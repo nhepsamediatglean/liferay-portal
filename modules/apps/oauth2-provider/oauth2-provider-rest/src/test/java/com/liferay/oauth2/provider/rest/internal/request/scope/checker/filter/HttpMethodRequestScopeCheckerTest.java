@@ -38,7 +38,7 @@ public class HttpMethodRequestScopeCheckerTest extends PowerMockito {
 
 	@Before
 	public void setUp() throws Exception {
-		methodAllowedChecker = new HttpMethodRequestScopeChecker();
+		requestScopeCheckerFilter = new HttpMethodRequestScopeChecker();
 		resourceInfo = Mockito.mock(ResourceInfo.class);
 	}
 
@@ -55,11 +55,11 @@ public class HttpMethodRequestScopeCheckerTest extends PowerMockito {
 		);
 
 		assertTrue(
-			methodAllowedChecker.isAllowed(
+			requestScopeCheckerFilter.isAllowed(
 				testScopeChecker, request, resourceInfo));
 	}
 
-	protected RequestScopeCheckerFilter methodAllowedChecker;
+	protected RequestScopeCheckerFilter requestScopeCheckerFilter;
 	protected ResourceInfo resourceInfo;
 
 }
