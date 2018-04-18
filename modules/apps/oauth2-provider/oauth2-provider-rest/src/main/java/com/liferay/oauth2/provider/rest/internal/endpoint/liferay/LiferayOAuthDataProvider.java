@@ -561,7 +561,8 @@ public class LiferayOAuthDataProvider
 
 		if (oAuth2Application == null) {
 
-			// TODO: Inform the audit service of a possible attack on client_id
+			// TODO: Inform the audit service of a possible attack on the
+			// client ID
 
 			return null;
 		}
