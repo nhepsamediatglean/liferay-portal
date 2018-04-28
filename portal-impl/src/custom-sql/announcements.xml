@@ -11,11 +11,11 @@
 				AnnouncementsFlag ON
 					AnnouncementsFlag.entryId = AnnouncementsEntry.entryId
 			WHERE
+				(AnnouncementsEntry.companyId = ?) AND
 				([$CLASS_PKS$]) AND
 				(AnnouncementsEntry.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
 				(AnnouncementsEntry.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
 				(AnnouncementsEntry.alert = ?) AND
-				(AnnouncementsEntry.companyId = ?) AND
 				(AnnouncementsFlag.userId = ?) AND
 				(AnnouncementsFlag.value = ?)
 		]]>
@@ -32,11 +32,11 @@
 					(AnnouncementsFlag.userId = ?) AND
 					(AnnouncementsFlag.value = ?)
 			WHERE
+				(AnnouncementsEntry.companyId = ?) AND
 				([$CLASS_PKS$]) AND
 				(AnnouncementsEntry.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
 				(AnnouncementsEntry.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
 				(AnnouncementsEntry.alert = ?) AND
-				(AnnouncementsEntry.companyId = ?) AND
 				(AnnouncementsFlag.entryId IS NULL)
 		]]>
 	</sql>
@@ -61,11 +61,11 @@
 				AnnouncementsFlag ON
 					AnnouncementsFlag.entryId = AnnouncementsEntry.entryId
 			WHERE
+				(AnnouncementsEntry.companyId = ?) AND
 				([$CLASS_PKS$]) AND
 				(AnnouncementsEntry.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
 				(AnnouncementsEntry.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
 				(AnnouncementsEntry.alert = ?) AND
-				(AnnouncementsEntry.companyId = ?) AND
 				(AnnouncementsFlag.userId = ?) AND
 				(AnnouncementsFlag.value = ?)
 			ORDER BY
@@ -85,11 +85,11 @@
 					(AnnouncementsFlag.userId = ?) AND
 					(AnnouncementsFlag.value = ?)
 			WHERE
+				(AnnouncementsEntry.companyId = ?) AND
 				([$CLASS_PKS$]) AND
 				(AnnouncementsEntry.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
 				(AnnouncementsEntry.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
 				(AnnouncementsEntry.alert = ?) AND
-				(AnnouncementsEntry.companyId = ?) AND
 				(AnnouncementsFlag.entryId IS NULL)
 			ORDER BY
 				AnnouncementsEntry.priority DESC,

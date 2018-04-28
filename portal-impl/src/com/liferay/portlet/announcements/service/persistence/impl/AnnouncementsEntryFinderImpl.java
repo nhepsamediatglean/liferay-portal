@@ -100,6 +100,8 @@ public class AnnouncementsEntryFinderImpl
 				qPos.add(AnnouncementsFlagConstants.HIDDEN);
 			}
 
+			qPos.add(companyId);
+
 			setClassPKs(qPos, classNameId, classPKs);
 
 			setDates(
@@ -109,7 +111,6 @@ public class AnnouncementsEntryFinderImpl
 				expirationDateMinute);
 
 			qPos.add(alert);
-			qPos.add(companyId);
 
 			if (flagValue != AnnouncementsFlagConstants.NOT_HIDDEN) {
 				qPos.add(userId);
@@ -212,6 +213,8 @@ public class AnnouncementsEntryFinderImpl
 				qPos.add(AnnouncementsFlagConstants.HIDDEN);
 			}
 
+			qPos.add(companyId);
+
 			setClassPKs(qPos, scopes);
 
 			setDates(
@@ -221,7 +224,6 @@ public class AnnouncementsEntryFinderImpl
 				expirationDateMinute);
 
 			qPos.add(alert);
-			qPos.add(companyId);
 
 			if (flagValue != AnnouncementsFlagConstants.NOT_HIDDEN) {
 				qPos.add(userId);
@@ -318,6 +320,8 @@ public class AnnouncementsEntryFinderImpl
 				qPos.add(AnnouncementsFlagConstants.HIDDEN);
 			}
 
+			qPos.add(companyId);
+
 			setDates(
 				qPos, displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
@@ -325,7 +329,6 @@ public class AnnouncementsEntryFinderImpl
 				expirationDateMinute);
 
 			qPos.add(alert);
-			qPos.add(companyId);
 
 			if (flagValue != AnnouncementsFlagConstants.NOT_HIDDEN) {
 				qPos.add(userId);
@@ -423,6 +426,8 @@ public class AnnouncementsEntryFinderImpl
 				qPos.add(AnnouncementsFlagConstants.HIDDEN);
 			}
 
+			qPos.add(companyId);
+
 			setClassPKs(qPos, scopes);
 
 			setDates(
@@ -432,7 +437,6 @@ public class AnnouncementsEntryFinderImpl
 				expirationDateMinute);
 
 			qPos.add(alert);
-			qPos.add(companyId);
 
 			if (flagValue != AnnouncementsFlagConstants.NOT_HIDDEN) {
 				qPos.add(userId);
