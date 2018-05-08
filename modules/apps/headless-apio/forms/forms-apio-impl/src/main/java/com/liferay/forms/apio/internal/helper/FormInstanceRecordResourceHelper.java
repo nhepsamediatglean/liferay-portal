@@ -93,7 +93,7 @@ public class FormInstanceRecordResourceHelper {
 			gson::toJson
 		).fold(
 			e -> {
-				_log.error(e);
+				_log.error(e, e);
 
 				return null;
 			},
