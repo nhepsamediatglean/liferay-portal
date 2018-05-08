@@ -107,6 +107,7 @@ public class FormInstanceRecordResourceHelper {
 		return ddmFormFieldValue -> {
 			String instanceId = ddmFormFieldValue.getInstanceId();
 			String name = ddmFormFieldValue.getName();
+
 			Value value = ddmFormFieldValue.getValue();
 
 			String valueString = value.getString(locale);
