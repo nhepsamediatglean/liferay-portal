@@ -46,7 +46,10 @@ public class FormInstanceRecordResourceHelper {
 
 		Gson gson = new Gson();
 
-		Type listType = new FormFieldValueListToken().getType();
+		FormFieldValueListToken formFieldValueListToken =
+			new FormFieldValueListToken();
+
+		Type listType = formFieldValueListToken.getType();
 
 		List<FormFieldValue> formFieldValues = gson.fromJson(
 			fieldValues, listType);
