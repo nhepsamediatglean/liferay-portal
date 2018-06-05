@@ -88,6 +88,7 @@ OAuth2Application oAuth2Application = oAuth2AdminPortletDisplayContext.getOAuth2
 					checked = ParamUtil.getBoolean(request, name, checked);
 
 					Map<String, Object> data = new HashMap<>();
+
 					data.put("isredirect", grantType.isRequiresRedirectURI());
 					data.put("issupportsconfidentialclients", grantType.isSupportsConfidentialClients());
 					data.put("issupportspublicclients", grantType.isSupportsPublicClients());
