@@ -17,26 +17,30 @@
 <%@ include file="/admin/init.jsp" %>
 
 <%
+final String currentAppTab = ParamUtil.getString(request, "appTab", "credentials");
+
 final String redirect = ParamUtil.getString(request, "redirect");
 
-portletDisplay.setShowBackIcon(true);
-portletDisplay.setURLBack(redirect);
+long oAuth2ApplicationId = 0;
 
 OAuth2Application oAuth2Application = oAuth2AdminPortletDisplayContext.getOAuth2Application();
 
-long oAuth2ApplicationId = 0;
+if (oAuth2Application != null) {
+	oAuth2ApplicationId = oAuth2Application.getOAuth2ApplicationId();
+}
+
+final String oAuth2ApplicationIdString = String.valueOf(oAuth2ApplicationId);
 
 String headerTitle = LanguageUtil.get(request, "add-o-auth2-application");
 
 if (oAuth2Application != null) {
-	oAuth2ApplicationId = oAuth2Application.getOAuth2ApplicationId();
 	headerTitle = oAuth2Application.getName();
 }
 
 renderResponse.setTitle(headerTitle);
 
-final String currentAppTab = ParamUtil.getString(request, "appTab", "credentials");
-final String oAuth2ApplicationIdString = String.valueOf(oAuth2ApplicationId);
+portletDisplay.setShowBackIcon(true);
+portletDisplay.setURLBack(redirect);
 %>
 
 <c:if test="<%= oAuth2Application != null %>">
@@ -47,39 +51,50 @@ final String oAuth2ApplicationIdString = String.valueOf(oAuth2ApplicationId);
 				{
 					add(
 						navigationItem -> {
-							PortletURL portletURL = renderResponse.createRenderURL();
-							portletURL.setParameter("appTab", "credentials");
-							portletURL.setParameter("mvcRenderCommandName", "/admin/update_oauth2_application");
-							portletURL.setParameter("oAuth2ApplicationId", oAuth2ApplicationIdString);
-							portletURL.setParameter("redirect", redirect);
-
 							navigationItem.setActive(currentAppTab.equals("credentials"));
+
+							PortletURL portletURL = renderResponse.createRenderURL();
+							
+							portletURL.setParameter("mvcRenderCommandName", "/admin/update_oauth2_application");
+							portletURL.setParameter("appTab", "credentials");
+							portletURL.setParameter("redirect", redirect);
+							portletURL.setParameter("oAuth2ApplicationId", oAuth2ApplicationIdString);
+
 							navigationItem.setHref(portletURL.toString());
+
 							navigationItem.setLabel(LanguageUtil.get(request, "credentials"));
 						});
+
 					add(
 						navigationItem -> {
-							PortletURL portletURL = renderResponse.createRenderURL();
-							portletURL.setParameter("appTab", "assign_scopes");
-							portletURL.setParameter("mvcRenderCommandName", "/admin/assign_scopes");
-							portletURL.setParameter("oAuth2ApplicationId", oAuth2ApplicationIdString);
-							portletURL.setParameter("redirect", redirect);
-
 							navigationItem.setActive(currentAppTab.equals("assign_scopes"));
+
+							PortletURL portletURL = renderResponse.createRenderURL();
+
+							portletURL.setParameter("mvcRenderCommandName", "/admin/assign_scopes");
+							portletURL.setParameter("appTab", "assign_scopes");
+							portletURL.setParameter("redirect", redirect);
+							portletURL.setParameter("oAuth2ApplicationId", oAuth2ApplicationIdString);
+
 							navigationItem.setHref(portletURL.toString());
+
 							navigationItem.setLabel(LanguageUtil.get(request, "scopes"));
 						});
+
 					if (oAuth2AdminPortletDisplayContext.hasViewGrantedAuthorizationsPermission()) {
 						add(
 							navigationItem -> {
-								PortletURL portletURL = renderResponse.createRenderURL();
-								portletURL.setParameter("appTab", "application_authorizations");
-								portletURL.setParameter("mvcRenderCommandName", "/admin/view_oauth2_authorizations");
-								portletURL.setParameter("oAuth2ApplicationId", oAuth2ApplicationIdString);
-								portletURL.setParameter("redirect", redirect);
-
 								navigationItem.setActive(currentAppTab.equals("application_authorizations"));
+
+								PortletURL portletURL = renderResponse.createRenderURL();
+
+								portletURL.setParameter("mvcRenderCommandName", "/admin/view_oauth2_authorizations");
+								portletURL.setParameter("appTab", "application_authorizations");
+								portletURL.setParameter("redirect", redirect);
+								portletURL.setParameter("oAuth2ApplicationId", oAuth2ApplicationIdString);
+
 								navigationItem.setHref(portletURL.toString());
+
 								navigationItem.setLabel(LanguageUtil.get(request, "authorizations"));
 							});
 					}
