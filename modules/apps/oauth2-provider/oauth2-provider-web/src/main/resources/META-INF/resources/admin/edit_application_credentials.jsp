@@ -37,6 +37,11 @@ String clientSecret = (oAuth2Application == null) ? "" : oAuth2Application.getCl
 			<div class="row">
 				<div class="col-lg-12">
 					<liferay-ui:error exception="<%= DuplicateOAuth2ApplicationClientIdException.class %>" focusField="clientId" message="client-id-already-exists" />
+
+					<liferay-ui:error exception="<%= OAuth2ApplicationClientGrantTypeException.class %>">
+						<liferay-ui:message arguments="<%= HtmlUtil.escape(((OAuth2ApplicationClientGrantTypeException)errorException).getMessage()) %>" key="grant-type-x-is-unsupported-for-this-client-type" />
+					</liferay-ui:error>
+
 					<liferay-ui:error exception="<%= OAuth2ApplicationHomePageURLException.class %>" focusField="homePageURL" message="home-page-url-is-invalid" />
 					<liferay-ui:error exception="<%= OAuth2ApplicationHomePageURLSchemeException.class %>" focusField="homePageURL" message="home-page-url-scheme-is-invalid" />
 					<liferay-ui:error exception="<%= OAuth2ApplicationNameException.class %>" focusField="name" message="missing-application-name" />
@@ -64,10 +69,6 @@ String clientSecret = (oAuth2Application == null) ? "" : oAuth2Application.getCl
 
 					<liferay-ui:error exception="<%= OAuth2ApplicationRedirectURISchemeException.class %>" focusField="redirectURIs">
 						<liferay-ui:message arguments="<%= HtmlUtil.escape(((OAuth2ApplicationRedirectURISchemeException)errorException).getMessage()) %>" key="redirect-uri-x-scheme-is-invalid" />
-					</liferay-ui:error>
-
-					<liferay-ui:error exception="<%= OAuth2ApplicationClientGrantTypeException.class %>">
-						<liferay-ui:message arguments="<%= HtmlUtil.escape(((OAuth2ApplicationClientGrantTypeException)errorException).getMessage()) %>" key="grant-type-x-is-unsupported-for-this-client-type" />
 					</liferay-ui:error>
 
 					<aui:model-context bean="<%= oAuth2Application %>" model="<%= OAuth2Application.class %>" />
