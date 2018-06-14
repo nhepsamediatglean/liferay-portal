@@ -728,6 +728,14 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService,
 
 	@Override
 	public java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
+		long classNameId, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.asset.kernel.model.AssetTag> obc) {
+		return _assetTagLocalService.getTags(classNameId, classPK, start, end,
+			obc);
+	}
+
+	@Override
+	public java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
 		long groupId, long classNameId, String name) {
 		return _assetTagLocalService.getTags(groupId, classNameId, name);
 	}
@@ -750,6 +758,23 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService,
 	public java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
 		String className, long classPK) {
 		return _assetTagLocalService.getTags(className, classPK);
+	}
+
+	@Override
+	public java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
+		String className, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.asset.kernel.model.AssetTag> obc) {
+		return _assetTagLocalService.getTags(className, classPK, start, end, obc);
+	}
+
+	@Override
+	public int getTagsCount(long classNameId, long classPK) {
+		return _assetTagLocalService.getTagsCount(classNameId, classPK);
+	}
+
+	@Override
+	public int getTagsCount(String className, long classPK) {
+		return _assetTagLocalService.getTagsCount(className, classPK);
 	}
 
 	@Override

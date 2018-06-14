@@ -134,8 +134,22 @@ public class AssetTagServiceUtil {
 		return getService().getTags(className, classPK);
 	}
 
+	public static java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
+		String className, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.asset.kernel.model.AssetTag> obc) {
+		return getService().getTags(className, classPK, start, end, obc);
+	}
+
+	public static int getTagsCount(long classNameId, long classPK) {
+		return getService().getTagsCount(classNameId, classPK);
+	}
+
 	public static int getTagsCount(long groupId, String name) {
 		return getService().getTagsCount(groupId, name);
+	}
+
+	public static int getTagsCount(String className, long classPK) {
+		return getService().getTagsCount(className, classPK);
 	}
 
 	public static int getVisibleAssetsTagsCount(long groupId, long classNameId,

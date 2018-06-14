@@ -571,6 +571,10 @@ public interface AssetTagLocalService extends BaseLocalService,
 	public List<AssetTag> getTags(long classNameId, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<AssetTag> getTags(long classNameId, long classPK, int start,
+		int end, OrderByComparator<AssetTag> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<AssetTag> getTags(long groupId, long classNameId, String name);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -587,6 +591,17 @@ public interface AssetTagLocalService extends BaseLocalService,
 	@ThreadLocalCachable
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<AssetTag> getTags(String className, long classPK);
+
+	@ThreadLocalCachable
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<AssetTag> getTags(String className, long classPK, int start,
+		int end, OrderByComparator<AssetTag> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getTagsCount(long classNameId, long classPK);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getTagsCount(String className, long classPK);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getTagsSize(long groupId, long classNameId, String name);

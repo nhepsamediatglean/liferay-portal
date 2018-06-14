@@ -192,6 +192,36 @@ public class AssetTagServiceSoap {
 		}
 	}
 
+	public static int getTagsCount(long classNameId, long classPK)
+		throws RemoteException {
+		try {
+			int returnValue = AssetTagServiceUtil.getTagsCount(classNameId,
+					classPK);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getTagsCount(String className, long classPK)
+		throws RemoteException {
+		try {
+			int returnValue = AssetTagServiceUtil.getTagsCount(className,
+					classPK);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.asset.kernel.model.AssetTagSoap[] getTags(
 		long groupId, long classNameId, String name) throws RemoteException {
 		try {
@@ -295,6 +325,23 @@ public class AssetTagServiceSoap {
 		try {
 			java.util.List<com.liferay.asset.kernel.model.AssetTag> returnValue = AssetTagServiceUtil.getTags(className,
 					classPK);
+
+			return com.liferay.asset.kernel.model.AssetTagSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.asset.kernel.model.AssetTagSoap[] getTags(
+		String className, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.asset.kernel.model.AssetTag> obc)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.asset.kernel.model.AssetTag> returnValue = AssetTagServiceUtil.getTags(className,
+					classPK, start, end, obc);
 
 			return com.liferay.asset.kernel.model.AssetTagSoap.toSoapModels(returnValue);
 		}

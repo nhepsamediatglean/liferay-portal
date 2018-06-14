@@ -674,6 +674,12 @@ public class AssetTagLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
+		long classNameId, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.asset.kernel.model.AssetTag> obc) {
+		return getService().getTags(classNameId, classPK, start, end, obc);
+	}
+
+	public static java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
 		long groupId, long classNameId, String name) {
 		return getService().getTags(groupId, classNameId, name);
 	}
@@ -693,6 +699,20 @@ public class AssetTagLocalServiceUtil {
 	public static java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
 		String className, long classPK) {
 		return getService().getTags(className, classPK);
+	}
+
+	public static java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
+		String className, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.asset.kernel.model.AssetTag> obc) {
+		return getService().getTags(className, classPK, start, end, obc);
+	}
+
+	public static int getTagsCount(long classNameId, long classPK) {
+		return getService().getTagsCount(classNameId, classPK);
+	}
+
+	public static int getTagsCount(String className, long classPK) {
+		return getService().getTagsCount(className, classPK);
 	}
 
 	public static int getTagsSize(long groupId, long classNameId, String name) {
