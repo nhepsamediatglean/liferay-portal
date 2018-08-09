@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.mapping.data.provider.internal.rest.json;
+package com.liferay.dynamic.data.mapping.data.provider.internal.json.transformer;
 
 import com.liferay.dynamic.data.mapping.model.DDMDataProviderInstance;
 import com.liferay.portal.json.transformer.ObjectTransformer;
