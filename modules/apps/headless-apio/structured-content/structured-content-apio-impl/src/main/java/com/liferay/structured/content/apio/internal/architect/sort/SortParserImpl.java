@@ -87,7 +87,7 @@ public class SortParserImpl implements SortParser {
 		String fieldName = sortParts.get(0);
 
 		boolean ascending = _ASC_DEFAULT;
-    
+
 		if (sortParts.size() > 1) {
 			ascending = isAscending(sortParts.get(1));
 		}
