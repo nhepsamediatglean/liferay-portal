@@ -342,9 +342,9 @@ public class StructuredContentNestedCollectionResource
 		OrderByComparator<JournalArticle> orderByComparator = null;
 
 		for (Sort.SortKey sortKey : sortKeys) {
-			String orderByCol = sortKey.getFieldName();
+			String fieldName = sortKey.getFieldName();
 
-			if (orderByCol.equals("title")) {
+			if (fieldName.equals("title")) {
 				orderByComparator = new ArticleTitleComparator(
 					sortKey.isAscending());
 
