@@ -86,7 +86,7 @@ public class SortParserImpl implements SortParser {
 
 		String fieldName = sortParts.get(0);
 
-		boolean ascending = _DEFAULT_ASC;
+		boolean ascending = _ASC_DEFAULT;
 
 		if (sortParts.size() > 1) {
 			ascending = isAscending(sortParts.get(1));
@@ -97,7 +97,7 @@ public class SortParserImpl implements SortParser {
 
 	protected boolean isAscending(String orderBy) {
 		if (orderBy == null) {
-			return _DEFAULT_ASC;
+			return _ASC_DEFAULT;
 		}
 
 		if (_ORDER_BY_ASC.equals(
@@ -114,10 +114,10 @@ public class SortParserImpl implements SortParser {
 			return false;
 		}
 
-		return _DEFAULT_ASC;
+		return _ASC_DEFAULT;
 	}
 
-	private static final boolean _DEFAULT_ASC = true;
+	private static final boolean _ASC_DEFAULT = true;
 
 	private static final String _ORDER_BY_ASC = "asc";
 
