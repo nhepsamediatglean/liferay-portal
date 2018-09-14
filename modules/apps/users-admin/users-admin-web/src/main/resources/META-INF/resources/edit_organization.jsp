@@ -27,6 +27,22 @@ Organization organization = OrganizationServiceUtil.fetchOrganization(organizati
 
 String type = BeanParamUtil.getString(organization, request, "type");
 
+PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+portletURL.setParameter("mvcRenderCommandName", "/users_admin/edit_organization");
+
+if (Validator.isNotNull(redirect)) {
+	portletURL.setParameter("redirect", redirect);
+}
+
+if (Validator.isNotNull(backURL)) {
+	portletURL.setParameter("backURL", backURL);
+}
+
+if (organization != null) {
+	portletURL.setParameter("organizationId", String.valueOf(organizationId));
+}
+
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(backURL);
 
@@ -43,22 +59,6 @@ else {
 }
 
 renderResponse.setTitle(headerTitle);
-
-PortletURL portletURL = liferayPortletResponse.createRenderURL();
-
-portletURL.setParameter("mvcRenderCommandName", "/users_admin/edit_organization");
-
-if (Validator.isNotNull(redirect)) {
-	portletURL.setParameter("redirect", redirect);
-}
-
-if (Validator.isNotNull(backURL)) {
-	portletURL.setParameter("backURL", backURL);
-}
-
-if (organization != null) {
-	portletURL.setParameter("organizationId", String.valueOf(organizationId));
-}
 %>
 
 <liferay-frontend:screen-navigation
