@@ -91,19 +91,21 @@ public class OrganizationScreenNavigationEntry
 	public void render(HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		OrganizationScreenNavigationDisplayContext displayContext =
-			new OrganizationScreenNavigationDisplayContext();
+		OrganizationScreenNavigationDisplayContext
+			organizationScreenNavigationDisplayContext =
+				new OrganizationScreenNavigationDisplayContext();
 
-		displayContext.setActionCommandName(_mvcActionCommandName);
+		organizationScreenNavigationDisplayContext.setActionCommandName(
+			_mvcActionCommandName);
 
 		String redirect = ParamUtil.getString(request, "redirect");
 
 		String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-		displayContext.setBackURL(backURL);
+		organizationScreenNavigationDisplayContext.setBackURL(backURL);
 
-		displayContext.setFormLabel(getLabel(request.getLocale()));
-		displayContext.setJspPath(_jspPath);
+		organizationScreenNavigationDisplayContext.setFormLabel(getLabel(request.getLocale()));
+		organizationScreenNavigationDisplayContext.setJspPath(_jspPath);
 
 		long organizationId = ParamUtil.getLong(request, "organizationId");
 
@@ -119,14 +121,18 @@ public class OrganizationScreenNavigationEntry
 			}
 		}
 
-		displayContext.setOrganization(organization);
-		displayContext.setOrganizationId(organizationId);
-		displayContext.setScreenNavigationCategoryKey(_categoryKey);
-		displayContext.setScreenNavigationEntryKey(_entryKey);
+		organizationScreenNavigationDisplayContext.setOrganization(
+			organization);
+		organizationScreenNavigationDisplayContext.setOrganizationId(
+			organizationId);
+		organizationScreenNavigationDisplayContext.
+			setScreenNavigationCategoryKey(_categoryKey);
+		organizationScreenNavigationDisplayContext.setScreenNavigationEntryKey(
+			_entryKey);
 
 		request.setAttribute(
 			UsersAdminWebKeys.ORGANIZATION_SCREEN_NAVIGATION_DISPLAY_CONTEXT,
-			displayContext);
+			organizationScreenNavigationDisplayContext);
 
 		_jspRenderer.renderJSP(
 			request, response, "/edit_organization_navigation.jsp");
