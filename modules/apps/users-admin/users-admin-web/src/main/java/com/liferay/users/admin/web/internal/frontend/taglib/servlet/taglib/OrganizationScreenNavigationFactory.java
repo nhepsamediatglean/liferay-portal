@@ -47,7 +47,7 @@ public class OrganizationScreenNavigationFactory {
 
 		return createScreenNavigationEntry(
 			entryKey, categoryKey, jspPath, mvcActionCommandName,
-			_IS_VISIBLE_PREDICATE_ALWAYS);
+			_IS_VISIBLE_BI_FUNCTION_ALWAYS);
 	}
 
 	public ScreenNavigationEntry<Organization> createScreenNavigationEntry(
@@ -67,14 +67,14 @@ public class OrganizationScreenNavigationFactory {
 
 		return createScreenNavigationEntry(
 			entryKey, categoryKey, jspPath, mvcActionCommandName,
-			_IS_VISIBLE_PREDICATE_ORGANIZATION_EXISTS);
+			_IS_VISIBLE_BI_FUNCTION_ORGANIZATION_EXISTS);
 	}
 
 	private static final BiFunction<User, Organization, Boolean>
-		_IS_VISIBLE_PREDICATE_ALWAYS = (user, organization) -> true;
+		_IS_VISIBLE_BI_FUNCTION_ALWAYS = (user, organization) -> true;
 
 	private static final BiFunction<User, Organization, Boolean>
-		_IS_VISIBLE_PREDICATE_ORGANIZATION_EXISTS = (user, organization) -> {
+		_IS_VISIBLE_BI_FUNCTION_ORGANIZATION_EXISTS = (user, organization) -> {
 			if (organization != null) {
 				return true;
 			}
