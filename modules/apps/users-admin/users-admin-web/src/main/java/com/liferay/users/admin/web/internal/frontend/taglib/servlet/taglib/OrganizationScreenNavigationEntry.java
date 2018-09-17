@@ -104,7 +104,8 @@ public class OrganizationScreenNavigationEntry
 
 		organizationScreenNavigationDisplayContext.setBackURL(backURL);
 
-		organizationScreenNavigationDisplayContext.setFormLabel(getLabel(request.getLocale()));
+		organizationScreenNavigationDisplayContext.setFormLabel(
+			getLabel(request.getLocale()));
 		organizationScreenNavigationDisplayContext.setJspPath(_jspPath);
 
 		long organizationId = ParamUtil.getLong(request, "organizationId");
