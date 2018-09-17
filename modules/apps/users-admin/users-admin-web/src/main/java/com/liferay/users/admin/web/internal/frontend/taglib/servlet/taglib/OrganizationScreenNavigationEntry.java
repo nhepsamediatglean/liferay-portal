@@ -50,7 +50,7 @@ public class OrganizationScreenNavigationEntry
 		JSPRenderer jspRenderer, OrganizationService organizationService,
 		Portal portal, String entryKey, String categoryKey, String jspPath,
 		String mvcActionCommandName,
-		BiFunction<User, Organization, Boolean> isVisiblePredicate) {
+		BiFunction<User, Organization, Boolean> isVisibleBiFunction) {
 
 		_jspRenderer = jspRenderer;
 		_organizationService = organizationService;
@@ -59,7 +59,7 @@ public class OrganizationScreenNavigationEntry
 		_categoryKey = categoryKey;
 		_jspPath = jspPath;
 		_mvcActionCommandName = mvcActionCommandName;
-		_isVisiblePredicate = isVisiblePredicate;
+		_isVisibleBiFunction = isVisibleBiFunction;
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class OrganizationScreenNavigationEntry
 
 	@Override
 	public boolean isVisible(User user, Organization organization) {
-		return _isVisiblePredicate.apply(user, organization);
+		return _isVisibleBiFunction.apply(user, organization);
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class OrganizationScreenNavigationEntry
 
 	private final String _categoryKey;
 	private final String _entryKey;
-	private final BiFunction<User, Organization, Boolean> _isVisiblePredicate;
+	private final BiFunction<User, Organization, Boolean> _isVisibleBiFunction;
 	private final String _jspPath;
 	private final JSPRenderer _jspRenderer;
 	private final String _mvcActionCommandName;
