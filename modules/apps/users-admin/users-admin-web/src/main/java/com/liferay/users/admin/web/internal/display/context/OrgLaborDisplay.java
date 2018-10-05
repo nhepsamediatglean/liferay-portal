@@ -68,8 +68,8 @@ public class OrgLaborDisplay {
 		return dayKeyValuePairs;
 	}
 
-	private String _formatTime(Locale locale, int time) {
-		if (time < 0) {
+	private String _formatHourAndMinute(Locale locale, int hourAndMinute) {
+		if (hourAndMinute < 0) {
 			return "";
 		}
 
@@ -78,46 +78,53 @@ public class OrgLaborDisplay {
 		cal.set(Calendar.MILLISECOND, 0);
 		cal.set(Calendar.SECOND, 0);
 
-		String timeString = String.valueOf(time);
+		String hourAndMinuteString = String.valueOf(hourAndMinute);
 
-		if (timeString.length() == 4) {
+		if (hourAndMinuteString.length() == 4) {
 			cal.set(
 				Calendar.HOUR_OF_DAY,
-				Integer.valueOf(timeString.substring(0, 2)));
-			cal.set(Calendar.MINUTE, Integer.valueOf(timeString.substring(2)));
-		}
-		else if (timeString.length() == 3) {
+				Integer.valueOf(hourAndMinuteString.substring(0, 2)));
 			cal.set(
-				Calendar.HOUR_OF_DAY, Integer.valueOf(timeString.charAt(0)));
-			cal.set(Calendar.MINUTE, Integer.valueOf(timeString.substring(1)));
+				Calendar.MINUTE,
+				Integer.valueOf(hourAndMinuteString.substring(2)));
+		}
+		else if (hourAndMinuteString.length() == 3) {
+			cal.set(
+				Calendar.HOUR_OF_DAY,
+				Integer.valueOf(hourAndMinuteString.charAt(0)));
+			cal.set(
+				Calendar.MINUTE,
+				Integer.valueOf(hourAndMinuteString.substring(1)));
 		}
 		else {
 			cal.set(Calendar.HOUR_OF_DAY, 0);
 			cal.set(Calendar.MINUTE, 0);
 		}
 
-		Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+		Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(
 			"HH:mm", locale);
 
-		return timeFormat.format(cal.getTime());
+		return format.format(cal.getTime());
 	}
 
 	private String _getHoursDisplayValue(
 		Locale locale, OrgLabor orgLabor, String shortDayName) {
 
-		String closeTime = _formatTime(
+		String closeHourAndMinuteString = _formatHourAndMinute(
 			locale,
 			BeanPropertiesUtil.getInteger(
 				orgLabor, shortDayName + "Close", -1));
-		String openTime = _formatTime(
+		String openHourAndMinuteString = _formatHourAndMinute(
 			locale,
 			BeanPropertiesUtil.getInteger(orgLabor, shortDayName + "Open", -1));
 
-		if (Validator.isNull(closeTime) && Validator.isNull(openTime)) {
+		if (Validator.isNull(closeHourAndMinuteString) &&
+			Validator.isNull(openHourAndMinuteString)) {
+
 			return LanguageUtil.get(locale, "closed");
 		}
 
-		return openTime + " - " + closeTime;
+		return openHourAndMinuteString + " - " + closeHourAndMinuteString;
 	}
 
 	private static final String[] _SHORT_DAY_NAMES =
