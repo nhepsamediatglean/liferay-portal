@@ -65,7 +65,7 @@ public class SegmentsEntryModelListener
 		}
 		catch (PortalException pe) {
 			_log.error(
-				"Error while clearing cache for segments entry " +
+				"Unable to clear cache for segments entry " +
 					segmentsEntry.getSegmentsEntryId(),
 				pe);
 		}

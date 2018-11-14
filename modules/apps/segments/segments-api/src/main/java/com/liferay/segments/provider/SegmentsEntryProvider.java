@@ -27,6 +27,8 @@ public interface SegmentsEntryProvider {
 
 	/**
 	 * Clears the cache of all {@link SegmentsEntry} objects.
+	 *
+	 * @review
 	 */
 	public void clearCache();
 
@@ -35,6 +37,7 @@ public interface SegmentsEntryProvider {
 	 *
 	 * @param className the class name of the entity
 	 * @param classPK the primary key of the entity
+	 * @review
 	 */
 	public void clearCache(String className, long classPK);
 
