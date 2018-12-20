@@ -19,7 +19,7 @@ package com.liferay.data.engine.web.constants;
  */
 public class DEPortletKeys {
 
-	public static final String DE_DATA_DEFINITION =
+	public static final String DATA_DEFINITION =
 		"com_liferay_data_engine_web_portlet_DEDataDefinitionPortlet";
 
 }
