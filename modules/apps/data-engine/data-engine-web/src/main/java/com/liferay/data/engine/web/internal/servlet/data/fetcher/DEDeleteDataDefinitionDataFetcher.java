@@ -62,7 +62,8 @@ public class DEDeleteDataDefinitionDataFetcher
 			deDataDefinitionType.setDataDefinitionId(
 				String.valueOf(dataDefinitionId));
 
-			deleteDataDefinitionType.setDataDefinition(deDataDefinitionType);
+			deleteDataDefinitionType.setDataDefinitionType(
+				deDataDefinitionType);
 		}
 		catch (DEDataDefinitionException.MustHavePermission mhp) {
 			errorMessage = getMessage(

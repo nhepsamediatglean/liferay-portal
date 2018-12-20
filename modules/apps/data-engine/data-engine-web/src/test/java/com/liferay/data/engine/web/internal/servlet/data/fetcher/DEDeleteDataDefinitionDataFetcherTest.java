@@ -69,7 +69,7 @@ public class DEDeleteDataDefinitionDataFetcherTest {
 			deDeleteDataDefinitionDataFetcher.get(dataFetchingEnvironment);
 
 		DataDefinitionType deDataDefinitionType =
-			deleteDataDefinitionType.getDataDefinition();
+			deleteDataDefinitionType.getDataDefinitionType();
 
 		Assert.assertEquals("1", deDataDefinitionType.getDataDefinitionId());
 	}

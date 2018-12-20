@@ -19,14 +19,14 @@ package com.liferay.data.engine.web.internal.graphql.model;
  */
 public class DeleteDataDefinitionType {
 
-	public DataDefinitionType getDataDefinition() {
-		return _dataDefinition;
+	public DataDefinitionType getDataDefinitionType() {
+		return _dataDefinitionType;
 	}
 
-	public void setDataDefinition(DataDefinitionType dataDefinition) {
-		_dataDefinition = dataDefinition;
+	public void setDataDefinitionType(DataDefinitionType dataDefinitionType) {
+		_dataDefinitionType = dataDefinitionType;
 	}
 
-	private DataDefinitionType _dataDefinition;
+	private DataDefinitionType _dataDefinitionType;
 
 }

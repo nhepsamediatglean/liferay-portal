@@ -50,7 +50,7 @@ type SaveDataDefinitionType {
 }
 
 type DeleteDataDefinitionType {
-	dataDefinition: DataDefinitionType
+	dataDefinitionType: DataDefinitionType
 }
 
 type GetDataDefinitionType {
