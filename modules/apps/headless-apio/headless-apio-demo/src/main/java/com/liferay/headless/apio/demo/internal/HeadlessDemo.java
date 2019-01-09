@@ -63,6 +63,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.InputStream;
@@ -315,8 +316,8 @@ public class HeadlessDemo extends BasePortalInstanceLifecycleListener {
 		String portletIdAdded = layoutTypePortlet.addPortletId(
 			user.getUserId(), JournalContentPortletKeys.JOURNAL_CONTENT, false);
 
-		long ownerId = 0;
-		int ownerType = 3;
+		long ownerId = PortletKeysPREFS_OWNER_ID_DEFAULT;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
 
 		PortletPreferences prefs =
 			_portletPreferencesLocalService.getPreferences(
