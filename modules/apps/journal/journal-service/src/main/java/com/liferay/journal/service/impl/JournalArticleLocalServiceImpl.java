@@ -7028,7 +7028,7 @@ public class JournalArticleLocalServiceImpl
 
 		long checkInterval = getArticleCheckInterval();
 
-		final ActionableDynamicQuery actionableDynamicQuery =
+		ActionableDynamicQuery actionableDynamicQuery =
 			getActionableDynamicQuery();
 
 		actionableDynamicQuery.setAddCriteriaMethod(
