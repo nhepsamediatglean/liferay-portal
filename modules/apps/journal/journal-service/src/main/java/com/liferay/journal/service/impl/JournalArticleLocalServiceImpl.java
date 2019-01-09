@@ -7039,11 +7039,6 @@ public class JournalArticleLocalServiceImpl
 					classNameIdProperty.eq(
 						JournalArticleConstants.CLASSNAME_ID_DEFAULT));
 
-				Property statusProperty = PropertyFactoryUtil.forName("status");
-
-				dynamicQuery.add(
-					statusProperty.eq(WorkflowConstants.STATUS_APPROVED));
-
 				Property expirationDateProperty = PropertyFactoryUtil.forName(
 					"expirationDate");
 
@@ -7052,6 +7047,11 @@ public class JournalArticleLocalServiceImpl
 				dynamicQuery.add(
 					expirationDateProperty.le(
 						new Date(expirationDate.getTime() + checkInterval)));
+
+				Property statusProperty = PropertyFactoryUtil.forName("status");
+
+				dynamicQuery.add(
+					statusProperty.eq(WorkflowConstants.STATUS_APPROVED));
 			});
 		actionableDynamicQuery.setInterval(_INTERVAL);
 		actionableDynamicQuery.setPerformActionMethod(
