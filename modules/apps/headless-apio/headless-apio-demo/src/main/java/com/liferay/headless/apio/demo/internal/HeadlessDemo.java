@@ -86,8 +86,6 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = PortalInstanceLifecycleListener.class)
 public class HeadlessDemo extends BasePortalInstanceLifecycleListener {
 
-	public static final String SITE_NAME = "Sports Magazine";
-
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
 		try {
@@ -184,11 +182,11 @@ public class HeadlessDemo extends BasePortalInstanceLifecycleListener {
 		return _groupLocalService.addGroup(
 			user.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID, null, 0,
 			GroupConstants.DEFAULT_LIVE_GROUP_ID,
-			Collections.singletonMap(LocaleUtil.US, SITE_NAME),
-			Collections.singletonMap(LocaleUtil.US, SITE_NAME),
+			Collections.singletonMap(LocaleUtil.US, _SITE_NAME),
+			Collections.singletonMap(LocaleUtil.US, _SITE_NAME),
 			GroupConstants.TYPE_SITE_OPEN, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION,
-			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(SITE_NAME),
+			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(_SITE_NAME),
 			true, true,
 			_getServiceContext(
 				company,
@@ -407,6 +405,8 @@ public class HeadlessDemo extends BasePortalInstanceLifecycleListener {
 
 	private static final String _PATH =
 		"/com/liferay/headless/apio/demo/internal/";
+
+	private static final String _SITE_NAME = "Sports Magazine";
 
 	private static final Log _log = LogFactoryUtil.getLog(HeadlessDemo.class);
 
