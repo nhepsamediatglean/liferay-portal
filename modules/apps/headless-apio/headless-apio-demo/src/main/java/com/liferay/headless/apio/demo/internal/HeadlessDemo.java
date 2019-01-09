@@ -158,7 +158,6 @@ public class HeadlessDemo extends BasePortalInstanceLifecycleListener {
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-
 		serviceContext.setScopeGroupId(group.getGroupId());
 
 		String postmanVars = _read(
