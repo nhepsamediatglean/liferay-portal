@@ -18,7 +18,7 @@
 
 <div class="sheet">
 	<h2 class="sheet-title">
-		<liferay-ui:message key="failed-to-sign-in-using-this-google-account" />
+		<liferay-ui:message key="unable-to-sign-in-using-this-google-account" />
 	</h2>
 
 	<liferay-ui:error key="MustNotUseCompanyMx" message="this-google-account-cannot-be-used-to-register-a-new-user-because-its-email-domain-is-reserved" />
