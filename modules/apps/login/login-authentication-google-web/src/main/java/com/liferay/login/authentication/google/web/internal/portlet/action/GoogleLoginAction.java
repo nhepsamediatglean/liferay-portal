@@ -145,9 +145,9 @@ public class GoogleLoginAction implements StrutsAction {
 		PortletURL portletURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.LOGIN, PortletRequest.RENDER_PHASE);
 
-		portletURL.setParameter("error", error);
 		portletURL.setParameter(
 			"mvcRenderCommandName", "/login/google_login_error");
+		portletURL.setParameter("error", error);
 		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		response.sendRedirect(portletURL.toString());
