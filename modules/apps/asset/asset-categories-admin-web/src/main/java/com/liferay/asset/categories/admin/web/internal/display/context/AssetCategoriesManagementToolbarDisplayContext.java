@@ -97,9 +97,9 @@ public class AssetCategoriesManagementToolbarDisplayContext
 	public String getClearResultsURL() {
 		PortletURL clearResultsURL = getPortletURL();
 
-		clearResultsURL.setParameter("keywords", StringPool.BLANK);
 		clearResultsURL.setParameter("navigation", "all");
 		clearResultsURL.setParameter("categoryId", "0");
+		clearResultsURL.setParameter("keywords", StringPool.BLANK);
 
 		return clearResultsURL.toString();
 	}
