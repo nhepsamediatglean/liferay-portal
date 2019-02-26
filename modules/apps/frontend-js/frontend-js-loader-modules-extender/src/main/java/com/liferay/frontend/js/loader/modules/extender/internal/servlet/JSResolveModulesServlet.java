@@ -62,7 +62,8 @@ public class JSResolveModulesServlet extends HttpServlet {
 
 		List<String> moduleNames = _getModuleNames(request);
 
-		JSModulesResolution context = _jsModulesResolver.resolve(moduleNames);
+		JSModulesResolution jsModulesResolution =
+			_jsModulesResolver.resolve(moduleNames);
 
 		response.setCharacterEncoding(StringPool.UTF8);
 		response.setContentType(ContentTypes.APPLICATION_JSON);
@@ -70,7 +71,7 @@ public class JSResolveModulesServlet extends HttpServlet {
 		PrintWriter printWriter = new PrintWriter(
 			response.getOutputStream(), true);
 
-		printWriter.write(_jsonFactory.looseSerializeDeep(context));
+		printWriter.write(_jsonFactory.looseSerializeDeep(jsModulesResolution));
 
 		printWriter.close();
 	}
