@@ -79,12 +79,12 @@ public class JSResolveModulesServlet extends HttpServlet {
 	private List<String> _getModuleNames(HttpServletRequest request)
 		throws IOException {
 
-		String[] modules = null;
+		String[] moduleNames = null;
 
 		String method = request.getMethod();
 
 		if (method.equals("GET")) {
-			modules = ParamUtil.getStringValues(request, "modules");
+			moduleNames = ParamUtil.getStringValues(request, "modules");
 		}
 		else {
 			String body = StringUtil.read(request.getInputStream());
@@ -93,11 +93,11 @@ public class JSResolveModulesServlet extends HttpServlet {
 
 			body = body.substring(8);
 
-			modules = body.split(StringPool.COMMA);
+			moduleNames = body.split(StringPool.COMMA);
 		}
 
-		if (modules != null) {
-			return Arrays.asList(modules);
+		if (moduleNames != null) {
+			return Arrays.asList(moduleNames);
 		}
 
 		return Collections.emptyList();
