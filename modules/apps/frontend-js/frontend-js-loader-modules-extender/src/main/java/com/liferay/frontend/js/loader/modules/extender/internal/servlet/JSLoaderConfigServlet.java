@@ -85,11 +85,9 @@ public class JSLoaderConfigServlet extends HttpServlet {
 			response.getOutputStream(), true);
 
 		printWriter.println("(function() {");
-
 		printWriter.println(
 			"Liferay.EXPLAIN_RESOLUTIONS = " + _details.explainResolutions() +
 				";\n");
-
 		printWriter.println(
 			"Liferay.EXPOSE_GLOBAL = " + _details.exposeGlobal() + ";\n");
 
@@ -107,7 +105,6 @@ public class JSLoaderConfigServlet extends HttpServlet {
 		printWriter.println(
 			"Liferay.WAIT_TIMEOUT = " + (_details.waitTimeout() * 1000) +
 				";\n");
-
 		printWriter.println("}());");
 
 		printWriter.close();
