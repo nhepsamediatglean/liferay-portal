@@ -79,9 +79,9 @@ public class JSResolveModulesServlet extends HttpServlet {
 	private List<String> _getModuleNames(HttpServletRequest request)
 		throws IOException {
 
-		String method = request.getMethod();
+		String[] modules = null;
 
-		String[] modules;
+		String method = request.getMethod();
 
 		if (method.equals("GET")) {
 			modules = ParamUtil.getStringValues(request, "modules");
