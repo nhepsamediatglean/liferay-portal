@@ -60,16 +60,16 @@ public class JSResolveModulesServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		List<String> moduleNames = _getModuleNames(request);
-
-		JSModulesResolution jsModulesResolution =
-			_jsModulesResolver.resolve(moduleNames);
-
 		response.setCharacterEncoding(StringPool.UTF8);
 		response.setContentType(ContentTypes.APPLICATION_JSON);
 
 		PrintWriter printWriter = new PrintWriter(
 			response.getOutputStream(), true);
+
+		List<String> moduleNames = _getModuleNames(request);
+
+		JSModulesResolution jsModulesResolution =
+			_jsModulesResolver.resolve(moduleNames);
 
 		printWriter.write(_jsonFactory.looseSerializeDeep(jsModulesResolution));
 
