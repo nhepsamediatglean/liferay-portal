@@ -68,8 +68,8 @@ public class JSResolveModulesServlet extends HttpServlet {
 
 		List<String> moduleNames = _getModuleNames(request);
 
-		JSModulesResolution jsModulesResolution =
-			_jsModulesResolver.resolve(moduleNames);
+		JSModulesResolution jsModulesResolution = _jsModulesResolver.resolve(
+			moduleNames);
 
 		printWriter.write(_jsonFactory.looseSerializeDeep(jsModulesResolution));
 

@@ -120,19 +120,19 @@ public class JSConfigGeneratorPackage {
 		for (int i = 0; i < namesJSONArray.length(); i++) {
 			String name = (String)namesJSONArray.get(i);
 
-			int pos = name.indexOf(StringPool.SLASH);
+			int index = name.indexOf(StringPool.SLASH);
 
-			if (pos == -1) {
+			if (index == -1) {
 				continue;
 			}
 
-			String moduleName = name.substring(0, pos);
+			String moduleName = name.substring(0, index);
 
 			if (!moduleName.equals(getName())) {
 				continue;
 			}
 
-			String modulePath = name.substring(pos);
+			String modulePath = name.substring(index);
 
 			moduleName = StringBundler.concat(
 				getName(), StringPool.AT, getVersion(), modulePath);
@@ -145,14 +145,14 @@ public class JSConfigGeneratorPackage {
 			for (int j = 0; j < dependenciesJSONArray.length(); j++) {
 				String dependency = dependenciesJSONArray.getString(j);
 
-				int pos2 = dependency.indexOf('/');
+				index = dependency.indexOf('/');
 
-				if (pos2 == -1) {
+				if (index == -1) {
 					continue;
 				}
 
-				String dependencyName = dependency.substring(0, pos2);
-				String dependencyPath = dependency.substring(pos2);
+				String dependencyName = dependency.substring(0, index);
+				String dependencyPath = dependency.substring(index);
 
 				if (dependencyName.equals(getName())) {
 					dependencyName = StringBundler.concat(
@@ -248,12 +248,12 @@ public class JSConfigGeneratorPackage {
 		for (Object key : jsonObject.keySet()) {
 			String name = (String)key;
 
+			List<String> dependencies = new ArrayList<>();
+
 			JSONObject moduleJSONObject = jsonObject.getJSONObject(name);
 
 			JSONArray dependenciesJSONArray = moduleJSONObject.getJSONArray(
 				"dependencies");
-
-			List<String> dependencies = new ArrayList<>();
 
 			for (int i = 0; i < dependenciesJSONArray.length(); i++) {
 				dependencies.add((String)dependenciesJSONArray.get(i));

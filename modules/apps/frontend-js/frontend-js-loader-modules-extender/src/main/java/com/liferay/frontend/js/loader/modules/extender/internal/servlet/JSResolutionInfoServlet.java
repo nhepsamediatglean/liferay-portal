@@ -72,16 +72,14 @@ public class JSResolutionInfoServlet extends HttpServlet {
 		PrintWriter printWriter = new PrintWriter(
 			response.getOutputStream(), true);
 
-		Object jsBundlesObject = _getJSBundlesObject();
-
-		Object jsConfigGeneratorObject = _getJSConfigGeneratorObject();
-
-		Map<String, Object> resultMap = new HashMap<>();
-
-		resultMap.put("configGenerator", jsConfigGeneratorObject);
-		resultMap.put("npmRegistry", jsBundlesObject);
-
-		printWriter.write(_jsonFactory.looseSerializeDeep(resultMap));
+		printWriter.write(
+			_jsonFactory.looseSerializeDeep(
+				new HashMap<String, Object>() {
+					{
+						put("configGenerator", _getJSConfigGeneratorObject());
+						put("npmRegistry", _getJSBundlesObject());
+					}
+				}));
 
 		printWriter.close();
 	}
