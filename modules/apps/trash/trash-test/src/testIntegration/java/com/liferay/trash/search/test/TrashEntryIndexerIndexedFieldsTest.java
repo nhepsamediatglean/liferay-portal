@@ -137,7 +137,6 @@ public class TrashEntryIndexerIndexedFieldsTest {
 		map.put(Field.USER_ID, String.valueOf(fileEntry.getUserId()));
 		map.put(
 			Field.USER_NAME, StringUtil.toLowerCase(fileEntry.getUserName()));
-
 		map.put("classTypeId", "0");
 		map.put(
 			"dataRepositoryId", String.valueOf(fileEntry.getRepositoryId()));
