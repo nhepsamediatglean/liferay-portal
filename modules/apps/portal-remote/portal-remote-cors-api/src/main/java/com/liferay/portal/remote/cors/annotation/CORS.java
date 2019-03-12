@@ -26,16 +26,16 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface CORS {
 
-	boolean allowCredentials() default true;
+	public boolean allowCredentials() default true;
 
-	String[] allowHeaders() default {"*"};
+	public String[] allowHeaders() default {"*"};
 
-	String allowOrigin() default "*";
+	public String allowOrigin() default "*";
 
-	String[] allowMethods() default {"*"};
+	public String[] allowMethods() default {"*"};
 
-	String[] exposeHeaders() default {"*"};
+	public String[] exposeHeaders() default {"*"};
 
-	long maxAge() default 0;
+	public long maxAge() default 0;
 
 }
