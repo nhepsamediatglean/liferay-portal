@@ -144,14 +144,14 @@ public class ServerAuthorizationCodeGrantProvider {
 		_timeout = MapUtil.getInteger(properties, "timeout");
 	}
 
-	private static void _cleanup() {
+	private static void _cleanUp() {
 		while (_serverAuthorizationCodeGrantDelayeds.poll() != null);
 	}
 
 	private static ServerAuthorizationCodeGrant
 		_getServerAuthorizationCodeGrant(String code) {
 
-		_cleanup();
+		_cleanUp();
 
 		for (ServerAuthorizationCodeGrantDelayed
 				serverAuthorizationCodeGrantDelayed :
@@ -173,7 +173,7 @@ public class ServerAuthorizationCodeGrantProvider {
 		_getServerAuthorizationCodeGrants(
 			Client client, UserSubject userSubject) {
 
-		_cleanup();
+		_cleanUp();
 
 		List<ServerAuthorizationCodeGrant> serverAuthorizationCodeGrants =
 			new ArrayList<>();
@@ -199,7 +199,7 @@ public class ServerAuthorizationCodeGrantProvider {
 	private static void _putCodeGrant(
 		ServerAuthorizationCodeGrant serverAuthorizationCodeGrant) {
 
-		_cleanup();
+		_cleanUp();
 
 		_serverAuthorizationCodeGrantDelayeds.add(
 			new ServerAuthorizationCodeGrantDelayed(
@@ -207,7 +207,7 @@ public class ServerAuthorizationCodeGrantProvider {
 	}
 
 	private static ServerAuthorizationCodeGrant _removeCodeGrant(String code) {
-		_cleanup();
+		_cleanUp();
 
 		AtomicReference<ServerAuthorizationCodeGrant>
 			serverAuthorizationCodeGrantAtomicReference =
