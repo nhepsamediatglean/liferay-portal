@@ -160,7 +160,7 @@ public class LiferayOAuthDataProvider
 		serverAuthorizationCodeGrant.setRequestedScopes(
 			authorizationCodeRegistration.getRequestedScope());
 
-		_serverAuthorizationCodeGrantProvider.putCodeGrant(
+		_serverAuthorizationCodeGrantProvider.putServerAuthorizationCodeGrant(
 			serverAuthorizationCodeGrant);
 
 		return serverAuthorizationCodeGrant;
@@ -551,7 +551,8 @@ public class LiferayOAuthDataProvider
 			return null;
 		}
 
-		return _serverAuthorizationCodeGrantProvider.removeCodeGrant(code);
+		return _serverAuthorizationCodeGrantProvider.
+			removeServerAuthorizationCodeGrant(code);
 	}
 
 	public OAuth2Application resolveOAuth2Application(Client client) {

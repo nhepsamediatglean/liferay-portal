@@ -60,7 +60,8 @@ public class ServerAuthorizationCodeGrantProvider {
 
 		Future<ServerAuthorizationCodeGrant> future =
 			_clusterMasterExecutor.executeOnMaster(
-				new MethodHandler(_getCodeGrantMethodKey, code));
+				new MethodHandler(
+					_getServerAuthorizationCodeGrantMethodKey, code));
 
 		try {
 			return future.get(_timeout, TimeUnit.SECONDS);
@@ -84,7 +85,8 @@ public class ServerAuthorizationCodeGrantProvider {
 		Future<List<ServerAuthorizationCodeGrant>> future =
 			_clusterMasterExecutor.executeOnMaster(
 				new MethodHandler(
-					_getCodeGrantsMethodKey, client, userSubject));
+					_getServerAuthorizationCodeGrantsMethodKey, client,
+					userSubject));
 
 		try {
 			return future.get(_timeout, TimeUnit.SECONDS);
@@ -96,18 +98,19 @@ public class ServerAuthorizationCodeGrantProvider {
 		}
 	}
 
-	public void putCodeGrant(
+	public void putServerAuthorizationCodeGrant(
 		ServerAuthorizationCodeGrant serverAuthorizationCodeGrant) {
 
 		if (!_clusterMasterExecutor.isEnabled() ||
 			_clusterMasterExecutor.isMaster()) {
 
-			_putCodeGrant(serverAuthorizationCodeGrant);
+			_putServerAuthorizationCodeGrant(serverAuthorizationCodeGrant);
 		}
 		else {
 			Future<?> future = _clusterMasterExecutor.executeOnMaster(
 				new MethodHandler(
-					_putGrantMethodKey, serverAuthorizationCodeGrant));
+					_putServerAuthorizationCodeGrantMethodKey,
+					serverAuthorizationCodeGrant));
 
 			try {
 				future.get(_timeout, TimeUnit.SECONDS);
@@ -118,16 +121,19 @@ public class ServerAuthorizationCodeGrantProvider {
 		}
 	}
 
-	public ServerAuthorizationCodeGrant removeCodeGrant(String code) {
+	public ServerAuthorizationCodeGrant removeServerAuthorizationCodeGrant(
+		String code) {
+
 		if (!_clusterMasterExecutor.isEnabled() ||
 			_clusterMasterExecutor.isMaster()) {
 
-			return _removeCodeGrant(code);
+			return _removeServerAuthorizationCodeGrant(code);
 		}
 
 		Future<ServerAuthorizationCodeGrant> future =
 			_clusterMasterExecutor.executeOnMaster(
-				new MethodHandler(_removeGrantMethodKey, code));
+				new MethodHandler(
+					_removeServerAuthorizationCodeGrantMethodMethodKey, code));
 
 		try {
 			return future.get(_timeout, TimeUnit.SECONDS);
@@ -196,7 +202,7 @@ public class ServerAuthorizationCodeGrantProvider {
 		return serverAuthorizationCodeGrants;
 	}
 
-	private static void _putCodeGrant(
+	private static void _putServerAuthorizationCodeGrant(
 		ServerAuthorizationCodeGrant serverAuthorizationCodeGrant) {
 
 		_cleanUp();
@@ -206,7 +212,9 @@ public class ServerAuthorizationCodeGrantProvider {
 				serverAuthorizationCodeGrant));
 	}
 
-	private static ServerAuthorizationCodeGrant _removeCodeGrant(String code) {
+	private static ServerAuthorizationCodeGrant
+		_removeServerAuthorizationCodeGrant(String code) {
+
 		_cleanUp();
 
 		AtomicReference<ServerAuthorizationCodeGrant>
@@ -235,18 +243,23 @@ public class ServerAuthorizationCodeGrantProvider {
 	private static final Log _log = LogFactoryUtil.getLog(
 		ServerAuthorizationCodeGrantProvider.class);
 
-	private static final MethodKey _getCodeGrantMethodKey = new MethodKey(
-		ServerAuthorizationCodeGrantProvider.class, "_getCodeGrant",
-		String.class);
-	private static final MethodKey _getCodeGrantsMethodKey = new MethodKey(
-		ServerAuthorizationCodeGrantProvider.class, "_getCodeGrants",
-		String.class);
-	private static final MethodKey _putGrantMethodKey = new MethodKey(
-		ServerAuthorizationCodeGrantProvider.class, "_putCodeGrant",
-		ServerAuthorizationCodeGrant.class);
-	private static final MethodKey _removeGrantMethodKey = new MethodKey(
-		ServerAuthorizationCodeGrantProvider.class, "_removeCodeGrant",
-		String.class);
+	private static final MethodKey _getServerAuthorizationCodeGrantMethodKey =
+		new MethodKey(
+			ServerAuthorizationCodeGrantProvider.class,
+			"_getServerAuthorizationCodeGrant", String.class);
+	private static final MethodKey _getServerAuthorizationCodeGrantsMethodKey =
+		new MethodKey(
+			ServerAuthorizationCodeGrantProvider.class,
+			"_getServerAuthorizationCodeGrants", String.class);
+	private static final MethodKey _putServerAuthorizationCodeGrantMethodKey =
+		new MethodKey(
+			ServerAuthorizationCodeGrantProvider.class,
+			"_putServerAuthorizationCodeGrant",
+			ServerAuthorizationCodeGrant.class);
+	private static final MethodKey
+		_removeServerAuthorizationCodeGrantMethodMethodKey = new MethodKey(
+			ServerAuthorizationCodeGrantProvider.class,
+			"_removeServerAuthorizationCodeGrant", String.class);
 	private static final DelayQueue<ServerAuthorizationCodeGrantDelayed>
 		_serverAuthorizationCodeGrantDelayeds = new DelayQueue<>();
 
