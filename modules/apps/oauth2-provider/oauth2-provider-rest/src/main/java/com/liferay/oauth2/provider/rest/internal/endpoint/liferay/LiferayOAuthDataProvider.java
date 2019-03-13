@@ -317,20 +317,20 @@ public class LiferayOAuthDataProvider
 		throw new UnsupportedOperationException();
 	}
 
-	public ServerAuthorizationCodeGrant getCodeGrant(String code) {
+	public ServerAuthorizationCodeGrant getServerAuthorizationCodeGrant(String code) {
 		if (code == null) {
 			return null;
 		}
 
-		return _codeGrantsClusterSupport.getCodeGrant(code);
+		return _codeGrantsClusterSupport.getServerAuthorizationCodeGrant(code);
 	}
 
 	@Override
-	public List<ServerAuthorizationCodeGrant> getCodeGrants(
+	public List<ServerAuthorizationCodeGrant> getServerAuthorizationCodeGrants(
 			Client client, UserSubject subject)
 		throws OAuthServiceException {
 
-		return _codeGrantsClusterSupport.getCodeGrants(client, subject);
+		return _codeGrantsClusterSupport.getServerAuthorizationCodeGrants(client, subject);
 	}
 
 	@Override

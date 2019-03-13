@@ -48,11 +48,11 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class CodeGrantsClusterSupport {
 
-	public ServerAuthorizationCodeGrant getCodeGrant(String code) {
+	public ServerAuthorizationCodeGrant getServerAuthorizationCodeGrant(String code) {
 		if (!_clusterMasterExecutor.isEnabled() ||
 			_clusterMasterExecutor.isMaster()) {
 
-			return _getCodeGrant(code);
+			return _getServerAuthorizationCodeGrant(code);
 		}
 
 		Future<ServerAuthorizationCodeGrant> future =
@@ -69,13 +69,13 @@ public class CodeGrantsClusterSupport {
 		}
 	}
 
-	public List<ServerAuthorizationCodeGrant> getCodeGrants(
+	public List<ServerAuthorizationCodeGrant> getServerAuthorizationCodeGrants(
 		Client client, UserSubject userSubject) {
 
 		if (!_clusterMasterExecutor.isEnabled() ||
 			_clusterMasterExecutor.isMaster()) {
 
-			return _getCodeGrants(client, userSubject);
+			return _getServerAuthorizationCodeGrants(client, userSubject);
 		}
 
 		Future<List<ServerAuthorizationCodeGrant>> future =
@@ -145,7 +145,7 @@ public class CodeGrantsClusterSupport {
 		while (_serverAuthorizationCodeGrantDelayeds.poll() != null);
 	}
 
-	private static ServerAuthorizationCodeGrant _getCodeGrant(String code) {
+	private static ServerAuthorizationCodeGrant _getServerAuthorizationCodeGrant(String code) {
 		_cleanup();
 
 		for (ServerAuthorizationCodeGrantDelayed
@@ -164,7 +164,7 @@ public class CodeGrantsClusterSupport {
 		return null;
 	}
 
-	private static List<ServerAuthorizationCodeGrant> _getCodeGrants(
+	private static List<ServerAuthorizationCodeGrant> _getServerAuthorizationCodeGrants(
 		Client client, UserSubject userSubject) {
 
 		_cleanup();
