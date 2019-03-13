@@ -44,11 +44,14 @@ import org.osgi.service.component.annotations.Reference;
  * @author Carlos Sierra Andrés
  */
 @Component(
-	property = "timeout:Integer=15", service = CodeGrantsClusterSupport.class
+	property = "timeout:Integer=15",
+	service = ServerAuthorizationCodeGrantProvider.class
 )
-public class CodeGrantsClusterSupport {
+public class ServerAuthorizationCodeGrantProvider {
 
-	public ServerAuthorizationCodeGrant getServerAuthorizationCodeGrant(String code) {
+	public ServerAuthorizationCodeGrant getServerAuthorizationCodeGrant(
+		String code) {
+
 		if (!_clusterMasterExecutor.isEnabled() ||
 			_clusterMasterExecutor.isMaster()) {
 
@@ -145,7 +148,9 @@ public class CodeGrantsClusterSupport {
 		while (_serverAuthorizationCodeGrantDelayeds.poll() != null);
 	}
 
-	private static ServerAuthorizationCodeGrant _getServerAuthorizationCodeGrant(String code) {
+	private static ServerAuthorizationCodeGrant
+		_getServerAuthorizationCodeGrant(String code) {
+
 		_cleanup();
 
 		for (ServerAuthorizationCodeGrantDelayed
@@ -164,8 +169,9 @@ public class CodeGrantsClusterSupport {
 		return null;
 	}
 
-	private static List<ServerAuthorizationCodeGrant> _getServerAuthorizationCodeGrants(
-		Client client, UserSubject userSubject) {
+	private static List<ServerAuthorizationCodeGrant>
+		_getServerAuthorizationCodeGrants(
+			Client client, UserSubject userSubject) {
 
 		_cleanup();
 
@@ -227,17 +233,20 @@ public class CodeGrantsClusterSupport {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CodeGrantsClusterSupport.class);
+		ServerAuthorizationCodeGrantProvider.class);
 
 	private static final MethodKey _getCodeGrantMethodKey = new MethodKey(
-		CodeGrantsClusterSupport.class, "_getCodeGrant", String.class);
+		ServerAuthorizationCodeGrantProvider.class, "_getCodeGrant",
+		String.class);
 	private static final MethodKey _getCodeGrantsMethodKey = new MethodKey(
-		CodeGrantsClusterSupport.class, "_getCodeGrants", String.class);
+		ServerAuthorizationCodeGrantProvider.class, "_getCodeGrants",
+		String.class);
 	private static final MethodKey _putGrantMethodKey = new MethodKey(
-		CodeGrantsClusterSupport.class, "_putCodeGrant",
+		ServerAuthorizationCodeGrantProvider.class, "_putCodeGrant",
 		ServerAuthorizationCodeGrant.class);
 	private static final MethodKey _removeGrantMethodKey = new MethodKey(
-		CodeGrantsClusterSupport.class, "_removeCodeGrant", String.class);
+		ServerAuthorizationCodeGrantProvider.class, "_removeCodeGrant",
+		String.class);
 	private static final DelayQueue<ServerAuthorizationCodeGrantDelayed>
 		_serverAuthorizationCodeGrantDelayeds = new DelayQueue<>();
 

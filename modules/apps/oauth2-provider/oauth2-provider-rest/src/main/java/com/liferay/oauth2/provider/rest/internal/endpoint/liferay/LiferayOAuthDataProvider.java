@@ -160,7 +160,8 @@ public class LiferayOAuthDataProvider
 		serverAuthorizationCodeGrant.setRequestedScopes(
 			authorizationCodeRegistration.getRequestedScope());
 
-		_codeGrantsClusterSupport.putCodeGrant(serverAuthorizationCodeGrant);
+		_serverAuthorizationCodeGrantProvider.putCodeGrant(
+			serverAuthorizationCodeGrant);
 
 		return serverAuthorizationCodeGrant;
 	}
@@ -317,20 +318,13 @@ public class LiferayOAuthDataProvider
 		throw new UnsupportedOperationException();
 	}
 
-	public ServerAuthorizationCodeGrant getServerAuthorizationCodeGrant(String code) {
-		if (code == null) {
-			return null;
-		}
-
-		return _codeGrantsClusterSupport.getServerAuthorizationCodeGrant(code);
-	}
-
 	@Override
-	public List<ServerAuthorizationCodeGrant> getServerAuthorizationCodeGrants(
+	public List<ServerAuthorizationCodeGrant> getCodeGrants(
 			Client client, UserSubject subject)
 		throws OAuthServiceException {
 
-		return _codeGrantsClusterSupport.getServerAuthorizationCodeGrants(client, subject);
+		return _serverAuthorizationCodeGrantProvider.
+			getServerAuthorizationCodeGrants(client, subject);
 	}
 
 	@Override
@@ -437,6 +431,17 @@ public class LiferayOAuthDataProvider
 		throws OAuthServiceException {
 
 		return null;
+	}
+
+	public ServerAuthorizationCodeGrant getServerAuthorizationCodeGrant(
+		String code) {
+
+		if (code == null) {
+			return null;
+		}
+
+		return _serverAuthorizationCodeGrantProvider.
+			getServerAuthorizationCodeGrant(code);
 	}
 
 	@Override
@@ -546,7 +551,7 @@ public class LiferayOAuthDataProvider
 			return null;
 		}
 
-		return _codeGrantsClusterSupport.removeCodeGrant(code);
+		return _serverAuthorizationCodeGrantProvider.removeCodeGrant(code);
 	}
 
 	public OAuth2Application resolveOAuth2Application(Client client) {
@@ -1102,9 +1107,6 @@ public class LiferayOAuthDataProvider
 	private volatile BearerTokenProviderAccessor _bearerTokenProviderAccessor;
 
 	@Reference
-	private CodeGrantsClusterSupport _codeGrantsClusterSupport;
-
-	@Reference
 	private ConfigurationProvider _configurationProvider;
 
 	@Reference
@@ -1132,6 +1134,10 @@ public class LiferayOAuthDataProvider
 
 	@Reference
 	private ScopeLocator _scopeFinderLocator;
+
+	@Reference
+	private ServerAuthorizationCodeGrantProvider
+		_serverAuthorizationCodeGrantProvider;
 
 	@Reference
 	private UserLocalService _userLocalService;
