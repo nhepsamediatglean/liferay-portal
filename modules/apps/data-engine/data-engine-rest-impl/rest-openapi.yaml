@@ -464,7 +464,7 @@ paths:
                                 $ref: "#/components/schemas/DataRecordCollection"
                     description: ""
             tags: ["DataRecordCollection"]
-    "/data-record-collections/{data-record-collection-id}/records":
+    "/data-record-collections/{data-record-collection-id}/data-records":
         get:
             parameters:
                 - in: path
@@ -520,7 +520,7 @@ paths:
                                 $ref: "#/components/schemas/DataRecord"
                     description: ""
             tags: ["DataRecordCollection"]
-    "/data-record-collections/{data-record-collection-id}/records/{data-record-id}":
+    "/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}":
         delete:
             parameters:
                 - in: path
