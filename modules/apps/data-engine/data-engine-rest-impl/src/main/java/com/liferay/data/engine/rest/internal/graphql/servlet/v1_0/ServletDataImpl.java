@@ -17,6 +17,7 @@ package com.liferay.data.engine.rest.internal.graphql.servlet.v1_0;
 import com.liferay.data.engine.rest.internal.graphql.mutation.v1_0.Mutation;
 import com.liferay.data.engine.rest.internal.graphql.query.v1_0.Query;
 import com.liferay.data.engine.rest.resource.v1_0.DataDefinitionResource;
+import com.liferay.data.engine.rest.resource.v1_0.DataLayoutResource;
 import com.liferay.data.engine.rest.resource.v1_0.DataRecordCollectionResource;
 import com.liferay.portal.vulcan.graphql.servlet.ServletData;
 
@@ -41,11 +42,15 @@ public class ServletDataImpl implements ServletData {
 	public void activate(BundleContext bundleContext) {
 		Mutation.setDataDefinitionResourceComponentServiceObjects(
 			_dataDefinitionResourceComponentServiceObjects);
+		Mutation.setDataLayoutResourceComponentServiceObjects(
+			_dataLayoutResourceComponentServiceObjects);
 		Mutation.setDataRecordCollectionResourceComponentServiceObjects(
 			_dataRecordCollectionResourceComponentServiceObjects);
 
 		Query.setDataDefinitionResourceComponentServiceObjects(
 			_dataDefinitionResourceComponentServiceObjects);
+		Query.setDataLayoutResourceComponentServiceObjects(
+			_dataLayoutResourceComponentServiceObjects);
 		Query.setDataRecordCollectionResourceComponentServiceObjects(
 			_dataRecordCollectionResourceComponentServiceObjects);
 	}
@@ -68,6 +73,10 @@ public class ServletDataImpl implements ServletData {
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<DataDefinitionResource>
 		_dataDefinitionResourceComponentServiceObjects;
+
+	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
+	private ComponentServiceObjects<DataLayoutResource>
+		_dataLayoutResourceComponentServiceObjects;
 
 	@Reference(scope = ReferenceScope.PROTOTYPE_REQUIRED)
 	private ComponentServiceObjects<DataRecordCollectionResource>

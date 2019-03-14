@@ -41,6 +41,8 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.portal.vulcan.resource.EntityModelResource;
 
+import java.lang.reflect.InvocationTargetException;
+
 import java.net.URL;
 
 import java.text.DateFormat;
@@ -58,6 +60,8 @@ import javax.annotation.Generated;
 
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.Response;
+
+import org.apache.commons.beanutils.BeanUtilsBean;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -109,7 +113,7 @@ public abstract class BaseDataDefinitionResourceTestCase {
 				contentSpaceId, randomDataDefinition());
 
 		Page<DataDefinition> page = invokeGetDataDefinitionsPage(
-			contentSpaceId, Pagination.of(1, 2));
+			contentSpaceId, null, Pagination.of(1, 2));
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -134,7 +138,7 @@ public abstract class BaseDataDefinitionResourceTestCase {
 				contentSpaceId, randomDataDefinition());
 
 		Page<DataDefinition> page1 = invokeGetDataDefinitionsPage(
-			contentSpaceId, Pagination.of(1, 2));
+			contentSpaceId, null, Pagination.of(1, 2));
 
 		List<DataDefinition> dataDefinitions1 =
 			(List<DataDefinition>)page1.getItems();
@@ -143,7 +147,7 @@ public abstract class BaseDataDefinitionResourceTestCase {
 			dataDefinitions1.toString(), 2, dataDefinitions1.size());
 
 		Page<DataDefinition> page2 = invokeGetDataDefinitionsPage(
-			contentSpaceId, Pagination.of(2, 2));
+			contentSpaceId, null, Pagination.of(2, 2));
 
 		Assert.assertEquals(3, page2.getTotalCount());
 
@@ -663,6 +667,10 @@ public abstract class BaseDataDefinitionResourceTestCase {
 		};
 	}
 
+	protected DataDefinition randomPatchDataDefinition() {
+		return randomDataDefinition();
+	}
+
 	protected Group testGroup;
 
 	protected static class Page<T> {
@@ -726,6 +734,18 @@ public abstract class BaseDataDefinitionResourceTestCase {
 		return template.replaceFirst("\\{.*\\}", String.valueOf(value));
 	}
 
+	private static BeanUtilsBean _beanUtilsBean = new BeanUtilsBean() {
+
+		@Override
+		public void copyProperty(Object bean, String name, Object value)
+			throws IllegalAccessException, InvocationTargetException {
+
+			if (value != null) {
+				super.copyProperty(bean, name, value);
+			}
+		}
+
+	};
 	private static DateFormat _dateFormat;
 	private final static ObjectMapper _inputObjectMapper = new ObjectMapper() {
 		{

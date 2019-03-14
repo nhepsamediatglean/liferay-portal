@@ -15,8 +15,11 @@
 package com.liferay.data.engine.rest.internal.graphql.mutation.v1_0;
 
 import com.liferay.data.engine.rest.dto.v1_0.DataDefinition;
+import com.liferay.data.engine.rest.dto.v1_0.DataLayout;
+import com.liferay.data.engine.rest.dto.v1_0.DataRecord;
 import com.liferay.data.engine.rest.dto.v1_0.DataRecordCollection;
 import com.liferay.data.engine.rest.resource.v1_0.DataDefinitionResource;
+import com.liferay.data.engine.rest.resource.v1_0.DataLayoutResource;
 import com.liferay.data.engine.rest.resource.v1_0.DataRecordCollectionResource;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
@@ -44,6 +47,14 @@ public class Mutation {
 
 		_dataDefinitionResourceComponentServiceObjects =
 			dataDefinitionResourceComponentServiceObjects;
+	}
+
+	public static void setDataLayoutResourceComponentServiceObjects(
+		ComponentServiceObjects<DataLayoutResource>
+			dataLayoutResourceComponentServiceObjects) {
+
+		_dataLayoutResourceComponentServiceObjects =
+			dataLayoutResourceComponentServiceObjects;
 	}
 
 	public static void setDataRecordCollectionResourceComponentServiceObjects(
@@ -95,6 +106,45 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public DataLayout postDataLayout(
+			@GraphQLName("contentSpaceId") Long contentSpaceId,
+			@GraphQLName("DataLayout") DataLayout dataLayout)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataLayoutResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataLayoutResource -> dataLayoutResource.postDataLayout(
+				contentSpaceId, dataLayout));
+	}
+
+	@GraphQLInvokeDetached
+	public boolean deleteDataLayout(
+			@GraphQLName("data-layout-id") Long dataLayoutId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataLayoutResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataLayoutResource -> dataLayoutResource.deleteDataLayout(
+				dataLayoutId));
+	}
+
+	@GraphQLInvokeDetached
+	public DataLayout putDataLayout(
+			@GraphQLName("data-layout-id") Long dataLayoutId,
+			@GraphQLName("DataLayout") DataLayout dataLayout)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataLayoutResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataLayoutResource -> dataLayoutResource.putDataLayout(
+				dataLayoutId, dataLayout));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public DataRecordCollection postDataRecordCollection(
 			@GraphQLName("contentSpaceId") Long contentSpaceId,
 			@GraphQLName("DataRecordCollection") DataRecordCollection
@@ -139,6 +189,58 @@ public class Mutation {
 					dataRecordCollectionId, dataRecordCollection));
 	}
 
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public DataRecord postDataRecordCollectionRecord(
+			@GraphQLName("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@GraphQLName("contentSpaceId") Long contentSpaceId,
+			@GraphQLName("DataRecord") DataRecord dataRecord)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataRecordCollectionResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataRecordCollectionResource ->
+				dataRecordCollectionResource.postDataRecordCollectionRecord(
+					dataRecordCollectionId, contentSpaceId, dataRecord));
+	}
+
+	@GraphQLInvokeDetached
+	public boolean deleteDataRecordCollectionRecordDataRecord(
+			@GraphQLName("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@GraphQLName("data-record-id") Long dataRecordId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataRecordCollectionResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataRecordCollectionResource ->
+				dataRecordCollectionResource.
+					deleteDataRecordCollectionRecordDataRecord(
+						dataRecordCollectionId, dataRecordId));
+	}
+
+	@GraphQLInvokeDetached
+	public DataRecord putDataRecordCollectionRecordDataRecord(
+			@GraphQLName("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@GraphQLName("data-record-id") Long dataRecordId,
+			@GraphQLName("contentSpaceId") Long contentSpaceId,
+			@GraphQLName("DataRecord") DataRecord dataRecord)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataRecordCollectionResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataRecordCollectionResource ->
+				dataRecordCollectionResource.
+					putDataRecordCollectionRecordDataRecord(
+						dataRecordCollectionId, dataRecordId, contentSpaceId,
+						dataRecord));
+	}
+
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
 			_applyComponentServiceObjects(
 				ComponentServiceObjects<T> componentServiceObjects,
@@ -167,6 +269,14 @@ public class Mutation {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private void _populateResourceContext(DataLayoutResource dataLayoutResource)
+		throws Exception {
+
+		dataLayoutResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
 	private void _populateResourceContext(
 			DataRecordCollectionResource dataRecordCollectionResource)
 		throws Exception {
@@ -178,6 +288,8 @@ public class Mutation {
 
 	private static ComponentServiceObjects<DataDefinitionResource>
 		_dataDefinitionResourceComponentServiceObjects;
+	private static ComponentServiceObjects<DataLayoutResource>
+		_dataLayoutResourceComponentServiceObjects;
 	private static ComponentServiceObjects<DataRecordCollectionResource>
 		_dataRecordCollectionResourceComponentServiceObjects;
 

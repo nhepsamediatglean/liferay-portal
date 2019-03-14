@@ -15,8 +15,11 @@
 package com.liferay.data.engine.rest.internal.graphql.query.v1_0;
 
 import com.liferay.data.engine.rest.dto.v1_0.DataDefinition;
+import com.liferay.data.engine.rest.dto.v1_0.DataLayout;
+import com.liferay.data.engine.rest.dto.v1_0.DataRecord;
 import com.liferay.data.engine.rest.dto.v1_0.DataRecordCollection;
 import com.liferay.data.engine.rest.resource.v1_0.DataDefinitionResource;
+import com.liferay.data.engine.rest.resource.v1_0.DataLayoutResource;
 import com.liferay.data.engine.rest.resource.v1_0.DataRecordCollectionResource;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
@@ -48,6 +51,14 @@ public class Query {
 
 		_dataDefinitionResourceComponentServiceObjects =
 			dataDefinitionResourceComponentServiceObjects;
+	}
+
+	public static void setDataLayoutResourceComponentServiceObjects(
+		ComponentServiceObjects<DataLayoutResource>
+			dataLayoutResourceComponentServiceObjects) {
+
+		_dataLayoutResourceComponentServiceObjects =
+			dataLayoutResourceComponentServiceObjects;
 	}
 
 	public static void setDataRecordCollectionResourceComponentServiceObjects(
@@ -95,6 +106,19 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public DataLayout getDataLayout(
+			@GraphQLName("data-layout-id") Long dataLayoutId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataLayoutResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataLayoutResource -> dataLayoutResource.getDataLayout(
+				dataLayoutId));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public Collection<DataRecordCollection> getDataRecordCollectionsPage(
 			@GraphQLName("contentSpaceId") Long contentSpaceId,
 			@GraphQLName("keywords") String keywords,
@@ -130,6 +154,46 @@ public class Query {
 					dataRecordCollectionId));
 	}
 
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<DataRecord> getDataRecordCollectionRecordsPage(
+			@GraphQLName("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataRecordCollectionResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataRecordCollectionResource -> {
+				Page paginationPage =
+					dataRecordCollectionResource.
+						getDataRecordCollectionRecordsPage(
+							dataRecordCollectionId,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public DataRecord getDataRecordCollectionRecordDataRecord(
+			@GraphQLName("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@GraphQLName("data-record-id") Long dataRecordId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_dataRecordCollectionResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			dataRecordCollectionResource ->
+				dataRecordCollectionResource.
+					getDataRecordCollectionRecordDataRecord(
+						dataRecordCollectionId, dataRecordId));
+	}
+
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
 			_applyComponentServiceObjects(
 				ComponentServiceObjects<T> componentServiceObjects,
@@ -158,6 +222,14 @@ public class Query {
 				CompanyThreadLocal.getCompanyId()));
 	}
 
+	private void _populateResourceContext(DataLayoutResource dataLayoutResource)
+		throws Exception {
+
+		dataLayoutResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
+	}
+
 	private void _populateResourceContext(
 			DataRecordCollectionResource dataRecordCollectionResource)
 		throws Exception {
@@ -169,6 +241,8 @@ public class Query {
 
 	private static ComponentServiceObjects<DataDefinitionResource>
 		_dataDefinitionResourceComponentServiceObjects;
+	private static ComponentServiceObjects<DataLayoutResource>
+		_dataLayoutResourceComponentServiceObjects;
 	private static ComponentServiceObjects<DataRecordCollectionResource>
 		_dataRecordCollectionResourceComponentServiceObjects;
 

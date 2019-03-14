@@ -149,7 +149,8 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
 	public Page<DataRecord> getDataRecordCollectionRecordsPage(
-			@PathParam("data-record-collection-id") Long dataRecordCollectionId,
+			@NotNull @PathParam("data-record-collection-id") Long
+				dataRecordCollectionId,
 			@Context Pagination pagination)
 		throws Exception {
 
@@ -163,8 +164,9 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
 	public DataRecord postDataRecordCollectionRecord(
-			@PathParam("data-record-collection-id") Long dataRecordCollectionId,
-			@QueryParam("contentSpaceId") Long contentSpaceId,
+			@NotNull @PathParam("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@NotNull @QueryParam("contentSpaceId") Long contentSpaceId,
 			DataRecord dataRecord)
 		throws Exception {
 
@@ -179,8 +181,9 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
 	public boolean deleteDataRecordCollectionRecordDataRecord(
-			@PathParam("data-record-collection-id") Long dataRecordCollectionId,
-			@PathParam("data-record-id") Long dataRecordId)
+			@NotNull @PathParam("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@NotNull @PathParam("data-record-id") Long dataRecordId)
 		throws Exception {
 
 		return false;
@@ -194,8 +197,9 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
 	public DataRecord getDataRecordCollectionRecordDataRecord(
-			@PathParam("data-record-collection-id") Long dataRecordCollectionId,
-			@PathParam("data-record-id") Long dataRecordId)
+			@NotNull @PathParam("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@NotNull @PathParam("data-record-id") Long dataRecordId)
 		throws Exception {
 
 		return new DataRecord();
@@ -210,9 +214,10 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
 	public DataRecord putDataRecordCollectionRecordDataRecord(
-			@PathParam("data-record-collection-id") Long dataRecordCollectionId,
-			@PathParam("data-record-id") Long dataRecordId,
-			@QueryParam("contentSpaceId") Long contentSpaceId,
+			@NotNull @PathParam("data-record-collection-id") Long
+				dataRecordCollectionId,
+			@NotNull @PathParam("data-record-id") Long dataRecordId,
+			@NotNull @QueryParam("contentSpaceId") Long contentSpaceId,
 			DataRecord dataRecord)
 		throws Exception {
 
