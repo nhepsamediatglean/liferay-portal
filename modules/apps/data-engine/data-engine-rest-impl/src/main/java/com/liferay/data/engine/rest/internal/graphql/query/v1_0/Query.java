@@ -156,7 +156,7 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<DataRecord> getDataRecordCollectionRecordsPage(
+	public Collection<DataRecord> getDataRecordCollectionDataRecordsPage(
 			@GraphQLName("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@GraphQLName("pageSize") int pageSize,
@@ -169,7 +169,7 @@ public class Query {
 			dataRecordCollectionResource -> {
 				Page paginationPage =
 					dataRecordCollectionResource.
-						getDataRecordCollectionRecordsPage(
+						getDataRecordCollectionDataRecordsPage(
 							dataRecordCollectionId,
 							Pagination.of(pageSize, page));
 
@@ -179,7 +179,7 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public DataRecord getDataRecordCollectionRecordDataRecord(
+	public DataRecord getDataRecordCollectionDataRecord(
 			@GraphQLName("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@GraphQLName("data-record-id") Long dataRecordId)
@@ -189,9 +189,8 @@ public class Query {
 			_dataRecordCollectionResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			dataRecordCollectionResource ->
-				dataRecordCollectionResource.
-					getDataRecordCollectionRecordDataRecord(
-						dataRecordCollectionId, dataRecordId));
+				dataRecordCollectionResource.getDataRecordCollectionDataRecord(
+					dataRecordCollectionId, dataRecordId));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R

@@ -53,24 +53,24 @@ public interface DataRecordCollectionResource {
 			DataRecordCollection dataRecordCollection)
 		throws Exception;
 
-	public Page<DataRecord> getDataRecordCollectionRecordsPage(
+	public Page<DataRecord> getDataRecordCollectionDataRecordsPage(
 			Long dataRecordCollectionId, Pagination pagination)
 		throws Exception;
 
-	public DataRecord postDataRecordCollectionRecord(
+	public DataRecord postDataRecordCollectionDataRecord(
 			Long dataRecordCollectionId, Long contentSpaceId,
 			DataRecord dataRecord)
 		throws Exception;
 
-	public boolean deleteDataRecordCollectionRecordDataRecord(
+	public boolean deleteDataRecordCollectionDataRecord(
 			Long dataRecordCollectionId, Long dataRecordId)
 		throws Exception;
 
-	public DataRecord getDataRecordCollectionRecordDataRecord(
+	public DataRecord getDataRecordCollectionDataRecord(
 			Long dataRecordCollectionId, Long dataRecordId)
 		throws Exception;
 
-	public DataRecord putDataRecordCollectionRecordDataRecord(
+	public DataRecord putDataRecordCollectionDataRecord(
 			Long dataRecordCollectionId, Long dataRecordId, Long contentSpaceId,
 			DataRecord dataRecord)
 		throws Exception;

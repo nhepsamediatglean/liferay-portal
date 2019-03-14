@@ -503,19 +503,19 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	@Test
-	public void testGetDataRecordCollectionRecordsPage() throws Exception {
+	public void testGetDataRecordCollectionDataRecordsPage() throws Exception {
 		Long dataRecordCollectionId =
-			testGetDataRecordCollectionRecordsPage_getDataRecordCollectionId();
+			testGetDataRecordCollectionDataRecordsPage_getDataRecordCollectionId();
 
 		DataRecordCollection dataRecordCollection1 =
-			testGetDataRecordCollectionRecordsPage_addDataRecordCollection(
+			testGetDataRecordCollectionDataRecordsPage_addDataRecordCollection(
 				dataRecordCollectionId, randomDataRecordCollection());
 		DataRecordCollection dataRecordCollection2 =
-			testGetDataRecordCollectionRecordsPage_addDataRecordCollection(
+			testGetDataRecordCollectionDataRecordsPage_addDataRecordCollection(
 				dataRecordCollectionId, randomDataRecordCollection());
 
 		Page<DataRecordCollection> page =
-			invokeGetDataRecordCollectionRecordsPage(
+			invokeGetDataRecordCollectionDataRecordsPage(
 				dataRecordCollectionId, Pagination.of(1, 2));
 
 		Assert.assertEquals(2, page.getTotalCount());
@@ -527,24 +527,24 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	@Test
-	public void testGetDataRecordCollectionRecordsPageWithPagination()
+	public void testGetDataRecordCollectionDataRecordsPageWithPagination()
 		throws Exception {
 
 		Long dataRecordCollectionId =
-			testGetDataRecordCollectionRecordsPage_getDataRecordCollectionId();
+			testGetDataRecordCollectionDataRecordsPage_getDataRecordCollectionId();
 
 		DataRecordCollection dataRecordCollection1 =
-			testGetDataRecordCollectionRecordsPage_addDataRecordCollection(
+			testGetDataRecordCollectionDataRecordsPage_addDataRecordCollection(
 				dataRecordCollectionId, randomDataRecordCollection());
 		DataRecordCollection dataRecordCollection2 =
-			testGetDataRecordCollectionRecordsPage_addDataRecordCollection(
+			testGetDataRecordCollectionDataRecordsPage_addDataRecordCollection(
 				dataRecordCollectionId, randomDataRecordCollection());
 		DataRecordCollection dataRecordCollection3 =
-			testGetDataRecordCollectionRecordsPage_addDataRecordCollection(
+			testGetDataRecordCollectionDataRecordsPage_addDataRecordCollection(
 				dataRecordCollectionId, randomDataRecordCollection());
 
 		Page<DataRecordCollection> page1 =
-			invokeGetDataRecordCollectionRecordsPage(
+			invokeGetDataRecordCollectionDataRecordsPage(
 				dataRecordCollectionId, Pagination.of(1, 2));
 
 		List<DataRecordCollection> dataRecordCollections1 =
@@ -555,7 +555,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 			dataRecordCollections1.size());
 
 		Page<DataRecordCollection> page2 =
-			invokeGetDataRecordCollectionRecordsPage(
+			invokeGetDataRecordCollectionDataRecordsPage(
 				dataRecordCollectionId, Pagination.of(2, 2));
 
 		Assert.assertEquals(3, page2.getTotalCount());
@@ -580,7 +580,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	protected DataRecordCollection
-			testGetDataRecordCollectionRecordsPage_addDataRecordCollection(
+			testGetDataRecordCollectionDataRecordsPage_addDataRecordCollection(
 				Long dataRecordCollectionId,
 				DataRecordCollection dataRecordCollection)
 		throws Exception {
@@ -590,14 +590,14 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	protected Long
-			testGetDataRecordCollectionRecordsPage_getDataRecordCollectionId()
+			testGetDataRecordCollectionDataRecordsPage_getDataRecordCollectionId()
 		throws Exception {
 
 		throw new UnsupportedOperationException(
 			"This method needs to be implemented");
 	}
 
-	protected Page<DataRecord> invokeGetDataRecordCollectionRecordsPage(
+	protected Page<DataRecord> invokeGetDataRecordCollectionDataRecordsPage(
 			Long dataRecordCollectionId, Pagination pagination)
 		throws Exception {
 
@@ -606,7 +606,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records",
+					"/data-record-collections/{data-record-collection-id}/data-records",
 					dataRecordCollectionId);
 
 		location = HttpUtil.addParameter(
@@ -622,8 +622,9 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 			});
 	}
 
-	protected Http.Response invokeGetDataRecordCollectionRecordsPageResponse(
-			Long dataRecordCollectionId, Pagination pagination)
+	protected Http.Response
+			invokeGetDataRecordCollectionDataRecordsPageResponse(
+				Long dataRecordCollectionId, Pagination pagination)
 		throws Exception {
 
 		Http.Options options = _createHttpOptions();
@@ -631,7 +632,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records",
+					"/data-record-collections/{data-record-collection-id}/data-records",
 					dataRecordCollectionId);
 
 		location = HttpUtil.addParameter(
@@ -647,12 +648,12 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	@Test
-	public void testPostDataRecordCollectionRecord() throws Exception {
+	public void testPostDataRecordCollectionDataRecord() throws Exception {
 		DataRecordCollection randomDataRecordCollection =
 			randomDataRecordCollection();
 
 		DataRecordCollection postDataRecordCollection =
-			testPostDataRecordCollectionRecord_addDataRecordCollection(
+			testPostDataRecordCollectionDataRecord_addDataRecordCollection(
 				randomDataRecordCollection);
 
 		assertEquals(randomDataRecordCollection, postDataRecordCollection);
@@ -660,7 +661,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	protected DataRecordCollection
-			testPostDataRecordCollectionRecord_addDataRecordCollection(
+			testPostDataRecordCollectionDataRecord_addDataRecordCollection(
 				DataRecordCollection dataRecordCollection)
 		throws Exception {
 
@@ -668,7 +669,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 			"This method needs to be implemented");
 	}
 
-	protected DataRecord invokePostDataRecordCollectionRecord(
+	protected DataRecord invokePostDataRecordCollectionDataRecord(
 			Long dataRecordCollectionId, Long contentSpaceId,
 			DataRecord dataRecord)
 		throws Exception {
@@ -678,7 +679,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records",
+					"/data-record-collections/{data-record-collection-id}/data-records",
 					dataRecordCollectionId);
 
 		options.setLocation(location);
@@ -689,7 +690,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 			HttpUtil.URLtoString(options), DataRecord.class);
 	}
 
-	protected Http.Response invokePostDataRecordCollectionRecordResponse(
+	protected Http.Response invokePostDataRecordCollectionDataRecordResponse(
 			Long dataRecordCollectionId, Long contentSpaceId,
 			DataRecord dataRecord)
 		throws Exception {
@@ -699,7 +700,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records",
+					"/data-record-collections/{data-record-collection-id}/data-records",
 					dataRecordCollectionId);
 
 		options.setLocation(location);
@@ -712,32 +713,30 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	@Test
-	public void testDeleteDataRecordCollectionRecordDataRecord()
-		throws Exception {
-
+	public void testDeleteDataRecordCollectionDataRecord() throws Exception {
 		DataRecordCollection dataRecordCollection =
-			testDeleteDataRecordCollectionRecordDataRecord_addDataRecordCollection();
+			testDeleteDataRecordCollectionDataRecord_addDataRecordCollection();
 
 		assertResponseCode(
 			200,
-			invokeDeleteDataRecordCollectionRecordDataRecordResponse(
+			invokeDeleteDataRecordCollectionDataRecordResponse(
 				dataRecordCollection.getId()));
 
 		assertResponseCode(
 			404,
-			invokeGetDataRecordCollectionRecordDataRecordResponse(
+			invokeGetDataRecordCollectionDataRecordResponse(
 				dataRecordCollection.getId()));
 	}
 
 	protected DataRecordCollection
-			testDeleteDataRecordCollectionRecordDataRecord_addDataRecordCollection()
+			testDeleteDataRecordCollectionDataRecord_addDataRecordCollection()
 		throws Exception {
 
 		throw new UnsupportedOperationException(
 			"This method needs to be implemented");
 	}
 
-	protected boolean invokeDeleteDataRecordCollectionRecordDataRecord(
+	protected boolean invokeDeleteDataRecordCollectionDataRecord(
 			Long dataRecordCollectionId, Long dataRecordId)
 		throws Exception {
 
@@ -748,7 +747,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records/{data-record-id}",
+					"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}",
 					dataRecordCollectionId);
 
 		options.setLocation(location);
@@ -757,9 +756,8 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 			HttpUtil.URLtoString(options), Boolean.class);
 	}
 
-	protected Http.Response
-			invokeDeleteDataRecordCollectionRecordDataRecordResponse(
-				Long dataRecordCollectionId, Long dataRecordId)
+	protected Http.Response invokeDeleteDataRecordCollectionDataRecordResponse(
+			Long dataRecordCollectionId, Long dataRecordId)
 		throws Exception {
 
 		Http.Options options = _createHttpOptions();
@@ -769,7 +767,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records/{data-record-id}",
+					"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}",
 					dataRecordCollectionId);
 
 		options.setLocation(location);
@@ -780,11 +778,11 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	@Test
-	public void testGetDataRecordCollectionRecordDataRecord() throws Exception {
+	public void testGetDataRecordCollectionDataRecord() throws Exception {
 		Assert.assertTrue(true);
 	}
 
-	protected DataRecord invokeGetDataRecordCollectionRecordDataRecord(
+	protected DataRecord invokeGetDataRecordCollectionDataRecord(
 			Long dataRecordCollectionId, Long dataRecordId)
 		throws Exception {
 
@@ -793,7 +791,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records/{data-record-id}",
+					"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}",
 					dataRecordCollectionId);
 
 		options.setLocation(location);
@@ -802,9 +800,8 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 			HttpUtil.URLtoString(options), DataRecord.class);
 	}
 
-	protected Http.Response
-			invokeGetDataRecordCollectionRecordDataRecordResponse(
-				Long dataRecordCollectionId, Long dataRecordId)
+	protected Http.Response invokeGetDataRecordCollectionDataRecordResponse(
+			Long dataRecordCollectionId, Long dataRecordId)
 		throws Exception {
 
 		Http.Options options = _createHttpOptions();
@@ -812,7 +809,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records/{data-record-id}",
+					"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}",
 					dataRecordCollectionId);
 
 		options.setLocation(location);
@@ -823,9 +820,9 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	@Test
-	public void testPutDataRecordCollectionRecordDataRecord() throws Exception {
+	public void testPutDataRecordCollectionDataRecord() throws Exception {
 		DataRecordCollection postDataRecordCollection =
-			testPutDataRecordCollectionRecordDataRecord_addDataRecordCollection();
+			testPutDataRecordCollectionDataRecord_addDataRecordCollection();
 
 		DataRecordCollection randomDataRecordCollection =
 			randomDataRecordCollection();
@@ -845,14 +842,14 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	protected DataRecordCollection
-			testPutDataRecordCollectionRecordDataRecord_addDataRecordCollection()
+			testPutDataRecordCollectionDataRecord_addDataRecordCollection()
 		throws Exception {
 
 		throw new UnsupportedOperationException(
 			"This method needs to be implemented");
 	}
 
-	protected DataRecord invokePutDataRecordCollectionRecordDataRecord(
+	protected DataRecord invokePutDataRecordCollectionDataRecord(
 			Long dataRecordCollectionId, Long dataRecordId, Long contentSpaceId,
 			DataRecord dataRecord)
 		throws Exception {
@@ -862,7 +859,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records/{data-record-id}",
+					"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}",
 					dataRecordCollectionId);
 
 		options.setLocation(location);
@@ -873,10 +870,9 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 			HttpUtil.URLtoString(options), DataRecord.class);
 	}
 
-	protected Http.Response
-			invokePutDataRecordCollectionRecordDataRecordResponse(
-				Long dataRecordCollectionId, Long dataRecordId,
-				Long contentSpaceId, DataRecord dataRecord)
+	protected Http.Response invokePutDataRecordCollectionDataRecordResponse(
+			Long dataRecordCollectionId, Long dataRecordId, Long contentSpaceId,
+			DataRecord dataRecord)
 		throws Exception {
 
 		Http.Options options = _createHttpOptions();
@@ -884,7 +880,7 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		String location =
 			_resourceURL +
 				_toPath(
-					"/data-record-collections/{data-record-collection-id}/records/{data-record-id}",
+					"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}",
 					dataRecordCollectionId);
 
 		options.setLocation(location);

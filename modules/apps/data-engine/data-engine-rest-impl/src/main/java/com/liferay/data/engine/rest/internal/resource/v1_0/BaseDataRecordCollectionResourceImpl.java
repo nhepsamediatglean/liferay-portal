@@ -145,10 +145,10 @@ public abstract class BaseDataRecordCollectionResourceImpl
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/data-record-collections/{data-record-collection-id}/records")
+	@Path("/data-record-collections/{data-record-collection-id}/data-records")
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
-	public Page<DataRecord> getDataRecordCollectionRecordsPage(
+	public Page<DataRecord> getDataRecordCollectionDataRecordsPage(
 			@NotNull @PathParam("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@Context Pagination pagination)
@@ -160,10 +160,10 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Override
 	@Consumes("application/json")
 	@POST
-	@Path("/data-record-collections/{data-record-collection-id}/records")
+	@Path("/data-record-collections/{data-record-collection-id}/data-records")
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
-	public DataRecord postDataRecordCollectionRecord(
+	public DataRecord postDataRecordCollectionDataRecord(
 			@NotNull @PathParam("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@NotNull @QueryParam("contentSpaceId") Long contentSpaceId,
@@ -176,11 +176,11 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Override
 	@DELETE
 	@Path(
-		"/data-record-collections/{data-record-collection-id}/records/{data-record-id}"
+		"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}"
 	)
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
-	public boolean deleteDataRecordCollectionRecordDataRecord(
+	public boolean deleteDataRecordCollectionDataRecord(
 			@NotNull @PathParam("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@NotNull @PathParam("data-record-id") Long dataRecordId)
@@ -192,11 +192,11 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Override
 	@GET
 	@Path(
-		"/data-record-collections/{data-record-collection-id}/records/{data-record-id}"
+		"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}"
 	)
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
-	public DataRecord getDataRecordCollectionRecordDataRecord(
+	public DataRecord getDataRecordCollectionDataRecord(
 			@NotNull @PathParam("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@NotNull @PathParam("data-record-id") Long dataRecordId)
@@ -209,11 +209,11 @@ public abstract class BaseDataRecordCollectionResourceImpl
 	@Consumes("application/json")
 	@PUT
 	@Path(
-		"/data-record-collections/{data-record-collection-id}/records/{data-record-id}"
+		"/data-record-collections/{data-record-collection-id}/data-records/{data-record-id}"
 	)
 	@Produces("application/json")
 	@Tags(value = {@Tag(name = "DataRecordCollection")})
-	public DataRecord putDataRecordCollectionRecordDataRecord(
+	public DataRecord putDataRecordCollectionDataRecord(
 			@NotNull @PathParam("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@NotNull @PathParam("data-record-id") Long dataRecordId,

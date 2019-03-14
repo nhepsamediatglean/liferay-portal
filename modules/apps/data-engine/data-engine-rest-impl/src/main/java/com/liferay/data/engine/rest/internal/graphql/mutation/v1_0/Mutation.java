@@ -191,7 +191,7 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public DataRecord postDataRecordCollectionRecord(
+	public DataRecord postDataRecordCollectionDataRecord(
 			@GraphQLName("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@GraphQLName("contentSpaceId") Long contentSpaceId,
@@ -202,12 +202,12 @@ public class Mutation {
 			_dataRecordCollectionResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			dataRecordCollectionResource ->
-				dataRecordCollectionResource.postDataRecordCollectionRecord(
+				dataRecordCollectionResource.postDataRecordCollectionDataRecord(
 					dataRecordCollectionId, contentSpaceId, dataRecord));
 	}
 
 	@GraphQLInvokeDetached
-	public boolean deleteDataRecordCollectionRecordDataRecord(
+	public boolean deleteDataRecordCollectionDataRecord(
 			@GraphQLName("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@GraphQLName("data-record-id") Long dataRecordId)
@@ -218,12 +218,12 @@ public class Mutation {
 			this::_populateResourceContext,
 			dataRecordCollectionResource ->
 				dataRecordCollectionResource.
-					deleteDataRecordCollectionRecordDataRecord(
+					deleteDataRecordCollectionDataRecord(
 						dataRecordCollectionId, dataRecordId));
 	}
 
 	@GraphQLInvokeDetached
-	public DataRecord putDataRecordCollectionRecordDataRecord(
+	public DataRecord putDataRecordCollectionDataRecord(
 			@GraphQLName("data-record-collection-id") Long
 				dataRecordCollectionId,
 			@GraphQLName("data-record-id") Long dataRecordId,
@@ -235,10 +235,9 @@ public class Mutation {
 			_dataRecordCollectionResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			dataRecordCollectionResource ->
-				dataRecordCollectionResource.
-					putDataRecordCollectionRecordDataRecord(
-						dataRecordCollectionId, dataRecordId, contentSpaceId,
-						dataRecord));
+				dataRecordCollectionResource.putDataRecordCollectionDataRecord(
+					dataRecordCollectionId, dataRecordId, contentSpaceId,
+					dataRecord));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
