@@ -186,11 +186,11 @@ public class DataDefinitionUtil {
 		).put(
 			"name", dataDefinitionRule.getName()
 		).put(
-			"ruleType", dataDefinitionRule.getRuleType()
-		).put(
 			"parameters",
 			DataDefinitionRuleParameterUtil.toJSONObject(
 				dataDefinitionRule.getDataDefinitionRuleParameters())
+		).put(
+			"ruleType", dataDefinitionRule.getRuleType()
 		);
 	}
 
