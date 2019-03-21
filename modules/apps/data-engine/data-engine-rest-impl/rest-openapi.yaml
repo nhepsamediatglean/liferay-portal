@@ -198,7 +198,6 @@ components:
                     type: string
                 value:
                     type: string
-
 info:
     description: ""
     title: ""
