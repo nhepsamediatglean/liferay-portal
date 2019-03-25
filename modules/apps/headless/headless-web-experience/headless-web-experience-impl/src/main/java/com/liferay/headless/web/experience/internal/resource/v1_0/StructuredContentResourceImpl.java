@@ -344,7 +344,7 @@ public class StructuredContentResourceImpl
 					}
 				},
 				_createJournalArticleContent(
-					ddmFormValuesCreator.createDDMFormValues(
+					ddmFormValuesCreator.toDDMFormValues(
 						structuredContent.getContentFields(),
 						ddmStructure.getDDMForm(),
 						contextAcceptLanguage.getPreferredLocale(),
@@ -598,7 +598,7 @@ public class StructuredContentResourceImpl
 
 		DDMStructure ddmStructure = journalArticle.getDDMStructure();
 
-		DDMFormValues ddmFormValues = ddmFormValuesCreator.createDDMFormValues(
+		DDMFormValues ddmFormValues = ddmFormValuesCreator.toDDMFormValues(
 			contentFields, ddmStructure.getDDMForm(),
 			contextAcceptLanguage.getPreferredLocale(),
 			_getRootDDMFormFields(ddmStructure));

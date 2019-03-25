@@ -39,33 +39,15 @@ import java.util.stream.Stream;
 import javax.ws.rs.BadRequestException;
 
 /**
- * Create the {@link DDMFormValues} exracting information from the {@link
- * ContentField}.
- *
- * <p>
- * It always generates valid DDMFormValues. If some of the fields are not
- * present in the ContentField array, it will create it using the {@link
- * DDMFormField#getPredefinedValue()}
- * </p>
- *
  * @author Víctor Galán
- * @review
  */
 public class DDMFormValuesCreator {
 
-	public DDMFormValuesCreator(
+	public static DDMFormValues toDDMFormValues(
+		ContentField[] contentFields, DDMForm ddmForm,
 		DLAppService dlAppService, long groupId,
 		JournalArticleService journalArticleService,
-		LayoutLocalService layoutLocalService) {
-
-		_dlAppService = dlAppService;
-		_groupId = groupId;
-		_journalArticleService = journalArticleService;
-		_layoutLocalService = layoutLocalService;
-	}
-
-	public DDMFormValues createDDMFormValues(
-		ContentField[] contentFields, DDMForm ddmForm, Locale locale,
+		LayoutLocalService layoutLocalService, Locale locale,
 		List<DDMFormField> rootDDMFormFields) {
 
 		Map<String, List<ContentField>> contentFieldMap = _getContentFieldMap(
@@ -80,8 +62,10 @@ public class DDMFormValuesCreator {
 				setDDMFormFieldValues(
 					_flattenDDMFormFieldValues(
 						rootDDMFormFields,
-						field -> _createDDMFormFieldValue(
-							contentFieldMap.get(field.getName()), field,
+						ddmFormField -> _createDDMFormFieldValue(
+							contentFieldMap.get(ddmFormField.getName()),
+							ddmFormField, dlAppService, groupId,
+							journalArticleService, layoutLocalService,
 							locale)));
 				setDefaultLocale(ddmForm.getDefaultLocale());
 			}
@@ -98,9 +82,11 @@ public class DDMFormValuesCreator {
 		);
 	}
 
-	private List<DDMFormFieldValue> _createDDMFormFieldValue(
+	private static List<DDMFormFieldValue> _createDDMFormFieldValue(
 		List<ContentField> contentFields, DDMFormField ddmFormField,
-		Locale locale) {
+		DLAppService dlAppService, long groupId,
+		JournalArticleService journalArticleService,
+		LayoutLocalService layoutLocalService, Locale locale) {
 
 		if (ListUtil.isEmpty(contentFields)) {
 			if (ddmFormField.isRequired()) {
@@ -123,8 +109,8 @@ public class DDMFormValuesCreator {
 				ListUtil.toList(contentField.getNestedFields()), ddmFormField,
 				locale,
 				DDMValueUtil.toDDMValue(
-					contentField, ddmFormField, _dlAppService, _groupId,
-					_journalArticleService, _layoutLocalService, locale));
+					contentField, ddmFormField, dlAppService, groupId,
+					journalArticleService, layoutLocalService, locale));
 
 			ddmFormFieldValues.add(ddmFormFieldValue);
 		}
@@ -132,7 +118,7 @@ public class DDMFormValuesCreator {
 		return ddmFormFieldValues;
 	}
 
-	private List<DDMFormFieldValue> _flattenDDMFormFieldValues(
+	private static List<DDMFormFieldValue> _flattenDDMFormFieldValues(
 		List<DDMFormField> list,
 		UnsafeFunction<DDMFormField, List<DDMFormFieldValue>, Exception>
 			unsafeFunction) {
@@ -162,7 +148,7 @@ public class DDMFormValuesCreator {
 		);
 	}
 
-	private Value _getPredefinedValue(
+	private static Value _getPredefinedValue(
 		DDMFormField ddmFormField, Locale locale) {
 
 		LocalizedValue predefinedValue = ddmFormField.getPredefinedValue();
@@ -182,7 +168,7 @@ public class DDMFormValuesCreator {
 		return new UnlocalizedValue(value);
 	}
 
-	private DDMFormFieldValue _toDDMFormFieldValue(
+	private static DDMFormFieldValue _toDDMFormFieldValue(
 		List<ContentField> contentFields, DDMFormField ddmFormField,
 		Locale locale, Value fieldValue) {
 
