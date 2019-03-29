@@ -33,8 +33,6 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 
-import java.net.URI;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -53,7 +51,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -301,27 +298,6 @@ public abstract class BaseStructuredContentResourceImpl
 
 	public void setContextCompany(Company contextCompany) {
 		this.contextCompany = contextCompany;
-	}
-
-	protected String getJAXRSLink(String methodName, Object... values) {
-		String baseURIString = String.valueOf(contextUriInfo.getBaseUri());
-
-		if (baseURIString.endsWith(StringPool.FORWARD_SLASH)) {
-			baseURIString = baseURIString.substring(
-				0, baseURIString.length() - 1);
-		}
-
-		URI resourceURI = UriBuilder.fromResource(
-			BaseStructuredContentResourceImpl.class
-		).build();
-
-		URI methodURI = UriBuilder.fromMethod(
-			BaseStructuredContentResourceImpl.class, methodName
-		).build(
-			values
-		);
-
-		return baseURIString + resourceURI.toString() + methodURI.toString();
 	}
 
 	protected void preparePatch(StructuredContent structuredContent) {
