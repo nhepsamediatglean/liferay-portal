@@ -16,22 +16,16 @@ package com.liferay.headless.form.internal.resource.v1_0;
 
 import com.liferay.headless.form.dto.v1_0.FormRecord;
 import com.liferay.headless.form.dto.v1_0.FormRecordForm;
-import com.liferay.headless.form.resource.v1_0.FormRecordResource;
+import com.liferay.headless.form.resource.v1_0.FormRecordFormResource;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
-import com.liferay.portal.vulcan.pagination.Page;
-import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -39,8 +33,7 @@ import javax.annotation.Generated;
 import javax.validation.constraints.NotNull;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -53,59 +46,17 @@ import javax.ws.rs.core.UriInfo;
  */
 @Generated("")
 @Path("/v1.0")
-public abstract class BaseFormRecordResourceImpl implements FormRecordResource {
-
-	@Override
-	@GET
-	@Path("/form-records/{form-record-id}")
-	@Produces("application/json")
-	@Tags(value = {@Tag(name = "FormRecord")})
-	public FormRecord getFormRecord(
-			@NotNull @PathParam("form-record-id") Long formRecordId)
-		throws Exception {
-
-		return new FormRecord();
-	}
-
-	@Override
-	@GET
-	@Path("/forms/{form-id}/fetch-latest-draft")
-	@Produces("application/json")
-	@Tags(value = {@Tag(name = "FormRecord")})
-	public FormRecord getFormFetchLatestDraft(
-			@NotNull @PathParam("form-id") Long formId)
-		throws Exception {
-
-		return new FormRecord();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/forms/{form-id}/form-records")
-	@Produces("application/json")
-	@Tags(value = {@Tag(name = "FormRecord")})
-	public Page<FormRecord> getFormFormRecordsPage(
-			@NotNull @PathParam("form-id") Long formId,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
+public abstract class BaseFormRecordFormResourceImpl
+	implements FormRecordFormResource {
 
 	@Override
 	@Consumes("application/json")
-	@POST
-	@Path("/forms/{form-id}/form-records")
+	@PUT
+	@Path("/form-records/{form-record-id}")
 	@Produces("application/json")
-	@Tags(value = {@Tag(name = "FormRecord")})
-	public FormRecord postFormFormRecord(
-			@NotNull @PathParam("form-id") Long formId,
+	@Tags(value = {@Tag(name = "FormRecordForm")})
+	public FormRecord putFormRecord(
+			@NotNull @PathParam("form-record-id") Long formRecordId,
 			FormRecordForm formRecordForm)
 		throws Exception {
 
@@ -116,8 +67,7 @@ public abstract class BaseFormRecordResourceImpl implements FormRecordResource {
 		this.contextCompany = contextCompany;
 	}
 
-	protected void preparePatch(
-		FormRecord formRecord, FormRecord existingFormRecord) {
+	protected void preparePatch(FormRecordForm formRecordForm) {
 	}
 
 	protected <T, R> List<R> transform(
