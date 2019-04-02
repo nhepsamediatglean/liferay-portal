@@ -30,10 +30,6 @@ public interface FragmentRenderer {
 
 	public String getCollectionKey();
 
-	public default int getFragmentType() {
-		return FragmentConstants.TYPE_COMPONENT;
-	}
-
 	public default String getKey() {
 		Class<?> clazz = getClass();
 
@@ -41,6 +37,10 @@ public interface FragmentRenderer {
 	}
 
 	public String getLabel(Locale locale);
+
+	public default int getType() {
+		return FragmentConstants.TYPE_COMPONENT;
+	}
 
 	public default boolean isAvailable(HttpServletRequest httpServletRequest) {
 		return true;
