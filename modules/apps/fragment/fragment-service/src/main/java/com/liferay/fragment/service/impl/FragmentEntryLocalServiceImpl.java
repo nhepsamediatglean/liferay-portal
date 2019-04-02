@@ -213,8 +213,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, StringPool.BLANK, name, css,
-			html, js, FragmentConstants.TYPE_SECTION, status,
-			serviceContext);
+			html, js, FragmentConstants.TYPE_SECTION, status, serviceContext);
 	}
 
 	@Override

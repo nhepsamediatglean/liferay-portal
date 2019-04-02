@@ -14,8 +14,8 @@
 
 package com.liferay.fragment.web.internal.portlet.action;
 
-import com.liferay.fragment.constants.FragmentPortletKeys;
 import com.liferay.fragment.constants.FragmentConstants;
+import com.liferay.fragment.constants.FragmentPortletKeys;
 import com.liferay.fragment.model.FragmentEntry;
 import com.liferay.fragment.service.FragmentEntryService;
 import com.liferay.fragment.web.internal.handler.FragmentEntryExceptionRequestHandler;

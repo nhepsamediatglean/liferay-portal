@@ -18,8 +18,8 @@ import com.liferay.asset.display.contributor.AssetDisplayContributor;
 import com.liferay.asset.display.contributor.AssetDisplayContributorTracker;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.fragment.constants.FragmentEntryLinkConstants;
 import com.liferay.fragment.constants.FragmentConstants;
+import com.liferay.fragment.constants.FragmentEntryLinkConstants;
 import com.liferay.fragment.contributor.FragmentCollectionContributor;
 import com.liferay.fragment.contributor.FragmentCollectionContributorTracker;
 import com.liferay.fragment.model.FragmentCollection;
@@ -183,8 +183,7 @@ public class ContentPageEditorDisplayContext {
 				"/content_layout/edit_fragment_entry_link")
 		).put(
 			"elements",
-			_getSoyContextFragmentCollections(
-				FragmentConstants.TYPE_COMPONENT)
+			_getSoyContextFragmentCollections(FragmentConstants.TYPE_COMPONENT)
 		).put(
 			"fragmentEntryLinks", _getSoyContextFragmentEntryLinks()
 		);
@@ -230,8 +229,7 @@ public class ContentPageEditorDisplayContext {
 			"redirectURL", _getRedirect()
 		).put(
 			"sections",
-			_getSoyContextFragmentCollections(
-				FragmentConstants.TYPE_SECTION)
+			_getSoyContextFragmentCollections(FragmentConstants.TYPE_SECTION)
 		).put(
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/lexicon/icons.svg"

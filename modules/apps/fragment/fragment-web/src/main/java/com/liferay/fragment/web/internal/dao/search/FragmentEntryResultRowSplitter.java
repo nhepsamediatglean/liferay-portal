@@ -40,9 +40,7 @@ public class FragmentEntryResultRowSplitter implements ResultRowSplitter {
 		for (ResultRow resultRow : resultRows) {
 			FragmentEntry fragmentEntry = (FragmentEntry)resultRow.getObject();
 
-			if (fragmentEntry.getType() ==
-					FragmentConstants.TYPE_COMPONENT) {
-
+			if (fragmentEntry.getType() == FragmentConstants.TYPE_COMPONENT) {
 				fragmentEntryComponentsResultRows.add(resultRow);
 			}
 			else {

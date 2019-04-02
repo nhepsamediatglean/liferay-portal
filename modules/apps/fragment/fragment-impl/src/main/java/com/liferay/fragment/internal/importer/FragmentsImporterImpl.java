@@ -14,9 +14,9 @@
 
 package com.liferay.fragment.internal.importer;
 
+import com.liferay.fragment.constants.FragmentConstants;
 import com.liferay.fragment.constants.FragmentExportImportConstants;
 import com.liferay.fragment.constants.FragmentPortletKeys;
-import com.liferay.fragment.constants.FragmentConstants;
 import com.liferay.fragment.exception.DuplicateFragmentCollectionKeyException;
 import com.liferay.fragment.exception.DuplicateFragmentEntryKeyException;
 import com.liferay.fragment.exception.FragmentCollectionNameException;
