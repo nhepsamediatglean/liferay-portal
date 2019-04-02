@@ -78,10 +78,11 @@ public class FragmentEntryLinkModelImpl
 		{"fragmentEntryId", Types.BIGINT}, {"classNameId", Types.BIGINT},
 		{"classPK", Types.BIGINT}, {"css", Types.VARCHAR},
 		{"html", Types.VARCHAR}, {"js", Types.VARCHAR},
-		{"editableValues", Types.VARCHAR}, {"position", Types.INTEGER},
-		{"lastPropagationDate", Types.TIMESTAMP}, {"namespace", Types.VARCHAR},
-		{"lastPublishDate", Types.TIMESTAMP}, {"rendererType", Types.INTEGER},
-		{"rendererKey", Types.VARCHAR}
+		{"editableValues", Types.VARCHAR}, {"namespace", Types.VARCHAR},
+		{"position", Types.INTEGER}, {"rendererKey", Types.VARCHAR},
+		{"rendererType", Types.INTEGER},
+		{"lastPropagationDate", Types.TIMESTAMP},
+		{"lastPublishDate", Types.TIMESTAMP}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -104,16 +105,16 @@ public class FragmentEntryLinkModelImpl
 		TABLE_COLUMNS_MAP.put("html", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("js", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("editableValues", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("position", Types.INTEGER);
-		TABLE_COLUMNS_MAP.put("lastPropagationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("namespace", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("rendererType", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("position", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("rendererKey", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("rendererType", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("lastPropagationDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table FragmentEntryLink (uuid_ VARCHAR(75) null,fragmentEntryLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,originalFragmentEntryLinkId LONG,fragmentEntryId LONG,classNameId LONG,classPK LONG,css STRING null,html STRING null,js STRING null,editableValues STRING null,position INTEGER,lastPropagationDate DATE null,namespace VARCHAR(75) null,lastPublishDate DATE null,rendererType INTEGER,rendererKey VARCHAR(75) null)";
+		"create table FragmentEntryLink (uuid_ VARCHAR(75) null,fragmentEntryLinkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,originalFragmentEntryLinkId LONG,fragmentEntryId LONG,classNameId LONG,classPK LONG,css STRING null,html STRING null,js STRING null,editableValues STRING null,namespace VARCHAR(75) null,position INTEGER,rendererKey VARCHAR(75) null,rendererType INTEGER,lastPropagationDate DATE null,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table FragmentEntryLink";
 
@@ -348,29 +349,23 @@ public class FragmentEntryLinkModelImpl
 			(BiConsumer<FragmentEntryLink, String>)
 				FragmentEntryLink::setEditableValues);
 		attributeGetterFunctions.put(
-			"position", FragmentEntryLink::getPosition);
-		attributeSetterBiConsumers.put(
-			"position",
-			(BiConsumer<FragmentEntryLink, Integer>)
-				FragmentEntryLink::setPosition);
-		attributeGetterFunctions.put(
-			"lastPropagationDate", FragmentEntryLink::getLastPropagationDate);
-		attributeSetterBiConsumers.put(
-			"lastPropagationDate",
-			(BiConsumer<FragmentEntryLink, Date>)
-				FragmentEntryLink::setLastPropagationDate);
-		attributeGetterFunctions.put(
 			"namespace", FragmentEntryLink::getNamespace);
 		attributeSetterBiConsumers.put(
 			"namespace",
 			(BiConsumer<FragmentEntryLink, String>)
 				FragmentEntryLink::setNamespace);
 		attributeGetterFunctions.put(
-			"lastPublishDate", FragmentEntryLink::getLastPublishDate);
+			"position", FragmentEntryLink::getPosition);
 		attributeSetterBiConsumers.put(
-			"lastPublishDate",
-			(BiConsumer<FragmentEntryLink, Date>)
-				FragmentEntryLink::setLastPublishDate);
+			"position",
+			(BiConsumer<FragmentEntryLink, Integer>)
+				FragmentEntryLink::setPosition);
+		attributeGetterFunctions.put(
+			"rendererKey", FragmentEntryLink::getRendererKey);
+		attributeSetterBiConsumers.put(
+			"rendererKey",
+			(BiConsumer<FragmentEntryLink, String>)
+				FragmentEntryLink::setRendererKey);
 		attributeGetterFunctions.put(
 			"rendererType", FragmentEntryLink::getRendererType);
 		attributeSetterBiConsumers.put(
@@ -378,11 +373,17 @@ public class FragmentEntryLinkModelImpl
 			(BiConsumer<FragmentEntryLink, Integer>)
 				FragmentEntryLink::setRendererType);
 		attributeGetterFunctions.put(
-			"rendererKey", FragmentEntryLink::getRendererKey);
+			"lastPropagationDate", FragmentEntryLink::getLastPropagationDate);
 		attributeSetterBiConsumers.put(
-			"rendererKey",
-			(BiConsumer<FragmentEntryLink, String>)
-				FragmentEntryLink::setRendererKey);
+			"lastPropagationDate",
+			(BiConsumer<FragmentEntryLink, Date>)
+				FragmentEntryLink::setLastPropagationDate);
+		attributeGetterFunctions.put(
+			"lastPublishDate", FragmentEntryLink::getLastPublishDate);
+		attributeSetterBiConsumers.put(
+			"lastPublishDate",
+			(BiConsumer<FragmentEntryLink, Date>)
+				FragmentEntryLink::setLastPublishDate);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -695,28 +696,6 @@ public class FragmentEntryLinkModelImpl
 	}
 
 	@Override
-	public int getPosition() {
-		return _position;
-	}
-
-	@Override
-	public void setPosition(int position) {
-		_columnBitmask = -1L;
-
-		_position = position;
-	}
-
-	@Override
-	public Date getLastPropagationDate() {
-		return _lastPropagationDate;
-	}
-
-	@Override
-	public void setLastPropagationDate(Date lastPropagationDate) {
-		_lastPropagationDate = lastPropagationDate;
-	}
-
-	@Override
 	public String getNamespace() {
 		if (_namespace == null) {
 			return "";
@@ -732,23 +711,15 @@ public class FragmentEntryLinkModelImpl
 	}
 
 	@Override
-	public Date getLastPublishDate() {
-		return _lastPublishDate;
+	public int getPosition() {
+		return _position;
 	}
 
 	@Override
-	public void setLastPublishDate(Date lastPublishDate) {
-		_lastPublishDate = lastPublishDate;
-	}
+	public void setPosition(int position) {
+		_columnBitmask = -1L;
 
-	@Override
-	public int getRendererType() {
-		return _rendererType;
-	}
-
-	@Override
-	public void setRendererType(int rendererType) {
-		_rendererType = rendererType;
+		_position = position;
 	}
 
 	@Override
@@ -764,6 +735,36 @@ public class FragmentEntryLinkModelImpl
 	@Override
 	public void setRendererKey(String rendererKey) {
 		_rendererKey = rendererKey;
+	}
+
+	@Override
+	public int getRendererType() {
+		return _rendererType;
+	}
+
+	@Override
+	public void setRendererType(int rendererType) {
+		_rendererType = rendererType;
+	}
+
+	@Override
+	public Date getLastPropagationDate() {
+		return _lastPropagationDate;
+	}
+
+	@Override
+	public void setLastPropagationDate(Date lastPropagationDate) {
+		_lastPropagationDate = lastPropagationDate;
+	}
+
+	@Override
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	@Override
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
 	}
 
 	@Override
@@ -823,12 +824,12 @@ public class FragmentEntryLinkModelImpl
 		fragmentEntryLinkImpl.setHtml(getHtml());
 		fragmentEntryLinkImpl.setJs(getJs());
 		fragmentEntryLinkImpl.setEditableValues(getEditableValues());
-		fragmentEntryLinkImpl.setPosition(getPosition());
-		fragmentEntryLinkImpl.setLastPropagationDate(getLastPropagationDate());
 		fragmentEntryLinkImpl.setNamespace(getNamespace());
-		fragmentEntryLinkImpl.setLastPublishDate(getLastPublishDate());
-		fragmentEntryLinkImpl.setRendererType(getRendererType());
+		fragmentEntryLinkImpl.setPosition(getPosition());
 		fragmentEntryLinkImpl.setRendererKey(getRendererKey());
+		fragmentEntryLinkImpl.setRendererType(getRendererType());
+		fragmentEntryLinkImpl.setLastPropagationDate(getLastPropagationDate());
+		fragmentEntryLinkImpl.setLastPublishDate(getLastPublishDate());
 
 		fragmentEntryLinkImpl.resetOriginalValues();
 
@@ -1047,7 +1048,25 @@ public class FragmentEntryLinkModelImpl
 			fragmentEntryLinkCacheModel.editableValues = null;
 		}
 
+		fragmentEntryLinkCacheModel.namespace = getNamespace();
+
+		String namespace = fragmentEntryLinkCacheModel.namespace;
+
+		if ((namespace != null) && (namespace.length() == 0)) {
+			fragmentEntryLinkCacheModel.namespace = null;
+		}
+
 		fragmentEntryLinkCacheModel.position = getPosition();
+
+		fragmentEntryLinkCacheModel.rendererKey = getRendererKey();
+
+		String rendererKey = fragmentEntryLinkCacheModel.rendererKey;
+
+		if ((rendererKey != null) && (rendererKey.length() == 0)) {
+			fragmentEntryLinkCacheModel.rendererKey = null;
+		}
+
+		fragmentEntryLinkCacheModel.rendererType = getRendererType();
 
 		Date lastPropagationDate = getLastPropagationDate();
 
@@ -1059,14 +1078,6 @@ public class FragmentEntryLinkModelImpl
 			fragmentEntryLinkCacheModel.lastPropagationDate = Long.MIN_VALUE;
 		}
 
-		fragmentEntryLinkCacheModel.namespace = getNamespace();
-
-		String namespace = fragmentEntryLinkCacheModel.namespace;
-
-		if ((namespace != null) && (namespace.length() == 0)) {
-			fragmentEntryLinkCacheModel.namespace = null;
-		}
-
 		Date lastPublishDate = getLastPublishDate();
 
 		if (lastPublishDate != null) {
@@ -1075,16 +1086,6 @@ public class FragmentEntryLinkModelImpl
 		}
 		else {
 			fragmentEntryLinkCacheModel.lastPublishDate = Long.MIN_VALUE;
-		}
-
-		fragmentEntryLinkCacheModel.rendererType = getRendererType();
-
-		fragmentEntryLinkCacheModel.rendererKey = getRendererKey();
-
-		String rendererKey = fragmentEntryLinkCacheModel.rendererKey;
-
-		if ((rendererKey != null) && (rendererKey.length() == 0)) {
-			fragmentEntryLinkCacheModel.rendererKey = null;
 		}
 
 		return fragmentEntryLinkCacheModel;
@@ -1187,12 +1188,12 @@ public class FragmentEntryLinkModelImpl
 	private String _html;
 	private String _js;
 	private String _editableValues;
-	private int _position;
-	private Date _lastPropagationDate;
 	private String _namespace;
-	private Date _lastPublishDate;
-	private int _rendererType;
+	private int _position;
 	private String _rendererKey;
+	private int _rendererType;
+	private Date _lastPropagationDate;
+	private Date _lastPublishDate;
 	private long _columnBitmask;
 	private FragmentEntryLink _escapedModel;
 

@@ -336,34 +336,6 @@ public interface FragmentEntryLinkModel
 	public void setEditableValues(String editableValues);
 
 	/**
-	 * Returns the position of this fragment entry link.
-	 *
-	 * @return the position of this fragment entry link
-	 */
-	public int getPosition();
-
-	/**
-	 * Sets the position of this fragment entry link.
-	 *
-	 * @param position the position of this fragment entry link
-	 */
-	public void setPosition(int position);
-
-	/**
-	 * Returns the last propagation date of this fragment entry link.
-	 *
-	 * @return the last propagation date of this fragment entry link
-	 */
-	public Date getLastPropagationDate();
-
-	/**
-	 * Sets the last propagation date of this fragment entry link.
-	 *
-	 * @param lastPropagationDate the last propagation date of this fragment entry link
-	 */
-	public void setLastPropagationDate(Date lastPropagationDate);
-
-	/**
 	 * Returns the namespace of this fragment entry link.
 	 *
 	 * @return the namespace of this fragment entry link
@@ -379,20 +351,33 @@ public interface FragmentEntryLinkModel
 	public void setNamespace(String namespace);
 
 	/**
-	 * Returns the last publish date of this fragment entry link.
+	 * Returns the position of this fragment entry link.
 	 *
-	 * @return the last publish date of this fragment entry link
+	 * @return the position of this fragment entry link
 	 */
-	@Override
-	public Date getLastPublishDate();
+	public int getPosition();
 
 	/**
-	 * Sets the last publish date of this fragment entry link.
+	 * Sets the position of this fragment entry link.
 	 *
-	 * @param lastPublishDate the last publish date of this fragment entry link
+	 * @param position the position of this fragment entry link
 	 */
-	@Override
-	public void setLastPublishDate(Date lastPublishDate);
+	public void setPosition(int position);
+
+	/**
+	 * Returns the renderer key of this fragment entry link.
+	 *
+	 * @return the renderer key of this fragment entry link
+	 */
+	@AutoEscape
+	public String getRendererKey();
+
+	/**
+	 * Sets the renderer key of this fragment entry link.
+	 *
+	 * @param rendererKey the renderer key of this fragment entry link
+	 */
+	public void setRendererKey(String rendererKey);
 
 	/**
 	 * Returns the renderer type of this fragment entry link.
@@ -409,18 +394,33 @@ public interface FragmentEntryLinkModel
 	public void setRendererType(int rendererType);
 
 	/**
-	 * Returns the renderer key of this fragment entry link.
+	 * Returns the last propagation date of this fragment entry link.
 	 *
-	 * @return the renderer key of this fragment entry link
+	 * @return the last propagation date of this fragment entry link
 	 */
-	@AutoEscape
-	public String getRendererKey();
+	public Date getLastPropagationDate();
 
 	/**
-	 * Sets the renderer key of this fragment entry link.
+	 * Sets the last propagation date of this fragment entry link.
 	 *
-	 * @param rendererKey the renderer key of this fragment entry link
+	 * @param lastPropagationDate the last propagation date of this fragment entry link
 	 */
-	public void setRendererKey(String rendererKey);
+	public void setLastPropagationDate(Date lastPropagationDate);
+
+	/**
+	 * Returns the last publish date of this fragment entry link.
+	 *
+	 * @return the last publish date of this fragment entry link
+	 */
+	@Override
+	public Date getLastPublishDate();
+
+	/**
+	 * Sets the last publish date of this fragment entry link.
+	 *
+	 * @param lastPublishDate the last publish date of this fragment entry link
+	 */
+	@Override
+	public void setLastPublishDate(Date lastPublishDate);
 
 }

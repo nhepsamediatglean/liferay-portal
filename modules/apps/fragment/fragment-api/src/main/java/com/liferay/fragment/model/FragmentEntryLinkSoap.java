@@ -51,12 +51,12 @@ public class FragmentEntryLinkSoap implements Serializable {
 		soapModel.setHtml(model.getHtml());
 		soapModel.setJs(model.getJs());
 		soapModel.setEditableValues(model.getEditableValues());
-		soapModel.setPosition(model.getPosition());
-		soapModel.setLastPropagationDate(model.getLastPropagationDate());
 		soapModel.setNamespace(model.getNamespace());
-		soapModel.setLastPublishDate(model.getLastPublishDate());
-		soapModel.setRendererType(model.getRendererType());
+		soapModel.setPosition(model.getPosition());
 		soapModel.setRendererKey(model.getRendererKey());
+		soapModel.setRendererType(model.getRendererType());
+		soapModel.setLastPropagationDate(model.getLastPropagationDate());
+		soapModel.setLastPublishDate(model.getLastPublishDate());
 
 		return soapModel;
 	}
@@ -248,22 +248,6 @@ public class FragmentEntryLinkSoap implements Serializable {
 		_editableValues = editableValues;
 	}
 
-	public int getPosition() {
-		return _position;
-	}
-
-	public void setPosition(int position) {
-		_position = position;
-	}
-
-	public Date getLastPropagationDate() {
-		return _lastPropagationDate;
-	}
-
-	public void setLastPropagationDate(Date lastPropagationDate) {
-		_lastPropagationDate = lastPropagationDate;
-	}
-
 	public String getNamespace() {
 		return _namespace;
 	}
@@ -272,12 +256,20 @@ public class FragmentEntryLinkSoap implements Serializable {
 		_namespace = namespace;
 	}
 
-	public Date getLastPublishDate() {
-		return _lastPublishDate;
+	public int getPosition() {
+		return _position;
 	}
 
-	public void setLastPublishDate(Date lastPublishDate) {
-		_lastPublishDate = lastPublishDate;
+	public void setPosition(int position) {
+		_position = position;
+	}
+
+	public String getRendererKey() {
+		return _rendererKey;
+	}
+
+	public void setRendererKey(String rendererKey) {
+		_rendererKey = rendererKey;
 	}
 
 	public int getRendererType() {
@@ -288,12 +280,20 @@ public class FragmentEntryLinkSoap implements Serializable {
 		_rendererType = rendererType;
 	}
 
-	public String getRendererKey() {
-		return _rendererKey;
+	public Date getLastPropagationDate() {
+		return _lastPropagationDate;
 	}
 
-	public void setRendererKey(String rendererKey) {
-		_rendererKey = rendererKey;
+	public void setLastPropagationDate(Date lastPropagationDate) {
+		_lastPropagationDate = lastPropagationDate;
+	}
+
+	public Date getLastPublishDate() {
+		return _lastPublishDate;
+	}
+
+	public void setLastPublishDate(Date lastPublishDate) {
+		_lastPublishDate = lastPublishDate;
 	}
 
 	private String _uuid;
@@ -312,11 +312,11 @@ public class FragmentEntryLinkSoap implements Serializable {
 	private String _html;
 	private String _js;
 	private String _editableValues;
-	private int _position;
-	private Date _lastPropagationDate;
 	private String _namespace;
-	private Date _lastPublishDate;
-	private int _rendererType;
+	private int _position;
 	private String _rendererKey;
+	private int _rendererType;
+	private Date _lastPropagationDate;
+	private Date _lastPublishDate;
 
 }

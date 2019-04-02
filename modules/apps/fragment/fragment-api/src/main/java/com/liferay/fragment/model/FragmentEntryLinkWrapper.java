@@ -63,12 +63,12 @@ public class FragmentEntryLinkWrapper
 		attributes.put("html", getHtml());
 		attributes.put("js", getJs());
 		attributes.put("editableValues", getEditableValues());
-		attributes.put("position", getPosition());
-		attributes.put("lastPropagationDate", getLastPropagationDate());
 		attributes.put("namespace", getNamespace());
-		attributes.put("lastPublishDate", getLastPublishDate());
-		attributes.put("rendererType", getRendererType());
+		attributes.put("position", getPosition());
 		attributes.put("rendererKey", getRendererKey());
+		attributes.put("rendererType", getRendererType());
+		attributes.put("lastPropagationDate", getLastPropagationDate());
+		attributes.put("lastPublishDate", getLastPublishDate());
 
 		return attributes;
 	}
@@ -172,28 +172,22 @@ public class FragmentEntryLinkWrapper
 			setEditableValues(editableValues);
 		}
 
-		Integer position = (Integer)attributes.get("position");
-
-		if (position != null) {
-			setPosition(position);
-		}
-
-		Date lastPropagationDate = (Date)attributes.get("lastPropagationDate");
-
-		if (lastPropagationDate != null) {
-			setLastPropagationDate(lastPropagationDate);
-		}
-
 		String namespace = (String)attributes.get("namespace");
 
 		if (namespace != null) {
 			setNamespace(namespace);
 		}
 
-		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+		Integer position = (Integer)attributes.get("position");
 
-		if (lastPublishDate != null) {
-			setLastPublishDate(lastPublishDate);
+		if (position != null) {
+			setPosition(position);
+		}
+
+		String rendererKey = (String)attributes.get("rendererKey");
+
+		if (rendererKey != null) {
+			setRendererKey(rendererKey);
 		}
 
 		Integer rendererType = (Integer)attributes.get("rendererType");
@@ -202,10 +196,16 @@ public class FragmentEntryLinkWrapper
 			setRendererType(rendererType);
 		}
 
-		String rendererKey = (String)attributes.get("rendererKey");
+		Date lastPropagationDate = (Date)attributes.get("lastPropagationDate");
 
-		if (rendererKey != null) {
-			setRendererKey(rendererKey);
+		if (lastPropagationDate != null) {
+			setLastPropagationDate(lastPropagationDate);
+		}
+
+		Date lastPublishDate = (Date)attributes.get("lastPublishDate");
+
+		if (lastPublishDate != null) {
+			setLastPublishDate(lastPublishDate);
 		}
 	}
 

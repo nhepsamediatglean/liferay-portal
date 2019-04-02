@@ -101,18 +101,18 @@ public class FragmentEntryLinkCacheModel
 		sb.append(js);
 		sb.append(", editableValues=");
 		sb.append(editableValues);
-		sb.append(", position=");
-		sb.append(position);
-		sb.append(", lastPropagationDate=");
-		sb.append(lastPropagationDate);
 		sb.append(", namespace=");
 		sb.append(namespace);
-		sb.append(", lastPublishDate=");
-		sb.append(lastPublishDate);
-		sb.append(", rendererType=");
-		sb.append(rendererType);
+		sb.append(", position=");
+		sb.append(position);
 		sb.append(", rendererKey=");
 		sb.append(rendererKey);
+		sb.append(", rendererType=");
+		sb.append(rendererType);
+		sb.append(", lastPropagationDate=");
+		sb.append(lastPropagationDate);
+		sb.append(", lastPublishDate=");
+		sb.append(lastPublishDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -190,7 +190,23 @@ public class FragmentEntryLinkCacheModel
 			fragmentEntryLinkImpl.setEditableValues(editableValues);
 		}
 
+		if (namespace == null) {
+			fragmentEntryLinkImpl.setNamespace("");
+		}
+		else {
+			fragmentEntryLinkImpl.setNamespace(namespace);
+		}
+
 		fragmentEntryLinkImpl.setPosition(position);
+
+		if (rendererKey == null) {
+			fragmentEntryLinkImpl.setRendererKey("");
+		}
+		else {
+			fragmentEntryLinkImpl.setRendererKey(rendererKey);
+		}
+
+		fragmentEntryLinkImpl.setRendererType(rendererType);
 
 		if (lastPropagationDate == Long.MIN_VALUE) {
 			fragmentEntryLinkImpl.setLastPropagationDate(null);
@@ -200,27 +216,11 @@ public class FragmentEntryLinkCacheModel
 				new Date(lastPropagationDate));
 		}
 
-		if (namespace == null) {
-			fragmentEntryLinkImpl.setNamespace("");
-		}
-		else {
-			fragmentEntryLinkImpl.setNamespace(namespace);
-		}
-
 		if (lastPublishDate == Long.MIN_VALUE) {
 			fragmentEntryLinkImpl.setLastPublishDate(null);
 		}
 		else {
 			fragmentEntryLinkImpl.setLastPublishDate(new Date(lastPublishDate));
-		}
-
-		fragmentEntryLinkImpl.setRendererType(rendererType);
-
-		if (rendererKey == null) {
-			fragmentEntryLinkImpl.setRendererKey("");
-		}
-		else {
-			fragmentEntryLinkImpl.setRendererKey(rendererKey);
 		}
 
 		fragmentEntryLinkImpl.resetOriginalValues();
@@ -254,14 +254,14 @@ public class FragmentEntryLinkCacheModel
 		html = objectInput.readUTF();
 		js = objectInput.readUTF();
 		editableValues = objectInput.readUTF();
+		namespace = objectInput.readUTF();
 
 		position = objectInput.readInt();
-		lastPropagationDate = objectInput.readLong();
-		namespace = objectInput.readUTF();
-		lastPublishDate = objectInput.readLong();
+		rendererKey = objectInput.readUTF();
 
 		rendererType = objectInput.readInt();
-		rendererKey = objectInput.readUTF();
+		lastPropagationDate = objectInput.readLong();
+		lastPublishDate = objectInput.readLong();
 	}
 
 	@Override
@@ -327,9 +327,6 @@ public class FragmentEntryLinkCacheModel
 			objectOutput.writeUTF(editableValues);
 		}
 
-		objectOutput.writeInt(position);
-		objectOutput.writeLong(lastPropagationDate);
-
 		if (namespace == null) {
 			objectOutput.writeUTF("");
 		}
@@ -337,9 +334,7 @@ public class FragmentEntryLinkCacheModel
 			objectOutput.writeUTF(namespace);
 		}
 
-		objectOutput.writeLong(lastPublishDate);
-
-		objectOutput.writeInt(rendererType);
+		objectOutput.writeInt(position);
 
 		if (rendererKey == null) {
 			objectOutput.writeUTF("");
@@ -347,6 +342,10 @@ public class FragmentEntryLinkCacheModel
 		else {
 			objectOutput.writeUTF(rendererKey);
 		}
+
+		objectOutput.writeInt(rendererType);
+		objectOutput.writeLong(lastPropagationDate);
+		objectOutput.writeLong(lastPublishDate);
 	}
 
 	public String uuid;
@@ -365,11 +364,11 @@ public class FragmentEntryLinkCacheModel
 	public String html;
 	public String js;
 	public String editableValues;
-	public int position;
-	public long lastPropagationDate;
 	public String namespace;
-	public long lastPublishDate;
-	public int rendererType;
+	public int position;
 	public String rendererKey;
+	public int rendererType;
+	public long lastPropagationDate;
+	public long lastPublishDate;
 
 }
