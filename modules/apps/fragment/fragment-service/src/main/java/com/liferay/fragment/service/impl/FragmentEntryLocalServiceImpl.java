@@ -14,7 +14,7 @@
 
 package com.liferay.fragment.service.impl;
 
-import com.liferay.fragment.constants.FragmentTypeConstants;
+import com.liferay.fragment.constants.FragmentConstants;
 import com.liferay.fragment.exception.DuplicateFragmentEntryKeyException;
 import com.liferay.fragment.exception.FragmentEntryContentException;
 import com.liferay.fragment.exception.FragmentEntryNameException;
@@ -75,7 +75,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, StringPool.BLANK, name, 0,
-			FragmentTypeConstants.TYPE_SECTION, status, serviceContext);
+			FragmentConstants.TYPE_SECTION, status, serviceContext);
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, StringPool.BLANK, name,
-			previewFileEntryId, FragmentTypeConstants.TYPE_SECTION, status,
+			previewFileEntryId, FragmentConstants.TYPE_SECTION, status,
 			serviceContext);
 	}
 
@@ -123,7 +123,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, fragmentEntryKey, name, 0,
-			FragmentTypeConstants.TYPE_SECTION, status, serviceContext);
+			FragmentConstants.TYPE_SECTION, status, serviceContext);
 	}
 
 	@Override
@@ -188,7 +188,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, fragmentEntryKey, name,
-			previewFileEntryId, FragmentTypeConstants.TYPE_SECTION, status,
+			previewFileEntryId, FragmentConstants.TYPE_SECTION, status,
 			serviceContext);
 	}
 
@@ -213,7 +213,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, StringPool.BLANK, name, css,
-			html, js, FragmentTypeConstants.TYPE_SECTION, status,
+			html, js, FragmentConstants.TYPE_SECTION, status,
 			serviceContext);
 	}
 
@@ -238,7 +238,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, StringPool.BLANK, name, css,
-			html, js, previewFileEntryId, FragmentTypeConstants.TYPE_SECTION,
+			html, js, previewFileEntryId, FragmentConstants.TYPE_SECTION,
 			status, serviceContext);
 	}
 
@@ -263,7 +263,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, fragmentEntryKey, name, css,
-			html, js, 0, FragmentTypeConstants.TYPE_SECTION, status,
+			html, js, 0, FragmentConstants.TYPE_SECTION, status,
 			serviceContext);
 	}
 
@@ -337,7 +337,7 @@ public class FragmentEntryLocalServiceImpl
 
 		return addFragmentEntry(
 			userId, groupId, fragmentCollectionId, fragmentEntryKey, name, css,
-			html, js, previewFileEntryId, FragmentTypeConstants.TYPE_SECTION,
+			html, js, previewFileEntryId, FragmentConstants.TYPE_SECTION,
 			status, serviceContext);
 	}
 

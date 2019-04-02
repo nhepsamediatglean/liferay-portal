@@ -14,7 +14,7 @@
 
 package com.liferay.fragment.renderer;
 
-import com.liferay.fragment.constants.FragmentTypeConstants;
+import com.liferay.fragment.constants.FragmentConstants;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public interface FragmentRenderer {
 	public String getCollectionKey();
 
 	public default int getFragmentType() {
-		return FragmentTypeConstants.TYPE_COMPONENT;
+		return FragmentConstants.TYPE_COMPONENT;
 	}
 
 	public default String getKey() {

@@ -14,7 +14,7 @@
 
 package com.liferay.fragment.internal.contributor;
 
-import com.liferay.fragment.constants.FragmentTypeConstants;
+import com.liferay.fragment.constants.FragmentConstants;
 import com.liferay.fragment.contributor.FragmentCollectionContributor;
 import com.liferay.fragment.contributor.FragmentCollectionContributorTracker;
 import com.liferay.fragment.model.FragmentEntry;
@@ -89,7 +89,7 @@ public class FragmentCollectionContributorTrackerImpl
 	}
 
 	private static final int[] _SUPPORTED_FRAGMENT_TYPES = {
-		FragmentTypeConstants.TYPE_COMPONENT, FragmentTypeConstants.TYPE_SECTION
+		FragmentConstants.TYPE_COMPONENT, FragmentConstants.TYPE_SECTION
 	};
 
 	private final Map<String, FragmentEntry>
