@@ -56,9 +56,7 @@ public abstract class BaseWorkflowLogResourceImpl
 	}
 
 	@Override
-	public WorkflowLog getWorkflowLog(Long workflowLogId)
-		throws Exception {
-
+	public WorkflowLog getWorkflowLog(Long workflowLogId) throws Exception {
 		return new WorkflowLog();
 	}
 
@@ -71,9 +69,7 @@ public abstract class BaseWorkflowLogResourceImpl
 	}
 
 	@Override
-	public void setContextAcceptLanguage(
-		AcceptLanguage contextAcceptLanguage) {
-
+	public void setContextAcceptLanguage(AcceptLanguage contextAcceptLanguage) {
 		this.contextAcceptLanguage = contextAcceptLanguage;
 	}
 
@@ -120,9 +116,7 @@ public abstract class BaseWorkflowLogResourceImpl
 	}
 
 	protected AcceptLanguage contextAcceptLanguage;
-
 	protected Company contextCompany;
-
 	protected UriInfo contextUriInfo;
 
 }
