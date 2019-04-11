@@ -50,11 +50,11 @@ public class GeoBuildersImpl implements GeoBuilders {
 
 	@Override
 	public CircleShape circleShape(
-		Coordinate center, GeoDistance radiusGeoDistance) {
+		Coordinate centerCoordinate, GeoDistance radiusGeoDistance) {
 
 		return circleShapeBuilder(
 		).center(
-			center
+			centerCoordinate
 		).radius(
 			radiusGeoDistance
 		).build();
@@ -77,13 +77,13 @@ public class GeoBuildersImpl implements GeoBuilders {
 
 	@Override
 	public EnvelopeShape envelopeShape(
-		Coordinate topLeft, Coordinate bottomRight) {
+		Coordinate topLeftCoordinate, Coordinate bottomRightCoordinate) {
 
 		return envelopeShapeBuilder(
 		).topLeft(
-			topLeft
+			topLeftCoordinate
 		).bottomRight(
-			bottomRight
+			bottomRightCoordinate
 		).build();
 	}
 

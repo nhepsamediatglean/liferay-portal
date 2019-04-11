@@ -26,7 +26,7 @@ import java.util.List;
 public interface GeoBuilders {
 
 	public CircleShape circleShape(
-		Coordinate center, GeoDistance radiusGeoDistance);
+		Coordinate centerCoordinate, GeoDistance radiusGeoDistance);
 
 	public CircleShapeBuilder circleShapeBuilder();
 
@@ -35,7 +35,7 @@ public interface GeoBuilders {
 	public Coordinate coordinate(double x, double y, double z);
 
 	public EnvelopeShape envelopeShape(
-		Coordinate topLeft, Coordinate bottomRight);
+		Coordinate topLeftCoordinate, Coordinate bottomRightCoordinate);
 
 	public EnvelopeShapeBuilder envelopeShapeBuilder();
 
