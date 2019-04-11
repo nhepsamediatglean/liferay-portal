@@ -94,8 +94,8 @@ public class EnvelopeShapeImpl extends ShapeImpl implements EnvelopeShape {
 	}
 
 	protected EnvelopeShapeImpl(EnvelopeShapeImpl envelopeShapeImpl) {
-		_topLeft = envelopeShapeImpl._topLeft;
 		_bottomRight = envelopeShapeImpl._bottomRight;
+		_topLeft = envelopeShapeImpl._topLeft;
 
 		setCoordinates(envelopeShapeImpl.getCoordinates());
 	}
