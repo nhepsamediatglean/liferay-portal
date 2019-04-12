@@ -160,15 +160,12 @@ public class SearchMVCRenderCommand implements MVCRenderCommand {
 				}
 			}
 
-			ConfigurationEntryIterator configurationEntryIterator =
-				new ConfigurationEntryIterator(searchResults);
-
+			renderRequest.setAttribute(
+				ConfigurationAdminWebKeys.CONFIGURATION_ENTRY_ITERATOR,
+				new ConfigurationEntryIterator(searchResults));
 			renderRequest.setAttribute(
 				ConfigurationAdminWebKeys.CONFIGURATION_ENTRY_RETRIEVER,
 				_configurationEntryRetriever);
-			renderRequest.setAttribute(
-				ConfigurationAdminWebKeys.CONFIGURATION_ENTRY_ITERATOR,
-				configurationEntryIterator);
 			renderRequest.setAttribute(
 				ConfigurationAdminWebKeys.RESOURCE_BUNDLE_LOADER_PROVIDER,
 				_resourceBundleLoaderProvider);
