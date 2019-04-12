@@ -19,8 +19,8 @@
 <%
 String redirect = renderRequest.getParameter("redirect");
 
-ConfigurationEntryRetriever configurationEntryRetriever = (ConfigurationEntryRetriever)request.getAttribute(ConfigurationAdminWebKeys.CONFIGURATION_ENTRY_RETRIEVER);
 ConfigurationEntryIterator configurationEntryIterator = (ConfigurationEntryIterator)request.getAttribute(ConfigurationAdminWebKeys.CONFIGURATION_ENTRY_ITERATOR);
+ConfigurationEntryRetriever configurationEntryRetriever = (ConfigurationEntryRetriever)request.getAttribute(ConfigurationAdminWebKeys.CONFIGURATION_ENTRY_RETRIEVER);
 
 ConfigurationScopeDisplayContext configurationScopeDisplayContext = new ConfigurationScopeDisplayContext(renderRequest);
 
