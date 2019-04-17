@@ -113,7 +113,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 	}
 
 	@Test
-	public void testClientDesSer() throws Exception {
+	public void testClientSerDesToJSON() throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper() {
 			{
 				configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
@@ -141,7 +141,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 	}
 
 	@Test
-	public void testClientSerDes() throws Exception {
+	public void testClientSerDesToDTO() throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper() {
 			{
 				configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
