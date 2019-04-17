@@ -67,7 +67,6 @@ public class ${schemaName}SerDes {
 			<#assign propertyType = properties[propertyName] />
 
 			if (${schemaVarName}.get${propertyName?cap_first}() != null) {
-
 				if (sb.length() > 1) {
 					sb.append(",");
 				}
