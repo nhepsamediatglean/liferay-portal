@@ -113,6 +113,33 @@ public abstract class Base${schemaName}ResourceTestCase {
 	}
 
 	@Test
+	public void testClientSerDesToDTO() throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper() {
+			{
+				configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
+				enable(SerializationFeature.INDENT_OUTPUT);
+				setDateFormat(new ISO8601DateFormat());
+				setFilterProvider(
+					new SimpleFilterProvider() {
+						{
+							addFilter("Liferay.Vulcan", SimpleBeanPropertyFilter.serializeAll());
+						}
+					});
+				setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+				setSerializationInclusion(JsonInclude.Include.NON_NULL);
+			}
+		};
+
+		${schemaName} ${schemaVarName}1 = random${schemaName}();
+
+		String json = objectMapper.writeValueAsString(${schemaVarName}1);
+
+		${schemaName} ${schemaVarName}2 = ${schemaName}SerDes.toDTO(json);
+
+		Assert.assertTrue(equals(${schemaVarName}1,${schemaVarName}2));
+	}
+
+	@Test
 	public void testClientSerDesToJSON() throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper() {
 			{
@@ -138,33 +165,6 @@ public abstract class Base${schemaName}ResourceTestCase {
 		String json2 = ${schemaName}SerDes.toJSON(${schemaVarName});
 
 		Assert.assertEquals(json1, json2);
-	}
-
-	@Test
-	public void testClientSerDesToDTO() throws Exception {
-		ObjectMapper objectMapper = new ObjectMapper() {
-			{
-				configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
-				enable(SerializationFeature.INDENT_OUTPUT);
-				setDateFormat(new ISO8601DateFormat());
-				setFilterProvider(
-					new SimpleFilterProvider() {
-						{
-							addFilter("Liferay.Vulcan", SimpleBeanPropertyFilter.serializeAll());
-						}
-					});
-				setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-				setSerializationInclusion(JsonInclude.Include.NON_NULL);
-			}
-		};
-
-		${schemaName} ${schemaVarName}1 = random${schemaName}();
-
-		String json = objectMapper.writeValueAsString(${schemaVarName}1);
-
-		${schemaName} ${schemaVarName}2 = ${schemaName}SerDes.toDTO(json);
-
-		Assert.assertTrue(equals(${schemaVarName}1,${schemaVarName}2));
 	}
 
 	<#assign
