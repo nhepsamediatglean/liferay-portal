@@ -136,7 +136,7 @@ public abstract class Base${schemaName}ResourceTestCase {
 
 		${schemaName} ${schemaVarName}2 = ${schemaName}SerDes.toDTO(json);
 
-		Assert.assertTrue(equals(${schemaVarName}1,${schemaVarName}2));
+		Assert.assertTrue(equals(${schemaVarName}1, ${schemaVarName}2));
 	}
 
 	@Test
@@ -161,7 +161,6 @@ public abstract class Base${schemaName}ResourceTestCase {
 		${schemaName} ${schemaVarName} = random${schemaName}();
 
 		String json1 = objectMapper.writeValueAsString(${schemaVarName});
-
 		String json2 = ${schemaName}SerDes.toJSON(${schemaVarName});
 
 		Assert.assertEquals(json1, json2);
