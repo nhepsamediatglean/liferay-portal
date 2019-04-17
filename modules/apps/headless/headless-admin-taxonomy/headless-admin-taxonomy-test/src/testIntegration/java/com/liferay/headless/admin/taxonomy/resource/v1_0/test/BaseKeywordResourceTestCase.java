@@ -119,35 +119,7 @@ public abstract class BaseKeywordResourceTestCase {
 	}
 
 	@Test
-	public void testClientDesSer() throws Exception {
-		ObjectMapper objectMapper = new ObjectMapper() {
-			{
-				configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
-				setDateFormat(new ISO8601DateFormat());
-				setFilterProvider(
-					new SimpleFilterProvider() {
-						{
-							addFilter(
-								"Liferay.Vulcan",
-								SimpleBeanPropertyFilter.serializeAll());
-						}
-					});
-				setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-				setSerializationInclusion(JsonInclude.Include.NON_NULL);
-			}
-		};
-
-		Keyword keyword = randomKeyword();
-
-		String json1 = objectMapper.writeValueAsString(keyword);
-
-		String json2 = KeywordSerDes.toJSON(keyword);
-
-		Assert.assertEquals(json1, json2);
-	}
-
-	@Test
-	public void testClientSerDes() throws Exception {
+	public void testClientSerDesToDTO() throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper() {
 			{
 				configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
@@ -173,6 +145,33 @@ public abstract class BaseKeywordResourceTestCase {
 		Keyword keyword2 = KeywordSerDes.toDTO(json);
 
 		Assert.assertTrue(equals(keyword1, keyword2));
+	}
+
+	@Test
+	public void testClientSerDesToJSON() throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper() {
+			{
+				configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY, true);
+				setDateFormat(new ISO8601DateFormat());
+				setFilterProvider(
+					new SimpleFilterProvider() {
+						{
+							addFilter(
+								"Liferay.Vulcan",
+								SimpleBeanPropertyFilter.serializeAll());
+						}
+					});
+				setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+				setSerializationInclusion(JsonInclude.Include.NON_NULL);
+			}
+		};
+
+		Keyword keyword = randomKeyword();
+
+		String json1 = objectMapper.writeValueAsString(keyword);
+		String json2 = KeywordSerDes.toJSON(keyword);
+
+		Assert.assertEquals(json1, json2);
 	}
 
 	@Test
