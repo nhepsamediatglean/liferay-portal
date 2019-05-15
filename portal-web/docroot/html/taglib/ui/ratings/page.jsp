@@ -86,14 +86,12 @@ if (!inTrash) {
 }
 %>
 
-<div class="taglib-ratings <%= type %>" id="<%= randomNamespace %>ratingContainer">
+<div class="taglib-ratings <%= type %>" id="<%= randomNamespace %>ratingContainer" style="display:flex;flex-direction: column-reverse;">
 	<c:choose>
 		<c:when test="<%= type.equals(RatingsType.STARS.getValue()) %>">
 			<c:if test="<%= themeDisplay.isSignedIn() && enabled %>">
 				<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar">
-					<div id="<%= randomNamespace %>ratingStarContent">
-						<div class="rating-label"><liferay-ui:message key="your-rating" /></div>
-
+					<div id="<%= randomNamespace %>ratingStarContent" style="display: flex;">
 						<liferay-util:whitespace-remover>
 
 							<%
@@ -120,14 +118,8 @@ if (!inTrash) {
 				</div>
 			</c:if>
 
-			<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore">
-				<div id="<%= randomNamespace %>ratingScoreContent">
-					<div class="rating-label">
-						<liferay-ui:message key="average" />
-
-						(<%= totalEntries %> <liferay-ui:message key='<%= (totalEntries == 1) ? "vote" : "votes" %>' />)
-					</div>
-
+			<div class="liferay-rating-score" id="<%= randomNamespace %>ratingScore" style="padding:0;">
+				<div id="<%= randomNamespace %>ratingScoreContent" style="display: flex;">
 					<liferay-util:whitespace-remover>
 
 						<%
@@ -145,13 +137,17 @@ if (!inTrash) {
 							}
 						%>
 
-							<span class="rating-element <%= (i <= averageIndex) ? "icon-star" : "icon-star-empty" %>" title="<%= message %>"></span>
+							<span class="rating-element <%= (i <= averageIndex) ? "icon-star" : "icon-star-empty" %>" title="<%= message %>" style="padding-top: 3px;color:#FFB900"></span>
 
 						<%
 						}
 						%>
 
 					</liferay-util:whitespace-remover>
+
+					<div class="rating-label" style="margin-left:8px">
+						(<%= totalEntries %> <liferay-ui:message key='<%= (totalEntries == 1) ? "vote" : "votes" %>' />)
+					</div>
 				</div>
 			</div>
 		</c:when>
