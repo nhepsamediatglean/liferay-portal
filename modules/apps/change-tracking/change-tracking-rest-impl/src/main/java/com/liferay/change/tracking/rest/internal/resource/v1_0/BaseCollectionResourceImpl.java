@@ -47,6 +47,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -92,7 +93,7 @@ public abstract class BaseCollectionResourceImpl implements CollectionResource {
 		}
 	)
 	@Path("/collections")
-	@Produces({"application/json", "application/xml"})
+	@Produces({"application/json", "application/xml", "text/plain"})
 	@Tags(value = {@Tag(name = "Collection")})
 	public Collection postCollection(
 			@NotNull @Parameter(hidden = true) @QueryParam("companyId") Long
@@ -111,12 +112,16 @@ public abstract class BaseCollectionResourceImpl implements CollectionResource {
 		value = {@Parameter(in = ParameterIn.PATH, name = "collectionId")}
 	)
 	@Path("/collections/{collectionId}")
-	@Produces({"application/json", "text/plain"})
+	@Produces("text/plain")
 	@Tags(value = {@Tag(name = "Collection")})
-	public void deleteCollection(
+	public Response deleteCollection(
 			@NotNull @Parameter(hidden = true) @PathParam("collectionId") Long
 				collectionId)
 		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
