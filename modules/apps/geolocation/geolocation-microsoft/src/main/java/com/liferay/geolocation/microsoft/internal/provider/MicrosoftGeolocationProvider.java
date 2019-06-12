@@ -162,7 +162,7 @@ public class MicrosoftGeolocationProvider implements GeolocationProvider {
 
 		if (resourcesJSONArray.length() == 0) {
 			throw new GeolocationException(
-				"Microsoft geolocation did not return any result");
+				"Microsoft geolocation did not return a result");
 		}
 
 		JSONObject resourceJSONObject = resourcesJSONArray.getJSONObject(0);
