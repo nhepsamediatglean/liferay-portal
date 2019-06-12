@@ -182,10 +182,10 @@ public class MicrosoftGeolocationProvider implements GeolocationProvider {
 
 		sb.append("https://dev.virtualearth.net/REST/v1/Locations?");
 
-		_addParameter(sb, "key", _bingApiKey);
 		_addParameter(sb, "addressLine", geolocationAddress.getStreet());
 		_addParameter(sb, "adminDistrict", geolocationAddress.getRegionCode());
 		_addParameter(sb, "countryRegion", geolocationAddress.getCountryCode());
+		_addParameter(sb, "key", _bingApiKey);
 		_addParameter(sb, "locality", geolocationAddress.getCity());
 		_addParameter(sb, "postalCode", geolocationAddress.getZip());
 
