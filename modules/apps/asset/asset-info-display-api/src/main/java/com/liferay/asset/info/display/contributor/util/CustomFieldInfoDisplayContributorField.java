@@ -84,24 +84,22 @@ public class CustomFieldInfoDisplayContributorField
 
 		int attributeType = _expandoBridge.getAttributeType(_attributeName);
 
-		if (attributeType == ExpandoColumnConstants.STRING_LOCALIZED) {
-			Map<Locale, String> values = (Map<Locale, String>)attributeValue;
-
-			Map<Locale, String> defaultValues =
-				(Map<Locale, String>)_expandoBridge.getAttributeDefault(
-					_attributeName);
-
-			attributeValue = values.getOrDefault(
-				locale, defaultValues.get(locale));
-		}
-		else if (attributeType ==
-					ExpandoColumnConstants.STRING_ARRAY_LOCALIZED) {
-
+		if (attributeType == ExpandoColumnConstants.STRING_ARRAY_LOCALIZED) {
 			Map<Locale, String[]> values =
 				(Map<Locale, String[]>)attributeValue;
 
 			Map<Locale, String[]> defaultValues =
 				(Map<Locale, String[]>)_expandoBridge.getAttributeDefault(
+					_attributeName);
+
+			attributeValue = values.getOrDefault(
+				locale, defaultValues.get(locale));
+		}
+		else if (attributeType == ExpandoColumnConstants.STRING_LOCALIZED) {
+			Map<Locale, String> values = (Map<Locale, String>)attributeValue;
+
+			Map<Locale, String> defaultValues =
+				(Map<Locale, String>)_expandoBridge.getAttributeDefault(
 					_attributeName);
 
 			attributeValue = values.getOrDefault(
