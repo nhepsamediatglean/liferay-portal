@@ -121,7 +121,7 @@ public class CustomFieldInfoDisplayContributorField
 				attributeValue = sb.toString();
 			}
 			catch (JSONException jsone) {
-				_log.error("Unable to parse geolocation json", jsone);
+				_log.error("Unable to parse geolocation JSON", jsone);
 			}
 		}
 
