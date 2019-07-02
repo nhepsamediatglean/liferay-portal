@@ -299,25 +299,25 @@ public class DefaultPortalLDAP implements PortalLDAP {
 	@Override
 	public byte[] getGroups(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter groupFilter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter groupLDAPFilter,
 			List<SearchResult> searchResults)
 		throws Exception {
 
 		return searchLDAP(
 			companyId, ldapContext, cookie, maxResults, baseDNLdapName,
-			groupFilter, null, searchResults);
+			groupLDAPFilter, null, searchResults);
 	}
 
 	@Override
 	public byte[] getGroups(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter groupFilter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter groupLDAPFilter,
 			String[] attributeIds, List<SearchResult> searchResults)
 		throws Exception {
 
 		return searchLDAP(
 			companyId, ldapContext, cookie, maxResults, baseDNLdapName,
-			groupFilter, attributeIds, searchResults);
+			groupLDAPFilter, attributeIds, searchResults);
 	}
 
 	/**
@@ -883,25 +883,25 @@ public class DefaultPortalLDAP implements PortalLDAP {
 	@Override
 	public byte[] getUsers(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter userFilter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter userLDAPFilter,
 			List<SearchResult> searchResults)
 		throws Exception {
 
 		return searchLDAP(
 			companyId, ldapContext, cookie, maxResults, baseDNLdapName,
-			userFilter, null, searchResults);
+			userLDAPFilter, null, searchResults);
 	}
 
 	@Override
 	public byte[] getUsers(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter userFilter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter userLDAPFilter,
 			String[] attributeIds, List<SearchResult> searchResults)
 		throws Exception {
 
 		return searchLDAP(
 			companyId, ldapContext, cookie, maxResults, baseDNLdapName,
-			userFilter, attributeIds, searchResults);
+			userLDAPFilter, attributeIds, searchResults);
 	}
 
 	/**
@@ -960,14 +960,14 @@ public class DefaultPortalLDAP implements PortalLDAP {
 		LdapName baseDNLdapName = LDAPUtil.asLdapName(
 			ldapServerConfiguration.baseDN());
 
-		LDAPFilter userSearchFilter = _ldapFilterValidator.createLDAPFilter(
+		LDAPFilter userSearchLDAPFilter = _ldapFilterValidator.createLDAPFilter(
 			ldapServerConfiguration.userSearchFilter(),
 			LDAPServerConfiguration.class.getSimpleName() +
 				".userSearchFilter");
 
 		return getUsers(
 			companyId, ldapContext, cookie, maxResults, baseDNLdapName,
-			userSearchFilter, searchResults);
+			userSearchLDAPFilter, searchResults);
 	}
 
 	@Override
@@ -988,14 +988,14 @@ public class DefaultPortalLDAP implements PortalLDAP {
 		LdapName baseDNLdapName = LDAPUtil.asLdapName(
 			ldapServerConfiguration.baseDN());
 
-		LDAPFilter userSearchFilter = _ldapFilterValidator.createLDAPFilter(
+		LDAPFilter userSearchLDAPFilter = _ldapFilterValidator.createLDAPFilter(
 			ldapServerConfiguration.userSearchFilter(),
 			LDAPServerConfiguration.class.getSimpleName() +
 				".userSearchFilter");
 
 		return getUsers(
 			companyId, ldapContext, cookie, maxResults, baseDNLdapName,
-			userSearchFilter, attributeIds, searchResults);
+			userSearchLDAPFilter, attributeIds, searchResults);
 	}
 
 	@Override
