@@ -170,12 +170,13 @@ public class LDAPFilter {
 
 		StringBundler filterSB = new StringBundler();
 
-		List<Object> arguments = new ArrayList<>();
-
 		filterSB.append(StringPool.OPEN_PARENTHESIS);
 		filterSB.append(StringPool.PIPE);
 
 		filterSB.append(_filterSB);
+
+		List<Object> arguments = new ArrayList<>();
+
 		arguments.addAll(_arguments);
 
 		for (LDAPFilter ldapFilter : ldapFilters) {
