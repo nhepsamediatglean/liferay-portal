@@ -45,12 +45,12 @@ import org.apache.commons.lang.StringEscapeUtils;
  */
 public class LDAPUtil {
 
-	public static LdapName asLdapName(Rdn prefix, LdapName baseDN) {
-		List<Rdn> rdnList = new ArrayList<>(baseDN.getRdns());
+	public static LdapName asLdapName(Rdn rdn, LdapName baseDNLdapName) {
+		List<Rdn> rdns = new ArrayList<>(baseDNLdapName.getRdns());
 
-		rdnList.add(prefix);
+		rdns.add(rdn);
 
-		return new LdapName(rdnList);
+		return new LdapName(rdns);
 	}
 
 	public static LdapName asLdapName(String fullDN)
@@ -60,10 +60,10 @@ public class LDAPUtil {
 	}
 
 	public static LdapName asLdapName(
-			String rdnName, String rdnValue, LdapName baseDN)
+			String rdnName, String rdnValue, LdapName baseDNLdapName)
 		throws InvalidNameException {
 
-		return asLdapName(new Rdn(rdnName, rdnValue), baseDN);
+		return asLdapName(new Rdn(rdnName, rdnValue), baseDNLdapName);
 	}
 
 	/**
