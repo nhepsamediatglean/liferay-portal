@@ -97,13 +97,13 @@ public interface PortalLDAP {
 
 	public byte[] getGroups(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter groupFilter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter groupLDAPFilter,
 			List<SearchResult> searchResults)
 		throws Exception;
 
 	public byte[] getGroups(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter groupFilter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter groupLDAPFilter,
 			String[] attributeIds, List<SearchResult> searchResults)
 		throws Exception;
 
@@ -206,13 +206,13 @@ public interface PortalLDAP {
 
 	public byte[] getUsers(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter userFilter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter userLDAPFilter,
 			List<SearchResult> searchResults)
 		throws Exception;
 
 	public byte[] getUsers(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter userFilter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter userLDAPFilter,
 			String[] attributeIds, List<SearchResult> searchResults)
 		throws Exception;
 
@@ -288,7 +288,7 @@ public interface PortalLDAP {
 
 	public byte[] searchLDAP(
 			long companyId, LdapContext ldapContext, byte[] cookie,
-			int maxResults, LdapName baseDNLdapName, LDAPFilter filter,
+			int maxResults, LdapName baseDNLdapName, LDAPFilter ldapFilter,
 			String[] attributeIds, List<SearchResult> searchResults)
 		throws Exception;
 
