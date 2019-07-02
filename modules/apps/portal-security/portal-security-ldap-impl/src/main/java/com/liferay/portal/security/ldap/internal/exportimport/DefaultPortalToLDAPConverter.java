@@ -371,12 +371,12 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 			return LDAPUtil.asLdapName(groupBinding.getNameInNamespace());
 		}
 
-		String groupsDN = _portalLDAP.getGroupsDN(
-			ldapServerId, userGroup.getCompanyId());
-
 		String rdnType = GetterUtil.getString(
 			groupMappings.getProperty(GroupConverterKeys.GROUP_NAME),
 			_DEFAULT_DN);
+		String groupsDN = _portalLDAP.getGroupsDN(
+			ldapServerId, userGroup.getCompanyId());
+
 
 		return LDAPUtil.asLdapName(
 			rdnType, userGroup.getName(), LDAPUtil.asLdapName(groupsDN));
