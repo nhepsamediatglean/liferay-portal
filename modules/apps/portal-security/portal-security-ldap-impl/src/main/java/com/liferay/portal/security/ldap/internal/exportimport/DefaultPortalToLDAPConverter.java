@@ -395,14 +395,12 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 			return LDAPUtil.asLdapName(userBinding.getNameInNamespace());
 		}
 
-		String usersDN = _portalLDAP.getUsersDN(
-			ldapServerId, user.getCompanyId());
-
 		String rdnType = GetterUtil.getString(
 			userMappings.getProperty(_userDNFieldName), _DEFAULT_DN);
-
 		String rdnValue = BeanPropertiesUtil.getStringSilent(
 			user, _userDNFieldName);
+		String usersDN = _portalLDAP.getUsersDN(
+			ldapServerId, user.getCompanyId());
 
 		return LDAPUtil.asLdapName(
 			rdnType, rdnValue, LDAPUtil.asLdapName(usersDN));
