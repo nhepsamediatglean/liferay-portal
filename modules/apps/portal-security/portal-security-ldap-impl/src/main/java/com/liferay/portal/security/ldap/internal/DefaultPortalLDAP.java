@@ -1311,7 +1311,8 @@ public class DefaultPortalLDAP implements PortalLDAP {
 	}
 
 	private Attributes _getAttributes(
-			LdapContext ldapContext, LdapName fullDN, String[] attributeIds)
+			LdapContext ldapContext, LdapName fullDNLdapName,
+			String[] attributeIds)
 		throws Exception {
 
 		Attributes attributes = null;
@@ -1325,13 +1326,13 @@ public class DefaultPortalLDAP implements PortalLDAP {
 
 			// Get complete listing of LDAP attributes (slow)
 
-			attributes = ldapContext.getAttributes(fullDN);
+			attributes = ldapContext.getAttributes(fullDNLdapName);
 
 			NamingEnumeration<? extends Attribute> enu = null;
 
 			try {
 				Attributes auditAttributes = ldapContext.getAttributes(
-					fullDN, auditAttributeIds);
+					fullDNLdapName, auditAttributeIds);
 
 				enu = auditAttributes.getAll();
 
@@ -1359,7 +1360,8 @@ public class DefaultPortalLDAP implements PortalLDAP {
 				auditAttributeIds, 0, allAttributeIds, attributeIds.length,
 				auditAttributeIds.length);
 
-			attributes = ldapContext.getAttributes(fullDN, allAttributeIds);
+			attributes = ldapContext.getAttributes(
+				fullDNLdapName, allAttributeIds);
 		}
 
 		return attributes;
