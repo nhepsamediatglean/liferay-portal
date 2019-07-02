@@ -192,17 +192,17 @@ public class LDAPFilter {
 
 	public LDAPFilter replace(String[] keys, String[] values) {
 		if (keys == null) {
-			throw new IllegalArgumentException("Parameter keys cannot be null");
+			throw new IllegalArgumentException("Parameter keys array is null");
 		}
 
 		if (values == null) {
 			throw new IllegalArgumentException(
-				"Parameter values cannot be null");
+				"Parameter values array is null");
 		}
 
 		if (keys.length > values.length) {
 			throw new IllegalArgumentException(
-				"Parameters keys and values must have same length");
+				"Parameters keys and values must have the same length");
 		}
 
 		String[] placeholderValues = new String[values.length];
@@ -210,22 +210,23 @@ public class LDAPFilter {
 		Arrays.fill(placeholderValues, _PLACEHOLDER);
 
 		List<Object> arguments = new ArrayList<>();
-		StringBundler sb = new StringBundler();
-
 		int argumentsPos = 0;
+		StringBundler sb = new StringBundler();
 
 		for (int i = 0; i < _filterSB.index(); i++) {
 			String string = _filterSB.stringAt(i);
 
 			if (Objects.equals(string, _PLACEHOLDER)) {
 				sb.append(_PLACEHOLDER);
+
 				arguments.add(_arguments.get(argumentsPos));
+
 				argumentsPos++;
 
 				continue;
 			}
 
-			TreeMap<Integer, String> valuesSortedByKeyPos = new TreeMap<>();
+			TreeMap<Integer, String> valuesTreeMap = new TreeMap<>();
 
 			for (int j = 0; j < keys.length; j++) {
 				String key = keys[j];
@@ -233,16 +234,17 @@ public class LDAPFilter {
 				int pos = string.indexOf(key);
 
 				while (pos > -1) {
-					valuesSortedByKeyPos.put(pos, values[j]);
+					valuesTreeMap.put(pos, values[j]);
+
 					pos = string.indexOf(key, pos + key.length());
 				}
 			}
 
-			if (valuesSortedByKeyPos.isEmpty()) {
+			if (valuesTreeMap.isEmpty()) {
 				sb.append(string);
 			}
 			else {
-				arguments.addAll(valuesSortedByKeyPos.values());
+				arguments.addAll(valuesTreeMap.values());
 
 				String replacedKeys = StringUtil.replace(
 					string, keys, placeholderValues);
@@ -255,6 +257,7 @@ public class LDAPFilter {
 					sb.append(_PLACEHOLDER);
 
 					lastPos = pos + _PLACEHOLDER.length();
+
 					pos = replacedKeys.indexOf(_PLACEHOLDER, lastPos);
 				}
 
