@@ -193,7 +193,7 @@ public class SPIDataRecordCollectionResource<T> {
 	}
 
 	public void postDataRecordCollectionDataRecordCollectionPermissions(
-			boolean addDataRecord, Company company, Long dataRecordCollectionId,
+			boolean hasAddDataRecordPermission, Company company, Long dataRecordCollectionId,
 			boolean delete, boolean deleteDataRecord, boolean exportDataRecord,
 			String operation, String[] roleNames, boolean update,
 			boolean updateDataRecord, boolean view, boolean viewDataRecord)
@@ -207,7 +207,7 @@ public class SPIDataRecordCollectionResource<T> {
 
 		List<String> actionIds = new ArrayList<>();
 
-		if (addDataRecord) {
+		if (hasAddDataRecordPermission) {
 			actionIds.add(DataActionKeys.ADD_DATA_RECORD);
 		}
 
@@ -251,7 +251,7 @@ public class SPIDataRecordCollectionResource<T> {
 	}
 
 	public void postSiteDataRecordCollectionPermissions(
-			boolean addDataRecordCollection, Company company,
+			boolean hasAddDataRecordPermissionCollection, Company company,
 			boolean definePermissions, String operation, String[] roleNames,
 			Long siteId)
 		throws Exception {
@@ -261,7 +261,7 @@ public class SPIDataRecordCollectionResource<T> {
 
 		List<String> actionIds = new ArrayList<>();
 
-		if (addDataRecordCollection) {
+		if (hasAddDataRecordPermissionCollection) {
 			actionIds.add(DataActionKeys.ADD_DATA_RECORD_COLLECTION);
 		}
 
