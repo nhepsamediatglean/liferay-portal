@@ -48,10 +48,11 @@ public class GetMappedContentMVCResourceCommand extends BaseMVCResourceCommand {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		long classNameId = ParamUtil.getLong(resourceRequest, "classNameId");
-		long classPK = ParamUtil.getLong(resourceRequest, "classPK");
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		long classNameId = ParamUtil.getLong(resourceRequest, "classNameId");
+		long classPK = ParamUtil.getLong(resourceRequest, "classPK");
 
 		JSONPortletResponseUtil.writeJSON(
 			resourceRequest, resourceResponse,
