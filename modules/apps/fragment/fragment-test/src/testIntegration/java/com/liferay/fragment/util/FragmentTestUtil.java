@@ -105,11 +105,11 @@ public class FragmentTestUtil {
 			long groupId, long fragmentEntryId, long classNameId, long classPK)
 		throws PortalException {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
 		FragmentEntry fragmentEntry =
 			FragmentEntryLocalServiceUtil.getFragmentEntry(fragmentEntryId);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return FragmentEntryLinkLocalServiceUtil.addFragmentEntryLink(
 			TestPropsValues.getUserId(), groupId, 0,
