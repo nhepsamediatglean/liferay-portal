@@ -161,16 +161,17 @@ public class FragmentEntryLinkStagedModelDataHandlerTest
 			ExportImportThreadLocal.setPortletImportInProcess(false);
 		}
 
-		StagedModel importedStagedModel = getStagedModel(
-			stagedModel.getUuid(), liveGroup);
-
 		FragmentEntryLink fragmentEntryLink = (FragmentEntryLink)stagedModel;
-		FragmentEntryLink importedFragmentEntryLink =
-			(FragmentEntryLink)importedStagedModel;
 
 		Assert.assertNotNull(
 			_fragmentEntryLocalService.getFragmentEntry(
 				fragmentEntryLink.getFragmentEntryId()));
+
+		StagedModel importedStagedModel = getStagedModel(
+			stagedModel.getUuid(), liveGroup);
+
+		FragmentEntryLink importedFragmentEntryLink =
+			(FragmentEntryLink)importedStagedModel;
 
 		Assert.assertNotNull(
 			_fragmentEntryLocalService.getFragmentEntry(
