@@ -148,12 +148,13 @@ components:
                     description:
                         The category's text description.
                     type: string
+                externalReferenceCode:
+                    type: string
                 id:
                     description:
                         The category's ID.
-                    format: int64
                     readOnly: true
-                    type: integer
+                    type: string
                 name:
                     description:
                         The category's name.
@@ -518,8 +519,7 @@ paths:
                   name: parentTaxonomyCategoryId
                   required: true
                   schema:
-                      format: int64
-                      type: integer
+                      type: string
                 - in: query
                   name: filter
                   schema:
@@ -565,8 +565,7 @@ paths:
                   name: parentTaxonomyCategoryId
                   required: true
                   schema:
-                      format: int64
-                      type: integer
+                      type: string
             requestBody:
                 content:
                     application/json:
@@ -597,8 +596,7 @@ paths:
                   name: taxonomyCategoryId
                   required: true
                   schema:
-                      format: int64
-                      type: integer
+                      type: string
             responses:
                 204:
                     content:
@@ -616,8 +614,7 @@ paths:
                   name: taxonomyCategoryId
                   required: true
                   schema:
-                      format: int64
-                      type: integer
+                      type: string
             responses:
                 200:
                     content:
@@ -639,8 +636,7 @@ paths:
                   name: taxonomyCategoryId
                   required: true
                   schema:
-                      format: int64
-                      type: integer
+                      type: string
             requestBody:
                 content:
                     application/json:
@@ -671,8 +667,7 @@ paths:
                   name: taxonomyCategoryId
                   required: true
                   schema:
-                      format: int64
-                      type: integer
+                      type: string
             requestBody:
                 content:
                     application/json:
