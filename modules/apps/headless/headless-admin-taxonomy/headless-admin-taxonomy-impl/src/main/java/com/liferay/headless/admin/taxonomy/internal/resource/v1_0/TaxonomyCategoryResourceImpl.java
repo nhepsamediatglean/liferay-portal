@@ -294,8 +294,9 @@ public class TaxonomyCategoryResourceImpl
 	private AssetCategory _getAssetCategory(String taxonomyCategoryId)
 		throws PortalException {
 
-		AssetCategory assetCategory = _getAssetCategoryByReferenceCode(
-			taxonomyCategoryId);
+		AssetCategory assetCategory =
+			_assetCategoryLocalService.fetchAssetCategoryByReferenceCode(
+				contextCompany.getCompanyId(), taxonomyCategoryId);
 
 		if (assetCategory == null) {
 			assetCategory = _assetCategoryService.getCategory(
@@ -305,16 +306,10 @@ public class TaxonomyCategoryResourceImpl
 		return assetCategory;
 	}
 
-	private AssetCategory _getAssetCategoryByReferenceCode(
-		String taxonomyCategoryId) {
-
-		return _assetCategoryLocalService.fetchAssetCategoryByReferenceCode(
-			contextCompany.getCompanyId(), taxonomyCategoryId);
-	}
-
 	private long _getAssetCategoryId(String taxonomyCategoryId) {
-		AssetCategory assetCategory = _getAssetCategoryByReferenceCode(
-			taxonomyCategoryId);
+		AssetCategory assetCategory =
+			_assetCategoryLocalService.fetchAssetCategoryByReferenceCode(
+				contextCompany.getCompanyId(), taxonomyCategoryId);
 
 		if (assetCategory == null) {
 			return GetterUtil.getLong(taxonomyCategoryId);
