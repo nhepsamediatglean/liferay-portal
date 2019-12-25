@@ -77,9 +77,9 @@ public class TaxonomyCategoryResourceImpl
 	public void deleteTaxonomyCategory(String taxonomyCategoryId)
 		throws Exception {
 
-		long categoryId = _getCategoryId(taxonomyCategoryId);
+		long assetCategoryId = _getAssetCategoryId(taxonomyCategoryId);
 
-		_assetCategoryService.deleteCategory(categoryId);
+		_assetCategoryService.deleteCategory(assetCategoryId);
 	}
 
 	@Override
@@ -107,8 +107,7 @@ public class TaxonomyCategoryResourceImpl
 			Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		String categoryId = String.valueOf(
-			_getCategoryId(parentTaxonomyCategoryId));
+		long assetCategoryId = _getAssetCategoryId(parentTaxonomyCategoryId);
 
 		return _getCategoriesPage(
 			booleanQuery -> {
@@ -116,7 +115,9 @@ public class TaxonomyCategoryResourceImpl
 					booleanQuery.getPreBooleanFilter();
 
 				booleanFilter.add(
-					new TermFilter(Field.ASSET_PARENT_CATEGORY_ID, categoryId),
+					new TermFilter(
+						Field.ASSET_PARENT_CATEGORY_ID,
+						String.valueOf(assetCategoryId)),
 					BooleanClauseOccur.MUST);
 			},
 			search, filter, pagination, sorts);
@@ -311,6 +312,17 @@ public class TaxonomyCategoryResourceImpl
 			contextCompany.getCompanyId(), taxonomyCategoryId);
 	}
 
+	private long _getAssetCategoryId(String taxonomyCategoryId) {
+		AssetCategory assetCategory = _getAssetCategoryByReferenceCode(
+			taxonomyCategoryId);
+
+		if (assetCategory == null) {
+			return GetterUtil.getLong(taxonomyCategoryId);
+		}
+
+		return assetCategory.getCategoryId();
+	}
+
 	private Page<TaxonomyCategory> _getCategoriesPage(
 			UnsafeConsumer<BooleanQuery, Exception> booleanQueryUnsafeConsumer,
 			String search, Filter filter, Pagination pagination, Sort[] sorts)
@@ -327,17 +339,6 @@ public class TaxonomyCategoryResourceImpl
 				_assetCategoryService.getCategory(
 					GetterUtil.getLong(document.get(Field.ASSET_CATEGORY_ID)))),
 			sorts);
-	}
-
-	private long _getCategoryId(String taxonomyCategoryId) {
-		AssetCategory assetCategory = _getAssetCategoryByReferenceCode(
-			taxonomyCategoryId);
-
-		if (assetCategory == null) {
-			return GetterUtil.getLong(taxonomyCategoryId);
-		}
-
-		return assetCategory.getCategoryId();
 	}
 
 	private ParentTaxonomyCategory _toParentTaxonomyCategory(
