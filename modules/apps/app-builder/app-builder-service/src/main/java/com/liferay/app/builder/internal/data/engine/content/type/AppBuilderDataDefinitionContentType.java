@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.app.builder.internal.content.type;
+package com.liferay.app.builder.internal.data.engine.content.type;
 
 import com.liferay.app.builder.model.AppBuilderApp;
 import com.liferay.data.engine.content.type.DataDefinitionContentType;
