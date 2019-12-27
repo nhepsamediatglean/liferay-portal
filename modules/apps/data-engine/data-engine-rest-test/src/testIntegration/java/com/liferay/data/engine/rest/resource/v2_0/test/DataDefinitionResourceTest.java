@@ -192,7 +192,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _DEFAULT_CONTENT_TYPE,
+			testGroup.getGroupId(), _CONTENT_TYPE,
 			randomDataDefinition());
 	}
 
@@ -201,7 +201,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _DEFAULT_CONTENT_TYPE,
+			testGroup.getGroupId(), _CONTENT_TYPE,
 			randomDataDefinition());
 	}
 
@@ -225,7 +225,7 @@ public class DataDefinitionResourceTest
 			testGetDataDefinitionByContentTypeContentTypePage_getContentType()
 		throws Exception {
 
-		return _DEFAULT_CONTENT_TYPE;
+		return _CONTENT_TYPE;
 	}
 
 	@Override
@@ -234,7 +234,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _DEFAULT_CONTENT_TYPE,
+			testGroup.getGroupId(), _CONTENT_TYPE,
 			randomDataDefinition());
 	}
 
@@ -253,7 +253,7 @@ public class DataDefinitionResourceTest
 			testGetSiteDataDefinitionByContentTypeContentTypePage_getContentType()
 		throws Exception {
 
-		return _DEFAULT_CONTENT_TYPE;
+		return _CONTENT_TYPE;
 	}
 
 	@Override
@@ -271,7 +271,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _DEFAULT_CONTENT_TYPE, dataDefinition);
+			testGroup.getGroupId(), _CONTENT_TYPE, dataDefinition);
 	}
 
 	@Override
@@ -281,7 +281,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _DEFAULT_CONTENT_TYPE, dataDefinition);
+			testGroup.getGroupId(), _CONTENT_TYPE, dataDefinition);
 	}
 
 	@Override
@@ -289,7 +289,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _DEFAULT_CONTENT_TYPE,
+			testGroup.getGroupId(), _CONTENT_TYPE,
 			randomDataDefinition());
 	}
 
@@ -366,7 +366,7 @@ public class DataDefinitionResourceTest
 		dataDefinitionResource.deleteDataDefinition(dataDefinition.getId());
 	}
 
-	private static final String _DEFAULT_CONTENT_TYPE = "default";
+	private static final String _CONTENT_TYPE = "default";
 
 	private List<DataDefinition> _dataDefinitions;
 
