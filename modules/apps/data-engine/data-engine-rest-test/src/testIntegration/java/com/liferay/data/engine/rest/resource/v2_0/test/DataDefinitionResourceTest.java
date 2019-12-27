@@ -192,8 +192,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _CONTENT_TYPE,
-			randomDataDefinition());
+			testGroup.getGroupId(), _CONTENT_TYPE, randomDataDefinition());
 	}
 
 	@Override
@@ -201,8 +200,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _CONTENT_TYPE,
-			randomDataDefinition());
+			testGroup.getGroupId(), _CONTENT_TYPE, randomDataDefinition());
 	}
 
 	@Override
@@ -234,8 +232,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _CONTENT_TYPE,
-			randomDataDefinition());
+			testGroup.getGroupId(), _CONTENT_TYPE, randomDataDefinition());
 	}
 
 	@Override
@@ -289,8 +286,7 @@ public class DataDefinitionResourceTest
 		throws Exception {
 
 		return dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _CONTENT_TYPE,
-			randomDataDefinition());
+			testGroup.getGroupId(), _CONTENT_TYPE, randomDataDefinition());
 	}
 
 	private DataDefinition _createDataDefinition(
