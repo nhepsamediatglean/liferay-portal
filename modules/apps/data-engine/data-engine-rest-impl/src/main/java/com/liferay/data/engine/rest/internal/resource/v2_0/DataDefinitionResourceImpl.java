@@ -358,7 +358,9 @@ public class DataDefinitionResourceImpl
 		DataEnginePermissionUtil.checkPermission(
 			DataActionKeys.ADD_DATA_DEFINITION, _groupLocalService, siteId);
 
-		ServiceContext serviceContext = new ServiceContext();
+		DataDefinitionContentType dataDefinitionContentType =
+			_dataDefinitionContentTypeTracker.getDataDefinitionContentType(
+				contentType);
 
 		DDMFormSerializerSerializeRequest.Builder builder =
 			DDMFormSerializerSerializeRequest.Builder.newBuilder(
@@ -367,10 +369,6 @@ public class DataDefinitionResourceImpl
 
 		DDMFormSerializerSerializeResponse ddmFormSerializerSerializeResponse =
 			_ddmFormSerializer.serialize(builder.build());
-
-		DataDefinitionContentType dataDefinitionContentType =
-			_dataDefinitionContentTypeTracker.getDataDefinitionContentType(
-				contentType);
 
 		dataDefinition = DataDefinitionUtil.toDataDefinition(
 			_ddmFormFieldTypeServicesTracker,
@@ -384,7 +382,7 @@ public class DataDefinitionResourceImpl
 					dataDefinition.getDescription()),
 				ddmFormSerializerSerializeResponse.getContent(),
 				GetterUtil.getString(dataDefinition.getStorageType(), "json"),
-				serviceContext));
+				new ServiceContext()));
 
 		_resourceLocalService.addResources(
 			contextCompany.getCompanyId(), siteId,
