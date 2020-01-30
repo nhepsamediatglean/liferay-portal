@@ -46,7 +46,7 @@ GroupDisplayContext groupDisplayContext = new GroupDisplayContext(renderRequest,
 			</span>
 		</li>
 		<li class="mb-3">
-			<aui:input label="multi-property-data-source" name="optionProperty" type="radio" />
+			<aui:input label="multiple-properties-data-source" name="optionProperty" type="radio" />
 
 			<span class="description text-secondary">
 				<liferay-ui:message key="each-site-is-its-own-analytics-cloud-property" />
