@@ -189,10 +189,10 @@ public class AssetCategoryPropertyLocalServiceImpl
 	}
 
 	protected void validate(String key, String value) throws PortalException {
-		int nameMaxLength = ModelHintsUtil.getMaxLength(
+		int keyMaxLength = ModelHintsUtil.getMaxLength(
 			AssetCategoryProperty.class.getName(), "key");
 
-		if (key.length() > nameMaxLength) {
+		if (key.length() > keyMaxLength) {
 			throw new CategoryPropertyKeyException(
 				"Maximum length of key exceeded");
 		}
