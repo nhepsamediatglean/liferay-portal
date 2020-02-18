@@ -85,12 +85,12 @@ public class AssetCategoryPropertyLocalServiceTest {
 			RandomTestUtil.randomString(), assetVocabulary.getVocabularyId(),
 			serviceContext);
 
-		int maxNameLength = ModelHintsUtil.getMaxLength(
+		int keyMaxLength = ModelHintsUtil.getMaxLength(
 			AssetCategoryProperty.class.getName(), "key");
 
 		_assetCategoryPropertyLocalService.addCategoryProperty(
 			TestPropsValues.getUserId(), assetCategory.getCategoryId(),
-			RandomTestUtil.randomString(maxNameLength + 1),
+			RandomTestUtil.randomString(keyMaxLength + 1),
 			RandomTestUtil.randomString());
 	}
 
@@ -117,13 +117,13 @@ public class AssetCategoryPropertyLocalServiceTest {
 			RandomTestUtil.randomString(), assetVocabulary.getVocabularyId(),
 			serviceContext);
 
-		int maxNameLength = ModelHintsUtil.getMaxLength(
+		int keyMaxLength = ModelHintsUtil.getMaxLength(
 			AssetCategoryProperty.class.getName(), "value");
 
 		_assetCategoryPropertyLocalService.addCategoryProperty(
 			TestPropsValues.getUserId(), assetCategory.getCategoryId(),
 			RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(maxNameLength + 1));
+			RandomTestUtil.randomString(keyMaxLength + 1));
 	}
 
 	@Inject
