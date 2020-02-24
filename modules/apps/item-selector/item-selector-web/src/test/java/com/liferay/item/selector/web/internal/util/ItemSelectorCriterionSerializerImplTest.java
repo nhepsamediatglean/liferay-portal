@@ -64,7 +64,6 @@ public class ItemSelectorCriterionSerializerImplTest {
 			_flickrItemSelectorCriterion);
 
 		json = _assert("\"desiredItemSelectorReturnTypes\":\"testurl\"", json);
-
 		json = _assert("\"tags\":[\"me\",\"photo\",\"picture\"]", json);
 		json = _assert("\"user\":\"anonymous\"", json);
 

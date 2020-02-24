@@ -121,7 +121,6 @@ public class ItemSelectorCriterionSerializerImpl
 
 		addItemSelectorReturnType(
 			itemSelectorReturnTypeClass.getName(), itemSelectorReturnType);
-
 		addItemSelectorReturnType(
 			ItemSelectorKeyUtil.getItemSelectorReturnTypeKey(
 				itemSelectorReturnTypeClass),

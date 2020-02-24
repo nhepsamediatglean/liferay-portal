@@ -408,7 +408,6 @@ public class ItemSelectorImpl implements ItemSelector {
 		_itemSelectionCriterionHandlers.put(
 			itemSelectorCriterionClass.getName(),
 			(ItemSelectorCriterionHandler)itemSelectionCriterionHandler);
-
 		_itemSelectionCriterionHandlers.put(
 			ItemSelectorKeyUtil.getItemSelectorCriterionKey(
 				itemSelectorCriterionClass),
@@ -432,7 +431,6 @@ public class ItemSelectorImpl implements ItemSelector {
 
 		_itemSelectionCriterionHandlers.remove(
 			itemSelectorCriterionClass.getName());
-
 		_itemSelectionCriterionHandlers.remove(
 			ItemSelectorKeyUtil.getItemSelectorCriterionKey(
 				itemSelectorCriterionClass));
