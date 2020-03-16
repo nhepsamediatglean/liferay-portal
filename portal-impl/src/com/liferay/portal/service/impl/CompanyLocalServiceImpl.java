@@ -1824,7 +1824,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		defaultUser.setAgreedToTermsOfUse(true);
 		defaultUser.setStatus(WorkflowConstants.STATUS_APPROVED);
 
-		userLocalService.preAddDefaultUser(defaultUser);
+		userLocalService.preaddDefaultUser(defaultUser);
 
 		defaultUser = userPersistence.update(defaultUser);
 

@@ -2964,7 +2964,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param defaultUser the default user
 	 */
 	@Override
-	public void preAddDefaultUser(User defaultUser) {
+	public void preaddDefaultUser(User defaultUser) {
 		_defaultUsers.put(defaultUser.getCompanyId(), defaultUser);
 	}
 
