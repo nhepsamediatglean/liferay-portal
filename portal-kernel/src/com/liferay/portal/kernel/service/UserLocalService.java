@@ -1579,7 +1579,7 @@ public interface UserLocalService
 	 *
 	 * @param defaultUser the default user
 	 */
-	public void preAddDefaultUser(User defaultUser);
+	public void preaddDefaultUser(User defaultUser);
 
 	/**
 	 * Returns an ordered range of all the users who match the keywords and

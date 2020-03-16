@@ -2261,10 +2261,10 @@ public class UserLocalServiceWrapper
 	 * @param defaultUser the default user
 	 */
 	@Override
-	public void preAddDefaultUser(
+	public void preaddDefaultUser(
 		com.liferay.portal.kernel.model.User defaultUser) {
 
-		_userLocalService.preAddDefaultUser(defaultUser);
+		_userLocalService.preaddDefaultUser(defaultUser);
 	}
 
 	/**

@@ -2097,10 +2097,10 @@ public class UserLocalServiceUtil {
 	 *
 	 * @param defaultUser the default user
 	 */
-	public static void preAddDefaultUser(
+	public static void preaddDefaultUser(
 		com.liferay.portal.kernel.model.User defaultUser) {
 
-		getService().preAddDefaultUser(defaultUser);
+		getService().preaddDefaultUser(defaultUser);
 	}
 
 	/**
