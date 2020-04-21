@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
+import com.liferay.portal.kernel.messaging.async.Async;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -79,6 +80,7 @@ public class DDMFormInstanceReportLocalServiceImpl
 			formInstanceId);
 	}
 
+	@Async
 	@Override
 	public DDMFormInstanceReport updateFormInstanceReport(
 			DDMFormInstanceRecord ddmFormInstanceRecord,
