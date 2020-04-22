@@ -153,6 +153,7 @@ pageContext.setAttribute("scopeAliasesDescriptionsMap", scopeAliasesDescriptions
 		<portlet:namespace />recalculateScopeChildrens = function(checkboxElement) {
 			var valueId = checkboxElement.val();
 			var isChecked = checkboxElement.attr('checked');
+
 			A.all('input[data-parent=' + valueId + ']').each(function() {
 				this.attr('checked', isChecked);
 				var hasChildrens = checkboxElement.attr('data-has-childrens');
@@ -182,9 +183,11 @@ pageContext.setAttribute("scopeAliasesDescriptionsMap", scopeAliasesDescriptions
 							if (!this.attr('checked')) {
 								this.attr('checked', true);
 								var elementId = this.attr('value');
+
 								var container = document.getElementById(
 									elementId + '-container'
 								);
+
 								container.classList.add('added-scope');
 							}
 						}
