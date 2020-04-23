@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Marcos Martins
  */
 @Component(immediate = true, service = ModelListener.class)
-public class DDMFormInstanceRecordVersionReportModelListener
+public class DDMFormInstanceRecordVersionModelListener
 	extends BaseModelListener<DDMFormInstanceRecordVersion> {
 
 	@Override
@@ -62,7 +62,7 @@ public class DDMFormInstanceRecordVersionReportModelListener
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		DDMFormInstanceRecordVersionReportModelListener.class);
+		DDMFormInstanceRecordVersionModelListener.class);
 
 	@Reference
 	private DDMFormInstanceReportLocalService
