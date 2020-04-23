@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
-import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -40,13 +39,11 @@ public class DDMFormInstanceReportModelListener
 
 		try {
 			_ddmFormInstanceReportLocalService.addFormInstanceReport(
-				ddmFormInstance.getFormInstanceId(),
-				ddmFormInstance.getGroupId(),
-				ServiceContextThreadLocal.getServiceContext());
+				ddmFormInstance);
 		}
 		catch (PortalException portalException) {
 			_log.error(
-				"Unable to create a form instance report with formInstanceId " +
+				"Could not add DDMFormInstanceReport with formInstanceId " +
 					ddmFormInstance.getFormInstanceId(),
 				portalException);
 		}
@@ -62,7 +59,7 @@ public class DDMFormInstanceReportModelListener
 		}
 		catch (PortalException portalException) {
 			_log.error(
-				"Unable to remove form instance report with formInstanceId " +
+				"Could not delete DDMFormInstanceReport with formInstanceId  " +
 					ddmFormInstance.getFormInstanceId(),
 				portalException);
 		}

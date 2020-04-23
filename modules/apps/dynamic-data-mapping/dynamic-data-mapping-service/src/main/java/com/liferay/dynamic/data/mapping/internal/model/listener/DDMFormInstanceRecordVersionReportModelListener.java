@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
-import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -51,17 +50,14 @@ public class DDMFormInstanceRecordVersionReportModelListener
 
 			_ddmFormInstanceReportLocalService.updateFormInstanceReport(
 				ddmFormInstanceRecord,
-				ddmFormInstanceReport.getFormInstanceReportId(),
-				ServiceContextThreadLocal.getServiceContext());
+				ddmFormInstanceReport.getFormInstanceReportId());
 		}
 		catch (PortalException portalException) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to compute form instance record with id " +
-						ddmFormInstanceRecordVersion.getFormInstanceRecordId() +
-							" in the report",
-					portalException);
-			}
+			_log.error(
+				"Could not update DDMFormInstanceReport for " +
+					"formInstanceRecordId " +
+						ddmFormInstanceRecordVersion.getFormInstanceRecordId(),
+				portalException);
 		}
 	}
 
