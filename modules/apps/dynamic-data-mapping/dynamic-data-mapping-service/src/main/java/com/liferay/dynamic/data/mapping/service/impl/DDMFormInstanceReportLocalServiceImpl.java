@@ -65,11 +65,11 @@ public class DDMFormInstanceReportLocalServiceImpl
 
 	@Override
 	public DDMFormInstanceReport deleteFormInstanceReport(
-			long ddmFormInstanceId)
+			DDMFormInstance ddmFormInstance)
 		throws PortalException {
 
 		DDMFormInstanceReport ddmFormInstanceReport = getFormInstanceReport(
-			ddmFormInstanceId);
+			ddmFormInstance.getFormInstanceId());
 
 		return deleteDDMFormInstanceReport(ddmFormInstanceReport);
 	}
@@ -104,13 +104,13 @@ public class DDMFormInstanceReportLocalServiceImpl
 			String action, DDMFormInstanceRecord ddmFormInstanceRecord)
 		throws PortalException {
 
-		DDMFormValues ddmFormValues = ddmFormInstanceRecord.getDDMFormValues();
-
 		DDMFormInstanceReport ddmFormInstanceReport = getFormInstanceReport(
 			ddmFormInstanceRecord.getFormInstanceId());
 
 		JSONObject formInstanceReportDataJSONObject =
 			JSONFactoryUtil.createJSONObject(ddmFormInstanceReport.getData());
+
+		DDMFormValues ddmFormValues = ddmFormInstanceRecord.getDDMFormValues();
 
 		for (DDMFormFieldValue ddmFormFieldValue :
 				ddmFormValues.getDDMFormFieldValues()) {

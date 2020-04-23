@@ -55,7 +55,7 @@ public class DDMFormInstanceModelListener
 
 		try {
 			_ddmFormInstanceReportLocalService.deleteFormInstanceReport(
-				ddmFormInstance.getFormInstanceId());
+				ddmFormInstance);
 		}
 		catch (PortalException portalException) {
 			_log.error(
