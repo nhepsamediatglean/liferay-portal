@@ -59,7 +59,7 @@ public class DDMFormInstanceModelListener
 		}
 		catch (PortalException portalException) {
 			_log.error(
-				"Could not delete DDMFormInstanceReport with formInstanceId  " +
+				"Could not delete DDMFormInstanceReport with formInstanceId " +
 					ddmFormInstance.getFormInstanceId(),
 				portalException);
 		}
