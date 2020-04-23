@@ -14,6 +14,7 @@
 
 package com.liferay.dynamic.data.mapping.internal.model.listener;
 
+import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportActionKeys;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
@@ -49,7 +50,7 @@ public class DDMFormInstanceRecordVersionModelListener
 					ddmFormInstanceRecord.getFormInstanceId());
 
 			_ddmFormInstanceReportLocalService.updateFormInstanceReport(
-				ddmFormInstanceRecord,
+				DDMFormInstanceReportActionKeys.ADD, ddmFormInstanceRecord,
 				ddmFormInstanceReport.getFormInstanceReportId());
 		}
 		catch (PortalException portalException) {

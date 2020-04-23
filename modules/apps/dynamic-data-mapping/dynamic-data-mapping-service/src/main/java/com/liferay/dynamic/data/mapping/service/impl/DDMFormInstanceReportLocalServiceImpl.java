@@ -14,6 +14,7 @@
 
 package com.liferay.dynamic.data.mapping.service.impl;
 
+import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportActionKeys;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
@@ -83,7 +84,7 @@ public class DDMFormInstanceReportLocalServiceImpl
 
 	@Override
 	public DDMFormInstanceReport updateFormInstanceReport(
-			DDMFormInstanceRecord ddmFormInstanceRecord,
+			String action, DDMFormInstanceRecord ddmFormInstanceRecord,
 			long formInstanceReportId)
 		throws PortalException {
 
@@ -92,7 +93,7 @@ public class DDMFormInstanceReportLocalServiceImpl
 				formInstanceReportId);
 
 		ddmFormInstanceReport.setData(
-			_getFormInstanceReportData(ddmFormInstanceRecord));
+			_getFormInstanceReportData(action, ddmFormInstanceRecord));
 
 		ddmFormInstanceReport.setModifiedDate(new Date());
 
@@ -100,7 +101,7 @@ public class DDMFormInstanceReportLocalServiceImpl
 	}
 
 	private String _getFormInstanceReportData(
-			DDMFormInstanceRecord ddmFormInstanceRecord)
+			String action, DDMFormInstanceRecord ddmFormInstanceRecord)
 		throws PortalException {
 
 		DDMFormValues ddmFormValues = ddmFormInstanceRecord.getDDMFormValues();
@@ -129,17 +130,26 @@ public class DDMFormInstanceReportLocalServiceImpl
 			}
 
 			if (StringUtil.equals(ddmFormFieldValue.getType(), "radio")) {
-				JSONObject fieldValuesJSONObject =
-					fieldJSONObject.getJSONObject("values");
+				JSONObject valuesJSONObject = fieldJSONObject.getJSONObject(
+					"values");
 
 				Value value = ddmFormFieldValue.getValue();
 
 				for (Locale availableLocale : value.getAvailableLocales()) {
-					String valueString = value.getString(availableLocale);
+					String key = value.getString(availableLocale);
 
-					fieldValuesJSONObject.put(
-						valueString,
-						fieldValuesJSONObject.getInt(valueString) + 1);
+					int count = valuesJSONObject.getInt(key);
+
+					if (DDMFormInstanceReportActionKeys.ADD.equals(action)) {
+						count = count + 1;
+					}
+					else if (DDMFormInstanceReportActionKeys.DELETE.equals(
+								action)) {
+
+						count = count - 1;
+					}
+
+					valuesJSONObject.put(key, count);
 				}
 			}
 		}
