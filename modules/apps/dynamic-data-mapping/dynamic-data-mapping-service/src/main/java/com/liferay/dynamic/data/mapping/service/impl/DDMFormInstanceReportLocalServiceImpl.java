@@ -64,12 +64,11 @@ public class DDMFormInstanceReportLocalServiceImpl
 	}
 
 	@Override
-	public DDMFormInstanceReport deleteFormInstanceReport(
-			DDMFormInstance ddmFormInstance)
+	public DDMFormInstanceReport deleteFormInstanceReport(long formInstanceId)
 		throws PortalException {
 
 		DDMFormInstanceReport ddmFormInstanceReport = getFormInstanceReport(
-			ddmFormInstance.getFormInstanceId());
+			formInstanceId);
 
 		return deleteDDMFormInstanceReport(ddmFormInstanceReport);
 	}
