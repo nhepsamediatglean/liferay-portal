@@ -20,7 +20,6 @@ import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceReportLocalService;
 import com.liferay.portal.kernel.exception.ModelListenerException;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
@@ -53,12 +52,14 @@ public class DDMFormInstanceRecordVersionModelListener
 				DDMFormInstanceReportActionKeys.ADD, ddmFormInstanceRecord,
 				ddmFormInstanceReport.getFormInstanceReportId());
 		}
-		catch (PortalException portalException) {
+		catch (Exception exception) {
 			_log.error(
 				"Could not update DDMFormInstanceReport for " +
 					"formInstanceRecordId " +
 						ddmFormInstanceRecordVersion.getFormInstanceRecordId(),
-				portalException);
+				exception);
+
+			throw new ModelListenerException(exception);
 		}
 	}
 

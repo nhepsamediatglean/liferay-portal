@@ -17,7 +17,6 @@ package com.liferay.dynamic.data.mapping.internal.model.listener;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceReportLocalService;
 import com.liferay.portal.kernel.exception.ModelListenerException;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
@@ -41,11 +40,13 @@ public class DDMFormInstanceModelListener
 			_ddmFormInstanceReportLocalService.addFormInstanceReport(
 				ddmFormInstance);
 		}
-		catch (PortalException portalException) {
+		catch (Exception exception) {
 			_log.error(
 				"Could not add DDMFormInstanceReport with formInstanceId " +
 					ddmFormInstance.getFormInstanceId(),
-				portalException);
+				exception);
+
+			throw new ModelListenerException(exception);
 		}
 	}
 
@@ -55,13 +56,15 @@ public class DDMFormInstanceModelListener
 
 		try {
 			_ddmFormInstanceReportLocalService.deleteFormInstanceReport(
-				ddmFormInstance);
+				ddmFormInstance.getFormInstanceId());
 		}
-		catch (PortalException portalException) {
+		catch (Exception exception) {
 			_log.error(
 				"Could not delete DDMFormInstanceReport with formInstanceId " +
 					ddmFormInstance.getFormInstanceId(),
-				portalException);
+				exception);
+
+			throw new ModelListenerException(exception);
 		}
 	}
 
