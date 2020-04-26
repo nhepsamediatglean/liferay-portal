@@ -21,6 +21,4 @@ public class DDMFormInstanceReportConstants {
 
 	public static final String ADD_RECORD = "ADD_RECORD";
 
-	public static final String DELETE_RECORD = "DELETE_RECORD";
-
 }

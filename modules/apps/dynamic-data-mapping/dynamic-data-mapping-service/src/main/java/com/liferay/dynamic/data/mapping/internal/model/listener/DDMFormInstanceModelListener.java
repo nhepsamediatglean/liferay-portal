@@ -15,7 +15,9 @@
 package com.liferay.dynamic.data.mapping.internal.model.listener;
 
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
+import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceReportLocalService;
+import com.liferay.dynamic.data.mapping.service.persistence.DDMFormInstanceReportPersistence;
 import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -42,7 +44,7 @@ public class DDMFormInstanceModelListener
 		}
 		catch (Exception exception) {
 			_log.error(
-				"Could not add DDMFormInstanceReport with formInstanceId " +
+				"Unable to create DDMFormInstanceReport with formInstanceId " +
 					ddmFormInstance.getFormInstanceId(),
 				exception);
 
@@ -55,12 +57,20 @@ public class DDMFormInstanceModelListener
 		throws ModelListenerException {
 
 		try {
-			_ddmFormInstanceReportLocalService.deleteFormInstanceReport(
-				ddmFormInstance.getFormInstanceId());
+			DDMFormInstanceReport ddmFormInstanceReport =
+				_ddmFormInstanceReportPersistence.fetchByFormInstanceId(
+					ddmFormInstance.getFormInstanceId());
+
+			if (ddmFormInstanceReport == null) {
+				return;
+			}
+
+			_ddmFormInstanceReportLocalService.deleteDDMFormInstanceReport(
+				ddmFormInstanceReport.getFormInstanceReportId());
 		}
 		catch (Exception exception) {
 			_log.error(
-				"Could not delete DDMFormInstanceReport with formInstanceId " +
+				"Unable to delete DDMFormInstanceReport with formInstanceId " +
 					ddmFormInstance.getFormInstanceId(),
 				exception);
 
@@ -74,5 +84,8 @@ public class DDMFormInstanceModelListener
 	@Reference
 	private DDMFormInstanceReportLocalService
 		_ddmFormInstanceReportLocalService;
+
+	@Reference
+	private DDMFormInstanceReportPersistence _ddmFormInstanceReportPersistence;
 
 }

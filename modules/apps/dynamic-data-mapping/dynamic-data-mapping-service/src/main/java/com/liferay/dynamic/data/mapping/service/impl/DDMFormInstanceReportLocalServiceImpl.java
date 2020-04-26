@@ -64,24 +64,6 @@ public class DDMFormInstanceReportLocalServiceImpl
 	}
 
 	@Override
-	public DDMFormInstanceReport deleteFormInstanceReport(long formInstanceId)
-		throws PortalException {
-
-		DDMFormInstanceReport ddmFormInstanceReport = getFormInstanceReport(
-			formInstanceId);
-
-		return deleteDDMFormInstanceReport(ddmFormInstanceReport);
-	}
-
-	@Override
-	public DDMFormInstanceReport getFormInstanceReport(long formInstanceId)
-		throws PortalException {
-
-		return ddmFormInstanceReportPersistence.findByFormInstanceId(
-			formInstanceId);
-	}
-
-	@Override
 	public DDMFormInstanceReport updateFormInstanceReport(
 			String action, DDMFormInstanceRecord ddmFormInstanceRecord,
 			long formInstanceReportId)
@@ -103,8 +85,9 @@ public class DDMFormInstanceReportLocalServiceImpl
 			String action, DDMFormInstanceRecord ddmFormInstanceRecord)
 		throws PortalException {
 
-		DDMFormInstanceReport ddmFormInstanceReport = getFormInstanceReport(
-			ddmFormInstanceRecord.getFormInstanceId());
+		DDMFormInstanceReport ddmFormInstanceReport =
+			ddmFormInstanceReportPersistence.findByFormInstanceId(
+				ddmFormInstanceRecord.getFormInstanceId());
 
 		JSONObject formInstanceReportDataJSONObject =
 			JSONFactoryUtil.createJSONObject(ddmFormInstanceReport.getData());
@@ -143,11 +126,6 @@ public class DDMFormInstanceReportLocalServiceImpl
 							action)) {
 
 						count = count + 1;
-					}
-					else if (DDMFormInstanceReportConstants.DELETE_RECORD.
-								equals(action)) {
-
-						count = count - 1;
 					}
 
 					valuesJSONObject.put(key, count);
