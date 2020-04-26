@@ -17,10 +17,10 @@ package com.liferay.dynamic.data.mapping.constants;
 /**
  * @author Bruno Farache
  */
-public class DDMFormInstanceReportActionKeys {
+public class DDMFormInstanceReportConstants {
 
-	public static final String ADD = "ADD";
+	public static final String ADD_RECORD = "ADD_RECORD";
 
-	public static final String DELETE = "DELETE";
+	public static final String DELETE_RECORD = "DELETE_RECORD";
 
 }

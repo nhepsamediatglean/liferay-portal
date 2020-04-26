@@ -14,7 +14,7 @@
 
 package com.liferay.dynamic.data.mapping.service.impl;
 
-import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportActionKeys;
+import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportConstants;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
@@ -139,11 +139,13 @@ public class DDMFormInstanceReportLocalServiceImpl
 
 					int count = valuesJSONObject.getInt(key);
 
-					if (DDMFormInstanceReportActionKeys.ADD.equals(action)) {
+					if (DDMFormInstanceReportConstants.ADD_RECORD.equals(
+							action)) {
+
 						count = count + 1;
 					}
-					else if (DDMFormInstanceReportActionKeys.DELETE.equals(
-								action)) {
+					else if (DDMFormInstanceReportConstants.DELETE_RECORD.
+								equals(action)) {
 
 						count = count - 1;
 					}

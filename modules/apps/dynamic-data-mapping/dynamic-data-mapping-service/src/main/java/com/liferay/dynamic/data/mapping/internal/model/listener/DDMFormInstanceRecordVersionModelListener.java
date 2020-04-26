@@ -14,7 +14,7 @@
 
 package com.liferay.dynamic.data.mapping.internal.model.listener;
 
-import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportActionKeys;
+import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportConstants;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
@@ -49,7 +49,37 @@ public class DDMFormInstanceRecordVersionModelListener
 					ddmFormInstanceRecord.getFormInstanceId());
 
 			_ddmFormInstanceReportLocalService.updateFormInstanceReport(
-				DDMFormInstanceReportActionKeys.ADD, ddmFormInstanceRecord,
+				DDMFormInstanceReportConstants.ADD_RECORD,
+				ddmFormInstanceRecord,
+				ddmFormInstanceReport.getFormInstanceReportId());
+		}
+		catch (Exception exception) {
+			_log.error(
+				"Could not update DDMFormInstanceReport for " +
+					"formInstanceRecordId " +
+						ddmFormInstanceRecordVersion.getFormInstanceRecordId(),
+				exception);
+
+			throw new ModelListenerException(exception);
+		}
+	}
+
+	@Override
+	public void onAfterRemove(
+			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion)
+		throws ModelListenerException {
+
+		try {
+			DDMFormInstanceRecord ddmFormInstanceRecord =
+				ddmFormInstanceRecordVersion.getFormInstanceRecord();
+
+			DDMFormInstanceReport ddmFormInstanceReport =
+				_ddmFormInstanceReportLocalService.getFormInstanceReport(
+					ddmFormInstanceRecord.getFormInstanceId());
+
+			_ddmFormInstanceReportLocalService.updateFormInstanceReport(
+				DDMFormInstanceReportConstants.DELETE_RECORD,
+				ddmFormInstanceRecord,
 				ddmFormInstanceReport.getFormInstanceReportId());
 		}
 		catch (Exception exception) {
