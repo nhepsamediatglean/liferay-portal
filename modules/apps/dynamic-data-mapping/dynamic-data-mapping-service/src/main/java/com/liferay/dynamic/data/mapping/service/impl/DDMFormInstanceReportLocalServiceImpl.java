@@ -16,7 +16,7 @@ package com.liferay.dynamic.data.mapping.service.impl;
 
 import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportConstants;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
-import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
+import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
 import com.liferay.dynamic.data.mapping.model.Value;
 import com.liferay.dynamic.data.mapping.service.base.DDMFormInstanceReportLocalServiceBaseImpl;
@@ -65,7 +65,8 @@ public class DDMFormInstanceReportLocalServiceImpl
 
 	@Override
 	public DDMFormInstanceReport updateFormInstanceReport(
-			String action, DDMFormInstanceRecord ddmFormInstanceRecord,
+			String action,
+			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion,
 			long formInstanceReportId)
 		throws PortalException {
 
@@ -74,7 +75,7 @@ public class DDMFormInstanceReportLocalServiceImpl
 				formInstanceReportId);
 
 		ddmFormInstanceReport.setData(
-			_getFormInstanceReportData(action, ddmFormInstanceRecord));
+			_getFormInstanceReportData(action, ddmFormInstanceRecordVersion));
 
 		ddmFormInstanceReport.setModifiedDate(new Date());
 
@@ -82,17 +83,19 @@ public class DDMFormInstanceReportLocalServiceImpl
 	}
 
 	private String _getFormInstanceReportData(
-			String action, DDMFormInstanceRecord ddmFormInstanceRecord)
+			String action,
+			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion)
 		throws PortalException {
 
 		DDMFormInstanceReport ddmFormInstanceReport =
 			ddmFormInstanceReportPersistence.findByFormInstanceId(
-				ddmFormInstanceRecord.getFormInstanceId());
+				ddmFormInstanceRecordVersion.getFormInstanceId());
 
 		JSONObject formInstanceReportDataJSONObject =
 			JSONFactoryUtil.createJSONObject(ddmFormInstanceReport.getData());
 
-		DDMFormValues ddmFormValues = ddmFormInstanceRecord.getDDMFormValues();
+		DDMFormValues ddmFormValues =
+			ddmFormInstanceRecordVersion.getDDMFormValues();
 
 		for (DDMFormFieldValue ddmFormFieldValue :
 				ddmFormValues.getDDMFormFieldValues()) {

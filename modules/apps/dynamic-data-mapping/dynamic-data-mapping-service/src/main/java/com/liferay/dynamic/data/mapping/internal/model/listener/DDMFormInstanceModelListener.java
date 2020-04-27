@@ -47,8 +47,6 @@ public class DDMFormInstanceModelListener
 				"Unable to create DDMFormInstanceReport with formInstanceId " +
 					ddmFormInstance.getFormInstanceId(),
 				exception);
-
-			throw new ModelListenerException(exception);
 		}
 	}
 
@@ -73,8 +71,6 @@ public class DDMFormInstanceModelListener
 				"Unable to delete DDMFormInstanceReport with formInstanceId " +
 					ddmFormInstance.getFormInstanceId(),
 				exception);
-
-			throw new ModelListenerException(exception);
 		}
 	}
 
