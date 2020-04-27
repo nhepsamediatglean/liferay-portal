@@ -14,6 +14,8 @@
 
 package com.liferay.dynamic.data.mapping.service;
 
+import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
+import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -70,6 +72,10 @@ public interface DDMFormInstanceReportLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public DDMFormInstanceReport addDDMFormInstanceReport(
 		DDMFormInstanceReport ddmFormInstanceReport);
+
+	public DDMFormInstanceReport addFormInstanceReport(
+			DDMFormInstance ddmFormInstance)
+		throws PortalException;
 
 	/**
 	 * Creates a new ddm form instance report with the primary key. Does not add the ddm form instance report to the database.
@@ -251,5 +257,11 @@ public interface DDMFormInstanceReportLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public DDMFormInstanceReport updateDDMFormInstanceReport(
 		DDMFormInstanceReport ddmFormInstanceReport);
+
+	public DDMFormInstanceReport updateFormInstanceReport(
+			String action,
+			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion,
+			long formInstanceReportId)
+		throws PortalException;
 
 }

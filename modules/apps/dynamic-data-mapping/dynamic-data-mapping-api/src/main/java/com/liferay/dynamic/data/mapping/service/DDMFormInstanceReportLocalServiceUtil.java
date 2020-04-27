@@ -52,6 +52,15 @@ public class DDMFormInstanceReportLocalServiceUtil {
 		return getService().addDDMFormInstanceReport(ddmFormInstanceReport);
 	}
 
+	public static com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport
+			addFormInstanceReport(
+				com.liferay.dynamic.data.mapping.model.DDMFormInstance
+					ddmFormInstance)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addFormInstanceReport(ddmFormInstance);
+	}
+
 	/**
 	 * Creates a new ddm form instance report with the primary key. Does not add the ddm form instance report to the database.
 	 *
@@ -289,6 +298,18 @@ public class DDMFormInstanceReportLocalServiceUtil {
 				ddmFormInstanceReport) {
 
 		return getService().updateDDMFormInstanceReport(ddmFormInstanceReport);
+	}
+
+	public static com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport
+			updateFormInstanceReport(
+				String action,
+				com.liferay.dynamic.data.mapping.model.
+					DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion,
+				long formInstanceReportId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateFormInstanceReport(
+			action, ddmFormInstanceRecordVersion, formInstanceReportId);
 	}
 
 	public static DDMFormInstanceReportLocalService getService() {
