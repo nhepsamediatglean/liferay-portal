@@ -63,12 +63,12 @@ public class FormFieldProjectTemplateCustomizer
 			fileNames.add(
 				"src/main/resources/META-INF/resources/" + name + "_field.js");
 
-			String[] folders = name.split("-");
+			String[] nameParts = name.split("-");
 
-			String directory = (folders.length > 0) ? "" : name;
+			String directory = (nameParts.length > 0) ? "" : name;
 
-			for (String folder : folders) {
-				directory += folder + "/";
+			for (String namePart : nameParts) {
+				directory += namePart + "/";
 			}
 
 			String className = projectTemplatesArgs.getClassName();
