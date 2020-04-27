@@ -53,8 +53,8 @@ public class DDMFormInstanceRecordVersionModelListener
 			}
 
 			_ddmFormInstanceReportLocalService.updateFormInstanceReport(
-				DDMFormInstanceReportConstants.ADD_RECORD,
 				ddmFormInstanceRecordVersion,
+				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION,
 				ddmFormInstanceReport.getFormInstanceReportId());
 		}
 		catch (Exception exception) {

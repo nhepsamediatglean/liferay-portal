@@ -19,6 +19,6 @@ package com.liferay.dynamic.data.mapping.constants;
  */
 public class DDMFormInstanceReportConstants {
 
-	public static final String ADD_RECORD = "ADD_RECORD";
+	public static final String EVENT_ADD_RECORD_VERSION = "add";
 
 }
