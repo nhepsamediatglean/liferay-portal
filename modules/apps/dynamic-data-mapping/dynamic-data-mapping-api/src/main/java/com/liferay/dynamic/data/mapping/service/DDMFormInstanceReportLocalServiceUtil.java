@@ -302,14 +302,15 @@ public class DDMFormInstanceReportLocalServiceUtil {
 
 	public static com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport
 			updateFormInstanceReport(
-				String action,
 				com.liferay.dynamic.data.mapping.model.
 					DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion,
+				String formInstanceRecordVersionEvent,
 				long formInstanceReportId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().updateFormInstanceReport(
-			action, ddmFormInstanceRecordVersion, formInstanceReportId);
+			ddmFormInstanceRecordVersion, formInstanceRecordVersionEvent,
+			formInstanceReportId);
 	}
 
 	public static DDMFormInstanceReportLocalService getService() {

@@ -333,14 +333,15 @@ public class DDMFormInstanceReportLocalServiceWrapper
 	@Override
 	public com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport
 			updateFormInstanceReport(
-				String action,
 				com.liferay.dynamic.data.mapping.model.
 					DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion,
+				String formInstanceRecordVersionEvent,
 				long formInstanceReportId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _ddmFormInstanceReportLocalService.updateFormInstanceReport(
-			action, ddmFormInstanceRecordVersion, formInstanceReportId);
+			ddmFormInstanceRecordVersion, formInstanceRecordVersionEvent,
+			formInstanceReportId);
 	}
 
 	@Override
