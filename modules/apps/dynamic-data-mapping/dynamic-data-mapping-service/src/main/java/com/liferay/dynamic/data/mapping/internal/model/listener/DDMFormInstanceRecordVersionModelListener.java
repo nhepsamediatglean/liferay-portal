@@ -59,8 +59,8 @@ public class DDMFormInstanceRecordVersionModelListener
 		}
 		catch (Exception exception) {
 			_log.error(
-				"Unable to update DDMFormInstanceReport for " +
-					"formInstanceRecordId " +
+				"Unable to update dynamic data mapping form instance report " +
+					"for dynamic data mapping form instance record " +
 						ddmFormInstanceRecordVersion.getFormInstanceRecordId(),
 				exception);
 		}

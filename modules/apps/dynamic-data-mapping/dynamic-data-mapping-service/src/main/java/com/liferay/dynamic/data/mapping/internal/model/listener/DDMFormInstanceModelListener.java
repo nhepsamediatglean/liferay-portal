@@ -44,8 +44,9 @@ public class DDMFormInstanceModelListener
 		}
 		catch (Exception exception) {
 			_log.error(
-				"Unable to create DDMFormInstanceReport with formInstanceId " +
-					ddmFormInstance.getFormInstanceId(),
+				"Unable to update dynamic data mapping form instance report " +
+					"for dynamic data mapping form instance " +
+						ddmFormInstance.getFormInstanceId(),
 				exception);
 		}
 	}
@@ -68,8 +69,9 @@ public class DDMFormInstanceModelListener
 		}
 		catch (Exception exception) {
 			_log.error(
-				"Unable to delete DDMFormInstanceReport with formInstanceId " +
-					ddmFormInstance.getFormInstanceId(),
+				"Unable to update dynamic data mapping form instance report " +
+					"for dynamic data mapping form instance " +
+						ddmFormInstance.getFormInstanceId(),
 				exception);
 		}
 	}
