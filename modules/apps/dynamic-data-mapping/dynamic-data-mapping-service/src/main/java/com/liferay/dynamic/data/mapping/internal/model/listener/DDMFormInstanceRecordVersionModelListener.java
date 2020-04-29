@@ -15,11 +15,11 @@
 package com.liferay.dynamic.data.mapping.internal.model.listener;
 
 import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportConstants;
-import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceReportLocalService;
 import com.liferay.portal.kernel.exception.ModelListenerException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
@@ -41,20 +41,8 @@ public class DDMFormInstanceRecordVersionModelListener
 		throws ModelListenerException {
 
 		try {
-			DDMFormInstanceRecord ddmFormInstanceRecord =
-				ddmFormInstanceRecordVersion.getFormInstanceRecord();
-
-			DDMFormInstanceReport ddmFormInstanceReport =
-				_ddmFormInstanceReportLocalService.fetchDDMFormInstanceReport(
-					ddmFormInstanceRecord.getFormInstanceId());
-
-			if (ddmFormInstanceReport == null) {
-				return;
-			}
-
-			_ddmFormInstanceReportLocalService.updateFormInstanceReport(
-				ddmFormInstanceReport.getFormInstanceReportId(),
-				ddmFormInstanceRecordVersion.getFormInstanceRecordVersionId(),
+			_updateFormInstanceReport(
+				ddmFormInstanceRecordVersion,
 				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
 		}
 		catch (Exception exception) {
@@ -64,6 +52,44 @@ public class DDMFormInstanceRecordVersionModelListener
 						ddmFormInstanceRecordVersion.getFormInstanceRecordId(),
 				exception);
 		}
+	}
+
+	@Override
+	public void onAfterRemove(
+			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion)
+		throws ModelListenerException {
+
+		try {
+			_updateFormInstanceReport(
+				ddmFormInstanceRecordVersion,
+				DDMFormInstanceReportConstants.EVENT_REMOVE_RECORD_VERSION);
+		}
+		catch (Exception exception) {
+			_log.error(
+				"Unable to update dynamic data mapping form instance report " +
+					"for dynamic data mapping form instance record " +
+						ddmFormInstanceRecordVersion.getFormInstanceRecordId(),
+				exception);
+		}
+	}
+
+	private void _updateFormInstanceReport(
+			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion,
+			String formInstanceReportConstant)
+		throws PortalException {
+
+		DDMFormInstanceReport ddmFormInstanceReport =
+			_ddmFormInstanceReportLocalService.getByFormInstanceId(
+				ddmFormInstanceRecordVersion.getFormInstanceId());
+
+		if (ddmFormInstanceReport == null) {
+			return;
+		}
+
+		_ddmFormInstanceReportLocalService.updateFormInstanceReport(
+			ddmFormInstanceReport.getFormInstanceReportId(),
+			ddmFormInstanceRecordVersion.getFormInstanceRecordVersionId(),
+			formInstanceReportConstant);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
