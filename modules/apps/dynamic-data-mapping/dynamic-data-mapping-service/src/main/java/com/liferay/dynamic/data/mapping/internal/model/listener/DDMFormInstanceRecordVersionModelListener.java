@@ -55,7 +55,7 @@ public class DDMFormInstanceRecordVersionModelListener
 	}
 
 	@Override
-	public void onAfterRemove(
+	public void onBeforeRemove(
 			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion)
 		throws ModelListenerException {
 

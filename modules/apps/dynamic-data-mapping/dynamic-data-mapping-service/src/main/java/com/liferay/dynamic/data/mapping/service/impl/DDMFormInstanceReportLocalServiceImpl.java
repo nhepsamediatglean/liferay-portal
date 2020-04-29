@@ -118,13 +118,14 @@ public class DDMFormInstanceReportLocalServiceImpl
 					ddmFormFieldValue.getName());
 
 			if (fieldJSONObject == null) {
+				fieldJSONObject = JSONUtil.put(
+					"type", ddmFormFieldValue.getType()
+				).put(
+					"values", JSONFactoryUtil.createJSONObject()
+				);
+
 				formInstanceReportDataJSONObject.put(
-					ddmFormFieldValue.getName(),
-					JSONUtil.put(
-						"type", ddmFormFieldValue.getType()
-					).put(
-						"values", JSONFactoryUtil.createJSONObject()
-					));
+					ddmFormFieldValue.getName(), fieldJSONObject);
 			}
 
 			if (StringUtil.equals(ddmFormFieldValue.getType(), "radio")) {
@@ -138,10 +139,17 @@ public class DDMFormInstanceReportLocalServiceImpl
 
 					int count = valuesJSONObject.getInt(key);
 
-					if (DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION.
-							equals(formInstanceReportEvent)) {
+					if (formInstanceReportEvent.equals(
+							DDMFormInstanceReportConstants.
+								EVENT_ADD_RECORD_VERSION)) {
 
 						count = count + 1;
+					}
+					else if (formInstanceReportEvent.equals(
+								DDMFormInstanceReportConstants.
+									EVENT_REMOVE_RECORD_VERSION)) {
+
+						count = count - 1;
 					}
 
 					valuesJSONObject.put(key, count);
