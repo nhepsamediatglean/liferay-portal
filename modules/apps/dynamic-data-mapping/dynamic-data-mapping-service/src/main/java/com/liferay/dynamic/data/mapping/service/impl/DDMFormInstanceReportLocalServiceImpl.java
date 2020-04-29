@@ -68,6 +68,14 @@ public class DDMFormInstanceReportLocalServiceImpl
 	}
 
 	@Override
+	public DDMFormInstanceReport getByFormInstanceId(long formInstanceId)
+		throws PortalException {
+
+		return ddmFormInstanceReportPersistence.findByFormInstanceId(
+			formInstanceId);
+	}
+
+	@Override
 	public DDMFormInstanceReport updateFormInstanceReport(
 			long formInstanceReportId, long formInstanceRecordVersionId,
 			String formInstanceReportEvent)
