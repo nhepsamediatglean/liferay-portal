@@ -192,6 +192,10 @@ public interface DDMFormInstanceReportLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public DDMFormInstanceReport getByFormInstanceId(long formInstanceId)
+		throws PortalException;
+
 	/**
 	 * Returns the ddm form instance report with the primary key.
 	 *
