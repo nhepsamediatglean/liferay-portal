@@ -217,13 +217,6 @@ public class DDMFormInstanceReportLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
-	public static com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport
-			getByFormInstanceId(long formInstanceId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getByFormInstanceId(formInstanceId);
-	}
-
 	/**
 	 * Returns the ddm form instance report with the primary key.
 	 *
@@ -263,6 +256,14 @@ public class DDMFormInstanceReportLocalServiceUtil {
 	 */
 	public static int getDDMFormInstanceReportsCount() {
 		return getService().getDDMFormInstanceReportsCount();
+	}
+
+	public static com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport
+			getFormInstanceReportByFormInstanceId(long formInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getFormInstanceReportByFormInstanceId(
+			formInstanceId);
 	}
 
 	public static
