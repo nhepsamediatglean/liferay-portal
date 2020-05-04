@@ -21,6 +21,6 @@ public class DDMFormInstanceReportConstants {
 
 	public static final String EVENT_ADD_RECORD_VERSION = "add";
 
-	public static final String EVENT_REMOVE_RECORD_VERSION = "remove";
+	public static final String EVENT_DELETE_RECORD_VERSION = "delete";
 
 }

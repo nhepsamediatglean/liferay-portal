@@ -56,8 +56,9 @@ public class DDMFormInstanceModelListener
 
 		try {
 			DDMFormInstanceReport ddmFormInstanceReport =
-				_ddmFormInstanceReportLocalService.getByFormInstanceId(
-					ddmFormInstance.getFormInstanceId());
+				_ddmFormInstanceReportLocalService.
+					getFormInstanceReportByFormInstanceId(
+						ddmFormInstance.getFormInstanceId());
 
 			if (ddmFormInstanceReport == null) {
 				return;

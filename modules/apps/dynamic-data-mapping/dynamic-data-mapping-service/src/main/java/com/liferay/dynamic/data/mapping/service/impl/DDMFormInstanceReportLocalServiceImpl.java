@@ -67,8 +67,8 @@ public class DDMFormInstanceReportLocalServiceImpl
 		return ddmFormInstanceReportPersistence.update(formInstanceReport);
 	}
 
-	@Override
-	public DDMFormInstanceReport getByFormInstanceId(long formInstanceId)
+	public DDMFormInstanceReport getFormInstanceReportByFormInstanceId(
+			long formInstanceId)
 		throws PortalException {
 
 		return ddmFormInstanceReportPersistence.findByFormInstanceId(
@@ -147,7 +147,7 @@ public class DDMFormInstanceReportLocalServiceImpl
 					}
 					else if (formInstanceReportEvent.equals(
 								DDMFormInstanceReportConstants.
-									EVENT_REMOVE_RECORD_VERSION)) {
+									EVENT_DELETE_RECORD_VERSION)) {
 
 						count = count - 1;
 					}

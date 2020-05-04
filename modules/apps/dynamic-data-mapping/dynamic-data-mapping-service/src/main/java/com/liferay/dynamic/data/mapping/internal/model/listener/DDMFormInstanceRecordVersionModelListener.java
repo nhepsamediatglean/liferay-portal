@@ -62,7 +62,7 @@ public class DDMFormInstanceRecordVersionModelListener
 		try {
 			_updateFormInstanceReport(
 				ddmFormInstanceRecordVersion,
-				DDMFormInstanceReportConstants.EVENT_REMOVE_RECORD_VERSION);
+				DDMFormInstanceReportConstants.EVENT_DELETE_RECORD_VERSION);
 		}
 		catch (Exception exception) {
 			_log.error(
@@ -75,12 +75,13 @@ public class DDMFormInstanceRecordVersionModelListener
 
 	private void _updateFormInstanceReport(
 			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion,
-			String formInstanceReportConstant)
+			String formInstanceReportEvent)
 		throws PortalException {
 
 		DDMFormInstanceReport ddmFormInstanceReport =
-			_ddmFormInstanceReportLocalService.getByFormInstanceId(
-				ddmFormInstanceRecordVersion.getFormInstanceId());
+			_ddmFormInstanceReportLocalService.
+				getFormInstanceReportByFormInstanceId(
+					ddmFormInstanceRecordVersion.getFormInstanceId());
 
 		if (ddmFormInstanceReport == null) {
 			return;
@@ -89,7 +90,7 @@ public class DDMFormInstanceRecordVersionModelListener
 		_ddmFormInstanceReportLocalService.updateFormInstanceReport(
 			ddmFormInstanceReport.getFormInstanceReportId(),
 			ddmFormInstanceRecordVersion.getFormInstanceRecordVersionId(),
-			formInstanceReportConstant);
+			formInstanceReportEvent);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
