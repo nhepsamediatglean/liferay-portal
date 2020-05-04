@@ -14,6 +14,6 @@
 
 import React from 'react';
 
-export default function () {
-	return <div>Forms Report</div>;
+export default function ({data}) {
+	return <div>{data}</div>;
 }

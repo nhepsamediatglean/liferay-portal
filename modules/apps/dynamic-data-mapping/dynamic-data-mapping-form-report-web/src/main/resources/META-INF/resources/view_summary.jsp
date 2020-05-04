@@ -16,9 +16,20 @@
 
 <%@ include file="/init.jsp" %>
 
+<%
+DDMFormInstanceReport formInstanceReport = (DDMFormInstanceReport)request.getAttribute(DDMFormReportWebKeys.REPORT);
+%>
+
 <div id="<portlet:namespace />reports">
+
+	<%
+	Map<String, Object> data = HashMapBuilder.<String, Object>put(
+		"data", formInstanceReport.getData()
+	).build();
+	%>
+
 	<react:component
-		data="<%= new HashMap<>() %>"
+		data="<%= data %>"
 		module="js/index.es"
 	/>
 </div>
