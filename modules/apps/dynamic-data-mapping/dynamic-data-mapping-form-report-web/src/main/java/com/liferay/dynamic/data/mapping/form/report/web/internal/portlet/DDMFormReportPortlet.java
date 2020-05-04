@@ -15,6 +15,7 @@
 package com.liferay.dynamic.data.mapping.form.report.web.internal.portlet;
 
 import com.liferay.dynamic.data.mapping.constants.DDMPortletKeys;
+import com.liferay.dynamic.data.mapping.form.report.web.internal.constants.DDMFormReportWebKeys;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceRecordLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceReportLocalService;
@@ -87,11 +88,16 @@ public class DDMFormReportPortlet extends MVCPortlet {
 
 		try {
 			renderRequest.setAttribute(
-				"lastModifiedDate",
+				DDMFormReportWebKeys.REPORT,
+				_ddmFormInstanceReportLocalService.
+					getFormInstanceReportByFormInstanceId(formInstanceId));
+
+			renderRequest.setAttribute(
+				DDMFormReportWebKeys.REPORT_LAST_MODIFIED_DATE,
 				_getLastModifiedDate(formInstanceId, renderRequest));
 
 			renderRequest.setAttribute(
-				"totalItems",
+				DDMFormReportWebKeys.TOTAL_ITEMS,
 				_ddmFormInstanceRecordLocalService.getFormInstanceRecordsCount(
 					formInstanceId, WorkflowConstants.STATUS_APPROVED));
 		}
@@ -109,8 +115,8 @@ public class DDMFormReportPortlet extends MVCPortlet {
 		throws PortalException {
 
 		DDMFormInstanceReport ddmFormInstanceReport =
-			_ddmFormInstanceReportLocalService.getByFormInstanceId(
-				formInstanceId);
+			_ddmFormInstanceReportLocalService.
+				getFormInstanceReportByFormInstanceId(formInstanceId);
 
 		if (ddmFormInstanceReport == null) {
 			return StringPool.BLANK;

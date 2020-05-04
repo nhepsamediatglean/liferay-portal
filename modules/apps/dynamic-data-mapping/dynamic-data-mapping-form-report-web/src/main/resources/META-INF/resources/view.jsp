@@ -17,8 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-int totalItems = (int)request.getAttribute("totalItems");
-String lastModifiedDate = (String)request.getAttribute("lastModifiedDate");
+int totalItems = (int)request.getAttribute(DDMFormReportWebKeys.TOTAL_ITEMS);
+
+String lastModifiedDate = (String)request.getAttribute(DDMFormReportWebKeys.REPORT_LAST_MODIFIED_DATE);
 %>
 
 <div class="ddm-form-report hide">
