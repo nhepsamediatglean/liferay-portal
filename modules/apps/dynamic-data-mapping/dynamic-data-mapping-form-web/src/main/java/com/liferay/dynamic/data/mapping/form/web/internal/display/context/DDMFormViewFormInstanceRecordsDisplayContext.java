@@ -24,11 +24,9 @@ import com.liferay.dynamic.data.mapping.model.DDMFormFieldOptions;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
-import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceRecordLocalService;
-import com.liferay.dynamic.data.mapping.service.DDMFormInstanceReportLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
@@ -40,7 +38,6 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletURLUtil;
@@ -50,26 +47,19 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchContextFactory;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.TimeZone;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -323,49 +313,6 @@ public class DDMFormViewFormInstanceRecordsDisplayContext {
 		}
 
 		return portletURL;
-	}
-
-	public String getReportLastModifiedDate() throws PortalException {
-		DDMFormInstanceReport ddmFormInstanceReport =
-			DDMFormInstanceReportLocalServiceUtil.getByFormInstanceId(
-				_ddmFormInstance.getFormInstanceId());
-
-		if (ddmFormInstanceReport == null) {
-			return StringPool.BLANK;
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Date modifiedDate = ddmFormInstanceReport.getModifiedDate();
-
-		User user = themeDisplay.getUser();
-
-		Locale locale = user.getLocale();
-
-		TimeZone timeZone = user.getTimeZone();
-
-		int daysBetween = DateUtil.getDaysBetween(
-			new Date(modifiedDate.getTime()), new Date(), timeZone);
-
-		String relativeTimeDescription = StringUtil.removeSubstring(
-			Time.getRelativeTimeDescription(modifiedDate, locale, timeZone),
-			StringPool.PERIOD);
-
-		String languageKey = "report-was-last-modified-on-x";
-
-		if (daysBetween < 2) {
-			languageKey = "report-was-last-modified-x";
-
-			relativeTimeDescription = StringUtil.toLowerCase(
-				relativeTimeDescription);
-		}
-
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			locale, DDMFormViewFormInstanceRecordsDisplayContext.class);
-
-		return LanguageUtil.format(
-			resourceBundle, languageKey, relativeTimeDescription, false);
 	}
 
 	public SearchContainer<?> getSearch() {
