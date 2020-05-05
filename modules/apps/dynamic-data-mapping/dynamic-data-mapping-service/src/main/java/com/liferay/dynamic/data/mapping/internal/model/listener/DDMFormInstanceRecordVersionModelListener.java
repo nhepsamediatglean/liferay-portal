@@ -15,6 +15,7 @@
 package com.liferay.dynamic.data.mapping.internal.model.listener;
 
 import com.liferay.dynamic.data.mapping.constants.DDMFormInstanceReportConstants;
+import com.liferay.dynamic.data.mapping.exception.NoSuchFormInstanceReportException;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceReport;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceReportLocalService;
@@ -78,19 +79,26 @@ public class DDMFormInstanceRecordVersionModelListener
 			String formInstanceReportEvent)
 		throws PortalException {
 
-		DDMFormInstanceReport ddmFormInstanceReport =
-			_ddmFormInstanceReportLocalService.
-				getFormInstanceReportByFormInstanceId(
-					ddmFormInstanceRecordVersion.getFormInstanceId());
+		try {
+			DDMFormInstanceReport ddmFormInstanceReport =
+				_ddmFormInstanceReportLocalService.
+					getFormInstanceReportByFormInstanceId(
+						ddmFormInstanceRecordVersion.getFormInstanceId());
 
-		if (ddmFormInstanceReport == null) {
-			return;
+			_ddmFormInstanceReportLocalService.updateFormInstanceReport(
+				ddmFormInstanceReport.getFormInstanceReportId(),
+				ddmFormInstanceRecordVersion.getFormInstanceRecordVersionId(),
+				formInstanceReportEvent);
 		}
+		catch (NoSuchFormInstanceReportException
+					noSuchFormInstanceReportException) {
 
-		_ddmFormInstanceReportLocalService.updateFormInstanceReport(
-			ddmFormInstanceReport.getFormInstanceReportId(),
-			ddmFormInstanceRecordVersion.getFormInstanceRecordVersionId(),
-			formInstanceReportEvent);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					noSuchFormInstanceReportException,
+					noSuchFormInstanceReportException);
+			}
+		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
