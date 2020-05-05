@@ -143,13 +143,13 @@ public class DDMFormInstanceReportLocalServiceImpl
 							DDMFormInstanceReportConstants.
 								EVENT_ADD_RECORD_VERSION)) {
 
-						count = count + 1;
+						count++;
 					}
 					else if (formInstanceReportEvent.equals(
 								DDMFormInstanceReportConstants.
 									EVENT_DELETE_RECORD_VERSION)) {
 
-						count = count - 1;
+						count--;
 					}
 
 					valuesJSONObject.put(key, count);
