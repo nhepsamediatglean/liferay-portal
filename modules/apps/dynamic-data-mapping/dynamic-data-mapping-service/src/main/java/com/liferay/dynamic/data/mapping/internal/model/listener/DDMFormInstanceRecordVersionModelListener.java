@@ -42,7 +42,7 @@ public class DDMFormInstanceRecordVersionModelListener
 		throws ModelListenerException {
 
 		try {
-			_updateFormInstanceReport(
+			_updateDDMFormInstanceReport(
 				ddmFormInstanceRecordVersion,
 				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
 		}
@@ -61,7 +61,7 @@ public class DDMFormInstanceRecordVersionModelListener
 		throws ModelListenerException {
 
 		try {
-			_updateFormInstanceReport(
+			_updateDDMFormInstanceReport(
 				ddmFormInstanceRecordVersion,
 				DDMFormInstanceReportConstants.EVENT_DELETE_RECORD_VERSION);
 		}
@@ -74,7 +74,7 @@ public class DDMFormInstanceRecordVersionModelListener
 		}
 	}
 
-	private void _updateFormInstanceReport(
+	private void _updateDDMFormInstanceReport(
 			DDMFormInstanceRecordVersion ddmFormInstanceRecordVersion,
 			String formInstanceReportEvent)
 		throws PortalException {

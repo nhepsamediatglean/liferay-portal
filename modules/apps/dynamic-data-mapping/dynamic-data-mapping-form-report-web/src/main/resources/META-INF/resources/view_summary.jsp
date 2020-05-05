@@ -17,14 +17,14 @@
 <%@ include file="/init.jsp" %>
 
 <%
-DDMFormInstanceReport formInstanceReport = (DDMFormInstanceReport)request.getAttribute(DDMFormReportWebKeys.REPORT);
+DDMFormInstanceReport ddmFormInstanceReportEvent = (DDMFormInstanceReport)request.getAttribute(DDMFormReportWebKeys.REPORT);
 %>
 
 <div id="<portlet:namespace />reports">
 
 	<%
 	Map<String, Object> data = HashMapBuilder.<String, Object>put(
-		"data", formInstanceReport.getData()
+		"data", ddmFormInstanceReportEvent.getData()
 	).build();
 	%>
 
