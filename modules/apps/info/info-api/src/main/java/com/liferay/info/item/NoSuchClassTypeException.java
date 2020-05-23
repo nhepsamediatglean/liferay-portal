@@ -21,7 +21,7 @@ public class NoSuchClassTypeException extends Exception {
 
 	public NoSuchClassTypeException(long classTypeId, Throwable cause) {
 		super(
-			"Unable to find class type found with classTypeId " + classTypeId,
+			"Unable to get class type found with class type ID " + classTypeId,
 			cause);
 	}
 

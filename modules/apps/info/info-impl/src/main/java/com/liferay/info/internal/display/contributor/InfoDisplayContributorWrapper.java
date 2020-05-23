@@ -76,7 +76,8 @@ public class InfoDisplayContributorWrapper
 		}
 		catch (PortalException portalException) {
 			throw new RuntimeException(
-				"Error retrieving fields for classTypeId: " + itemClassTypeId,
+				"Unable to get info form with item class type ID " +
+					itemClassTypeId,
 				portalException);
 		}
 	}
