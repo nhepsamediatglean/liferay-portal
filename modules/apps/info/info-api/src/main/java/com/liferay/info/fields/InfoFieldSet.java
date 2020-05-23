@@ -126,10 +126,10 @@ public class InfoFieldSet implements InfoFieldSetEntry {
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("{name: ");
-		sb.append(_name);
-		sb.append(", entries: ");
+		sb.append("{entries: ");
 		sb.append(_entries.size());
+		sb.append(", name: ");
+		sb.append(_name);
 		sb.append("}");
 
 		return sb.toString();
