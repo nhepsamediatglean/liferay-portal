@@ -81,7 +81,7 @@ public class InfoFormValues {
 	public String toString() {
 		StringBundler sb = new StringBundler(3);
 
-		sb.append("{Form Values: ");
+		sb.append("{infoFieldValues: ");
 		sb.append(_infoFieldValues.size());
 		sb.append("}");
 
