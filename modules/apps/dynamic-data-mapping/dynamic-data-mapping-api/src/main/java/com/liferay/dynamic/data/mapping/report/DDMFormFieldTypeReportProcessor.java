@@ -24,6 +24,7 @@ public interface DDMFormFieldTypeReportProcessor {
 
 	public JSONObject process(
 			DDMFormFieldValue ddmFormFieldValue,
+			long formInstanceRecordId,
 			JSONObject formInstanceReportDataJSONObject,
 			String formInstanceReportEvent)
 		throws Exception;

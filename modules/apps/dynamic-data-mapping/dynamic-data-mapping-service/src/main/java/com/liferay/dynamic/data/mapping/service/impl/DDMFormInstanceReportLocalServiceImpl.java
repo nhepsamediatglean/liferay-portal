@@ -122,7 +122,9 @@ public class DDMFormInstanceReportLocalServiceImpl
 				if (ddmFormFieldTypeReportProcessor != null) {
 					formInstanceReportDataJSONObject =
 						ddmFormFieldTypeReportProcessor.process(
-							ddmFormFieldValue, formInstanceReportDataJSONObject,
+							ddmFormFieldValue,
+							formInstanceRecordVersion.getFormInstanceRecordId(),
+							formInstanceReportDataJSONObject,
 							formInstanceReportEvent);
 				}
 			}

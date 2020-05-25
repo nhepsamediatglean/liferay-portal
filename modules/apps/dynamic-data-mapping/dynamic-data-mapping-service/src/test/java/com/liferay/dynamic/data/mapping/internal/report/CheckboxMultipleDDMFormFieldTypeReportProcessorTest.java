@@ -81,7 +81,7 @@ public class CheckboxMultipleDDMFormFieldTypeReportProcessorTest
 
 		JSONObject processedFormInstanceReportDataJSONObject =
 			checkboxMultipleDDMFormFieldTypeReportProcessor.process(
-				ddmFormFieldValue, JSONFactoryUtil.createJSONObject(),
+				ddmFormFieldValue, 0, JSONFactoryUtil.createJSONObject(),
 				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
 
 		JSONObject fieldJSONObject =
@@ -139,7 +139,7 @@ public class CheckboxMultipleDDMFormFieldTypeReportProcessorTest
 
 		JSONObject processedFormInstanceReportDataJSONObject =
 			checkboxMultipleDDMFormFieldTypeReportProcessor.process(
-				ddmFormFieldValue, formInstanceReportDataJSONObject,
+				ddmFormFieldValue, 0, formInstanceReportDataJSONObject,
 				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
 
 		JSONObject fieldJSONObject =

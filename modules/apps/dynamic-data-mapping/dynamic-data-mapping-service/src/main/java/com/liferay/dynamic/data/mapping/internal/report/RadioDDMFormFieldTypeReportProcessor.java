@@ -35,7 +35,7 @@ public class RadioDDMFormFieldTypeReportProcessor
 
 	@Override
 	protected JSONObject doProcess(
-			DDMFormFieldValue ddmFormFieldValue,
+			DDMFormFieldValue ddmFormFieldValue, long formInstanceFormId,
 			JSONObject formInstanceReportDataJSONObject,
 			String formInstanceReportEvent)
 		throws Exception {

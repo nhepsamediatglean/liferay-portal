@@ -28,7 +28,7 @@ public abstract class BaseDDMFormFieldTypeReportProcessor
 
 	@Override
 	public JSONObject process(
-			DDMFormFieldValue ddmFormFieldValue,
+			DDMFormFieldValue ddmFormFieldValue, long formInstanceRecordId,
 			JSONObject formInstanceReportDataJSONObject,
 			String formInstanceReportEvent)
 		throws Exception {
@@ -47,11 +47,12 @@ public abstract class BaseDDMFormFieldTypeReportProcessor
 		}
 
 		return doProcess(
-			ddmFormFieldValue, jsonObject, formInstanceReportEvent);
+			ddmFormFieldValue, formInstanceRecordId, jsonObject,
+			formInstanceReportEvent);
 	}
 
 	protected abstract JSONObject doProcess(
-			DDMFormFieldValue ddmFormFieldValue,
+			DDMFormFieldValue ddmFormFieldValue, long formInstanceRecordId,
 			JSONObject formInstanceReportDataJSONObject,
 			String formInstanceReportEvent)
 		throws Exception;
