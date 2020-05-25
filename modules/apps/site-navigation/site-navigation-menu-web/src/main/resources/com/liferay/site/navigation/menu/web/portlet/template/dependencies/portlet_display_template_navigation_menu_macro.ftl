@@ -4,18 +4,18 @@
 	navItemLevel = 2
 >
 	<#assign
-	portletDisplay = themeDisplay.getPortletDisplay()
-	showChildren = ((displayDepth == 0) || (navItemLevel < displayDepth))
+		portletDisplay = themeDisplay.getPortletDisplay()
+		showChildren = ((displayDepth == 0) || (navItemLevel < displayDepth))
 	/>
 
 	<#list navItem.getBrowsableChildren() as childNavigationItem>
 		<#assign
-		nav_child_css_class = ""
+			nav_child_css_class = ""
 		/>
 
 		<#if childNavigationItem.isSelected()>
 			<#assign
-			nav_child_css_class = "active selected"
+				nav_child_css_class = "active selected"
 			/>
 		</#if>
 
