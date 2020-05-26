@@ -107,7 +107,7 @@ public class LoginMVCActionCommand extends BaseMVCActionCommand {
 				AuthenticatedSessionManagerUtil.getAuthenticatedUserId(
 					httpServletRequest, login, password, null);
 
-			MFABrowserChecker mfaBrowserChecker = _getVerifiedBrowserChecker(
+			MFABrowserChecker mfaBrowserChecker = _getVerifiedMFABrowserChecker(
 				companyId, userId, httpServletRequest);
 
 			if ((userId > 0) && (mfaBrowserChecker == null)) {
@@ -210,7 +210,7 @@ public class LoginMVCActionCommand extends BaseMVCActionCommand {
 		return liferayPortletURL;
 	}
 
-	private MFABrowserChecker _getVerifiedBrowserChecker(
+	private MFABrowserChecker _getVerifiedMFABrowserChecker(
 		long companyId, long userId, HttpServletRequest httpServletRequest) {
 
 		for (MFABrowserChecker mfaBrowserChecker :
