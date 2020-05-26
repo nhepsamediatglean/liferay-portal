@@ -108,7 +108,7 @@ public class LoginMVCActionCommand extends BaseMVCActionCommand {
 					httpServletRequest, login, password, null);
 
 			MFABrowserChecker mfaBrowserChecker = _getVerifiedMFABrowserChecker(
-				companyId, userId, httpServletRequest);
+				companyId, httpServletRequest, userId);
 
 			if ((userId > 0) && (mfaBrowserChecker == null)) {
 				_redirectToVerify(actionRequest, actionResponse, userId);
@@ -211,7 +211,7 @@ public class LoginMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	private MFABrowserChecker _getVerifiedMFABrowserChecker(
-		long companyId, long userId, HttpServletRequest httpServletRequest) {
+		long companyId, HttpServletRequest httpServletRequest, long userId) {
 
 		for (MFABrowserChecker mfaBrowserChecker :
 				_mfaPolicy.getAvailableBrowserCheckers(companyId, userId)) {
