@@ -43,22 +43,17 @@ import org.osgi.service.component.annotations.Reference;
 	service = DDMFormFieldTypeReportProcessor.class
 )
 public class TextDDMFormFieldTypeReportProcessor
-	extends BaseDDMFormFieldTypeReportProcessor {
+	implements DDMFormFieldTypeReportProcessor {
 
 	@Override
-	protected JSONObject doProcess(
-			DDMFormFieldValue ddmFormFieldValue, long formInstanceRecordId,
-			JSONObject formInstanceReportDataJSONObject,
-			String formInstanceReportEvent)
+	public JSONObject process(
+			DDMFormFieldValue ddmFormFieldValue, JSONObject fieldJSONObject,
+			long formInstanceRecordId, String formInstanceReportEvent)
 		throws Exception {
 
 		DDMFormInstanceRecord formInstanceRecord =
 			_ddmFormInstanceRecordLocalService.getFormInstanceRecord(
 				formInstanceRecordId);
-
-		JSONObject fieldJSONObject =
-			formInstanceReportDataJSONObject.getJSONObject(
-				ddmFormFieldValue.getName());
 
 		JSONArray valuesJSONArray = JSONFactoryUtil.createJSONArray();
 
@@ -133,7 +128,7 @@ public class TextDDMFormFieldTypeReportProcessor
 			"values", valuesJSONArray
 		);
 
-		return formInstanceReportDataJSONObject;
+		return fieldJSONObject;
 	}
 
 	private String _getValue(DDMFormFieldValue ddmFormFieldValue) {

@@ -75,23 +75,27 @@ public class CheckboxMultipleDDMFormFieldTypeReportProcessorTest
 			value
 		);
 
+		JSONObject fieldJSONObject = JSONUtil.put(
+			"type", DDMFormFieldType.CHECKBOX_MULTIPLE
+		).put(
+			"values", JSONFactoryUtil.createJSONObject()
+		);
+
 		CheckboxMultipleDDMFormFieldTypeReportProcessor
 			checkboxMultipleDDMFormFieldTypeReportProcessor =
 				new CheckboxMultipleDDMFormFieldTypeReportProcessor();
 
-		JSONObject processedFormInstanceReportDataJSONObject =
+		JSONObject processedFieldJSONObject =
 			checkboxMultipleDDMFormFieldTypeReportProcessor.process(
-				ddmFormFieldValue, 0, JSONFactoryUtil.createJSONObject(),
+				ddmFormFieldValue, fieldJSONObject, 0,
 				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
-
-		JSONObject fieldJSONObject =
-			processedFormInstanceReportDataJSONObject.getJSONObject("field1");
 
 		Assert.assertEquals(
 			DDMFormFieldType.CHECKBOX_MULTIPLE,
-			fieldJSONObject.getString("type"));
+			processedFieldJSONObject.getString("type"));
 
-		JSONObject valuesJSONObject = fieldJSONObject.getJSONObject("values");
+		JSONObject valuesJSONObject = processedFieldJSONObject.getJSONObject(
+			"values");
 
 		Assert.assertEquals(1, valuesJSONObject.getLong("option1"));
 	}
@@ -125,31 +129,26 @@ public class CheckboxMultipleDDMFormFieldTypeReportProcessorTest
 			value
 		);
 
-		JSONObject formInstanceReportDataJSONObject = JSONUtil.put(
-			ddmFormFieldValue.getName(),
-			JSONUtil.put(
-				"type", DDMFormFieldType.CHECKBOX_MULTIPLE
-			).put(
-				"values", JSONFactoryUtil.createJSONObject("{option1: 1}")
-			));
+		JSONObject fieldJSONObject = JSONUtil.put(
+			"type", DDMFormFieldType.CHECKBOX_MULTIPLE
+		).put(
+			"values", JSONUtil.put("option1", 1)
+		);
 
 		CheckboxMultipleDDMFormFieldTypeReportProcessor
 			checkboxMultipleDDMFormFieldTypeReportProcessor =
 				new CheckboxMultipleDDMFormFieldTypeReportProcessor();
 
-		JSONObject processedFormInstanceReportDataJSONObject =
+		JSONObject processedFieldJSONObject =
 			checkboxMultipleDDMFormFieldTypeReportProcessor.process(
-				ddmFormFieldValue, 0, formInstanceReportDataJSONObject,
+				ddmFormFieldValue, fieldJSONObject, 0,
 				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
 
-		JSONObject fieldJSONObject =
-			processedFormInstanceReportDataJSONObject.getJSONObject("field1");
-
-		JSONObject fieldValueJSONObject = fieldJSONObject.getJSONObject(
+		JSONObject valuesJSONObject = processedFieldJSONObject.getJSONObject(
 			"values");
 
-		Assert.assertEquals(2, fieldValueJSONObject.getLong("option1"));
-		Assert.assertEquals(1, fieldValueJSONObject.getLong("option2"));
+		Assert.assertEquals(2, valuesJSONObject.getLong("option1"));
+		Assert.assertEquals(1, valuesJSONObject.getLong("option2"));
 	}
 
 	private void _setUpJSONFactoryUtil() {
