@@ -75,20 +75,19 @@ public class CheckboxMultipleDDMFormFieldTypeReportProcessorTest
 			value
 		);
 
-		JSONObject fieldJSONObject = JSONUtil.put(
-			"type", DDMFormFieldType.CHECKBOX_MULTIPLE
-		).put(
-			"values", JSONFactoryUtil.createJSONObject()
-		);
-
 		CheckboxMultipleDDMFormFieldTypeReportProcessor
 			checkboxMultipleDDMFormFieldTypeReportProcessor =
 				new CheckboxMultipleDDMFormFieldTypeReportProcessor();
 
 		JSONObject processedFieldJSONObject =
 			checkboxMultipleDDMFormFieldTypeReportProcessor.process(
-				ddmFormFieldValue, fieldJSONObject, 0,
-				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
+				ddmFormFieldValue,
+				JSONUtil.put(
+					"type", DDMFormFieldType.CHECKBOX_MULTIPLE
+				).put(
+					"values", JSONFactoryUtil.createJSONObject()
+				),
+				0, DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
 
 		Assert.assertEquals(
 			DDMFormFieldType.CHECKBOX_MULTIPLE,
@@ -129,20 +128,19 @@ public class CheckboxMultipleDDMFormFieldTypeReportProcessorTest
 			value
 		);
 
-		JSONObject fieldJSONObject = JSONUtil.put(
-			"type", DDMFormFieldType.CHECKBOX_MULTIPLE
-		).put(
-			"values", JSONUtil.put("option1", 1)
-		);
-
 		CheckboxMultipleDDMFormFieldTypeReportProcessor
 			checkboxMultipleDDMFormFieldTypeReportProcessor =
 				new CheckboxMultipleDDMFormFieldTypeReportProcessor();
 
 		JSONObject processedFieldJSONObject =
 			checkboxMultipleDDMFormFieldTypeReportProcessor.process(
-				ddmFormFieldValue, fieldJSONObject, 0,
-				DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
+				ddmFormFieldValue,
+				JSONUtil.put(
+					"type", DDMFormFieldType.CHECKBOX_MULTIPLE
+				).put(
+					"values", JSONUtil.put("option1", 1)
+				),
+				0, DDMFormInstanceReportConstants.EVENT_ADD_RECORD_VERSION);
 
 		JSONObject valuesJSONObject = processedFieldJSONObject.getJSONObject(
 			"values");
