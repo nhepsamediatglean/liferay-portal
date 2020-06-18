@@ -28,7 +28,7 @@ import org.osgi.annotation.versioning.ConsumerType;
 @ConsumerType
 public interface ClayDataSetActionProvider {
 
-	public List<ClayDataSetAction> clayDataSetActions(
+	public List<ClayDataSetAction> getClayDataSetActions(
 			HttpServletRequest httpServletRequest, long groupId, Object model)
 		throws PortalException;
 
