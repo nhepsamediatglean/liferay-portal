@@ -94,9 +94,7 @@
 
 	<%
 	String defaultNavigationModel = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NAVIGATION_MODEL, WebKeys.NAVIGATION_MODEL_GLOBAL);
-
 	String leftNavigationLabel = "<strong>" + LanguageUtil.get(resourceBundle, "left-navigation") + "</strong>: " + LanguageUtil.get(resourceBundle, WebKeys.NAVIGATION_MODEL_LEFT);
-
 	String globalNavigationLabel = "<strong>" + LanguageUtil.get(resourceBundle, "global-navigation") + "</strong>: " + LanguageUtil.get(resourceBundle, WebKeys.NAVIGATION_MODEL_GLOBAL);
 	%>
 
