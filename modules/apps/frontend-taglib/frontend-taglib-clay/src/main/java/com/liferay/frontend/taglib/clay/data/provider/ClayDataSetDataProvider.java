@@ -31,7 +31,8 @@ import org.osgi.annotation.versioning.ConsumerType;
 @ConsumerType
 public interface ClayDataSetDataProvider<T> {
 
-	public int countItems(HttpServletRequest httpServletRequest, Filter filter)
+	public int getItemsCount(
+				HttpServletRequest httpServletRequest, Filter filter)
 		throws PortalException;
 
 	public List<T> getItems(
