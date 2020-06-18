@@ -27,7 +27,7 @@ public class ClayTableSchemaField {
 		return _contentRenderer;
 	}
 
-	public String getContentRendererModuleUrl() {
+	public String getContentRendererModuleURL() {
 		return _contentRendererModuleUrl;
 	}
 
