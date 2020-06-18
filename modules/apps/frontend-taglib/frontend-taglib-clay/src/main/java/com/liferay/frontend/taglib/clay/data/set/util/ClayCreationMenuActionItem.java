@@ -18,7 +18,7 @@ package com.liferay.frontend.taglib.clay.data.set.util;
  * @author Marco Leo
  */
 public class ClayCreationMenuActionItem extends ClayMenuActionItem {
-
+// This should be called XyzClayMenuActionItem
 	public ClayCreationMenuActionItem(String href, String label) {
 		super(href, "plus", label, CLAY_MENU_ACTION_ITEM_TARGET_LINK);
 	}
