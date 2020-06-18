@@ -22,7 +22,7 @@ import com.liferay.frontend.taglib.clay.data.set.ClayDataSetDisplayView;
  */
 public abstract class ClayTimelineDataSetDisplayView
 	implements ClayDataSetDisplayView {
-
+// should be BaseClayDataSetDisplayView
 	public String getContentRenderer() {
 		return ClayDataSetConstants.CLAY_DATA_SET_CONTENT_RENDERER_TIMELINE;
 	}

@@ -25,7 +25,7 @@ import java.util.Locale;
  */
 public abstract class ClaySelectableTableDataSetDisplayView
 	implements ClayDataSetDisplayView {
-
+// should be XyzClayDataSetDisplayView
 	public String getContentRenderer() {
 		return ClayDataSetConstants.
 			CLAY_DATA_SET_CONTENT_RENDERER_SELECTABLE_TABLE;
