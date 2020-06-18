@@ -23,6 +23,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface ClayDataSetDataJSONBuilder {
 
+	// This is not a builder. Rename this to *Factory and create
+	// Builders have a bunch of setters and then last method is build
+
 	public String build(
 			long groupId, String tableName, List<Object> items,
 			HttpServletRequest httpServletRequest)
