@@ -18,7 +18,7 @@ package com.liferay.frontend.taglib.clay.data.set.view.table;
  * @author Marco Leo
  */
 public interface ClayTableSchemaBuilder {
-
+// See, this is a real builder
 	public void addField(ClayTableSchemaField clayTableSchemaField);
 
 	public ClayTableSchemaField addField(String fieldName);
