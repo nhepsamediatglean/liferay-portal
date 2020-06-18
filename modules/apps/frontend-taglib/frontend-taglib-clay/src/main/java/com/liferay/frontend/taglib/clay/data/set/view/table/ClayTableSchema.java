@@ -21,11 +21,11 @@ import java.util.Map;
  */
 public class ClayTableSchema {
 
-	public Map<String, ClayTableSchemaField> getFields() {
+	public Map<String, ClayTableSchemaField> getClayTableSchemaFields() {
 		return _fields;
 	}
 
-	public void setFields(Map<String, ClayTableSchemaField> fields) {
+	public void setFields(Map<String, ClayTableSchemaField> clayTableSchemaFields) {
 		_fields = fields;
 	}
 
