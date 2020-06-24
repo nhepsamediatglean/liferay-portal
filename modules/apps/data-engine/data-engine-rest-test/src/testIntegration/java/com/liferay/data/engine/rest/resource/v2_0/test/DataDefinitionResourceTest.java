@@ -484,6 +484,9 @@ public class DataDefinitionResourceTest
 			Assert.assertEquals("MustSetValidName", problem.getType());
 		}
 
+		// Jeyvison, I need a comment here. See how the comments are breaking up
+		// this test.
+
 		DataDefinition dataDefinition =
 			dataDefinitionResource.postSiteDataDefinitionByContentType(
 				testGroup.getGroupId(), _CONTENT_TYPE,
