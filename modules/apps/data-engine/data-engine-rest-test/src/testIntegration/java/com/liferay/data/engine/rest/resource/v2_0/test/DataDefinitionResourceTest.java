@@ -553,23 +553,23 @@ public class DataDefinitionResourceTest
 	}
 
 	protected DataDefinition testDeleteDataDefinition_addDataDefinition(
-			DataDefinition dataDefinitionParent,
-			DataDefinition dataDefinitionChild)
+			DataDefinition parentDataDefinition,
+			DataDefinition childDataDefinition)
 		throws Exception {
 
-		dataDefinitionParent =
+		parentDataDefinition =
 			dataDefinitionResource.postSiteDataDefinitionByContentType(
-				testGroup.getGroupId(), _CONTENT_TYPE, dataDefinitionParent);
+				testGroup.getGroupId(), _CONTENT_TYPE, parentDataDefinition);
 
 		DataDefinitionField[] dataDefinitionFields =
-			dataDefinitionChild.getDataDefinitionFields();
+			childDataDefinition.getDataDefinitionFields();
 
 		for (DataDefinitionField dataDefinitionField : dataDefinitionFields) {
 			dataDefinitionField.setCustomProperties(
 				HashMapBuilder.<String, Object>put(
 					"collapsible", true
 				).put(
-					"ddmStructureId", dataDefinitionParent.getId()
+					"ddmStructureId", parentDataDefinition.getId()
 				).put(
 					"ddmStructureLayoutId", ""
 				).put(
@@ -581,9 +581,9 @@ public class DataDefinitionResourceTest
 		}
 
 		dataDefinitionResource.postSiteDataDefinitionByContentType(
-			testGroup.getGroupId(), _CONTENT_TYPE, dataDefinitionChild);
+			testGroup.getGroupId(), _CONTENT_TYPE, childDataDefinition);
 
-		return dataDefinitionParent;
+		return parentDataDefinition;
 	}
 
 	@Override
