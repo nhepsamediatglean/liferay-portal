@@ -59,7 +59,7 @@ public class DataDefinitionResourceTest
 		super.testDeleteDataDefinition();
 
 		DataDefinition dataDefinition =
-			testDeleteDataDefinition_addDataDefinition(
+			_testDeleteDataDefinition_addDataDefinition(
 				DataDefinition.toDTO(
 					DataDefinitionTestUtil.read("data-definition-parent.json")),
 				DataDefinition.toDTO(
@@ -552,7 +552,7 @@ public class DataDefinitionResourceTest
 			testGroup.getGroupId(), _CONTENT_TYPE, randomDataDefinition());
 	}
 
-	protected DataDefinition testDeleteDataDefinition_addDataDefinition(
+	private DataDefinition _testDeleteDataDefinition_addDataDefinition(
 			DataDefinition parentDataDefinition,
 			DataDefinition childDataDefinition)
 		throws Exception {
