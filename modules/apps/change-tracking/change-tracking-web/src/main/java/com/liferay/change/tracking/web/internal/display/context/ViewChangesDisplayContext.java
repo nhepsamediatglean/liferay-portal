@@ -86,8 +86,12 @@ public class ViewChangesDisplayContext {
 		_ctCollection = ctCollection;
 		_ctConfiguration = ctConfiguration;
 		_ctDisplayRendererRegistry = ctDisplayRendererRegistry;
-
 		_ctEntryLocalService = ctEntryLocalService;
+		_language = language;
+		_portal = portal;
+		_renderRequest = renderRequest;
+		_renderResponse = renderResponse;
+		_userLocalService = userLocalService;
 
 		int count = _ctEntryLocalService.getCTCollectionCTEntriesCount(
 			_ctCollection.getCtCollectionId());
@@ -99,18 +103,10 @@ public class ViewChangesDisplayContext {
 			_hasChanges = false;
 		}
 
-		_language = language;
-
-		_portal = portal;
-
 		_httpServletRequest = _portal.getHttpServletRequest(renderRequest);
 
 		_themeDisplay = (ThemeDisplay)_httpServletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		_renderRequest = renderRequest;
-		_renderResponse = renderResponse;
-		_userLocalService = userLocalService;
 	}
 
 	public String getBackURL() {
