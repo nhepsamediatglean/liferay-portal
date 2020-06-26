@@ -177,7 +177,7 @@ public class ViewChangesDisplayContext {
 	private JSONObject _getChangesJSONObject() throws PortalException {
 		int counter = 1;
 
-		JSONArray children = JSONFactoryUtil.createJSONArray();
+		JSONArray childrenJSONArray = JSONFactoryUtil.createJSONArray();
 
 		List<CTEntry> ctEntries = _ctEntryLocalService.getCTCollectionCTEntries(
 			_ctCollection.getCtCollectionId(), QueryUtil.ALL_POS,
@@ -229,7 +229,7 @@ public class ViewChangesDisplayContext {
 			renderURL.setParameter(
 				"ctEntryId", String.valueOf(ctEntry.getCtEntryId()));
 
-			children.put(
+			childrenJSONArray.put(
 				JSONUtil.put(
 					"description",
 					_ctDisplayRendererRegistry.getEntryDescription(
@@ -272,7 +272,7 @@ public class ViewChangesDisplayContext {
 		}
 
 		return JSONUtil.put(
-			"children", children
+			"children", childrenJSONArray
 		).put(
 			"id", 0
 		).put(
@@ -284,7 +284,7 @@ public class ViewChangesDisplayContext {
 			AtomicInteger nodeIdCounter, Map<Long, List<Long>> childPKsMap)
 		throws PortalException {
 
-		JSONArray children = JSONFactoryUtil.createJSONArray();
+		JSONArray childrenJSONArray = JSONFactoryUtil.createJSONArray();
 
 		for (Map.Entry<Long, List<Long>> entry : childPKsMap.entrySet()) {
 			long classNameId = entry.getKey();
@@ -379,11 +379,11 @@ public class ViewChangesDisplayContext {
 					"renderURL", renderURL.toString()
 				);
 
-				children.put(childJSONObject);
+				childrenJSONArray.put(childJSONObject);
 			}
 		}
 
-		return children;
+		return childrenJSONArray;
 	}
 
 	private JSONObject _getContextViewJSONObject() throws PortalException {
@@ -472,23 +472,23 @@ public class ViewChangesDisplayContext {
 				continue;
 			}
 
-			JSONArray children = _getChildren(nodeIdCounter, childPKsMap);
+			JSONArray childrenJSONArray = _getChildren(nodeIdCounter, childPKsMap);
 
-			if (children.length() == 0) {
+			if (childrenJSONArray.length() == 0) {
 				continue;
 			}
 
-			for (int i = 0; i < children.length(); i++) {
-				JSONObject child = children.getJSONObject(i);
+			for (int i = 0; i < childrenJSONArray.length(); i++) {
+				JSONObject childJSONObject = childrenJSONArray.getJSONObject(i);
 
 				_addRootDisplayNode(
 					child,
-					rootDisplayMap.get(child.getLong("modelClassNameId")));
+					rootDisplayMap.get(childJSONObject.getLong("modelClassNameId")));
 
-				deque.push(child);
+				deque.push(childJSONObject);
 			}
 
-			jsonObject.put("children", children);
+			jsonObject.put("children", childrenJSONArray);
 		}
 
 		for (Map.Entry<Long, List<JSONObject>> entry :
