@@ -172,7 +172,6 @@ public class CTDisplayRendererRegistry {
 		}
 
 		Locale locale = _portal.getLocale(httpServletRequest);
-
 		Date modifiedDate = ctEntry.getModifiedDate();
 
 		return _language.format(
