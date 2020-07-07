@@ -20,7 +20,6 @@ import com.liferay.change.tracking.model.CTCollection;
 import com.liferay.change.tracking.model.CTEntry;
 import com.liferay.change.tracking.service.CTCollectionLocalService;
 import com.liferay.change.tracking.service.CTEntryLocalService;
-import com.liferay.change.tracking.web.internal.constants.CTWebConstants;
 import com.liferay.change.tracking.web.internal.display.CTDisplayRendererRegistry;
 import com.liferay.change.tracking.web.internal.display.CTEntryDiffDisplay;
 import com.liferay.petra.lang.SafeClosable;
