@@ -107,9 +107,6 @@ public class JournalArticleCTDisplayRenderer
 
 		HttpServletRequest httpServletRequest =
 			displayContext.getHttpServletRequest();
-		HttpServletResponse httpServletResponse =
-			displayContext.getHttpServletResponse();
-		JournalArticle journalArticle = displayContext.getModel();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
@@ -118,14 +115,15 @@ public class JournalArticleCTDisplayRenderer
 		httpServletRequest.setAttribute(
 			WebKeys.JOURNAL_ARTICLE_DISPLAY,
 			_journalContent.getDisplay(
-				journalArticle, "", "",
+				displayContext.getModel(), "", "",
 				_language.getLanguageId(httpServletRequest), 1, null,
 				themeDisplay));
 
 		RequestDispatcher requestDispatcher =
 			_servletContext.getRequestDispatcher("/ct_display/render.jsp");
 
-		requestDispatcher.include(httpServletRequest, httpServletResponse);
+		requestDispatcher.include(
+			httpServletRequest, displayContext.getHttpServletResponse());
 	}
 
 	@Reference
