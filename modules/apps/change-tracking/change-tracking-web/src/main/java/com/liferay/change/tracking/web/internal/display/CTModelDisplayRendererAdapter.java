@@ -148,14 +148,10 @@ public class CTModelDisplayRendererAdapter<T extends BaseModel<T>>
 				}
 				else {
 					writer.write("<a href=\"");
-
 					writer.write(downloadURL);
-
 					writer.write("\" >");
-
 					writer.write(
 						LanguageUtil.get(themeDisplay.getLocale(), "download"));
-
 					writer.write("</a>");
 				}
 			}
