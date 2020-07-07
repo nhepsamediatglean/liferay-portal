@@ -19,9 +19,6 @@ package com.liferay.change.tracking.web.internal.constants;
  */
 public class CTWebConstants {
 
-	public static final String CT_DOCUMENTS_SERVLET_PATH =
-		"/change_tracking/documents/*";
-
 	public static final int USER_FILTER_ALL = -1;
 
 }

@@ -75,7 +75,7 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
 @Component(
 	property = {
 		"osgi.http.whiteboard.servlet.name=com.liferay.change.tracking.web.internal.servlet.CTForwardingServlet",
-		"osgi.http.whiteboard.servlet.pattern=" + CTWebConstants.CT_DOCUMENTS_SERVLET_PATH,
+		"osgi.http.whiteboard.servlet.pattern=/change_tracking/documents/*",
 		"servlet.init.httpMethods=GET,POST"
 	},
 	service = Servlet.class
