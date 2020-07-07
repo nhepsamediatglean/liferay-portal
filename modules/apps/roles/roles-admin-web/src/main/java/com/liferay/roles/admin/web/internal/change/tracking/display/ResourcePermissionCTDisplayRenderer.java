@@ -186,14 +186,11 @@ public class ResourcePermissionCTDisplayRenderer
 	public void render(DisplayContext<ResourcePermission> displayContext)
 		throws Exception {
 
-		HttpServletResponse httpServletResponse =
-			displayContext.getHttpServletResponse();
-		ResourcePermission resourcePermission = displayContext.getModel();
+		Map<String, ResourceAction> resourceActionMap = new TreeMap<>();
 
 		Locale locale = _portal.getLocale(
 			displayContext.getHttpServletRequest());
-
-		Map<String, ResourceAction> resourceActionMap = new TreeMap<>();
+		ResourcePermission resourcePermission = displayContext.getModel();
 
 		for (ResourceAction resourceAction :
 				_resourceActionLocalService.getResourceActions(
@@ -204,6 +201,9 @@ public class ResourcePermissionCTDisplayRenderer
 
 			resourceActionMap.put(actionLabel, resourceAction);
 		}
+
+		HttpServletResponse httpServletResponse =
+			displayContext.getHttpServletResponse();
 
 		Writer writer = httpServletResponse.getWriter();
 
