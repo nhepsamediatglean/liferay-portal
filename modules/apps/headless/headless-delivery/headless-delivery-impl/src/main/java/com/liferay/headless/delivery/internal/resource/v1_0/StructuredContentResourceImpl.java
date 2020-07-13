@@ -159,7 +159,7 @@ public class StructuredContentResourceImpl
 			Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		return _getStructuredContentPage(
+		return _getStructuredContentsPage(
 			assetLibraryId, flatten, search, filter, pagination, sorts);
 	}
 
@@ -254,7 +254,7 @@ public class StructuredContentResourceImpl
 			Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		return _getStructuredContentPage(
+		return _getStructuredContentsPage(
 			siteId, flatten, search, filter, pagination, sorts);
 	}
 
@@ -811,7 +811,7 @@ public class StructuredContentResourceImpl
 		return _toStructuredContent(journalArticle);
 	}
 
-	private Page<StructuredContent> _getStructuredContentPage(
+	private Page<StructuredContent> _getStructuredContentsPage(
 			Long siteId, Boolean flatten, String search, Filter filter,
 			Pagination pagination, Sort[] sorts)
 		throws Exception {
