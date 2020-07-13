@@ -105,7 +105,6 @@ public class StructuredContentResourceTest
 
 		_ddmLocalizedStructure = _addDDMStructure(
 			testGroup, "test-localized-structured-content-structure.json");
-
 		_ddmStructure = _addDDMStructure(
 			testGroup, "test-structured-content-structure.json");
 
