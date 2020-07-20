@@ -139,6 +139,8 @@ public class SelectCollectionManagementToolbarDisplayContext
 			String label, String title, int type) {
 
 		return dropdownItem -> {
+			dropdownItem.putData("action", "addAssetListEntry");
+
 			PortletURL addAssetListEntryURL =
 				PortalUtil.getControlPanelPortletURL(
 					liferayPortletRequest, AssetListPortletKeys.ASSET_LIST,
@@ -150,9 +152,9 @@ public class SelectCollectionManagementToolbarDisplayContext
 				"backURL", _themeDisplay.getURLCurrent());
 			addAssetListEntryURL.setParameter("type", String.valueOf(type));
 
-			dropdownItem.putData("action", "addAssetListEntry");
 			dropdownItem.putData(
 				"addAssetListEntryURL", addAssetListEntryURL.toString());
+
 			dropdownItem.putData(
 				"namespace",
 				PortalUtil.getPortletNamespace(
