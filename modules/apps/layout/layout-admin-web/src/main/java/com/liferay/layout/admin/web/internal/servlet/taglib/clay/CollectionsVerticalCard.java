@@ -108,6 +108,9 @@ public class CollectionsVerticalCard extends BaseVerticalCard {
 				selectLayoutMasterLayoutURL.toString());
 		}
 		catch (Exception exception) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(exception, exception);
+			}
 		}
 
 		return data;

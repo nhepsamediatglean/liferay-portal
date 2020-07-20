@@ -18,6 +18,8 @@ import com.liferay.frontend.taglib.clay.servlet.taglib.soy.BaseVerticalCard;
 import com.liferay.info.list.provider.InfoListProvider;
 import com.liferay.info.list.provider.item.selector.criterion.InfoListProviderItemSelectorReturnType;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.permission.ResourceActionsUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -102,6 +104,9 @@ public class CollectionProvidersVerticalCard extends BaseVerticalCard {
 				selectLayoutMasterLayoutURL.toString());
 		}
 		catch (Exception exception) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(exception, exception);
+			}
 		}
 
 		return data;
@@ -157,6 +162,9 @@ public class CollectionProvidersVerticalCard extends BaseVerticalCard {
 
 		return StringPool.BLANK;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CollectionProvidersVerticalCard.class);
 
 	private final long _groupId;
 	private final HttpServletRequest _httpServletRequest;
