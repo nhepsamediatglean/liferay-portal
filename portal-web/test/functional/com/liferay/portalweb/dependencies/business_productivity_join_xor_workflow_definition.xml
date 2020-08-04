@@ -131,7 +131,13 @@
 	</join-xor>
 	<state>
 		<name>end</name>
-		<metadata><![CDATA[{"terminal":true}]]></metadata>
+		<metadata>
+			<![CDATA[
+				{
+					"terminal": true
+				}
+			]]>
+		</metadata>
 		<actions>
 			<action>
 				<name>approve</name>
