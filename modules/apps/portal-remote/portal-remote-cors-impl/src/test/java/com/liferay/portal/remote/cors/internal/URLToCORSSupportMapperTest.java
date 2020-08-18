@@ -15,6 +15,8 @@
 package com.liferay.portal.remote.cors.internal;
 
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 
 import java.util.HashMap;
@@ -118,6 +120,24 @@ public class URLToCORSSupportMapperTest {
 					comparisonFailure.getActual());
 			}
 		}
+
+		long start = System.currentTimeMillis();
+
+		for (int i = 0; i < 100000; i++) {
+			for (KeyValuePair keyValuePair : keyValuePairs) {
+				urlToCORSSupportMapper.get(keyValuePair.getKey());
+			}
+		}
+
+		long end = System.currentTimeMillis();
+
+		long delta = end - start;
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Iterated 100 thousand times in " + delta + " ms");
+		}
+
+		Assert.assertTrue(delta < 1000);
 	}
 
 	protected URLToCORSSupportMapper createURLToCORSSupportMapper(
@@ -125,5 +145,8 @@ public class URLToCORSSupportMapperTest {
 
 		return new URLToCORSSupportMapper(corsSupports);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		URLToCORSSupportMapperTest.class);
 
 }
