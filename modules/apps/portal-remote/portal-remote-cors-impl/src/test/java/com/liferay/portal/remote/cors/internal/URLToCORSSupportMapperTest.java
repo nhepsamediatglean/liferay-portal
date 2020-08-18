@@ -91,7 +91,7 @@ public class URLToCORSSupportMapperTest {
 		}
 
 		URLToCORSSupportMapper urlToCORSSupportMapper =
-			new URLToCORSSupportMapper(corsSupports);
+			createURLToCORSSupportMapper(corsSupports);
 
 		for (KeyValuePair keyValuePair : keyValuePairs) {
 			CORSSupport corsSupport = urlToCORSSupportMapper.get(
@@ -118,6 +118,12 @@ public class URLToCORSSupportMapperTest {
 					comparisonFailure.getActual());
 			}
 		}
+	}
+
+	protected URLToCORSSupportMapper createURLToCORSSupportMapper(
+		Map<String, CORSSupport> corsSupports) {
+
+		return new URLToCORSSupportMapper(corsSupports);
 	}
 
 }
