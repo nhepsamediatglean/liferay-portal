@@ -170,7 +170,7 @@ public class DDMFormValuesToMapConverterImpl
 
 		Map<String, Object> fieldInstanceValue =
 			(Map<String, Object>)values.computeIfAbsent(
-				_getFieldValueInstanceKey(ddmFormFieldValue),
+				_getDDMFormFieldValueInstanceKey(ddmFormFieldValue),
 				k -> new LinkedHashMap<>());
 
 		DDMFormField ddmFormField = ddmFormFields.get(
@@ -201,7 +201,7 @@ public class DDMFormValuesToMapConverterImpl
 		}
 	}
 
-	private String _getFieldValueInstanceKey(
+	private String _getDDMFormFieldValueInstanceKey(
 		DDMFormFieldValue ddmFormFieldValue) {
 
 		return StringBundler.concat(
