@@ -55,7 +55,7 @@ public class LayoutDisplayPageProviderWrapper
 		}
 		catch (PortalException portalException) {
 			throw new RuntimeException(
-				"Unable to get infoDisplayObjectProvider for classPK: " +
+				"Unable to get info display object provider for class PK " +
 					infoItemReference.getClassPK(),
 				portalException);
 		}
@@ -75,7 +75,7 @@ public class LayoutDisplayPageProviderWrapper
 		}
 		catch (PortalException portalException) {
 			throw new RuntimeException(
-				"Unable to get infoDisplayObjectProvider for urlTitle: " +
+				"Unable to get info display object provider for URL title " +
 					urlTitle,
 				portalException);
 		}
