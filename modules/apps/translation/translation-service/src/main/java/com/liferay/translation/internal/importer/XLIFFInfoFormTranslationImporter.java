@@ -127,19 +127,19 @@ public class XLIFFInfoFormTranslationImporter
 			consumer -> {
 				for (Event event : events) {
 					if (event.isTextUnit()) {
-						ITextUnit textUnit = event.getTextUnit();
+						ITextUnit iTextUnit = event.getTextUnit();
 
-						_validateWellFormedTextUnit(targetLocale, textUnit);
+						_validateWellFormedTextUnit(targetLocale, iTextUnit);
 
-						TextContainer sourceValue = textUnit.getSource();
+						TextContainer textContainer = iTextUnit.getSource();
 
-						TextFragment sourceFirstContent =
-							sourceValue.getFirstContent();
+						TextFragment textFragment =
+							textContainer.getFirstContent();
 
 						for (LocaleId targetLocaleId :
-								textUnit.getTargetLocales()) {
+								iTextUnit.getTargetLocales()) {
 
-							TextContainer targetValue = textUnit.getTarget(
+							TextContainer targetValue = iTextUnit.getTarget(
 								targetLocaleId);
 
 							TextFragment targetFirstContent =
@@ -149,11 +149,11 @@ public class XLIFFInfoFormTranslationImporter
 							).infoFieldType(
 								TextInfoFieldType.INSTANCE
 							).name(
-								textUnit.getId()
+								iTextUnit.getId()
 							).labelInfoLocalizedValue(
 								InfoLocalizedValue.<String>builder(
 								).value(
-									targetLocale, textUnit.getId()
+									targetLocale, iTextUnit.getId()
 								).build()
 							).localizable(
 								true
@@ -171,7 +171,7 @@ public class XLIFFInfoFormTranslationImporter
 											if (includeSource) {
 												biConsumer.accept(
 													sourceLocale,
-													sourceFirstContent.
+													textFragment.
 														getText());
 											}
 										}
@@ -406,13 +406,13 @@ public class XLIFFInfoFormTranslationImporter
 	}
 
 	private void _validateWellFormedTextUnit(
-			Locale targetLocale, ITextUnit textUnit)
+			Locale targetLocale, ITextUnit iTextUnit)
 		throws XLIFFFileException.MustBeWellFormed {
 
-		TextContainer source = textUnit.getSource();
-		Set<LocaleId> targetLocales = textUnit.getTargetLocales();
+		TextContainer textContainer = iTextUnit.getSource();
+		Set<LocaleId> targetLocales = iTextUnit.getTargetLocales();
 
-		if (!source.isEmpty() && targetLocales.isEmpty()) {
+		if (!textContainer.isEmpty() && targetLocales.isEmpty()) {
 			throw new XLIFFFileException.MustBeWellFormed(
 				"There is no translation target");
 		}
@@ -430,9 +430,9 @@ public class XLIFFInfoFormTranslationImporter
 					"Only one translation language per file is permitted");
 			}
 
-			TextContainer value = textUnit.getTarget(targetLocaleId);
+			TextContainer targetTextContainer = iTextUnit.getTarget(targetLocaleId);
 
-			if (!source.isEmpty() && value.isEmpty()) {
+			if (!textContainer.isEmpty() && targetTextContainer.isEmpty()) {
 				throw new XLIFFFileException.MustBeWellFormed(
 					"There is no translation target");
 			}
