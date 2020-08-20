@@ -123,7 +123,6 @@ public class TranslationEntryAssetRenderer
 		InfoItemFormProvider<Object> infoItemFormProvider =
 			_infoItemServiceTracker.getFirstInfoItemService(
 				InfoItemFormProvider.class, _translationEntry.getClassName());
-
 		InfoItemObjectProvider<Object> infoItemObjectProvider =
 			_infoItemServiceTracker.getFirstInfoItemService(
 				InfoItemObjectProvider.class, _translationEntry.getClassName());
