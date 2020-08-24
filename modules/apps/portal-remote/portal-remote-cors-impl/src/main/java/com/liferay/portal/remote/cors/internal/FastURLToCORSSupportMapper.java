@@ -116,7 +116,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private int _getExactIndex(String urlPath, long[][][] trieMatrix) {
 		int row = 0;
-		long bitMask = _ALL_BITS_SET_BITMASK;
+		long bitMask = _BITMASK;
 		int column = 0;
 
 		for (; row < urlPath.length(); ++row) {
@@ -150,7 +150,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private CORSSupport _getExtensionCORSSupport(String urlPath) {
 		int urlPathLength = urlPath.length();
-		long currentBitMask = _ALL_BITS_SET_BITMASK;
+		long currentBitMask = _BITMASK;
 
 		for (int row = 0; row < urlPathLength; ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
@@ -205,7 +205,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 		int row = 0;
 		int col = 0;
-		long currentBitMask = _ALL_BITS_SET_BITMASK;
+		long currentBitMask = _BITMASK;
 		long bestMatchBitMask = 0;
 
 		for (; row < urlPathLength; ++row) {
@@ -366,7 +366,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		corsSupports.add(index, corsSupport);
 	}
 
-	private static final long _ALL_BITS_SET_BITMASK = ~0;
+	private static final long _BITMASK = ~0;
 
 	private static final byte _ASCII_CHARACTER_RANGE = 96;
 
