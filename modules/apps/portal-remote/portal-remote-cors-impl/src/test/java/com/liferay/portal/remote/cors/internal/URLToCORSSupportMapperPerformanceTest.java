@@ -163,6 +163,12 @@ public class URLToCORSSupportMapperPerformanceTest {
 		new KeyValuePair("url/some/random/pattern/one/", "url/some/random/pattern/one/"),
 		new KeyValuePair("url/some/random/pattern/one/*", "url/some/random/pattern/one/*"),
 
+		// Extension
+
+		new KeyValuePair("random/path/do/test.jsp", "*.jsp"),
+		new KeyValuePair("random/path/do/test.mp3", "*.mp3"),
+		new KeyValuePair("test.jsp", "*.jsp"),
+
 		// Wildcard
 
 		new KeyValuePair("/", "//*"),
@@ -196,13 +202,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 		new KeyValuePair("/url/some/random/pattern/two/two/two/", "/url/some/random/pattern/two/two/two/*"),
 		new KeyValuePair("/url/some/random/pattern/two/two/two/./some/very/long/./do/test", "/url/some/random/pattern/two/two/two/*"),
 		new KeyValuePair("/url/some/random/pattern/two/two/two/./some/very/long/./do/test/", "/url/some/random/pattern/two/two/two/*"),
-		new KeyValuePair("/url/some/random/pattern/two/two/two/do/test", "/url/some/random/pattern/two/two/two/*"),
-
-		// Extension
-
-		new KeyValuePair("random/path/do/test.jsp", "*.jsp"),
-		new KeyValuePair("random/path/do/test.mp3", "*.mp3"),
-		new KeyValuePair("test.jsp", "*.jsp")
+		new KeyValuePair("/url/some/random/pattern/two/two/two/do/test", "/url/some/random/pattern/two/two/two/*")
 	};
 
 	private URLToCORSSupportMapper _urlToCORSSupportMapper;
