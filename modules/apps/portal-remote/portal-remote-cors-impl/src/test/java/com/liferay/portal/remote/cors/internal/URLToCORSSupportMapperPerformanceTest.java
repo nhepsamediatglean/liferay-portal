@@ -30,7 +30,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 
 	@Before
 	public void setUp() {
-		urlToCORSSupportMapper = createURLToCORSSupportMapper(
+		_urlToCORSSupportMapper = createURLToCORSSupportMapper(
 			_buildCORSSupports());
 	}
 
@@ -40,7 +40,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 
 		for (int i = 0; i < 100000; i++) {
 			for (KeyValuePair keyValuePair : _expectedMatches) {
-				urlToCORSSupportMapper.get(keyValuePair.getKey());
+				_urlToCORSSupportMapper.get(keyValuePair.getKey());
 			}
 		}
 
@@ -59,7 +59,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 		return new URLToCORSSupportMapper(corsSupports);
 	}
 
-	protected URLToCORSSupportMapper urlToCORSSupportMapper;
+	private URLToCORSSupportMapper _urlToCORSSupportMapper;
 
 	private Map<String, CORSSupport> _buildCORSSupports() {
 		Map<String, CORSSupport> corsSupports = new HashMap<>();
