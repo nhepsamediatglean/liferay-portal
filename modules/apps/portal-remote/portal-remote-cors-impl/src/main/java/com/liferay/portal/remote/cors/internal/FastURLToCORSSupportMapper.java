@@ -318,8 +318,8 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			trieMatrix = _extensionTrieMatrix;
 		}
 
-		if ((!wildcard && (_extensionStoredURLPatterns > 63)) ||
-			(wildcard && (_wildcardStoredURLPatterns > 63))) {
+		if ((!wildcard && (_extensionURLPatternsCount > 63)) ||
+			(wildcard && (_wildcardURLPatternCount > 63))) {
 
 			throw new IllegalArgumentException(
 				"Exceeding maximum number of allowed URL patterns");
@@ -334,10 +334,10 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 
 		if (wildcard) {
-			index = _wildcardStoredURLPatterns++;
+			index = _wildcardURLPatternCount++;
 		}
 		else {
-			index = _extensionStoredURLPatterns++;
+			index = _extensionURLPatternsCount++;
 		}
 
 		long bitmask = 1L << index;
@@ -376,12 +376,12 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private List<CORSSupport> _extensionCORSSupports = new ArrayList<>(
 		Long.SIZE);
-	private int _extensionStoredURLPatterns;
+	private int _extensionURLPatternsCount;
 	private final long[][][] _extensionTrieMatrix;
 	private final int _maxURLPatternLength;
 	private List<CORSSupport> _wildcardCORSSupports = new ArrayList<>(
 		Long.SIZE);
-	private int _wildcardStoredURLPatterns;
+	private int _wildcardURLPatternCount;
 	private final long[][][] _wildCardTrieMatrix;
 
 }
