@@ -16,26 +16,11 @@ package com.liferay.portal.remote.cors.internal;
 
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  * @author Arthur Chan
  */
 public class FastURLToCORSSupportMapperPerformanceTest
 	extends URLToCORSSupportMapperPerformanceTest {
-
-	@Before
-	@Override
-	public void setUp() {
-		super.setUp();
-	}
-
-	@Override
-	@Test
-	public void testGet() {
-		super.testGet();
-	}
 
 	@Override
 	protected URLToCORSSupportMapper createURLToCORSSupportMapper(
