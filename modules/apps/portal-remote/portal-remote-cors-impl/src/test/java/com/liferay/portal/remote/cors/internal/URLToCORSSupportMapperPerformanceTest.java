@@ -59,8 +59,6 @@ public class URLToCORSSupportMapperPerformanceTest {
 		return new URLToCORSSupportMapper(corsSupports);
 	}
 
-	private URLToCORSSupportMapper _urlToCORSSupportMapper;
-
 	private Map<String, CORSSupport> _buildCORSSupports() {
 		Map<String, CORSSupport> corsSupports = new HashMap<>();
 
@@ -247,5 +245,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 			"random/path/do/test.jsp", _URL_PATTERNS_EXTENSION[14]),
 		new KeyValuePair("test.jsp", _URL_PATTERNS_EXTENSION[14]),
 	};
+
+	private URLToCORSSupportMapper _urlToCORSSupportMapper;
 
 }
