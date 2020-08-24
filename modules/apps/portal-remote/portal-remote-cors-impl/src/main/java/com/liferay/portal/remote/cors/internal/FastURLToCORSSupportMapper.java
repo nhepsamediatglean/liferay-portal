@@ -376,14 +376,14 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private static final int _INDEX_STAR = '*' - _ASCII_PRINTABLE_OFFSET;
 
-	private List<CORSSupport> _extensionCORSSupports =
-		new ArrayList<>(Long.SIZE);
-	private List<CORSSupport> _wildcardCORSSupports =
-		new ArrayList<>(Long.SIZE);
-	private int _maxURLPatternLength;
+	private List<CORSSupport> _extensionCORSSupports = new ArrayList<>(
+		Long.SIZE);
 	private int _extensionStoredURLPatterns;
+	private final long[][][] _extensionTrieMatrix;
+	private final int _maxURLPatternLength;
+	private List<CORSSupport> _wildcardCORSSupports = new ArrayList<>(
+		Long.SIZE);
 	private int _wildcardStoredURLPatterns;
-	private long[][][] _extensionTrieMatrix;
-	private long[][][] _wildCardTrieMatrix;
+	private final long[][][] _wildCardTrieMatrix;
 
 }
