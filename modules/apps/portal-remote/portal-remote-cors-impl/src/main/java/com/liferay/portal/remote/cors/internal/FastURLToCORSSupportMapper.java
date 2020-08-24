@@ -61,7 +61,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		return _getExtensionCORSSupport(urlPath);
 	}
 
-	private static int _getFirstSetBitIndex(long bitMask) {
+	private int _getFirstSetBitIndex(long bitMask) {
 		int firstSetBitIndex = -1;
 
 		if (bitMask == 0) {
