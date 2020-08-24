@@ -48,9 +48,6 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			new long[2][maxURLPatternLength][_ASCII_CHARACTER_RANGE];
 		_trieMatrixWildcard =
 			new long[2][maxURLPatternLength][_ASCII_CHARACTER_RANGE];
-
-		_corsSupportsExtension = new ArrayList<>(Long.SIZE);
-		_corsSupportsWildcard = new ArrayList<>(Long.SIZE);
 	}
 
 	@Override
@@ -379,8 +376,10 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private static final int _INDEX_STAR = '*' - _ASCII_PRINTABLE_OFFSET;
 
-	private List<CORSSupport> _corsSupportsExtension;
-	private List<CORSSupport> _corsSupportsWildcard;
+	private List<CORSSupport> _corsSupportsExtension =
+		new ArrayList<>(Long.SIZE);
+	private List<CORSSupport> _corsSupportsWildcard =
+		new ArrayList<>(Long.SIZE);
 	private int _maxURLPatternLength;
 	private int _storedURLPatternsExtension;
 	private int _storedURLPatternsWildcard;
