@@ -97,14 +97,13 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private CORSSupport _getExtensionCORSSupport(String urlPath) {
 		long currentBitmask = _BITMASK;
-		int urlPathLength = urlPath.length();
 
-		for (int row = 0; row < urlPathLength; ++row) {
+		for (int row = 0; row < urlPath.length(); ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
 				break;
 			}
 
-			char character = urlPath.charAt(urlPathLength - 1 - row);
+			char character = urlPath.charAt(urlPath.length() - 1 - row);
 
 			if (character == '/') {
 				break;
@@ -190,15 +189,14 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private CORSSupport _getWildcardCORSSupport(String urlPath) {
 		boolean onlyExact = false;
-		int urlPathLength = urlPath.length();
 		boolean onlyWildcard = false;
 
 		if (urlPath.charAt(0) != '/') {
 			onlyExact = true;
 		}
-		else if ((urlPathLength > 1) &&
-				 (urlPath.charAt(urlPathLength - 2) == '/') &&
-				 (urlPath.charAt(urlPathLength - 1) == '*')) {
+		else if ((urlPath.length() > 1) &&
+				 (urlPath.charAt(urlPath.length() - 2) == '/') &&
+				 (urlPath.charAt(urlPath.length() - 1) == '*')) {
 
 			onlyWildcard = true;
 		}
@@ -208,7 +206,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		long currentBitmask = _BITMASK;
 		long bestMatchBitmask = 0;
 
-		for (; row < urlPathLength; ++row) {
+		for (; row < urlPath.length(); ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
 				currentBitmask = 0;
 
