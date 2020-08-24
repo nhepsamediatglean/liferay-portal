@@ -54,7 +54,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 				break;
 			}
 
-			int column = character - ASCII_PRINTABLE_OFFSET;
+			int column = character - _ASCII_PRINTABLE_OFFSET;
 
 			currentBitMask &= _trieMatrixExtension[0][row][column];
 
@@ -108,7 +108,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 			char character = urlPath.charAt(row);
 
-			col = character - ASCII_PRINTABLE_OFFSET;
+			col = character - _ASCII_PRINTABLE_OFFSET;
 
 			currentBitMask &= _trieMatrixWildcard[0][row][col];
 
@@ -193,9 +193,9 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 
 		_trieMatrixExtension =
-			new long[2][maxURLPatternLength][ASCII_CHARACTER_RANGE];
+			new long[2][maxURLPatternLength][_ASCII_CHARACTER_RANGE];
 		_trieMatrixWildcard =
-			new long[2][maxURLPatternLength][ASCII_CHARACTER_RANGE];
+			new long[2][maxURLPatternLength][_ASCII_CHARACTER_RANGE];
 
 		_corsSupportsExtension = new ArrayList<>(Long.SIZE);
 		_corsSupportsWildcard = new ArrayList<>(Long.SIZE);
@@ -257,7 +257,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 				character = urlPattern.charAt(urlPatternLength - 1 - row);
 			}
 
-			column = character - ASCII_PRINTABLE_OFFSET;
+			column = character - _ASCII_PRINTABLE_OFFSET;
 
 			trieMatrix[0][row][column] |= bitMask;
 		}
@@ -267,9 +267,9 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		corsSupports.add(index, corsSupport);
 	}
 
-	protected static final byte ASCII_CHARACTER_RANGE = 96;
+	private static final byte _ASCII_CHARACTER_RANGE = 96;
 
-	protected static final byte ASCII_PRINTABLE_OFFSET = 32;
+	private static final byte _ASCII_PRINTABLE_OFFSET = 32;
 
 	private static int _getFirstSetBitIndex(long bitMask) {
 		int firstSetBitIndex = -1;
@@ -338,7 +338,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 			char character = urlPath.charAt(row);
 
-			column = character - ASCII_PRINTABLE_OFFSET;
+			column = character - _ASCII_PRINTABLE_OFFSET;
 
 			bitMask &= trieMatrix[0][row][column];
 
@@ -382,9 +382,9 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private static final long _ALL_BITS_SET_BITMASK = ~0;
 
-	private static final int _INDEX_SLASH = '/' - ASCII_PRINTABLE_OFFSET;
+	private static final int _INDEX_SLASH = '/' - _ASCII_PRINTABLE_OFFSET;
 
-	private static final int _INDEX_STAR = '*' - ASCII_PRINTABLE_OFFSET;
+	private static final int _INDEX_STAR = '*' - _ASCII_PRINTABLE_OFFSET;
 
 	private List<CORSSupport> _corsSupportsExtension;
 	private List<CORSSupport> _corsSupportsWildcard;
