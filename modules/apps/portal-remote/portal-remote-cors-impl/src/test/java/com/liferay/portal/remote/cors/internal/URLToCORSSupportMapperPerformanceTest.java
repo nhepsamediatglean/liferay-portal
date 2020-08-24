@@ -62,31 +62,90 @@ public class URLToCORSSupportMapperPerformanceTest {
 	private Map<String, CORSSupport> _buildCORSSupports() {
 		Map<String, CORSSupport> corsSupports = new HashMap<>();
 
-		for (String urlPattern : _URL_PATTERNS_EXACT) {
-			CORSSupport corsSupport = new CORSSupport();
+		// Exact
 
-			corsSupport.setHeader("pattern", urlPattern);
+		_put(corsSupports, "url/some/random/pattern/one");
+		_put(corsSupports, "/url/some/random/pattern/one/");
+		_put(corsSupports, "url/some/random/pattern/one/");
+		_put(corsSupports, "/url/some/random/pattern/one");
+		_put(corsSupports, "url/some/random/pattern/two");
+		_put(corsSupports, "/url/some/random/pattern/two/");
+		_put(corsSupports, "url/some/random/pattern/two/");
+		_put(corsSupports, "/url/some/random/pattern/two");
+		_put(corsSupports, "url/some/random/pattern/three");
+		_put(corsSupports, "/url/some/random/pattern/three/");
+		_put(corsSupports, "url/some/random/pattern/three/");
+		_put(corsSupports, "/url/some/random/pattern/three");
+		_put(corsSupports, "url/some/random/pattern/four");
+		_put(corsSupports, "/url/some/random/pattern/four/");
+		_put(corsSupports, "url/some/random/pattern/four/");
+		_put(corsSupports, "/url/some/random/pattern/four");
+		_put(corsSupports, "/url/some/random/pattern/one/*/");
+		_put(corsSupports, "url/some/random/pattern/one/*");
+		_put(corsSupports, "/url/some/random/pattern/one*");
+		_put(corsSupports, "/url/some/random/pattern/two/*/");
+		_put(corsSupports, "url/some/random/pattern/two/*");
+		_put(corsSupports, "/url/some/random/pattern/two*");
+		_put(corsSupports, "/url/some/random/pattern/one/*/do/test");
+		_put(corsSupports, "/url/some/random/pattern/two/*/do/test");
+		_put(corsSupports, "url/some/random/pattern/do/test.mp3/");
+		_put(corsSupports, "/url/some/random/pattern/do/test.mp3/");
 
-			corsSupports.put(urlPattern, corsSupport);
-		}
+		// Wildcard
 
-		for (String urlPattern : _URL_PATTERNS_WILDCARD) {
-			CORSSupport corsSupport = new CORSSupport();
+		_put(corsSupports, "/url/some/random/pattern/one/one/one/*");
+		_put(corsSupports, "/url/some/random/pattern/one/one/*");
+		_put(corsSupports, "/url/some/random/pattern/one/*");
+		_put(corsSupports, "/url/some/random/pattern/two/two/two/*");
+		_put(corsSupports, "/url/some/random/pattern/two/two/*");
+		_put(corsSupports, "/url/some/random/pattern/two/*");
+		_put(corsSupports, "/url/some/random/pattern/three/three/three/*");
+		_put(corsSupports, "/url/some/random/pattern/three/three/*");
+		_put(corsSupports, "/url/some/random/pattern/three/*");
+		_put(corsSupports, "/url/some/random/pattern/four/four/four/*");
+		_put(corsSupports, "/url/some/random/pattern/four/four/*");
+		_put(corsSupports, "/url/some/random/pattern/four/*");
+		_put(corsSupports, "/url/some/random/pattern/*");
+		_put(corsSupports, "/url/*");
+		_put(corsSupports, "/*");
+		_put(corsSupports, "/*/*");
+		_put(corsSupports, "//*");
+		_put(corsSupports, "/*//*");
+		_put(corsSupports, "/url/some/random/pattern/do/test.mp3/*");
+		_put(corsSupports, "/do/test.mp3/*");
+		_put(corsSupports, "/some/random/pattern/*");
+		_put(corsSupports, "/one/*");
 
-			corsSupport.setHeader("pattern", urlPattern);
+		// Extension
 
-			corsSupports.put(urlPattern, corsSupport);
-		}
-
-		for (String urlPattern : _URL_PATTERNS_EXTENSION) {
-			CORSSupport corsSupport = new CORSSupport();
-
-			corsSupport.setHeader("pattern", urlPattern);
-
-			corsSupports.put(urlPattern, corsSupport);
-		}
+		_put(corsSupports, "*.mov");
+		_put(corsSupports, "*.xml");
+		_put(corsSupports, "*.cpp");
+		_put(corsSupports, "*.xpm");
+		_put(corsSupports, "*.pdf");
+		_put(corsSupports, "*.deb");
+		_put(corsSupports, "*.doc");
+		_put(corsSupports, "*.bin");
+		_put(corsSupports, "*.zip");
+		_put(corsSupports, "*.mp3");
+		_put(corsSupports, "*.jpg");
+		_put(corsSupports, "*.png");
+		_put(corsSupports, "*.txt");
+		_put(corsSupports, "*.tar");
+		_put(corsSupports, "*.jsp");
+		_put(corsSupports, "*.jspf");
 
 		return corsSupports;
+	}
+
+	private void _put(
+		Map<String, CORSSupport> corsSupports, String urlPattern) {
+
+		CORSSupport corsSupport = new CORSSupport();
+
+		corsSupport.setHeader("pattern", urlPattern);
+
+		corsSupports.put(urlPattern, corsSupport);
 	}
 
 	/**
