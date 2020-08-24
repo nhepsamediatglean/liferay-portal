@@ -44,9 +44,9 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			_maxURLPatternLength = maxURLPatternLength;
 		}
 
-		_trieMatrixExtension =
+		_extensionTrieMatrix =
 			new long[2][maxURLPatternLength][_ASCII_CHARACTER_RANGE];
-		_trieMatrixWildcard =
+		_wildCardTrieMatrix =
 			new long[2][maxURLPatternLength][_ASCII_CHARACTER_RANGE];
 	}
 
@@ -165,7 +165,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 			int column = character - _ASCII_PRINTABLE_OFFSET;
 
-			currentBitMask &= _trieMatrixExtension[0][row][column];
+			currentBitMask &= _extensionTrieMatrix[0][row][column];
 
 			if (currentBitMask == 0) {
 				break;
@@ -174,7 +174,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			if ((character == '.') && ((row + 1) < _maxURLPatternLength)) {
 				long bitMask =
 					currentBitMask &
-					_trieMatrixExtension[1][row + 1][_INDEX_STAR];
+					_extensionTrieMatrix[1][row + 1][_INDEX_STAR];
 
 				if (bitMask != 0) {
 					return _extensionCORSSupports.get(
@@ -219,7 +219,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 			col = character - _ASCII_PRINTABLE_OFFSET;
 
-			currentBitMask &= _trieMatrixWildcard[0][row][col];
+			currentBitMask &= _wildCardTrieMatrix[0][row][col];
 
 			if (currentBitMask == 0) {
 				break;
@@ -230,7 +230,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 				long bitMask =
 					currentBitMask &
-					_trieMatrixWildcard[1][row + 1][_INDEX_STAR];
+					_wildCardTrieMatrix[1][row + 1][_INDEX_STAR];
 
 				if (bitMask != 0) {
 					bestMatchBitMask = bitMask;
@@ -249,7 +249,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 		if (onlyExact) {
 			long bitMask =
-				currentBitMask & _trieMatrixWildcard[1][row - 1][col];
+				currentBitMask & _wildCardTrieMatrix[1][row - 1][col];
 
 			if (bitMask != 0) {
 				return _wildcardCORSSupports.get(_getFirstSetBitIndex(bitMask));
@@ -260,7 +260,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 		if (!onlyWildcard) {
 			long bitMask =
-				currentBitMask & _trieMatrixWildcard[1][row - 1][col];
+				currentBitMask & _wildCardTrieMatrix[1][row - 1][col];
 
 			if (bitMask != 0) {
 				return _wildcardCORSSupports.get(_getFirstSetBitIndex(bitMask));
@@ -268,10 +268,10 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 
 		long extraBitMask =
-			currentBitMask & _trieMatrixWildcard[0][row][_INDEX_SLASH];
+			currentBitMask & _wildCardTrieMatrix[0][row][_INDEX_SLASH];
 
-		extraBitMask &= _trieMatrixWildcard[0][row + 1][_INDEX_STAR];
-		extraBitMask &= _trieMatrixWildcard[1][row + 1][_INDEX_STAR];
+		extraBitMask &= _wildCardTrieMatrix[0][row + 1][_INDEX_STAR];
+		extraBitMask &= _wildCardTrieMatrix[1][row + 1][_INDEX_STAR];
 
 		if (extraBitMask != 0) {
 			return _wildcardCORSSupports.get(
@@ -311,16 +311,16 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		List<CORSSupport> corsSupports = null;
 
 		if (wildcard) {
-			trieMatrix = _trieMatrixWildcard;
+			trieMatrix = _wildCardTrieMatrix;
 			corsSupports = _wildcardCORSSupports;
 		}
 		else {
-			trieMatrix = _trieMatrixExtension;
+			trieMatrix = _extensionTrieMatrix;
 			corsSupports = _extensionCORSSupports;
 		}
 
-		if ((wildcard && (_storedURLPatternsWildcard > 63)) ||
-			(!wildcard && (_storedURLPatternsExtension > 63))) {
+		if ((wildcard && (_wildcardStoredURLPatterns > 63)) ||
+			(!wildcard && (_extensionStoredURLPatterns > 63))) {
 
 			throw new IllegalArgumentException(
 				"Exceeding maximum number of allowed URL patterns");
@@ -335,10 +335,10 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 
 		if (wildcard) {
-			index = _storedURLPatternsWildcard++;
+			index = _wildcardStoredURLPatterns++;
 		}
 		else {
-			index = _storedURLPatternsExtension++;
+			index = _extensionStoredURLPatterns++;
 		}
 
 		int row = 0;
@@ -381,9 +381,9 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 	private List<CORSSupport> _wildcardCORSSupports =
 		new ArrayList<>(Long.SIZE);
 	private int _maxURLPatternLength;
-	private int _storedURLPatternsExtension;
-	private int _storedURLPatternsWildcard;
-	private long[][][] _trieMatrixExtension;
-	private long[][][] _trieMatrixWildcard;
+	private int _extensionStoredURLPatterns;
+	private int _wildcardStoredURLPatterns;
+	private long[][][] _extensionTrieMatrix;
+	private long[][][] _wildCardTrieMatrix;
 
 }
