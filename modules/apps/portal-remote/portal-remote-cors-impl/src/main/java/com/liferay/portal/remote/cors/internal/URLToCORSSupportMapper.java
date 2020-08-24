@@ -29,6 +29,56 @@ import java.util.Map;
  */
 public class URLToCORSSupportMapper {
 
+	public URLToCORSSupportMapper(Map<String, CORSSupport> corsSupports) {
+		doPut(corsSupports);
+	}
+
+	public CORSSupport get(String urlPath) {
+		if (Validator.isNull(urlPath)) {
+			return null;
+		}
+
+		CORSSupport corsSupport = _exactURLPatternCORSSupports.get(urlPath);
+
+		if (corsSupport != null) {
+			return corsSupport;
+		}
+
+		corsSupport = _wildcardURLPatternCORSSupports.get(urlPath + "/*");
+
+		if (corsSupport != null) {
+			return corsSupport;
+		}
+
+		int index = 0;
+
+		for (int i = urlPath.length(); i > 0; --i) {
+			if ((index < 1) && (urlPath.charAt(i - 1) == '.')) {
+				index = i - 1;
+			}
+
+			if (urlPath.charAt(i - 1) != '/') {
+				continue;
+			}
+
+			corsSupport = _wildcardURLPatternCORSSupports.get(
+				urlPath.substring(0, i) + "*");
+
+			if (corsSupport != null) {
+				return corsSupport;
+			}
+		}
+
+		return _extensionURLPatternCORSSupports.get(
+			"*" + urlPath.substring(index));
+	}
+
+	protected void doPut(Map<String, CORSSupport> corsSupports) {
+		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
+			_put(entry.getKey(), entry.getValue());
+		}
+	}
+
 	protected boolean isExtensionURLPattern(String urlPattern) {
 
 		// Servlet 4 spec 12.1.3
@@ -80,56 +130,6 @@ public class URLToCORSSupportMapper {
 		}
 
 		return true;
-	}
-
-	public URLToCORSSupportMapper(Map<String, CORSSupport> corsSupports) {
-		doPut(corsSupports);
-	}
-
-	public CORSSupport get(String urlPath) {
-		if (Validator.isNull(urlPath)) {
-			return null;
-		}
-
-		CORSSupport corsSupport = _exactURLPatternCORSSupports.get(urlPath);
-
-		if (corsSupport != null) {
-			return corsSupport;
-		}
-
-		corsSupport = _wildcardURLPatternCORSSupports.get(urlPath + "/*");
-
-		if (corsSupport != null) {
-			return corsSupport;
-		}
-
-		int index = 0;
-
-		for (int i = urlPath.length(); i > 0; --i) {
-			if ((index < 1) && (urlPath.charAt(i - 1) == '.')) {
-				index = i - 1;
-			}
-
-			if (urlPath.charAt(i - 1) != '/') {
-				continue;
-			}
-
-			corsSupport = _wildcardURLPatternCORSSupports.get(
-				urlPath.substring(0, i) + "*");
-
-			if (corsSupport != null) {
-				return corsSupport;
-			}
-		}
-
-		return _extensionURLPatternCORSSupports.get(
-			"*" + urlPath.substring(index));
-	}
-
-	protected void doPut(Map<String, CORSSupport> corsSupports) {
-		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
-			_put(entry.getKey(), entry.getValue());
-		}
 	}
 
 	private void _put(String urlPattern, CORSSupport corsSupport)
