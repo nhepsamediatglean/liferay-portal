@@ -62,9 +62,9 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 	}
 
 	private int _getExactIndex(String urlPath, long[][][] trieMatrix) {
-		int row = 0;
 		long bitMask = _BITMASK;
 		int column = 0;
+		int row = 0;
 
 		for (; row < urlPath.length(); ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
