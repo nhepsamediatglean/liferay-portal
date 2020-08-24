@@ -202,7 +202,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 
 		new KeyValuePair("random/path/do/test.jsp", "*.jsp"),
 		new KeyValuePair("random/path/do/test.mp3", "*.mp3"),
-		new KeyValuePair("test.jsp", "*.jsp"),
+		new KeyValuePair("test.jsp", "*.jsp")
 	};
 
 	private URLToCORSSupportMapper _urlToCORSSupportMapper;
