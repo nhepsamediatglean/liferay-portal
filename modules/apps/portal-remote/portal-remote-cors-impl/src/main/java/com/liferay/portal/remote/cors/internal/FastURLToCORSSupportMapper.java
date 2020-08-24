@@ -61,59 +61,6 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		return _getExtensionCORSSupport(urlPath);
 	}
 
-	private int _getFirstSetBitIndex(long bitMask) {
-		int firstSetBitIndex = -1;
-
-		if (bitMask == 0) {
-			return firstSetBitIndex;
-		}
-
-		firstSetBitIndex = 63;
-
-		long currentBitMask = bitMask << 32;
-
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
-			firstSetBitIndex -= 32;
-		}
-
-		currentBitMask = bitMask << 16;
-
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
-			firstSetBitIndex -= 16;
-		}
-
-		currentBitMask = bitMask << 8;
-
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
-			firstSetBitIndex -= 8;
-		}
-
-		currentBitMask = bitMask << 4;
-
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
-			firstSetBitIndex -= 4;
-		}
-
-		currentBitMask = bitMask << 2;
-
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
-			firstSetBitIndex -= 2;
-		}
-
-		currentBitMask = bitMask << 1;
-
-		if (currentBitMask != 0) {
-			firstSetBitIndex -= 1;
-		}
-
-		return firstSetBitIndex;
-	}
-
 	private int _getExactIndex(String urlPath, long[][][] trieMatrix) {
 		int row = 0;
 		long bitMask = _BITMASK;
@@ -186,6 +133,59 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 
 		return null;
+	}
+
+	private int _getFirstSetBitIndex(long bitMask) {
+		int firstSetBitIndex = -1;
+
+		if (bitMask == 0) {
+			return firstSetBitIndex;
+		}
+
+		firstSetBitIndex = 63;
+
+		long currentBitMask = bitMask << 32;
+
+		if (currentBitMask != 0) {
+			bitMask = currentBitMask;
+			firstSetBitIndex -= 32;
+		}
+
+		currentBitMask = bitMask << 16;
+
+		if (currentBitMask != 0) {
+			bitMask = currentBitMask;
+			firstSetBitIndex -= 16;
+		}
+
+		currentBitMask = bitMask << 8;
+
+		if (currentBitMask != 0) {
+			bitMask = currentBitMask;
+			firstSetBitIndex -= 8;
+		}
+
+		currentBitMask = bitMask << 4;
+
+		if (currentBitMask != 0) {
+			bitMask = currentBitMask;
+			firstSetBitIndex -= 4;
+		}
+
+		currentBitMask = bitMask << 2;
+
+		if (currentBitMask != 0) {
+			bitMask = currentBitMask;
+			firstSetBitIndex -= 2;
+		}
+
+		currentBitMask = bitMask << 1;
+
+		if (currentBitMask != 0) {
+			firstSetBitIndex -= 1;
+		}
+
+		return firstSetBitIndex;
 	}
 
 	private CORSSupport _getWildcardCORSSupport(String urlPath) {
@@ -366,11 +366,11 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		corsSupports.add(index, corsSupport);
 	}
 
-	private static final long _BITMASK = ~0;
-
 	private static final byte _ASCII_CHARACTER_RANGE = 96;
 
 	private static final byte _ASCII_PRINTABLE_OFFSET = 32;
+
+	private static final long _BITMASK = ~0;
 
 	private static final int _INDEX_SLASH = '/' - _ASCII_PRINTABLE_OFFSET;
 
