@@ -26,21 +26,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	public FastURLToCORSSupportMapper(Map<String, CORSSupport> corsSupports) {
 		super(corsSupports);
-	}
 
-	@Override
-	public CORSSupport get(String urlPath) {
-		CORSSupport corsSupport = _getWildcardCORSSupport(urlPath);
-
-		if (corsSupport != null) {
-			return corsSupport;
-		}
-
-		return _getExtensionCORSSupport(urlPath);
-	}
-
-	@Override
-	protected void put(Map<String, CORSSupport> corsSupports) {
 		int maxURLPatternLength = 0;
 
 		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
@@ -65,10 +51,17 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 		_corsSupportsExtension = new ArrayList<>(Long.SIZE);
 		_corsSupportsWildcard = new ArrayList<>(Long.SIZE);
+	}
 
-		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
-			_put(entry.getKey(), entry.getValue());
+	@Override
+	public CORSSupport get(String urlPath) {
+		CORSSupport corsSupport = _getWildcardCORSSupport(urlPath);
+
+		if (corsSupport != null) {
+			return corsSupport;
 		}
+
+		return _getExtensionCORSSupport(urlPath);
 	}
 
 	private static int _getFirstSetBitIndex(long bitMask) {
