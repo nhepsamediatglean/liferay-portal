@@ -64,76 +64,76 @@ public class URLToCORSSupportMapperPerformanceTest {
 
 		// Exact
 
-		_put(corsSupports, "url/some/random/pattern/one");
-		_put(corsSupports, "/url/some/random/pattern/one/");
-		_put(corsSupports, "url/some/random/pattern/one/");
-		_put(corsSupports, "/url/some/random/pattern/one");
-		_put(corsSupports, "url/some/random/pattern/two");
-		_put(corsSupports, "/url/some/random/pattern/two/");
-		_put(corsSupports, "url/some/random/pattern/two/");
-		_put(corsSupports, "/url/some/random/pattern/two");
-		_put(corsSupports, "url/some/random/pattern/three");
-		_put(corsSupports, "/url/some/random/pattern/three/");
-		_put(corsSupports, "url/some/random/pattern/three/");
-		_put(corsSupports, "/url/some/random/pattern/three");
-		_put(corsSupports, "url/some/random/pattern/four");
-		_put(corsSupports, "/url/some/random/pattern/four/");
-		_put(corsSupports, "url/some/random/pattern/four/");
+		_put(corsSupports, "/url/some/random/pattern/do/test.mp3/");
 		_put(corsSupports, "/url/some/random/pattern/four");
-		_put(corsSupports, "/url/some/random/pattern/one/*/");
-		_put(corsSupports, "url/some/random/pattern/one/*");
+		_put(corsSupports, "/url/some/random/pattern/four/");
+		_put(corsSupports, "/url/some/random/pattern/one");
 		_put(corsSupports, "/url/some/random/pattern/one*");
-		_put(corsSupports, "/url/some/random/pattern/two/*/");
-		_put(corsSupports, "url/some/random/pattern/two/*");
-		_put(corsSupports, "/url/some/random/pattern/two*");
+		_put(corsSupports, "/url/some/random/pattern/one/");
+		_put(corsSupports, "/url/some/random/pattern/one/*/");
 		_put(corsSupports, "/url/some/random/pattern/one/*/do/test");
+		_put(corsSupports, "/url/some/random/pattern/three");
+		_put(corsSupports, "/url/some/random/pattern/three/");
+		_put(corsSupports, "/url/some/random/pattern/two");
+		_put(corsSupports, "/url/some/random/pattern/two*");
+		_put(corsSupports, "/url/some/random/pattern/two/");
+		_put(corsSupports, "/url/some/random/pattern/two/*/");
 		_put(corsSupports, "/url/some/random/pattern/two/*/do/test");
 		_put(corsSupports, "url/some/random/pattern/do/test.mp3/");
-		_put(corsSupports, "/url/some/random/pattern/do/test.mp3/");
+		_put(corsSupports, "url/some/random/pattern/four");
+		_put(corsSupports, "url/some/random/pattern/four/");
+		_put(corsSupports, "url/some/random/pattern/one");
+		_put(corsSupports, "url/some/random/pattern/one/");
+		_put(corsSupports, "url/some/random/pattern/one/*");
+		_put(corsSupports, "url/some/random/pattern/three");
+		_put(corsSupports, "url/some/random/pattern/three/");
+		_put(corsSupports, "url/some/random/pattern/two");
+		_put(corsSupports, "url/some/random/pattern/two/");
+		_put(corsSupports, "url/some/random/pattern/two/*");
 
 		// Wildcard
 
-		_put(corsSupports, "/url/some/random/pattern/one/one/one/*");
-		_put(corsSupports, "/url/some/random/pattern/one/one/*");
-		_put(corsSupports, "/url/some/random/pattern/one/*");
-		_put(corsSupports, "/url/some/random/pattern/two/two/two/*");
-		_put(corsSupports, "/url/some/random/pattern/two/two/*");
-		_put(corsSupports, "/url/some/random/pattern/two/*");
-		_put(corsSupports, "/url/some/random/pattern/three/three/three/*");
-		_put(corsSupports, "/url/some/random/pattern/three/three/*");
-		_put(corsSupports, "/url/some/random/pattern/three/*");
-		_put(corsSupports, "/url/some/random/pattern/four/four/four/*");
-		_put(corsSupports, "/url/some/random/pattern/four/four/*");
-		_put(corsSupports, "/url/some/random/pattern/four/*");
-		_put(corsSupports, "/url/some/random/pattern/*");
-		_put(corsSupports, "/url/*");
 		_put(corsSupports, "/*");
 		_put(corsSupports, "/*/*");
-		_put(corsSupports, "//*");
 		_put(corsSupports, "/*//*");
-		_put(corsSupports, "/url/some/random/pattern/do/test.mp3/*");
+		_put(corsSupports, "//*");
 		_put(corsSupports, "/do/test.mp3/*");
-		_put(corsSupports, "/some/random/pattern/*");
 		_put(corsSupports, "/one/*");
+		_put(corsSupports, "/some/random/pattern/*");
+		_put(corsSupports, "/url/*");
+		_put(corsSupports, "/url/some/random/pattern/*");
+		_put(corsSupports, "/url/some/random/pattern/do/test.mp3/*");
+		_put(corsSupports, "/url/some/random/pattern/four/*");
+		_put(corsSupports, "/url/some/random/pattern/four/four/*");
+		_put(corsSupports, "/url/some/random/pattern/four/four/four/*");
+		_put(corsSupports, "/url/some/random/pattern/one/*");
+		_put(corsSupports, "/url/some/random/pattern/one/one/*");
+		_put(corsSupports, "/url/some/random/pattern/one/one/one/*");
+		_put(corsSupports, "/url/some/random/pattern/three/*");
+		_put(corsSupports, "/url/some/random/pattern/three/three/*");
+		_put(corsSupports, "/url/some/random/pattern/three/three/three/*");
+		_put(corsSupports, "/url/some/random/pattern/two/*");
+		_put(corsSupports, "/url/some/random/pattern/two/two/*");
+		_put(corsSupports, "/url/some/random/pattern/two/two/two/*");
 
 		// Extension
 
-		_put(corsSupports, "*.mov");
-		_put(corsSupports, "*.xml");
+		_put(corsSupports, "*.bin");
 		_put(corsSupports, "*.cpp");
-		_put(corsSupports, "*.xpm");
-		_put(corsSupports, "*.pdf");
 		_put(corsSupports, "*.deb");
 		_put(corsSupports, "*.doc");
-		_put(corsSupports, "*.bin");
-		_put(corsSupports, "*.zip");
-		_put(corsSupports, "*.mp3");
 		_put(corsSupports, "*.jpg");
-		_put(corsSupports, "*.png");
-		_put(corsSupports, "*.txt");
-		_put(corsSupports, "*.tar");
 		_put(corsSupports, "*.jsp");
 		_put(corsSupports, "*.jspf");
+		_put(corsSupports, "*.mov");
+		_put(corsSupports, "*.mp3");
+		_put(corsSupports, "*.pdf");
+		_put(corsSupports, "*.png");
+		_put(corsSupports, "*.tar");
+		_put(corsSupports, "*.txt");
+		_put(corsSupports, "*.xml");
+		_put(corsSupports, "*.xpm");
+		_put(corsSupports, "*.zip");
 
 		return corsSupports;
 	}
