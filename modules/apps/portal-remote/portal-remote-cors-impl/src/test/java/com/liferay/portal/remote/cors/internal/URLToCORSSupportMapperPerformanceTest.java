@@ -91,6 +91,25 @@ public class URLToCORSSupportMapperPerformanceTest {
 		_put(corsSupports, "url/some/random/pattern/two/");
 		_put(corsSupports, "url/some/random/pattern/two/*");
 
+		// Extension
+
+		_put(corsSupports, "*.bin");
+		_put(corsSupports, "*.cpp");
+		_put(corsSupports, "*.deb");
+		_put(corsSupports, "*.doc");
+		_put(corsSupports, "*.jpg");
+		_put(corsSupports, "*.jsp");
+		_put(corsSupports, "*.jspf");
+		_put(corsSupports, "*.mov");
+		_put(corsSupports, "*.mp3");
+		_put(corsSupports, "*.pdf");
+		_put(corsSupports, "*.png");
+		_put(corsSupports, "*.tar");
+		_put(corsSupports, "*.txt");
+		_put(corsSupports, "*.xml");
+		_put(corsSupports, "*.xpm");
+		_put(corsSupports, "*.zip");
+
 		// Wildcard
 
 		_put(corsSupports, "/*");
@@ -115,25 +134,6 @@ public class URLToCORSSupportMapperPerformanceTest {
 		_put(corsSupports, "/url/some/random/pattern/two/*");
 		_put(corsSupports, "/url/some/random/pattern/two/two/*");
 		_put(corsSupports, "/url/some/random/pattern/two/two/two/*");
-
-		// Extension
-
-		_put(corsSupports, "*.bin");
-		_put(corsSupports, "*.cpp");
-		_put(corsSupports, "*.deb");
-		_put(corsSupports, "*.doc");
-		_put(corsSupports, "*.jpg");
-		_put(corsSupports, "*.jsp");
-		_put(corsSupports, "*.jspf");
-		_put(corsSupports, "*.mov");
-		_put(corsSupports, "*.mp3");
-		_put(corsSupports, "*.pdf");
-		_put(corsSupports, "*.png");
-		_put(corsSupports, "*.tar");
-		_put(corsSupports, "*.txt");
-		_put(corsSupports, "*.xml");
-		_put(corsSupports, "*.xpm");
-		_put(corsSupports, "*.zip");
 
 		return corsSupports;
 	}
