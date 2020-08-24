@@ -284,7 +284,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		throws IllegalArgumentException {
 
 		if (corsSupport == null) {
-			throw new IllegalArgumentException("Value can not be null");
+			throw new IllegalArgumentException("CORS support is null");
 		}
 
 		if (isWildcardURLPattern(urlPattern)) {
