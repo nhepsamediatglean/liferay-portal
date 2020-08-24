@@ -29,7 +29,7 @@ import java.util.Map;
  */
 public class URLToCORSSupportMapper {
 
-	public static boolean isExtensionURLPattern(String urlPattern) {
+	protected boolean isExtensionURLPattern(String urlPattern) {
 
 		// Servlet 4 spec 12.1.3
 		// Servlet 4 spec 12.2
@@ -53,7 +53,7 @@ public class URLToCORSSupportMapper {
 		return true;
 	}
 
-	public static boolean isWildcardURLPattern(String urlPattern) {
+	protected boolean isWildcardURLPattern(String urlPattern) {
 
 		// Servlet 4 spec 12.2
 
