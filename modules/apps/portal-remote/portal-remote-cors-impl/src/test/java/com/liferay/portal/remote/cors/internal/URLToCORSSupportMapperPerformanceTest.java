@@ -216,10 +216,12 @@ public class URLToCORSSupportMapperPerformanceTest {
 				"/url/some/random/pattern/one/one/one/",
 				"/url/some/random/pattern/one/one/one/*"),
 			new KeyValuePair(
-				"/url/some/random/pattern/one/one/one/./some/very/long/./do/test",
+				"/url/some/random/pattern/one/one/one/./some/very/long/./do" +
+					"/test",
 				"/url/some/random/pattern/one/one/one/*"),
 			new KeyValuePair(
-				"/url/some/random/pattern/one/one/one/./some/very/long/./do/test/",
+				"/url/some/random/pattern/one/one/one/./some/very/long/./do" +
+					"/test/",
 				"/url/some/random/pattern/one/one/one/*"),
 			new KeyValuePair(
 				"/url/some/random/pattern/one/one/one/do/test",
@@ -249,10 +251,12 @@ public class URLToCORSSupportMapperPerformanceTest {
 				"/url/some/random/pattern/two/two/two/",
 				"/url/some/random/pattern/two/two/two/*"),
 			new KeyValuePair(
-				"/url/some/random/pattern/two/two/two/./some/very/long/./do/test",
+				"/url/some/random/pattern/two/two/two/./some/very/long/./do" +
+					"/test",
 				"/url/some/random/pattern/two/two/two/*"),
 			new KeyValuePair(
-				"/url/some/random/pattern/two/two/two/./some/very/long/./do/test/",
+				"/url/some/random/pattern/two/two/two/./some/very/long/./do" +
+					"/test/",
 				"/url/some/random/pattern/two/two/two/*"),
 			new KeyValuePair(
 				"/url/some/random/pattern/two/two/two/do/test",
