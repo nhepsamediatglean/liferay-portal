@@ -177,7 +177,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 					_trieMatrixExtension[1][row + 1][_INDEX_STAR];
 
 				if (bitMask != 0) {
-					return _corsSupportsExtension.get(
+					return _extensionCORSSupports.get(
 						_getFirstSetBitIndex(bitMask));
 				}
 
@@ -243,7 +243,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 				return null;
 			}
 
-			return _corsSupportsWildcard.get(
+			return _wildcardCORSSupports.get(
 				_getFirstSetBitIndex(bestMatchBitMask));
 		}
 
@@ -252,7 +252,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 				currentBitMask & _trieMatrixWildcard[1][row - 1][col];
 
 			if (bitMask != 0) {
-				return _corsSupportsWildcard.get(_getFirstSetBitIndex(bitMask));
+				return _wildcardCORSSupports.get(_getFirstSetBitIndex(bitMask));
 			}
 
 			return null;
@@ -263,7 +263,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 				currentBitMask & _trieMatrixWildcard[1][row - 1][col];
 
 			if (bitMask != 0) {
-				return _corsSupportsWildcard.get(_getFirstSetBitIndex(bitMask));
+				return _wildcardCORSSupports.get(_getFirstSetBitIndex(bitMask));
 			}
 		}
 
@@ -274,11 +274,11 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		extraBitMask &= _trieMatrixWildcard[1][row + 1][_INDEX_STAR];
 
 		if (extraBitMask != 0) {
-			return _corsSupportsWildcard.get(
+			return _wildcardCORSSupports.get(
 				_getFirstSetBitIndex(extraBitMask));
 		}
 
-		return _corsSupportsWildcard.get(
+		return _wildcardCORSSupports.get(
 			_getFirstSetBitIndex(bestMatchBitMask));
 	}
 
@@ -312,11 +312,11 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 		if (wildcard) {
 			trieMatrix = _trieMatrixWildcard;
-			corsSupports = _corsSupportsWildcard;
+			corsSupports = _wildcardCORSSupports;
 		}
 		else {
 			trieMatrix = _trieMatrixExtension;
-			corsSupports = _corsSupportsExtension;
+			corsSupports = _extensionCORSSupports;
 		}
 
 		if ((wildcard && (_storedURLPatternsWildcard > 63)) ||
@@ -376,9 +376,9 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private static final int _INDEX_STAR = '*' - _ASCII_PRINTABLE_OFFSET;
 
-	private List<CORSSupport> _corsSupportsExtension =
+	private List<CORSSupport> _extensionCORSSupports =
 		new ArrayList<>(Long.SIZE);
-	private List<CORSSupport> _corsSupportsWildcard =
+	private List<CORSSupport> _wildcardCORSSupports =
 		new ArrayList<>(Long.SIZE);
 	private int _maxURLPatternLength;
 	private int _storedURLPatternsExtension;
