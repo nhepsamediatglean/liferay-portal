@@ -14,7 +14,6 @@
 
 package com.liferay.portal.remote.cors.internal;
 
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.KeyValuePair;
 
 import java.util.HashMap;
@@ -41,7 +40,7 @@ public class URLToCORSSupportMapperTest {
 				keyValuePair.getKey());
 
 			if (corsSupport == null) {
-				Assert.assertEquals(StringPool.BLANK, keyValuePair.getValue());
+				Assert.assertEquals("", keyValuePair.getValue());
 
 				continue;
 			}
@@ -123,15 +122,13 @@ public class URLToCORSSupportMapperTest {
 			new KeyValuePair("/documents/user3/folder2", "/documents/*"),
 			new KeyValuePair("/documents/user3/folder2/", "/documents/*"),
 			new KeyValuePair("/test", "/*"), new KeyValuePair("/test/", "/*"),
-			new KeyValuePair("no/leading/slash", StringPool.BLANK),
-			new KeyValuePair("no/leading/slash/", StringPool.BLANK),
+			new KeyValuePair("no/leading/slash", ""),
+			new KeyValuePair("no/leading/slash/", ""),
 			new KeyValuePair("no/leading/slash/*", "no/leading/slash/*"),
-			new KeyValuePair("no/leading/slash/test", StringPool.BLANK),
-			new KeyValuePair("test", StringPool.BLANK),
-			new KeyValuePair("test.jsp", "*.jsp"),
-			new KeyValuePair("test.jspf/", StringPool.BLANK),
-			new KeyValuePair("test/", StringPool.BLANK),
-			new KeyValuePair("test/main.jsp/*", StringPool.BLANK),
+			new KeyValuePair("no/leading/slash/test", ""),
+			new KeyValuePair("test", ""), new KeyValuePair("test.jsp", "*.jsp"),
+			new KeyValuePair("test.jspf/", ""), new KeyValuePair("test/", ""),
+			new KeyValuePair("test/main.jsp/*", ""),
 			new KeyValuePair("test/main.jspf", "*.jspf")
 		};
 	}
