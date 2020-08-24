@@ -62,13 +62,13 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 	}
 
 	private int _getExactIndex(String urlPath, long[][][] trieMatrix) {
-		long bitMask = _BITMASK;
+		long bitmask = _BITMASK;
 		int column = 0;
 		int row = 0;
 
 		for (; row < urlPath.length(); ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
-				bitMask = 0;
+				bitmask = 0;
 
 				break;
 			}
@@ -77,18 +77,18 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 			column = character - _ASCII_PRINTABLE_OFFSET;
 
-			bitMask &= trieMatrix[0][row][column];
+			bitmask &= trieMatrix[0][row][column];
 
-			if (bitMask == 0) {
+			if (bitmask == 0) {
 				break;
 			}
 		}
 
-		if (bitMask != 0) {
-			bitMask &= trieMatrix[1][row - 1][column];
+		if (bitmask != 0) {
+			bitmask &= trieMatrix[1][row - 1][column];
 
-			if (bitMask != 0) {
-				return _getFirstSetBitIndex(bitMask);
+			if (bitmask != 0) {
+				return _getFirstSetBitIndex(bitmask);
 			}
 		}
 
@@ -97,7 +97,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	private CORSSupport _getExtensionCORSSupport(String urlPath) {
 		int urlPathLength = urlPath.length();
-		long currentBitMask = _BITMASK;
+		long currentBitmask = _BITMASK;
 
 		for (int row = 0; row < urlPathLength; ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
@@ -112,20 +112,20 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 			int column = character - _ASCII_PRINTABLE_OFFSET;
 
-			currentBitMask &= _extensionTrieMatrix[0][row][column];
+			currentBitmask &= _extensionTrieMatrix[0][row][column];
 
-			if (currentBitMask == 0) {
+			if (currentBitmask == 0) {
 				break;
 			}
 
 			if ((character == '.') && ((row + 1) < _maxURLPatternLength)) {
-				long bitMask =
-					currentBitMask &
+				long bitmask =
+					currentBitmask &
 					_extensionTrieMatrix[1][row + 1][_INDEX_STAR];
 
-				if (bitMask != 0) {
+				if (bitmask != 0) {
 					return _extensionCORSSupports.get(
-						_getFirstSetBitIndex(bitMask));
+						_getFirstSetBitIndex(bitmask));
 				}
 
 				break;
@@ -135,53 +135,53 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		return null;
 	}
 
-	private int _getFirstSetBitIndex(long bitMask) {
+	private int _getFirstSetBitIndex(long bitmask) {
 		int firstSetBitIndex = -1;
 
-		if (bitMask == 0) {
+		if (bitmask == 0) {
 			return firstSetBitIndex;
 		}
 
 		firstSetBitIndex = 63;
 
-		long currentBitMask = bitMask << 32;
+		long currentBitmask = bitmask << 32;
 
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
+		if (currentBitmask != 0) {
+			bitmask = currentBitmask;
 			firstSetBitIndex -= 32;
 		}
 
-		currentBitMask = bitMask << 16;
+		currentBitmask = bitmask << 16;
 
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
+		if (currentBitmask != 0) {
+			bitmask = currentBitmask;
 			firstSetBitIndex -= 16;
 		}
 
-		currentBitMask = bitMask << 8;
+		currentBitmask = bitmask << 8;
 
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
+		if (currentBitmask != 0) {
+			bitmask = currentBitmask;
 			firstSetBitIndex -= 8;
 		}
 
-		currentBitMask = bitMask << 4;
+		currentBitmask = bitmask << 4;
 
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
+		if (currentBitmask != 0) {
+			bitmask = currentBitmask;
 			firstSetBitIndex -= 4;
 		}
 
-		currentBitMask = bitMask << 2;
+		currentBitmask = bitmask << 2;
 
-		if (currentBitMask != 0) {
-			bitMask = currentBitMask;
+		if (currentBitmask != 0) {
+			bitmask = currentBitmask;
 			firstSetBitIndex -= 2;
 		}
 
-		currentBitMask = bitMask << 1;
+		currentBitmask = bitmask << 1;
 
-		if (currentBitMask != 0) {
+		if (currentBitmask != 0) {
 			firstSetBitIndex -= 1;
 		}
 
@@ -205,12 +205,12 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 		int row = 0;
 		int col = 0;
-		long currentBitMask = _BITMASK;
-		long bestMatchBitMask = 0;
+		long currentBitmask = _BITMASK;
+		long bestMatchBitmask = 0;
 
 		for (; row < urlPathLength; ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
-				currentBitMask = 0;
+				currentBitmask = 0;
 
 				break;
 			}
@@ -219,67 +219,67 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 			col = character - _ASCII_PRINTABLE_OFFSET;
 
-			currentBitMask &= _wildCardTrieMatrix[0][row][col];
+			currentBitmask &= _wildCardTrieMatrix[0][row][col];
 
-			if (currentBitMask == 0) {
+			if (currentBitmask == 0) {
 				break;
 			}
 
 			if (!onlyExact && (character == '/') &&
 				((row + 1) < _maxURLPatternLength)) {
 
-				long bitMask =
-					currentBitMask &
+				long bitmask =
+					currentBitmask &
 					_wildCardTrieMatrix[1][row + 1][_INDEX_STAR];
 
-				if (bitMask != 0) {
-					bestMatchBitMask = bitMask;
+				if (bitmask != 0) {
+					bestMatchBitmask = bitmask;
 				}
 			}
 		}
 
-		if (currentBitMask == 0) {
-			if (bestMatchBitMask == 0) {
+		if (currentBitmask == 0) {
+			if (bestMatchBitmask == 0) {
 				return null;
 			}
 
 			return _wildcardCORSSupports.get(
-				_getFirstSetBitIndex(bestMatchBitMask));
+				_getFirstSetBitIndex(bestMatchBitmask));
 		}
 
 		if (onlyExact) {
-			long bitMask =
-				currentBitMask & _wildCardTrieMatrix[1][row - 1][col];
+			long bitmask =
+				currentBitmask & _wildCardTrieMatrix[1][row - 1][col];
 
-			if (bitMask != 0) {
-				return _wildcardCORSSupports.get(_getFirstSetBitIndex(bitMask));
+			if (bitmask != 0) {
+				return _wildcardCORSSupports.get(_getFirstSetBitIndex(bitmask));
 			}
 
 			return null;
 		}
 
 		if (!onlyWildcard) {
-			long bitMask =
-				currentBitMask & _wildCardTrieMatrix[1][row - 1][col];
+			long bitmask =
+				currentBitmask & _wildCardTrieMatrix[1][row - 1][col];
 
-			if (bitMask != 0) {
-				return _wildcardCORSSupports.get(_getFirstSetBitIndex(bitMask));
+			if (bitmask != 0) {
+				return _wildcardCORSSupports.get(_getFirstSetBitIndex(bitmask));
 			}
 		}
 
-		long extraBitMask =
-			currentBitMask & _wildCardTrieMatrix[0][row][_INDEX_SLASH];
+		long extraBitmask =
+			currentBitmask & _wildCardTrieMatrix[0][row][_INDEX_SLASH];
 
-		extraBitMask &= _wildCardTrieMatrix[0][row + 1][_INDEX_STAR];
-		extraBitMask &= _wildCardTrieMatrix[1][row + 1][_INDEX_STAR];
+		extraBitmask &= _wildCardTrieMatrix[0][row + 1][_INDEX_STAR];
+		extraBitmask &= _wildCardTrieMatrix[1][row + 1][_INDEX_STAR];
 
-		if (extraBitMask != 0) {
+		if (extraBitmask != 0) {
 			return _wildcardCORSSupports.get(
-				_getFirstSetBitIndex(extraBitMask));
+				_getFirstSetBitIndex(extraBitmask));
 		}
 
 		return _wildcardCORSSupports.get(
-			_getFirstSetBitIndex(bestMatchBitMask));
+			_getFirstSetBitIndex(bestMatchBitmask));
 	}
 
 	private void _put(String urlPattern, CORSSupport corsSupport)
@@ -344,7 +344,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		int row = 0;
 		int urlPatternLength = urlPattern.length();
 		int column = 0;
-		long bitMask = 1L << index;
+		long bitmask = 1L << index;
 
 		for (; row < urlPatternLength; ++row) {
 			char character;
@@ -358,10 +358,10 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 			column = character - _ASCII_PRINTABLE_OFFSET;
 
-			trieMatrix[0][row][column] |= bitMask;
+			trieMatrix[0][row][column] |= bitmask;
 		}
 
-		trieMatrix[1][row - 1][column] |= bitMask;
+		trieMatrix[1][row - 1][column] |= bitmask;
 
 		corsSupports.add(index, corsSupport);
 	}
