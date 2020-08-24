@@ -73,36 +73,36 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		long currentBitMask = bitMask << 32;
 
 		if (currentBitMask != 0) {
-			firstSetBitIndex -= 32;
 			bitMask = currentBitMask;
+			firstSetBitIndex -= 32;
 		}
 
 		currentBitMask = bitMask << 16;
 
 		if (currentBitMask != 0) {
-			firstSetBitIndex -= 16;
 			bitMask = currentBitMask;
+			firstSetBitIndex -= 16;
 		}
 
 		currentBitMask = bitMask << 8;
 
 		if (currentBitMask != 0) {
-			firstSetBitIndex -= 8;
 			bitMask = currentBitMask;
+			firstSetBitIndex -= 8;
 		}
 
 		currentBitMask = bitMask << 4;
 
 		if (currentBitMask != 0) {
-			firstSetBitIndex -= 4;
 			bitMask = currentBitMask;
+			firstSetBitIndex -= 4;
 		}
 
 		currentBitMask = bitMask << 2;
 
 		if (currentBitMask != 0) {
-			firstSetBitIndex -= 2;
 			bitMask = currentBitMask;
+			firstSetBitIndex -= 2;
 		}
 
 		currentBitMask = bitMask << 1;
