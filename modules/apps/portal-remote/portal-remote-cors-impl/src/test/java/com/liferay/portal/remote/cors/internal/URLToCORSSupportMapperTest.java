@@ -31,9 +31,62 @@ public class URLToCORSSupportMapperTest {
 
 	@Test
 	public void testGet() throws Exception {
+		KeyValuePair[] keyValuePairs = _createKeyValuePairs();
+
+		URLToCORSSupportMapper urlToCORSSupportMapper =
+			createURLToCORSSupportMapper(_createCORSSupports(keyValuePairs));
+
+		for (KeyValuePair keyValuePair : keyValuePairs) {
+			CORSSupport corsSupport = urlToCORSSupportMapper.get(
+				keyValuePair.getKey());
+
+			if (corsSupport == null) {
+				Assert.assertEquals(StringPool.BLANK, keyValuePair.getValue());
+
+				continue;
+			}
+
+			Map<String, String> headers = new HashMap<>();
+
+			corsSupport.writeResponseHeaders(__ -> "origin", headers::put);
+
+			try {
+				Assert.assertEquals(
+					keyValuePair.getValue(), headers.get("pattern"));
+			}
+			catch (ComparisonFailure comparisonFailure) {
+				throw new ComparisonFailure(
+					"When testing " + keyValuePair.getKey() + ":",
+					comparisonFailure.getExpected(),
+					comparisonFailure.getActual());
+			}
+		}
+	}
+
+	protected URLToCORSSupportMapper createURLToCORSSupportMapper(
+		Map<String, CORSSupport> corsSupports) {
+
+		return new URLToCORSSupportMapper(corsSupports);
+	}
+
+	private Map<String, CORSSupport> _createCORSSupports(
+		KeyValuePair[] keyValuePairs) {
+
 		Map<String, CORSSupport> corsSupports = new HashMap<>();
 
-		KeyValuePair[] keyValuePairs = {
+		for (KeyValuePair keyValuePair : keyValuePairs) {
+			CORSSupport corsSupport = new CORSSupport();
+
+			corsSupport.setHeader("pattern", keyValuePair.getValue());
+
+			corsSupports.put(keyValuePair.getValue(), corsSupport);
+		}
+
+		return corsSupports;
+	}
+
+	private KeyValuePair[] _createKeyValuePairs() {
+		return new KeyValuePair[] {
 			new KeyValuePair("/", "//*"), new KeyValuePair("/*", "/*/*"),
 			new KeyValuePair("/*/", "/*//*"),
 			new KeyValuePair("/c/portal/j_login", "/c/portal/j_login"),
@@ -81,49 +134,6 @@ public class URLToCORSSupportMapperTest {
 			new KeyValuePair("test/main.jsp/*", StringPool.BLANK),
 			new KeyValuePair("test/main.jspf", "*.jspf")
 		};
-
-		for (KeyValuePair keyValuePair : keyValuePairs) {
-			CORSSupport corsSupport = new CORSSupport();
-
-			corsSupport.setHeader("pattern", keyValuePair.getValue());
-
-			corsSupports.put(keyValuePair.getValue(), corsSupport);
-		}
-
-		URLToCORSSupportMapper urlToCORSSupportMapper =
-			createURLToCORSSupportMapper(corsSupports);
-
-		for (KeyValuePair keyValuePair : keyValuePairs) {
-			CORSSupport corsSupport = urlToCORSSupportMapper.get(
-				keyValuePair.getKey());
-
-			if (corsSupport == null) {
-				Assert.assertEquals(StringPool.BLANK, keyValuePair.getValue());
-
-				continue;
-			}
-
-			Map<String, String> headers = new HashMap<>();
-
-			corsSupport.writeResponseHeaders(__ -> "origin", headers::put);
-
-			try {
-				Assert.assertEquals(
-					keyValuePair.getValue(), headers.get("pattern"));
-			}
-			catch (ComparisonFailure comparisonFailure) {
-				throw new ComparisonFailure(
-					"When testing " + keyValuePair.getKey() + ":",
-					comparisonFailure.getExpected(),
-					comparisonFailure.getActual());
-			}
-		}
-	}
-
-	protected URLToCORSSupportMapper createURLToCORSSupportMapper(
-		Map<String, CORSSupport> corsSupports) {
-
-		return new URLToCORSSupportMapper(corsSupports);
 	}
 
 }
