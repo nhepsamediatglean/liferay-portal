@@ -150,7 +150,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 
 	private final KeyValuePair[] _expectedMatches = {
 
-		// Exact matches
+		// Exact
 
 		new KeyValuePair("/url/some/random/pattern/do/test.mp3/", "/url/some/random/pattern/do/test.mp3/"),
 		new KeyValuePair("/url/some/random/pattern/one", "/url/some/random/pattern/one"),
@@ -163,7 +163,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 		new KeyValuePair("url/some/random/pattern/one/", "url/some/random/pattern/one/"),
 		new KeyValuePair("url/some/random/pattern/one/*", "url/some/random/pattern/one/*"),
 
-		// Wildcard matches
+		// Wildcard
 
 		new KeyValuePair("/", "//*"),
 		new KeyValuePair("/*", "/*/*"),
@@ -198,7 +198,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 		new KeyValuePair("/url/some/random/pattern/two/two/two/./some/very/long/./do/test/", "/url/some/random/pattern/two/two/two/*"),
 		new KeyValuePair("/url/some/random/pattern/two/two/two/do/test", "/url/some/random/pattern/two/two/two/*"),
 
-		// Extension matches
+		// Extension
 
 		new KeyValuePair("random/path/do/test.jsp", "*.jsp"),
 		new KeyValuePair("random/path/do/test.mp3", "*.mp3"),
