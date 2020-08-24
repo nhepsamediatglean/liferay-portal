@@ -153,95 +153,47 @@ public class URLToCORSSupportMapperPerformanceTest {
 		// Exact matches
 
 		new KeyValuePair("url/some/random/pattern/one", "url/some/random/pattern/one"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/", "/url/some/random/pattern/one/"),
-		new KeyValuePair(
-			"url/some/random/pattern/one/", "url/some/random/pattern/one/"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one", "/url/some/random/pattern/one"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/*/", "/url/some/random/pattern/one/*/"),
-		new KeyValuePair(
-			"url/some/random/pattern/one/*", "url/some/random/pattern/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one*", "/url/some/random/pattern/one*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/*/do/test", "/url/some/random/pattern/one/*/do/test"),
-		new KeyValuePair(
-			"url/some/random/pattern/do/test.mp3/", "url/some/random/pattern/do/test.mp3/"),
-		new KeyValuePair(
-			"/url/some/random/pattern/do/test.mp3/", "/url/some/random/pattern/do/test.mp3/"),
+		new KeyValuePair("/url/some/random/pattern/one/", "/url/some/random/pattern/one/"),
+		new KeyValuePair("url/some/random/pattern/one/", "url/some/random/pattern/one/"),
+		new KeyValuePair("/url/some/random/pattern/one", "/url/some/random/pattern/one"),
+		new KeyValuePair("/url/some/random/pattern/one/*/", "/url/some/random/pattern/one/*/"),
+		new KeyValuePair("url/some/random/pattern/one/*", "url/some/random/pattern/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one*", "/url/some/random/pattern/one*"),
+		new KeyValuePair("/url/some/random/pattern/one/*/do/test", "/url/some/random/pattern/one/*/do/test"),
+		new KeyValuePair("url/some/random/pattern/do/test.mp3/", "url/some/random/pattern/do/test.mp3/"),
+		new KeyValuePair("/url/some/random/pattern/do/test.mp3/", "/url/some/random/pattern/do/test.mp3/"),
 
 		// Wildcard matches
 
-		new KeyValuePair(
-			"/url/some/random/pattern/one/one/one/./some/very/long/./do/test",
-			"/url/some/random/pattern/one/one/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/one/one/./some/very/long/./do/test/",
-			"/url/some/random/pattern/one/one/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/one/one/do/test",
-			"/url/some/random/pattern/one/one/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/one/one/", "/url/some/random/pattern/one/one/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/one/one", "/url/some/random/pattern/one/one/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/one/do/test",
-			"/url/some/random/pattern/one/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/one/", "/url/some/random/pattern/one/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/one", "/url/some/random/pattern/one/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/do/test", "/url/some/random/pattern/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/*/do/test/t",
-			"/url/some/random/pattern/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/one/*/do/test/",
-			"/url/some/random/pattern/one/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/two/two/./some/very/long/./do/test",
-			"/url/some/random/pattern/two/two/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/two/two/./some/very/long/./do/test/",
-			"/url/some/random/pattern/two/two/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/two/two/do/test",
-			"/url/some/random/pattern/two/two/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/two/two/", "/url/some/random/pattern/two/two/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/two/two", "/url/some/random/pattern/two/two/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/two/do/test",
-			"/url/some/random/pattern/two/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/two/", "/url/some/random/pattern/two/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/two", "/url/some/random/pattern/two/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/do/test", "/url/some/random/pattern/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/*/do/test/t",
-			"/url/some/random/pattern/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/two/*/do/test/",
-			"/url/some/random/pattern/two/*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/five/five/five/",
-			"/url/some/random/pattern/*"),
-		new KeyValuePair(
-			"/url/random/one/two/three", "/url/*"),
-		new KeyValuePair(
-			"/random/one/two/three", "/*"),
+		new KeyValuePair("/url/some/random/pattern/one/one/one/./some/very/long/./do/test", "/url/some/random/pattern/one/one/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/one/one/./some/very/long/./do/test/", "/url/some/random/pattern/one/one/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/one/one/do/test", "/url/some/random/pattern/one/one/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/one/one/", "/url/some/random/pattern/one/one/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/one/one", "/url/some/random/pattern/one/one/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/one/do/test", "/url/some/random/pattern/one/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/one/", "/url/some/random/pattern/one/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/one", "/url/some/random/pattern/one/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/do/test", "/url/some/random/pattern/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/*/do/test/t", "/url/some/random/pattern/one/*"),
+		new KeyValuePair("/url/some/random/pattern/one/*/do/test/", "/url/some/random/pattern/one/*"),
+		new KeyValuePair("/url/some/random/pattern/two/two/two/./some/very/long/./do/test", "/url/some/random/pattern/two/two/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/two/two/./some/very/long/./do/test/", "/url/some/random/pattern/two/two/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/two/two/do/test", "/url/some/random/pattern/two/two/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/two/two/", "/url/some/random/pattern/two/two/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/two/two", "/url/some/random/pattern/two/two/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/two/do/test", "/url/some/random/pattern/two/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/two/", "/url/some/random/pattern/two/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/two", "/url/some/random/pattern/two/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/do/test", "/url/some/random/pattern/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/*/do/test/t", "/url/some/random/pattern/two/*"),
+		new KeyValuePair("/url/some/random/pattern/two/*/do/test/", "/url/some/random/pattern/two/*"),
+		new KeyValuePair("/url/some/random/pattern/five/five/five/", "/url/some/random/pattern/*"),
+		new KeyValuePair("/url/random/one/two/three", "/url/*"),
+		new KeyValuePair("/random/one/two/three", "/*"),
 		new KeyValuePair("/*", "/*/*"),
 		new KeyValuePair("/", "//*"),
 		new KeyValuePair("/*/", "/*//*"),
-		new KeyValuePair(
-			"/url/some/random/pattern/do/test.mp3", "/url/some/random/pattern/do/test.mp3/*"),
+		new KeyValuePair("/url/some/random/pattern/do/test.mp3", "/url/some/random/pattern/do/test.mp3/*"),
 		new KeyValuePair("/do/test.mp3/do/test", "/do/test.mp3/*"),
 		new KeyValuePair("/do/test.mp3/", "/do/test.mp3/*"),
 		new KeyValuePair("/do/test.mp3", "/do/test.mp3/*"),
