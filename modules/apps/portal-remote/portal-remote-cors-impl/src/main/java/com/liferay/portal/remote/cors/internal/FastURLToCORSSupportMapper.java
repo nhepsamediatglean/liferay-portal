@@ -45,9 +45,9 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 
 		_extensionTrieMatrix =
-			new long[2][maxURLPatternLength][_ASCII_CHARACTER_RANGE];
+			new long[2][_maxURLPatternLength][_ASCII_CHARACTER_RANGE];
 		_wildCardTrieMatrix =
-			new long[2][maxURLPatternLength][_ASCII_CHARACTER_RANGE];
+			new long[2][_maxURLPatternLength][_ASCII_CHARACTER_RANGE];
 	}
 
 	@Override
