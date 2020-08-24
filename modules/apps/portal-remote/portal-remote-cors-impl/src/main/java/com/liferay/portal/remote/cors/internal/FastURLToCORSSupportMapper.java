@@ -340,19 +340,18 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			index = _extensionStoredURLPatterns++;
 		}
 
-		int row = 0;
-		int urlPatternLength = urlPattern.length();
-		int column = 0;
 		long bitmask = 1L << index;
+		int column = 0;
+		int row = 0;
 
-		for (; row < urlPatternLength; ++row) {
+		for (; row < urlPattern.length(); ++row) {
 			char character;
 
 			if (wildcard) {
 				character = urlPattern.charAt(row);
 			}
 			else {
-				character = urlPattern.charAt(urlPatternLength - 1 - row);
+				character = urlPattern.charAt(urlPattern.length() - 1 - row);
 			}
 
 			column = character - _ASCII_PRINTABLE_OFFSET;
