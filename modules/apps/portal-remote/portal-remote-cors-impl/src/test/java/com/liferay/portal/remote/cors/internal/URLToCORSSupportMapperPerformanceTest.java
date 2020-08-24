@@ -31,7 +31,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 	@Before
 	public void setUp() {
 		_urlToCORSSupportMapper = createURLToCORSSupportMapper(
-			_buildCORSSupports());
+			_createCORSSupports());
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class URLToCORSSupportMapperPerformanceTest {
 		return new URLToCORSSupportMapper(corsSupports);
 	}
 
-	private Map<String, CORSSupport> _buildCORSSupports() {
+	private Map<String, CORSSupport> _createCORSSupports() {
 		Map<String, CORSSupport> corsSupports = new HashMap<>();
 
 		// Exact
