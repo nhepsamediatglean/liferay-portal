@@ -201,10 +201,10 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			onlyWildcard = true;
 		}
 
-		int row = 0;
+		long bestMatchBitmask = 0;
 		int col = 0;
 		long currentBitmask = _BITMASK;
-		long bestMatchBitmask = 0;
+		int row = 0;
 
 		for (; row < urlPath.length(); ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
