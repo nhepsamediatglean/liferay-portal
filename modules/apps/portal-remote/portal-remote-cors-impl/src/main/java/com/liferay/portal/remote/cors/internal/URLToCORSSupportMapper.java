@@ -73,12 +73,6 @@ public class URLToCORSSupportMapper {
 			"*" + urlPath.substring(index));
 	}
 
-	protected void put(Map<String, CORSSupport> corsSupports) {
-		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
-			_put(entry.getKey(), entry.getValue());
-		}
-	}
-
 	protected boolean isExtensionURLPattern(String urlPattern) {
 
 		// Servlet 4 spec 12.1.3
@@ -130,6 +124,12 @@ public class URLToCORSSupportMapper {
 		}
 
 		return true;
+	}
+
+	protected void put(Map<String, CORSSupport> corsSupports) {
+		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
+			_put(entry.getKey(), entry.getValue());
+		}
 	}
 
 	private void _put(String urlPattern, CORSSupport corsSupport)

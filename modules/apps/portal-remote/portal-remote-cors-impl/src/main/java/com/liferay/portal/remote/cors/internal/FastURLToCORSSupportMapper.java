@@ -39,37 +39,6 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		return getExtensionCORSSupport(urlPath);
 	}
 
-	protected void put(Map<String, CORSSupport> corsSupports) {
-		int maxURLPatternLength = 0;
-
-		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
-			String urlPattern = entry.getKey();
-
-			if (urlPattern.length() > maxURLPatternLength) {
-				maxURLPatternLength = urlPattern.length();
-			}
-		}
-
-		if (maxURLPatternLength < 1) {
-			_maxURLPatternLength = 64;
-		}
-		else {
-			_maxURLPatternLength = maxURLPatternLength;
-		}
-
-		_trieMatrixExtension =
-			new long[2][maxURLPatternLength][ASCII_CHARACTER_RANGE];
-		_trieMatrixWildcard =
-			new long[2][maxURLPatternLength][ASCII_CHARACTER_RANGE];
-
-		_corsSupportsExtension = new ArrayList<>(Long.SIZE);
-		_corsSupportsWildcard = new ArrayList<>(Long.SIZE);
-
-		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
-			_put(entry.getKey(), entry.getValue());
-		}
-	}
-
 	protected CORSSupport getExtensionCORSSupport(String urlPath) {
 		int urlPathLength = urlPath.length();
 		long currentBitMask = _ALL_BITS_SET_BITMASK;
@@ -202,6 +171,37 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 		return _corsSupportsWildcard.get(
 			_getFirstSetBitIndex(bestMatchBitMask));
+	}
+
+	protected void put(Map<String, CORSSupport> corsSupports) {
+		int maxURLPatternLength = 0;
+
+		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
+			String urlPattern = entry.getKey();
+
+			if (urlPattern.length() > maxURLPatternLength) {
+				maxURLPatternLength = urlPattern.length();
+			}
+		}
+
+		if (maxURLPatternLength < 1) {
+			_maxURLPatternLength = 64;
+		}
+		else {
+			_maxURLPatternLength = maxURLPatternLength;
+		}
+
+		_trieMatrixExtension =
+			new long[2][maxURLPatternLength][ASCII_CHARACTER_RANGE];
+		_trieMatrixWildcard =
+			new long[2][maxURLPatternLength][ASCII_CHARACTER_RANGE];
+
+		_corsSupportsExtension = new ArrayList<>(Long.SIZE);
+		_corsSupportsWildcard = new ArrayList<>(Long.SIZE);
+
+		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
+			_put(entry.getKey(), entry.getValue());
+		}
 	}
 
 	protected void put(
