@@ -96,8 +96,8 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 	}
 
 	private CORSSupport _getExtensionCORSSupport(String urlPath) {
-		int urlPathLength = urlPath.length();
 		long currentBitmask = _BITMASK;
+		int urlPathLength = urlPath.length();
 
 		for (int row = 0; row < urlPathLength; ++row) {
 			if (row > (_maxURLPatternLength - 1)) {
