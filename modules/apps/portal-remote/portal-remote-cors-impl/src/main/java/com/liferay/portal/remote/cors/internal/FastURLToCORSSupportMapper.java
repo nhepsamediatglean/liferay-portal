@@ -280,7 +280,8 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			_getFirstSetBitIndex(bestMatchBitmask));
 	}
 
-	private void _put(CORSSupport corsSupport, String urlPattern)
+	@Override
+	protected void put(CORSSupport corsSupport, String urlPattern)
 		throws IllegalArgumentException {
 
 		if (corsSupport == null) {

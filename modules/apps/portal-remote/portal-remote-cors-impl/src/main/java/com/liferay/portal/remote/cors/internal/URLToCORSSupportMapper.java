@@ -31,7 +31,7 @@ public class URLToCORSSupportMapper {
 
 	public URLToCORSSupportMapper(Map<String, CORSSupport> corsSupports) {
 		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
-			_put(entry.getValue(), entry.getKey());
+			put(entry.getValue(), entry.getKey());
 		}
 	}
 
@@ -128,7 +128,7 @@ public class URLToCORSSupportMapper {
 		return true;
 	}
 
-	private void _put(CORSSupport corsSupport, String urlPattern)
+	protected void put(CORSSupport corsSupport, String urlPattern)
 		throws IllegalArgumentException {
 
 		if (isWildcardURLPattern(urlPattern)) {
