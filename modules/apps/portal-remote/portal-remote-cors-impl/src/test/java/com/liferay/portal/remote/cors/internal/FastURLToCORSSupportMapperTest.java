@@ -26,7 +26,7 @@ public class FastURLToCORSSupportMapperTest extends URLToCORSSupportMapperTest {
 
 	@Ignore
 	@Test
-	public void testGet() throws Exception {
+	public void testGet() {
 		super.testGet();
 	}
 

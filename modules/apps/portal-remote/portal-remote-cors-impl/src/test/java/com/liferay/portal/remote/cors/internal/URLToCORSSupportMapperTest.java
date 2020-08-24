@@ -29,7 +29,7 @@ import org.junit.Test;
 public class URLToCORSSupportMapperTest {
 
 	@Test
-	public void testGet() throws Exception {
+	public void testGet() {
 		KeyValuePair[] keyValuePairs = _createKeyValuePairs();
 
 		URLToCORSSupportMapper urlToCORSSupportMapper =
