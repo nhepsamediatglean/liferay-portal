@@ -30,16 +30,16 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 
 	@Override
 	public CORSSupport get(String urlPath) {
-		CORSSupport corsSupport = getWildcardCORSSupport(urlPath);
+		CORSSupport corsSupport = _getWildcardCORSSupport(urlPath);
 
 		if (corsSupport != null) {
 			return corsSupport;
 		}
 
-		return getExtensionCORSSupport(urlPath);
+		return _getExtensionCORSSupport(urlPath);
 	}
 
-	protected CORSSupport getExtensionCORSSupport(String urlPath) {
+	private CORSSupport _getExtensionCORSSupport(String urlPath) {
 		int urlPathLength = urlPath.length();
 		long currentBitMask = _ALL_BITS_SET_BITMASK;
 
@@ -79,7 +79,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		return null;
 	}
 
-	protected CORSSupport getWildcardCORSSupport(String urlPath) {
+	private CORSSupport _getWildcardCORSSupport(String urlPath) {
 		boolean onlyExact = false;
 		int urlPathLength = urlPath.length();
 		boolean onlyWildcard = false;
@@ -204,7 +204,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 	}
 
-	protected void put(
+	private void _put(
 		String urlPattern, CORSSupport corsSupport, boolean wildcard) {
 
 		long[][][] trieMatrix = null;
@@ -365,18 +365,18 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 
 		if (isWildcardURLPattern(urlPattern)) {
-			put(urlPattern, corsSupport, true);
+			_put(urlPattern, corsSupport, true);
 
 			return;
 		}
 
 		if (isExtensionURLPattern(urlPattern)) {
-			put(urlPattern, corsSupport, false);
+			_put(urlPattern, corsSupport, false);
 
 			return;
 		}
 
-		put(urlPattern, corsSupport, true);
+		_put(urlPattern, corsSupport, true);
 	}
 
 	private static final long _ALL_BITS_SET_BITMASK = ~0;
