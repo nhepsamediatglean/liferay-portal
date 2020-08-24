@@ -280,7 +280,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			_getFirstSetBitIndex(bestMatchBitmask));
 	}
 
-	private void _put(String urlPattern, CORSSupport corsSupport)
+	private void _put(CORSSupport corsSupport, String urlPattern)
 		throws IllegalArgumentException {
 
 		if (corsSupport == null) {
@@ -288,22 +288,22 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		}
 
 		if (isWildcardURLPattern(urlPattern)) {
-			_put(urlPattern, corsSupport, true);
+			_put(corsSupport, urlPattern, true);
 
 			return;
 		}
 
 		if (isExtensionURLPattern(urlPattern)) {
-			_put(urlPattern, corsSupport, false);
+			_put(corsSupport, urlPattern, false);
 
 			return;
 		}
 
-		_put(urlPattern, corsSupport, true);
+		_put(corsSupport, urlPattern, true);
 	}
 
 	private void _put(
-		String urlPattern, CORSSupport corsSupport, boolean wildcard) {
+		CORSSupport corsSupport, String urlPattern, boolean wildcard) {
 
 		List<CORSSupport> corsSupports = null;
 		long[][][] trieMatrix = null;
