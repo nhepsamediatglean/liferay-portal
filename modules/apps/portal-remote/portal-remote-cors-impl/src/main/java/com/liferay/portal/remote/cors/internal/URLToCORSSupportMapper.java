@@ -30,7 +30,7 @@ import java.util.Map;
 public class URLToCORSSupportMapper {
 
 	public URLToCORSSupportMapper(Map<String, CORSSupport> corsSupports) {
-		doPut(corsSupports);
+		put(corsSupports);
 	}
 
 	public CORSSupport get(String urlPath) {
@@ -73,7 +73,7 @@ public class URLToCORSSupportMapper {
 			"*" + urlPath.substring(index));
 	}
 
-	protected void doPut(Map<String, CORSSupport> corsSupports) {
+	protected void put(Map<String, CORSSupport> corsSupports) {
 		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
 			_put(entry.getKey(), entry.getValue());
 		}

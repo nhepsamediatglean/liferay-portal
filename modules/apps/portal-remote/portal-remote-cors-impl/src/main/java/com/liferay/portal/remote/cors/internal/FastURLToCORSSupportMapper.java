@@ -39,7 +39,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		return getExtensionCORSSupport(urlPath);
 	}
 
-	protected void doPut(Map<String, CORSSupport> corsSupports) {
+	protected void put(Map<String, CORSSupport> corsSupports) {
 		int maxURLPatternLength = 0;
 
 		for (Map.Entry<String, CORSSupport> entry : corsSupports.entrySet()) {
