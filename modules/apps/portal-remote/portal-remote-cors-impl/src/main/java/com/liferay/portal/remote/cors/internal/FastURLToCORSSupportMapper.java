@@ -310,16 +310,16 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 		long[][][] trieMatrix = null;
 
 		if (wildcard) {
-			trieMatrix = _wildCardTrieMatrix;
 			corsSupports = _wildcardCORSSupports;
+			trieMatrix = _wildCardTrieMatrix;
 		}
 		else {
-			trieMatrix = _extensionTrieMatrix;
 			corsSupports = _extensionCORSSupports;
+			trieMatrix = _extensionTrieMatrix;
 		}
 
-		if ((wildcard && (_wildcardStoredURLPatterns > 63)) ||
-			(!wildcard && (_extensionStoredURLPatterns > 63))) {
+		if ((!wildcard && (_extensionStoredURLPatterns > 63)) ||
+			(wildcard && (_wildcardStoredURLPatterns > 63))) {
 
 			throw new IllegalArgumentException(
 				"Exceeding maximum number of allowed URL patterns");
