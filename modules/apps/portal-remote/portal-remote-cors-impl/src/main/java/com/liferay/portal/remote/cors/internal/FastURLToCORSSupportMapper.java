@@ -305,8 +305,8 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 	private void _put(
 		String urlPattern, CORSSupport corsSupport, boolean wildcard) {
 
-		long[][][] trieMatrix = null;
 		List<CORSSupport> corsSupports = null;
+		long[][][] trieMatrix = null;
 
 		if (wildcard) {
 			trieMatrix = _wildCardTrieMatrix;
