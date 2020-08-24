@@ -173,6 +173,7 @@ public class FastURLToCORSSupportMapper extends URLToCORSSupportMapper {
 			_getFirstSetBitIndex(bestMatchBitMask));
 	}
 
+	@Override
 	protected void put(Map<String, CORSSupport> corsSupports) {
 		int maxURLPatternLength = 0;
 
