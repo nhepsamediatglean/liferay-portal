@@ -26,8 +26,6 @@ import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.filter.Filter;
-import com.liferay.portal.kernel.service.GroupLocalService;
-import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
 import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
@@ -318,6 +316,7 @@ public class Query {
 
 		public AddressPage(Page addressPage) {
 			actions = addressPage.getActions();
+
 			items = addressPage.getItems();
 			lastPage = addressPage.getLastPage();
 			page = addressPage.getPage();
@@ -350,6 +349,7 @@ public class Query {
 
 		public CartPage(Page cartPage) {
 			actions = cartPage.getActions();
+
 			items = cartPage.getItems();
 			lastPage = cartPage.getLastPage();
 			page = cartPage.getPage();
@@ -382,6 +382,7 @@ public class Query {
 
 		public CartCommentPage(Page cartCommentPage) {
 			actions = cartCommentPage.getActions();
+
 			items = cartCommentPage.getItems();
 			lastPage = cartCommentPage.getLastPage();
 			page = cartCommentPage.getPage();
@@ -414,6 +415,7 @@ public class Query {
 
 		public CartItemPage(Page cartItemPage) {
 			actions = cartItemPage.getActions();
+
 			items = cartItemPage.getItems();
 			lastPage = cartItemPage.getLastPage();
 			page = cartItemPage.getPage();
@@ -438,30 +440,6 @@ public class Query {
 
 		@GraphQLField
 		protected long totalCount;
-
-	}
-
-	@GraphQLTypeExtension(CartItem.class)
-	public class ParentCartItemCartItemIdTypeExtension {
-
-		public ParentCartItemCartItemIdTypeExtension(CartItem cartItem) {
-			_cartItem = cartItem;
-		}
-
-		@GraphQLField(description = "Retrive information of the given Cart")
-		public CartItem parentCartItem() throws Exception {
-			if (_cartItem.getParentCartItemId() == null) {
-				return null;
-			}
-
-			return _applyComponentServiceObjects(
-				_cartItemResourceComponentServiceObjects,
-				Query.this::_populateResourceContext,
-				cartItemResource -> cartItemResource.getCartItem(
-					_cartItem.getParentCartItemId()));
-		}
-
-		private CartItem _cartItem;
 
 	}
 
@@ -493,8 +471,6 @@ public class Query {
 		addressResource.setContextHttpServletResponse(_httpServletResponse);
 		addressResource.setContextUriInfo(_uriInfo);
 		addressResource.setContextUser(_user);
-		addressResource.setGroupLocalService(_groupLocalService);
-		addressResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(CartResource cartResource)
@@ -506,8 +482,6 @@ public class Query {
 		cartResource.setContextHttpServletResponse(_httpServletResponse);
 		cartResource.setContextUriInfo(_uriInfo);
 		cartResource.setContextUser(_user);
-		cartResource.setGroupLocalService(_groupLocalService);
-		cartResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(
@@ -520,8 +494,6 @@ public class Query {
 		cartCommentResource.setContextHttpServletResponse(_httpServletResponse);
 		cartCommentResource.setContextUriInfo(_uriInfo);
 		cartCommentResource.setContextUser(_user);
-		cartCommentResource.setGroupLocalService(_groupLocalService);
-		cartCommentResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(CartItemResource cartItemResource)
@@ -533,8 +505,6 @@ public class Query {
 		cartItemResource.setContextHttpServletResponse(_httpServletResponse);
 		cartItemResource.setContextUriInfo(_uriInfo);
 		cartItemResource.setContextUser(_user);
-		cartItemResource.setGroupLocalService(_groupLocalService);
-		cartItemResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private static ComponentServiceObjects<AddressResource>
@@ -547,14 +517,12 @@ public class Query {
 		_cartItemResourceComponentServiceObjects;
 
 	private AcceptLanguage _acceptLanguage;
-	private com.liferay.portal.kernel.model.Company _company;
 	private BiFunction<Object, String, Filter> _filterBiFunction;
-	private GroupLocalService _groupLocalService;
+	private BiFunction<Object, String, Sort[]> _sortsBiFunction;
+	private com.liferay.portal.kernel.model.Company _company;
+	private com.liferay.portal.kernel.model.User _user;
 	private HttpServletRequest _httpServletRequest;
 	private HttpServletResponse _httpServletResponse;
-	private RoleLocalService _roleLocalService;
-	private BiFunction<Object, String, Sort[]> _sortsBiFunction;
 	private UriInfo _uriInfo;
-	private com.liferay.portal.kernel.model.User _user;
 
 }

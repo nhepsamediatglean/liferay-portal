@@ -111,9 +111,7 @@ public abstract class BaseAccountGroupResourceTestCase {
 
 		AccountGroupResource.Builder builder = AccountGroupResource.builder();
 
-		accountGroupResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		accountGroupResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -245,6 +243,22 @@ public abstract class BaseAccountGroupResourceTestCase {
 
 		assertEquals(randomAccountGroup, postAccountGroup);
 		assertValid(postAccountGroup);
+
+		randomAccountGroup = randomAccountGroup();
+
+		assertHttpResponseStatusCode(
+			404,
+			accountGroupResource.
+				getAccountGroupByExternalReferenceCodeHttpResponse(
+					randomAccountGroup.getExternalReferenceCode()));
+
+		testPostAccountGroup_addAccountGroup(randomAccountGroup);
+
+		assertHttpResponseStatusCode(
+			200,
+			accountGroupResource.
+				getAccountGroupByExternalReferenceCodeHttpResponse(
+					randomAccountGroup.getExternalReferenceCode()));
 	}
 
 	protected AccountGroup testPostAccountGroup_addAccountGroup(
@@ -559,7 +573,7 @@ public abstract class BaseAccountGroupResourceTestCase {
 		}
 	}
 
-	protected void assertValid(AccountGroup accountGroup) throws Exception {
+	protected void assertValid(AccountGroup accountGroup) {
 		boolean valid = true;
 
 		if (accountGroup.getId() == null) {

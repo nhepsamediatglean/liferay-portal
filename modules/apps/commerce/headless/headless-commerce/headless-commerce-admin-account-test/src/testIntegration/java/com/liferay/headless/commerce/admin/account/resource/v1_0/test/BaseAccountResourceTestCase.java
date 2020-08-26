@@ -119,9 +119,7 @@ public abstract class BaseAccountResourceTestCase {
 
 		AccountResource.Builder builder = AccountResource.builder();
 
-		accountResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		accountResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -505,6 +503,20 @@ public abstract class BaseAccountResourceTestCase {
 
 		assertEquals(randomAccount, postAccount);
 		assertValid(postAccount);
+
+		randomAccount = randomAccount();
+
+		assertHttpResponseStatusCode(
+			404,
+			accountResource.getAccountByExternalReferenceCodeHttpResponse(
+				randomAccount.getExternalReferenceCode()));
+
+		testPostAccount_addAccount(randomAccount);
+
+		assertHttpResponseStatusCode(
+			200,
+			accountResource.getAccountByExternalReferenceCodeHttpResponse(
+				randomAccount.getExternalReferenceCode()));
 	}
 
 	protected Account testPostAccount_addAccount(Account account)
@@ -804,7 +816,7 @@ public abstract class BaseAccountResourceTestCase {
 		}
 	}
 
-	protected void assertValid(Account account) throws Exception {
+	protected void assertValid(Account account) {
 		boolean valid = true;
 
 		if (account.getId() == null) {

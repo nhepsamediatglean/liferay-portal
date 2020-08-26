@@ -113,9 +113,7 @@ public abstract class BaseOrderItemResourceTestCase {
 
 		OrderItemResource.Builder builder = OrderItemResource.builder();
 
-		orderItemResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		orderItemResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -575,6 +573,21 @@ public abstract class BaseOrderItemResourceTestCase {
 
 		assertEquals(randomOrderItem, postOrderItem);
 		assertValid(postOrderItem);
+
+		randomOrderItem = randomOrderItem();
+
+		assertHttpResponseStatusCode(
+			404,
+			orderItemResource.getOrderItemByExternalReferenceCodeHttpResponse(
+				randomOrderItem.getExternalReferenceCode()));
+
+		testPostOrderByExternalReferenceCodeOrderItem_addOrderItem(
+			randomOrderItem);
+
+		assertHttpResponseStatusCode(
+			200,
+			orderItemResource.getOrderItemByExternalReferenceCodeHttpResponse(
+				randomOrderItem.getExternalReferenceCode()));
 	}
 
 	protected OrderItem
@@ -698,6 +711,20 @@ public abstract class BaseOrderItemResourceTestCase {
 
 		assertEquals(randomOrderItem, postOrderItem);
 		assertValid(postOrderItem);
+
+		randomOrderItem = randomOrderItem();
+
+		assertHttpResponseStatusCode(
+			404,
+			orderItemResource.getOrderItemByExternalReferenceCodeHttpResponse(
+				randomOrderItem.getExternalReferenceCode()));
+
+		testPostOrderIdOrderItem_addOrderItem(randomOrderItem);
+
+		assertHttpResponseStatusCode(
+			200,
+			orderItemResource.getOrderItemByExternalReferenceCodeHttpResponse(
+				randomOrderItem.getExternalReferenceCode()));
 	}
 
 	protected OrderItem testPostOrderIdOrderItem_addOrderItem(
@@ -761,7 +788,7 @@ public abstract class BaseOrderItemResourceTestCase {
 		}
 	}
 
-	protected void assertValid(OrderItem orderItem) throws Exception {
+	protected void assertValid(OrderItem orderItem) {
 		boolean valid = true;
 
 		if (orderItem.getId() == null) {

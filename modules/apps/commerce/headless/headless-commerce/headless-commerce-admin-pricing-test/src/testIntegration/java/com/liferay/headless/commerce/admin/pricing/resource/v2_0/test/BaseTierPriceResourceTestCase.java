@@ -113,9 +113,7 @@ public abstract class BaseTierPriceResourceTestCase {
 
 		TierPriceResource.Builder builder = TierPriceResource.builder();
 
-		tierPriceResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		tierPriceResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -347,6 +345,21 @@ public abstract class BaseTierPriceResourceTestCase {
 
 		assertEquals(randomTierPrice, postTierPrice);
 		assertValid(postTierPrice);
+
+		randomTierPrice = randomTierPrice();
+
+		assertHttpResponseStatusCode(
+			404,
+			tierPriceResource.getTierPriceByExternalReferenceCodeHttpResponse(
+				randomTierPrice.getExternalReferenceCode()));
+
+		testPostPriceEntryByExternalReferenceCodeTierPrice_addTierPrice(
+			randomTierPrice);
+
+		assertHttpResponseStatusCode(
+			200,
+			tierPriceResource.getTierPriceByExternalReferenceCodeHttpResponse(
+				randomTierPrice.getExternalReferenceCode()));
 	}
 
 	protected TierPrice
@@ -472,6 +485,20 @@ public abstract class BaseTierPriceResourceTestCase {
 
 		assertEquals(randomTierPrice, postTierPrice);
 		assertValid(postTierPrice);
+
+		randomTierPrice = randomTierPrice();
+
+		assertHttpResponseStatusCode(
+			404,
+			tierPriceResource.getTierPriceByExternalReferenceCodeHttpResponse(
+				randomTierPrice.getExternalReferenceCode()));
+
+		testPostPriceEntryIdTierPrice_addTierPrice(randomTierPrice);
+
+		assertHttpResponseStatusCode(
+			200,
+			tierPriceResource.getTierPriceByExternalReferenceCodeHttpResponse(
+				randomTierPrice.getExternalReferenceCode()));
 	}
 
 	protected TierPrice testPostPriceEntryIdTierPrice_addTierPrice(
@@ -765,7 +792,7 @@ public abstract class BaseTierPriceResourceTestCase {
 		}
 	}
 
-	protected void assertValid(TierPrice tierPrice) throws Exception {
+	protected void assertValid(TierPrice tierPrice) {
 		boolean valid = true;
 
 		if (tierPrice.getId() == null) {

@@ -36,8 +36,6 @@ import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.filter.Filter;
-import com.liferay.portal.kernel.service.GroupLocalService;
-import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
 import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
@@ -914,6 +912,7 @@ public class Query {
 
 		public DiscountPage(Page discountPage) {
 			actions = discountPage.getActions();
+
 			items = discountPage.getItems();
 			lastPage = discountPage.getLastPage();
 			page = discountPage.getPage();
@@ -946,6 +945,7 @@ public class Query {
 
 		public DiscountAccountGroupPage(Page discountAccountGroupPage) {
 			actions = discountAccountGroupPage.getActions();
+
 			items = discountAccountGroupPage.getItems();
 			lastPage = discountAccountGroupPage.getLastPage();
 			page = discountAccountGroupPage.getPage();
@@ -978,6 +978,7 @@ public class Query {
 
 		public DiscountCategoryPage(Page discountCategoryPage) {
 			actions = discountCategoryPage.getActions();
+
 			items = discountCategoryPage.getItems();
 			lastPage = discountCategoryPage.getLastPage();
 			page = discountCategoryPage.getPage();
@@ -1010,6 +1011,7 @@ public class Query {
 
 		public DiscountProductPage(Page discountProductPage) {
 			actions = discountProductPage.getActions();
+
 			items = discountProductPage.getItems();
 			lastPage = discountProductPage.getLastPage();
 			page = discountProductPage.getPage();
@@ -1042,6 +1044,7 @@ public class Query {
 
 		public DiscountRulePage(Page discountRulePage) {
 			actions = discountRulePage.getActions();
+
 			items = discountRulePage.getItems();
 			lastPage = discountRulePage.getLastPage();
 			page = discountRulePage.getPage();
@@ -1074,6 +1077,7 @@ public class Query {
 
 		public PriceEntryPage(Page priceEntryPage) {
 			actions = priceEntryPage.getActions();
+
 			items = priceEntryPage.getItems();
 			lastPage = priceEntryPage.getLastPage();
 			page = priceEntryPage.getPage();
@@ -1106,6 +1110,7 @@ public class Query {
 
 		public PriceListPage(Page priceListPage) {
 			actions = priceListPage.getActions();
+
 			items = priceListPage.getItems();
 			lastPage = priceListPage.getLastPage();
 			page = priceListPage.getPage();
@@ -1138,6 +1143,7 @@ public class Query {
 
 		public PriceListAccountGroupPage(Page priceListAccountGroupPage) {
 			actions = priceListAccountGroupPage.getActions();
+
 			items = priceListAccountGroupPage.getItems();
 			lastPage = priceListAccountGroupPage.getLastPage();
 			page = priceListAccountGroupPage.getPage();
@@ -1170,6 +1176,7 @@ public class Query {
 
 		public TierPricePage(Page tierPricePage) {
 			actions = tierPricePage.getActions();
+
 			items = tierPricePage.getItems();
 			lastPage = tierPricePage.getLastPage();
 			page = tierPricePage.getPage();
@@ -1225,8 +1232,6 @@ public class Query {
 		discountResource.setContextHttpServletResponse(_httpServletResponse);
 		discountResource.setContextUriInfo(_uriInfo);
 		discountResource.setContextUser(_user);
-		discountResource.setGroupLocalService(_groupLocalService);
-		discountResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(
@@ -1241,8 +1246,6 @@ public class Query {
 			_httpServletResponse);
 		discountAccountGroupResource.setContextUriInfo(_uriInfo);
 		discountAccountGroupResource.setContextUser(_user);
-		discountAccountGroupResource.setGroupLocalService(_groupLocalService);
-		discountAccountGroupResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(
@@ -1257,8 +1260,6 @@ public class Query {
 			_httpServletResponse);
 		discountCategoryResource.setContextUriInfo(_uriInfo);
 		discountCategoryResource.setContextUser(_user);
-		discountCategoryResource.setGroupLocalService(_groupLocalService);
-		discountCategoryResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(
@@ -1273,8 +1274,6 @@ public class Query {
 			_httpServletResponse);
 		discountProductResource.setContextUriInfo(_uriInfo);
 		discountProductResource.setContextUser(_user);
-		discountProductResource.setGroupLocalService(_groupLocalService);
-		discountProductResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(
@@ -1288,8 +1287,6 @@ public class Query {
 			_httpServletResponse);
 		discountRuleResource.setContextUriInfo(_uriInfo);
 		discountRuleResource.setContextUser(_user);
-		discountRuleResource.setGroupLocalService(_groupLocalService);
-		discountRuleResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(PriceEntryResource priceEntryResource)
@@ -1301,8 +1298,6 @@ public class Query {
 		priceEntryResource.setContextHttpServletResponse(_httpServletResponse);
 		priceEntryResource.setContextUriInfo(_uriInfo);
 		priceEntryResource.setContextUser(_user);
-		priceEntryResource.setGroupLocalService(_groupLocalService);
-		priceEntryResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(PriceListResource priceListResource)
@@ -1314,8 +1309,6 @@ public class Query {
 		priceListResource.setContextHttpServletResponse(_httpServletResponse);
 		priceListResource.setContextUriInfo(_uriInfo);
 		priceListResource.setContextUser(_user);
-		priceListResource.setGroupLocalService(_groupLocalService);
-		priceListResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(
@@ -1330,8 +1323,6 @@ public class Query {
 			_httpServletResponse);
 		priceListAccountGroupResource.setContextUriInfo(_uriInfo);
 		priceListAccountGroupResource.setContextUser(_user);
-		priceListAccountGroupResource.setGroupLocalService(_groupLocalService);
-		priceListAccountGroupResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private void _populateResourceContext(TierPriceResource tierPriceResource)
@@ -1343,8 +1334,6 @@ public class Query {
 		tierPriceResource.setContextHttpServletResponse(_httpServletResponse);
 		tierPriceResource.setContextUriInfo(_uriInfo);
 		tierPriceResource.setContextUser(_user);
-		tierPriceResource.setGroupLocalService(_groupLocalService);
-		tierPriceResource.setRoleLocalService(_roleLocalService);
 	}
 
 	private static ComponentServiceObjects<DiscountResource>
@@ -1367,14 +1356,12 @@ public class Query {
 		_tierPriceResourceComponentServiceObjects;
 
 	private AcceptLanguage _acceptLanguage;
-	private com.liferay.portal.kernel.model.Company _company;
 	private BiFunction<Object, String, Filter> _filterBiFunction;
-	private GroupLocalService _groupLocalService;
+	private BiFunction<Object, String, Sort[]> _sortsBiFunction;
+	private com.liferay.portal.kernel.model.Company _company;
+	private com.liferay.portal.kernel.model.User _user;
 	private HttpServletRequest _httpServletRequest;
 	private HttpServletResponse _httpServletResponse;
-	private RoleLocalService _roleLocalService;
-	private BiFunction<Object, String, Sort[]> _sortsBiFunction;
 	private UriInfo _uriInfo;
-	private com.liferay.portal.kernel.model.User _user;
 
 }

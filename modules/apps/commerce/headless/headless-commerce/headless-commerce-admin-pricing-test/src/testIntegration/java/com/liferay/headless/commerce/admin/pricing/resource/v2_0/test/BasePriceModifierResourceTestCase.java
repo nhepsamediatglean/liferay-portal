@@ -119,9 +119,7 @@ public abstract class BasePriceModifierResourceTestCase {
 
 		PriceModifierResource.Builder builder = PriceModifierResource.builder();
 
-		priceModifierResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		priceModifierResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -361,6 +359,23 @@ public abstract class BasePriceModifierResourceTestCase {
 
 		assertEquals(randomPriceModifier, postPriceModifier);
 		assertValid(postPriceModifier);
+
+		randomPriceModifier = randomPriceModifier();
+
+		assertHttpResponseStatusCode(
+			404,
+			priceModifierResource.
+				getPriceModifierByExternalReferenceCodeHttpResponse(
+					randomPriceModifier.getExternalReferenceCode()));
+
+		testPostPriceListByExternalReferenceCodePriceModifier_addPriceModifier(
+			randomPriceModifier);
+
+		assertHttpResponseStatusCode(
+			200,
+			priceModifierResource.
+				getPriceModifierByExternalReferenceCodeHttpResponse(
+					randomPriceModifier.getExternalReferenceCode()));
 	}
 
 	protected PriceModifier
@@ -699,6 +714,22 @@ public abstract class BasePriceModifierResourceTestCase {
 
 		assertEquals(randomPriceModifier, postPriceModifier);
 		assertValid(postPriceModifier);
+
+		randomPriceModifier = randomPriceModifier();
+
+		assertHttpResponseStatusCode(
+			404,
+			priceModifierResource.
+				getPriceModifierByExternalReferenceCodeHttpResponse(
+					randomPriceModifier.getExternalReferenceCode()));
+
+		testPostPriceListIdPriceModifier_addPriceModifier(randomPriceModifier);
+
+		assertHttpResponseStatusCode(
+			200,
+			priceModifierResource.
+				getPriceModifierByExternalReferenceCodeHttpResponse(
+					randomPriceModifier.getExternalReferenceCode()));
 	}
 
 	protected PriceModifier testPostPriceListIdPriceModifier_addPriceModifier(
@@ -1023,7 +1054,7 @@ public abstract class BasePriceModifierResourceTestCase {
 		}
 	}
 
-	protected void assertValid(PriceModifier priceModifier) throws Exception {
+	protected void assertValid(PriceModifier priceModifier) {
 		boolean valid = true;
 
 		if (priceModifier.getId() == null) {

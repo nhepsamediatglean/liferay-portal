@@ -119,9 +119,7 @@ public abstract class BaseCatalogResourceTestCase {
 
 		CatalogResource.Builder builder = CatalogResource.builder();
 
-		catalogResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		catalogResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -701,6 +699,20 @@ public abstract class BaseCatalogResourceTestCase {
 
 		assertEquals(randomCatalog, postCatalog);
 		assertValid(postCatalog);
+
+		randomCatalog = randomCatalog();
+
+		assertHttpResponseStatusCode(
+			404,
+			catalogResource.getCatalogByExternalReferenceCodeHttpResponse(
+				randomCatalog.getExternalReferenceCode()));
+
+		testPostCatalog_addCatalog(randomCatalog);
+
+		assertHttpResponseStatusCode(
+			200,
+			catalogResource.getCatalogByExternalReferenceCodeHttpResponse(
+				randomCatalog.getExternalReferenceCode()));
 	}
 
 	protected Catalog testPostCatalog_addCatalog(Catalog catalog)
@@ -899,7 +911,7 @@ public abstract class BaseCatalogResourceTestCase {
 		}
 	}
 
-	protected void assertValid(Catalog catalog) throws Exception {
+	protected void assertValid(Catalog catalog) {
 		boolean valid = true;
 
 		if (catalog.getId() == null) {

@@ -112,9 +112,7 @@ public abstract class BaseOrderNoteResourceTestCase {
 
 		OrderNoteResource.Builder builder = OrderNoteResource.builder();
 
-		orderNoteResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		orderNoteResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -570,6 +568,21 @@ public abstract class BaseOrderNoteResourceTestCase {
 
 		assertEquals(randomOrderNote, postOrderNote);
 		assertValid(postOrderNote);
+
+		randomOrderNote = randomOrderNote();
+
+		assertHttpResponseStatusCode(
+			404,
+			orderNoteResource.getOrderNoteByExternalReferenceCodeHttpResponse(
+				randomOrderNote.getExternalReferenceCode()));
+
+		testPostOrderByExternalReferenceCodeOrderNote_addOrderNote(
+			randomOrderNote);
+
+		assertHttpResponseStatusCode(
+			200,
+			orderNoteResource.getOrderNoteByExternalReferenceCodeHttpResponse(
+				randomOrderNote.getExternalReferenceCode()));
 	}
 
 	protected OrderNote
@@ -693,6 +706,20 @@ public abstract class BaseOrderNoteResourceTestCase {
 
 		assertEquals(randomOrderNote, postOrderNote);
 		assertValid(postOrderNote);
+
+		randomOrderNote = randomOrderNote();
+
+		assertHttpResponseStatusCode(
+			404,
+			orderNoteResource.getOrderNoteByExternalReferenceCodeHttpResponse(
+				randomOrderNote.getExternalReferenceCode()));
+
+		testPostOrderIdOrderNote_addOrderNote(randomOrderNote);
+
+		assertHttpResponseStatusCode(
+			200,
+			orderNoteResource.getOrderNoteByExternalReferenceCodeHttpResponse(
+				randomOrderNote.getExternalReferenceCode()));
 	}
 
 	protected OrderNote testPostOrderIdOrderNote_addOrderNote(
@@ -756,7 +783,7 @@ public abstract class BaseOrderNoteResourceTestCase {
 		}
 	}
 
-	protected void assertValid(OrderNote orderNote) throws Exception {
+	protected void assertValid(OrderNote orderNote) {
 		boolean valid = true;
 
 		if (orderNote.getId() == null) {

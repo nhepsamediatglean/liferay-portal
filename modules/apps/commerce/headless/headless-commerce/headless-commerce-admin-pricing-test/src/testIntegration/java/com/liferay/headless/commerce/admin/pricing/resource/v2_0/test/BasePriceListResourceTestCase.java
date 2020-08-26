@@ -119,9 +119,7 @@ public abstract class BasePriceListResourceTestCase {
 
 		PriceListResource.Builder builder = PriceListResource.builder();
 
-		priceListResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		priceListResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -491,6 +489,20 @@ public abstract class BasePriceListResourceTestCase {
 
 		assertEquals(randomPriceList, postPriceList);
 		assertValid(postPriceList);
+
+		randomPriceList = randomPriceList();
+
+		assertHttpResponseStatusCode(
+			404,
+			priceListResource.getPriceListByExternalReferenceCodeHttpResponse(
+				randomPriceList.getExternalReferenceCode()));
+
+		testPostPriceList_addPriceList(randomPriceList);
+
+		assertHttpResponseStatusCode(
+			200,
+			priceListResource.getPriceListByExternalReferenceCodeHttpResponse(
+				randomPriceList.getExternalReferenceCode()));
 	}
 
 	protected PriceList testPostPriceList_addPriceList(PriceList priceList)
@@ -614,7 +626,7 @@ public abstract class BasePriceListResourceTestCase {
 
 		PriceList patchPriceList =
 			priceListResource.patchPriceListByExternalReferenceCode(
-				postPriceList.getExternalReferenceCode(), randomPatchPriceList);
+				postPriceList.getId(), randomPatchPriceList);
 
 		PriceList expectedPatchPriceList = postPriceList.clone();
 
@@ -832,7 +844,7 @@ public abstract class BasePriceListResourceTestCase {
 		}
 	}
 
-	protected void assertValid(PriceList priceList) throws Exception {
+	protected void assertValid(PriceList priceList) {
 		boolean valid = true;
 
 		if (priceList.getId() == null) {

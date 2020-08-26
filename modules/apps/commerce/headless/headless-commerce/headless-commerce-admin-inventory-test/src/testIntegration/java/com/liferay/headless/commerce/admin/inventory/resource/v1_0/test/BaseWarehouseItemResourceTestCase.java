@@ -113,9 +113,7 @@ public abstract class BaseWarehouseItemResourceTestCase {
 
 		WarehouseItemResource.Builder builder = WarehouseItemResource.builder();
 
-		warehouseItemResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		warehouseItemResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -331,6 +329,23 @@ public abstract class BaseWarehouseItemResourceTestCase {
 
 		assertEquals(randomWarehouseItem, postWarehouseItem);
 		assertValid(postWarehouseItem);
+
+		randomWarehouseItem = randomWarehouseItem();
+
+		assertHttpResponseStatusCode(
+			404,
+			warehouseItemResource.
+				getWarehouseItemByExternalReferenceCodeHttpResponse(
+					randomWarehouseItem.getExternalReferenceCode()));
+
+		testPostWarehouseItemByExternalReferenceCode_addWarehouseItem(
+			randomWarehouseItem);
+
+		assertHttpResponseStatusCode(
+			200,
+			warehouseItemResource.
+				getWarehouseItemByExternalReferenceCodeHttpResponse(
+					randomWarehouseItem.getExternalReferenceCode()));
 	}
 
 	protected WarehouseItem
@@ -625,6 +640,23 @@ public abstract class BaseWarehouseItemResourceTestCase {
 
 		assertEquals(randomWarehouseItem, postWarehouseItem);
 		assertValid(postWarehouseItem);
+
+		randomWarehouseItem = randomWarehouseItem();
+
+		assertHttpResponseStatusCode(
+			404,
+			warehouseItemResource.
+				getWarehouseItemByExternalReferenceCodeHttpResponse(
+					randomWarehouseItem.getExternalReferenceCode()));
+
+		testPostWarehousByExternalReferenceCodeWarehouseItem_addWarehouseItem(
+			randomWarehouseItem);
+
+		assertHttpResponseStatusCode(
+			200,
+			warehouseItemResource.
+				getWarehouseItemByExternalReferenceCodeHttpResponse(
+					randomWarehouseItem.getExternalReferenceCode()));
 	}
 
 	protected WarehouseItem
@@ -769,6 +801,22 @@ public abstract class BaseWarehouseItemResourceTestCase {
 
 		assertEquals(randomWarehouseItem, postWarehouseItem);
 		assertValid(postWarehouseItem);
+
+		randomWarehouseItem = randomWarehouseItem();
+
+		assertHttpResponseStatusCode(
+			404,
+			warehouseItemResource.
+				getWarehouseItemByExternalReferenceCodeHttpResponse(
+					randomWarehouseItem.getExternalReferenceCode()));
+
+		testPostWarehousIdWarehouseItem_addWarehouseItem(randomWarehouseItem);
+
+		assertHttpResponseStatusCode(
+			200,
+			warehouseItemResource.
+				getWarehouseItemByExternalReferenceCodeHttpResponse(
+					randomWarehouseItem.getExternalReferenceCode()));
 	}
 
 	protected WarehouseItem testPostWarehousIdWarehouseItem_addWarehouseItem(
@@ -926,7 +974,7 @@ public abstract class BaseWarehouseItemResourceTestCase {
 		}
 	}
 
-	protected void assertValid(WarehouseItem warehouseItem) throws Exception {
+	protected void assertValid(WarehouseItem warehouseItem) {
 		boolean valid = true;
 
 		if (warehouseItem.getId() == null) {

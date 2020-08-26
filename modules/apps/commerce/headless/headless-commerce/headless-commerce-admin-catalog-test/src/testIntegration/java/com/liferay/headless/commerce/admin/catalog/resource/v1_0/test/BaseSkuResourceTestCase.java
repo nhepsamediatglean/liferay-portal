@@ -119,9 +119,7 @@ public abstract class BaseSkuResourceTestCase {
 
 		SkuResource.Builder builder = SkuResource.builder();
 
-		skuResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		skuResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -331,6 +329,20 @@ public abstract class BaseSkuResourceTestCase {
 
 		assertEquals(randomSku, postSku);
 		assertValid(postSku);
+
+		randomSku = randomSku();
+
+		assertHttpResponseStatusCode(
+			404,
+			skuResource.getSkuByExternalReferenceCodeHttpResponse(
+				randomSku.getExternalReferenceCode()));
+
+		testPostProductByExternalReferenceCodeSku_addSku(randomSku);
+
+		assertHttpResponseStatusCode(
+			200,
+			skuResource.getSkuByExternalReferenceCodeHttpResponse(
+				randomSku.getExternalReferenceCode()));
 	}
 
 	protected Sku testPostProductByExternalReferenceCodeSku_addSku(Sku sku)
@@ -438,6 +450,20 @@ public abstract class BaseSkuResourceTestCase {
 
 		assertEquals(randomSku, postSku);
 		assertValid(postSku);
+
+		randomSku = randomSku();
+
+		assertHttpResponseStatusCode(
+			404,
+			skuResource.getSkuByExternalReferenceCodeHttpResponse(
+				randomSku.getExternalReferenceCode()));
+
+		testPostProductIdSku_addSku(randomSku);
+
+		assertHttpResponseStatusCode(
+			200,
+			skuResource.getSkuByExternalReferenceCodeHttpResponse(
+				randomSku.getExternalReferenceCode()));
 	}
 
 	protected Sku testPostProductIdSku_addSku(Sku sku) throws Exception {
@@ -964,7 +990,7 @@ public abstract class BaseSkuResourceTestCase {
 		}
 	}
 
-	protected void assertValid(Sku sku) throws Exception {
+	protected void assertValid(Sku sku) {
 		boolean valid = true;
 
 		if (sku.getId() == null) {

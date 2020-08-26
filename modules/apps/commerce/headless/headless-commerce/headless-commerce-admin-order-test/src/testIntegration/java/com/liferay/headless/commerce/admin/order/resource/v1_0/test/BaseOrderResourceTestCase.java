@@ -119,9 +119,7 @@ public abstract class BaseOrderResourceTestCase {
 
 		OrderResource.Builder builder = OrderResource.builder();
 
-		orderResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		orderResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -519,6 +517,20 @@ public abstract class BaseOrderResourceTestCase {
 
 		assertEquals(randomOrder, postOrder);
 		assertValid(postOrder);
+
+		randomOrder = randomOrder();
+
+		assertHttpResponseStatusCode(
+			404,
+			orderResource.getOrderByExternalReferenceCodeHttpResponse(
+				randomOrder.getExternalReferenceCode()));
+
+		testPostOrder_addOrder(randomOrder);
+
+		assertHttpResponseStatusCode(
+			200,
+			orderResource.getOrderByExternalReferenceCodeHttpResponse(
+				randomOrder.getExternalReferenceCode()));
 	}
 
 	protected Order testPostOrder_addOrder(Order order) throws Exception {
@@ -800,7 +812,7 @@ public abstract class BaseOrderResourceTestCase {
 		}
 	}
 
-	protected void assertValid(Order order) throws Exception {
+	protected void assertValid(Order order) {
 		boolean valid = true;
 
 		if (order.getId() == null) {

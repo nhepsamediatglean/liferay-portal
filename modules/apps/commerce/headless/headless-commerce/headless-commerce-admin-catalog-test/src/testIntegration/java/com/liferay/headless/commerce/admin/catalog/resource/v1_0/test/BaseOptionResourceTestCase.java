@@ -119,9 +119,7 @@ public abstract class BaseOptionResourceTestCase {
 
 		OptionResource.Builder builder = OptionResource.builder();
 
-		optionResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		optionResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -473,6 +471,20 @@ public abstract class BaseOptionResourceTestCase {
 
 		assertEquals(randomOption, postOption);
 		assertValid(postOption);
+
+		randomOption = randomOption();
+
+		assertHttpResponseStatusCode(
+			404,
+			optionResource.getOptionByExternalReferenceCodeHttpResponse(
+				randomOption.getExternalReferenceCode()));
+
+		testPostOption_addOption(randomOption);
+
+		assertHttpResponseStatusCode(
+			200,
+			optionResource.getOptionByExternalReferenceCodeHttpResponse(
+				randomOption.getExternalReferenceCode()));
 	}
 
 	protected Option testPostOption_addOption(Option option) throws Exception {
@@ -754,7 +766,7 @@ public abstract class BaseOptionResourceTestCase {
 		}
 	}
 
-	protected void assertValid(Option option) throws Exception {
+	protected void assertValid(Option option) {
 		boolean valid = true;
 
 		if (option.getId() == null) {

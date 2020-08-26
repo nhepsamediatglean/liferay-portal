@@ -119,9 +119,7 @@ public abstract class BaseProductGroupResourceTestCase {
 
 		ProductGroupResource.Builder builder = ProductGroupResource.builder();
 
-		productGroupResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		productGroupResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -493,6 +491,22 @@ public abstract class BaseProductGroupResourceTestCase {
 
 		assertEquals(randomProductGroup, postProductGroup);
 		assertValid(postProductGroup);
+
+		randomProductGroup = randomProductGroup();
+
+		assertHttpResponseStatusCode(
+			404,
+			productGroupResource.
+				getProductGroupByExternalReferenceCodeHttpResponse(
+					randomProductGroup.getExternalReferenceCode()));
+
+		testPostProductGroup_addProductGroup(randomProductGroup);
+
+		assertHttpResponseStatusCode(
+			200,
+			productGroupResource.
+				getProductGroupByExternalReferenceCodeHttpResponse(
+					randomProductGroup.getExternalReferenceCode()));
 	}
 
 	protected ProductGroup testPostProductGroup_addProductGroup(
@@ -810,7 +824,7 @@ public abstract class BaseProductGroupResourceTestCase {
 		}
 	}
 
-	protected void assertValid(ProductGroup productGroup) throws Exception {
+	protected void assertValid(ProductGroup productGroup) {
 		boolean valid = true;
 
 		if (productGroup.getId() == null) {

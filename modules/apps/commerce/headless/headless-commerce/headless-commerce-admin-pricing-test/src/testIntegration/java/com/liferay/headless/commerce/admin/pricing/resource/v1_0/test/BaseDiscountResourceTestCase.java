@@ -112,9 +112,7 @@ public abstract class BaseDiscountResourceTestCase {
 
 		DiscountResource.Builder builder = DiscountResource.builder();
 
-		discountResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
+		discountResource = builder.locale(
 			LocaleUtil.getDefault()
 		).build();
 	}
@@ -250,6 +248,20 @@ public abstract class BaseDiscountResourceTestCase {
 
 		assertEquals(randomDiscount, postDiscount);
 		assertValid(postDiscount);
+
+		randomDiscount = randomDiscount();
+
+		assertHttpResponseStatusCode(
+			404,
+			discountResource.getDiscountByExternalReferenceCodeHttpResponse(
+				randomDiscount.getExternalReferenceCode()));
+
+		testPostDiscount_addDiscount(randomDiscount);
+
+		assertHttpResponseStatusCode(
+			200,
+			discountResource.getDiscountByExternalReferenceCodeHttpResponse(
+				randomDiscount.getExternalReferenceCode()));
 	}
 
 	protected Discount testPostDiscount_addDiscount(Discount discount)
@@ -539,7 +551,7 @@ public abstract class BaseDiscountResourceTestCase {
 		}
 	}
 
-	protected void assertValid(Discount discount) throws Exception {
+	protected void assertValid(Discount discount) {
 		boolean valid = true;
 
 		if (discount.getId() == null) {
