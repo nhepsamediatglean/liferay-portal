@@ -38,7 +38,7 @@ public class SimpleURLPatternMapperTest {
 		CodeCoverageAssertor.INSTANCE;
 
 	@Test
-	public void testGet() {
+	public void testGetValue() {
 		KeyValuePair[] keyValuePairs = _createKeyValuePairs();
 
 		URLPatternMapper<String> urlPatternMapper = createURLPatternMapper(
