@@ -87,7 +87,7 @@ public class SimpleURLPatternMapperTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testPutWithEmptyPattern() {
+	public void testConstructorWithEmptyPattern() {
 		createURLPatternMapper(
 			HashMapBuilder.put(
 				"", ""
@@ -95,7 +95,7 @@ public class SimpleURLPatternMapperTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testPutWithNullPattern() {
+	public void testConstructorWithNullPattern() {
 		HashMap<String, String> map = new HashMap<>();
 
 		map.put(null, "null");
