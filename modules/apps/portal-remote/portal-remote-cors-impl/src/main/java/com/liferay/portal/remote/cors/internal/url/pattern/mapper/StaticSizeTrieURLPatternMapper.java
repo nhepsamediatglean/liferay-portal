@@ -187,7 +187,7 @@ public class StaticSizeTrieURLPatternMapper<T>
 				"Exceeding maximum number of allowed URL patterns");
 		}
 
-		int index;
+		int index = 0;
 
 		if (wildcard) {
 			index = _wildcardURLPatternCount++;
