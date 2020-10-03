@@ -29,14 +29,14 @@ public class SimpleURLPatternMapperPerformanceTest {
 
 	@Test
 	public void testGet() {
-		Map<String, String> urlPaths = _createUrlPaths();
+		Map<String, String> urlPatterns = _createURLPatterns();
 		URLPatternMapper<String> urlPatternMapper = createURLPatternMapper(
 			_createValues());
 
 		long start = System.currentTimeMillis();
 
 		for (int i = 0; i < 100000; i++) {
-			for (String urlPath : urlPaths.keySet()) {
+			for (String urlPath : urlPatterns.keySet()) {
 				urlPatternMapper.getValue(urlPath);
 			}
 		}
@@ -56,7 +56,7 @@ public class SimpleURLPatternMapperPerformanceTest {
 		return new SimpleURLPatternMapper<>(values);
 	}
 
-	private Map<String, String> _createUrlPaths() {
+	private Map<String, String> _createURLPatterns() {
 		return new HashMap<String, String>() {
 			{
 

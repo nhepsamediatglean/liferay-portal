@@ -66,12 +66,12 @@ public class SimpleURLPatternMapperTest {
 
 	@Test
 	public void testGetValue() {
-		Map<String, String> urlPaths = _createUrlPaths();
+		Map<String, String> urlPatterns = _createURLPatterns();
 
 		URLPatternMapper<String> urlPatternMapper = createURLPatternMapper(
-			_createValues(urlPaths));
+			_createValues(urlPatterns));
 
-		for (Map.Entry<String, String> entry : urlPaths.entrySet()) {
+		for (Map.Entry<String, String> entry : urlPatterns.entrySet()) {
 			String value = urlPatternMapper.getValue(entry.getKey());
 
 			try {
@@ -109,7 +109,7 @@ public class SimpleURLPatternMapperTest {
 		return new SimpleURLPatternMapper<>(values);
 	}
 
-	private Map<String, String> _createUrlPaths() {
+	private Map<String, String> _createURLPatterns() {
 		return new HashMap<String, String>() {
 			{
 				put("/", "//*");
@@ -163,17 +163,15 @@ public class SimpleURLPatternMapperTest {
 		};
 	}
 
-	private Map<String, String> _createValues(
-		Map<String, String> pathToPatternMap) {
-
+	private Map<String, String> _createValues(Map<String, String> urlPatterns) {
 		Map<String, String> values = new HashMap<>();
 
-		for (String pattern : pathToPatternMap.values()) {
-			if ((pattern == null) || pattern.isEmpty()) {
+		for (String urlPattern : urlPatterns.values()) {
+			if ((urlPattern == null) || urlPattern.isEmpty()) {
 				continue;
 			}
 
-			values.put(pattern, pattern);
+			values.put(urlPattern, urlPattern);
 		}
 
 		return values;
