@@ -73,9 +73,6 @@ public class DynamicSizeTrieURLPatternMapper<T>
 			previousTrieNode = currentTrieNode;
 		}
 
-		// if current node is null, it means trie travesaling
-		// did not match every character.
-
 		if (currentTrieNode != null) {
 			if (exact) {
 				if (currentTrieNode.isEnd()) {
