@@ -41,7 +41,7 @@ public class CTSchemaVersionLocalServiceImpl
 	extends CTSchemaVersionLocalServiceBaseImpl {
 
 	@Override
-	public CTSchemaVersion createLatestSchemaVersion(long companyId) {
+	public CTSchemaVersion addLatestSchemaVersion(long companyId) {
 		CTSchemaVersion ctSchemaVersion = ctSchemaVersionPersistence.create(
 			counterLocalService.increment(CTSchemaVersion.class.getName()));
 
@@ -71,7 +71,7 @@ public class CTSchemaVersionLocalServiceImpl
 			!isLatestSchemaVersion(ctSchemaVersion, true)) {
 
 			ctSchemaVersion =
-				ctSchemaVersionLocalService.createLatestSchemaVersion(
+				ctSchemaVersionLocalService.addLatestSchemaVersion(
 					companyId);
 		}
 
