@@ -70,7 +70,6 @@ public class ReleaseModelListener extends BaseModelListener<Release> {
 				originalSchemaVersion, releaseImpl.getSchemaVersion())) {
 
 			Version version1 = Version.parseVersion(originalSchemaVersion);
-
 			Version version2 = Version.parseVersion(release.getSchemaVersion());
 
 			if ((version1.getMajor() != version2.getMajor()) ||
