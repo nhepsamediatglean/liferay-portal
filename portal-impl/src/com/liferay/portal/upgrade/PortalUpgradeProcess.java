@@ -59,7 +59,7 @@ public class PortalUpgradeProcess extends UpgradeProcess {
 		return new Version(0, 0, 0);
 	}
 
-	public static Version getLatestSchemaVersion() {
+	public static Version getLatestCTSchemaVersion() {
 		return _upgradeProcesses.lastKey();
 	}
 
@@ -91,7 +91,7 @@ public class PortalUpgradeProcess extends UpgradeProcess {
 	public static boolean isInLatestSchemaVersion(Connection connection)
 		throws SQLException {
 
-		Version latestSchemaVersion = getLatestSchemaVersion();
+		Version latestSchemaVersion = getLatestCTSchemaVersion();
 
 		if (latestSchemaVersion.equals(getCurrentSchemaVersion(connection))) {
 			return true;

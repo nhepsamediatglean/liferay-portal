@@ -132,13 +132,13 @@ public class PortalUpgradeProcessTest {
 		}
 
 		Assert.assertEquals(
-			latestSchemaVersion, PortalUpgradeProcess.getLatestSchemaVersion());
+			latestSchemaVersion, PortalUpgradeProcess.getLatestCTSchemaVersion());
 	}
 
 	@Test
 	public void testGetRequiredSchemaVersion() {
 		Version latestSchemaVersion =
-			PortalUpgradeProcess.getLatestSchemaVersion();
+			PortalUpgradeProcess.getLatestCTSchemaVersion();
 
 		Version requiredSchemaVersion =
 			PortalUpgradeProcess.getRequiredSchemaVersion();
@@ -152,7 +152,7 @@ public class PortalUpgradeProcessTest {
 
 	@Test
 	public void testIsInLatestSchemaVersion() throws Exception {
-		_updateSchemaVersion(PortalUpgradeProcess.getLatestSchemaVersion());
+		_updateSchemaVersion(PortalUpgradeProcess.getLatestCTSchemaVersion());
 
 		try (Connection connection = DataAccess.getConnection()) {
 			Assert.assertTrue(
@@ -226,7 +226,7 @@ public class PortalUpgradeProcessTest {
 
 	@Test
 	public void testUpgradeWhenCoreIsInLatestSchemaVersion() throws Exception {
-		_updateSchemaVersion(PortalUpgradeProcess.getLatestSchemaVersion());
+		_updateSchemaVersion(PortalUpgradeProcess.getLatestCTSchemaVersion());
 
 		PortalUpgradeProcess portalServiceUpgrade = new PortalUpgradeProcess();
 

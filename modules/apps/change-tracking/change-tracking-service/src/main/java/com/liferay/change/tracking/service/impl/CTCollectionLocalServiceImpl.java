@@ -112,7 +112,7 @@ public class CTCollectionLocalServiceImpl
 		_validate(name, description);
 
 		CTSchemaVersion ctSchemaVersion =
-			_ctSchemaVersionLocalService.getLatestSchemaVersion(companyId);
+			_ctSchemaVersionLocalService.getLatestCTSchemaVersion(companyId);
 
 		long ctCollectionId = counterLocalService.increment(
 			CTCollection.class.getName());

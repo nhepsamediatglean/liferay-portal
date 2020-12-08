@@ -89,7 +89,7 @@ public class DBInitUtil {
 			ps.setString(3, ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME);
 
 			Version latestSchemaVersion =
-				PortalUpgradeProcess.getLatestSchemaVersion();
+				PortalUpgradeProcess.getLatestCTSchemaVersion();
 
 			ps.setString(4, latestSchemaVersion.toString());
 

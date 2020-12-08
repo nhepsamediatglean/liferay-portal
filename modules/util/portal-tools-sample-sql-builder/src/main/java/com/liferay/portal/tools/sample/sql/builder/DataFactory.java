@@ -3603,7 +3603,7 @@ public class DataFactory {
 		List<ReleaseModel> releases = new ArrayList<>();
 
 		Version latestSchemaVersion =
-			PortalUpgradeProcess.getLatestSchemaVersion();
+			PortalUpgradeProcess.getLatestCTSchemaVersion();
 
 		releases.add(
 			newReleaseModel(
