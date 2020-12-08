@@ -75,6 +75,8 @@ public interface CTSchemaVersionLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CTSchemaVersion addCTSchemaVersion(CTSchemaVersion ctSchemaVersion);
 
+	public CTSchemaVersion addLatestSchemaVersion(long companyId);
+
 	/**
 	 * Creates a new ct schema version with the primary key. Does not add the ct schema version to the database.
 	 *
@@ -83,8 +85,6 @@ public interface CTSchemaVersionLocalService
 	 */
 	@Transactional(enabled = false)
 	public CTSchemaVersion createCTSchemaVersion(long schemaVersionId);
-
-	public CTSchemaVersion createLatestSchemaVersion(long companyId);
 
 	/**
 	 * @throws PortalException

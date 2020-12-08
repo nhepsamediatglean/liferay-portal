@@ -55,6 +55,12 @@ public class CTSchemaVersionLocalServiceUtil {
 		return getService().addCTSchemaVersion(ctSchemaVersion);
 	}
 
+	public static com.liferay.change.tracking.model.CTSchemaVersion
+		addLatestSchemaVersion(long companyId) {
+
+		return getService().addLatestSchemaVersion(companyId);
+	}
+
 	/**
 	 * Creates a new ct schema version with the primary key. Does not add the ct schema version to the database.
 	 *
@@ -65,12 +71,6 @@ public class CTSchemaVersionLocalServiceUtil {
 		createCTSchemaVersion(long schemaVersionId) {
 
 		return getService().createCTSchemaVersion(schemaVersionId);
-	}
-
-	public static com.liferay.change.tracking.model.CTSchemaVersion
-		createLatestSchemaVersion(long companyId) {
-
-		return getService().createLatestSchemaVersion(companyId);
 	}
 
 	/**
