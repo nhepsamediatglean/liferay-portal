@@ -79,15 +79,13 @@ public class CTCollectionLocalServiceTest {
 		_ctCollection1 = _ctCollectionLocalService.addCTCollection(
 			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(),
 			CTCollectionLocalServiceTest.class.getSimpleName(), null);
-
+		_group = GroupTestUtil.addGroup();
 		_journalArticleClassNameId = _classNameLocalService.getClassNameId(
 			JournalArticle.class);
 		_journalFolderClassNameId = _classNameLocalService.getClassNameId(
 			JournalFolder.class);
 		_layoutClassNameId = _classNameLocalService.getClassNameId(
 			Layout.class);
-
-		_group = GroupTestUtil.addGroup();
 	}
 
 	@Test
