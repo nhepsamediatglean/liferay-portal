@@ -59,9 +59,6 @@ public class ReleaseModelListenerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_release = _releaseLocalService.addRelease(
-			ReleaseModelListenerTest.class.getSimpleName(), "1.0.0");
-
 		_ctCollection = _ctCollectionLocalService.addCTCollection(
 			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(),
 			ReleaseModelListenerTest.class.getSimpleName(), null);
@@ -73,6 +70,9 @@ public class ReleaseModelListenerTest {
 
 		_ctPreferences = _ctPreferencesLocalService.updateCTPreferences(
 			_ctPreferences);
+
+		_release = _releaseLocalService.addRelease(
+			ReleaseModelListenerTest.class.getSimpleName(), "1.0.0");
 	}
 
 	@Test
