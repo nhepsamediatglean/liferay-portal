@@ -80,11 +80,9 @@ public class LayoutCTTest {
 		_ctCollection = _ctCollectionLocalService.addCTCollection(
 			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(),
 			LayoutCTTest.class.getName(), null);
-
+		_group = GroupTestUtil.addGroup();
 		_layoutClassNameId = _classNameLocalService.getClassNameId(
 			Layout.class);
-
-		_group = GroupTestUtil.addGroup();
 	}
 
 	@Test
