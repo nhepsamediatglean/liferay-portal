@@ -34,7 +34,6 @@ import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.search.query.TermQuery;
 import com.liferay.portal.search.query.function.CombineFunction;
 import com.liferay.portal.search.query.function.score.ScoreFunctions;
-import com.liferay.portal.search.query.function.score.ScriptScoreFunction;
 import com.liferay.portal.search.script.Script;
 import com.liferay.portal.search.script.ScriptBuilder;
 import com.liferay.portal.search.script.ScriptType;
