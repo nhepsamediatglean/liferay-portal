@@ -237,27 +237,19 @@ public class FrequentPatternCommerceMLRecommendationManagerImpl
 		searchSearchRequest.setIndexNames(
 			_commerceMLIndexer.getIndexName(companyId));
 
-		searchSearchRequest.setSize(DEFAULT_FETCH_SIZE);
-
-		BooleanQuery excludeRecommendationsBooleanQuery =
-			_getExcludeRecommendations(cpDefinitionIds);
-
-		BooleanQuery booleanQuery = _getConstantScoreQuery(cpDefinitionIds);
-
-		ScriptScoreFunction scriptScoreFunction = _scoreFunctions.script(
-			_getScript(cpDefinitionIds));
-
 		FunctionScoreQuery functionScoreQuery = _queries.functionScore(
-			booleanQuery);
+			_getConstantScoreQuery(cpDefinitionIds));
 
 		functionScoreQuery.addFilterQueryScoreFunctionHolder(
-			excludeRecommendationsBooleanQuery, scriptScoreFunction);
-
+			_getExcludeRecommendations(cpDefinitionIds),
+			_scoreFunctions.script(_getScript(cpDefinitionIds)));
 		functionScoreQuery.setCombineFunction(CombineFunction.REPLACE);
 		functionScoreQuery.setScoreMode(FunctionScoreQuery.ScoreMode.SUM);
 		functionScoreQuery.setMinScore(1.1F);
 
 		searchSearchRequest.setQuery(functionScoreQuery);
+
+		searchSearchRequest.setSize(DEFAULT_FETCH_SIZE);
 
 		return searchSearchRequest;
 	}
