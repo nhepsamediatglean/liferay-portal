@@ -17,6 +17,11 @@ package com.liferay.portal.crypto.hash.internal;
 import com.liferay.portal.crypto.hash.CryptoHasher;
 import com.liferay.portal.crypto.hash.generation.CryptoHashGenerationResponse;
 import com.liferay.portal.crypto.hash.verification.CryptoHashVerificationContext;
+import com.liferay.portal.kernel.security.SecureRandomUtil;
+import com.liferay.portal.kernel.util.HashMapBuilder;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -30,6 +35,14 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(service = CryptoHasher.class)
 public class CryptoHasherImpl implements CryptoHasher {
+
+	public CryptoHasherImpl() throws NoSuchAlgorithmException {
+		_cryptoHashProvider = new CryptoHashProvider(
+			"SHA-256",
+			HashMapBuilder.put(
+				"saltSize", 0
+			).build());
+	}
 
 	@Override
 	public CryptoHashGenerationResponse generate(byte[] input)
@@ -59,7 +72,7 @@ public class CryptoHasherImpl implements CryptoHasher {
 		for (CryptoHashVerificationContext cryptoHashVerificationContext :
 				cryptoHashVerificationContexts) {
 
-			CryptoHashProvider cryptoHashProvider = _getCryptoHashProvider(
+			CryptoHashProvider cryptoHashProvider = new CryptoHashProvider(
 				cryptoHashVerificationContext.getCryptoHashProviderName(),
 				cryptoHashVerificationContext.
 					getCryptoHashProviderProperties());
@@ -79,6 +92,61 @@ public class CryptoHasherImpl implements CryptoHasher {
 		return Arrays.equals(input, hash);
 	}
 
-	private CryptoHashProvider _cryptoHashProvider;
+	private final CryptoHashProvider _cryptoHashProvider;
+
+	private static class CryptoHashProvider {
+
+		public CryptoHashProvider(
+				String cryptoHashProviderName,
+				Map<String, ?> cryptoHashProviderProperties)
+			throws NoSuchAlgorithmException {
+
+			_cryptoHashProviderName = cryptoHashProviderName;
+			_cryptoHashProviderProperties = cryptoHashProviderProperties;
+
+			_messageDigest = MessageDigest.getInstance(cryptoHashProviderName);
+		}
+
+		public CryptoHashProviderResponse generate(
+			byte[] pepper, byte[] salt, byte[] input) {
+
+			if (pepper == null) {
+				pepper = new byte[0];
+			}
+
+			if (salt == null) {
+				salt = new byte[0];
+			}
+
+			byte[] bytes = new byte[pepper.length + salt.length + input.length];
+
+			System.arraycopy(pepper, 0, bytes, 0, pepper.length);
+			System.arraycopy(salt, 0, bytes, pepper.length, salt.length);
+			System.arraycopy(
+				input, 0, bytes, pepper.length + salt.length, input.length);
+
+			return new CryptoHashProviderResponse(
+				_messageDigest.digest(bytes), salt, _cryptoHashProviderName,
+				_cryptoHashProviderProperties);
+		}
+
+		public byte[] generateSalt() {
+			int saltSize = (Integer)_cryptoHashProviderProperties.get(
+				"saltSize");
+
+			byte[] salt = new byte[saltSize];
+
+			for (int i = 0; i < saltSize; ++i) {
+				salt[i] = SecureRandomUtil.nextByte();
+			}
+
+			return salt;
+		}
+
+		private final String _cryptoHashProviderName;
+		private final Map<String, ?> _cryptoHashProviderProperties;
+		private final MessageDigest _messageDigest;
+
+	}
 
 }
