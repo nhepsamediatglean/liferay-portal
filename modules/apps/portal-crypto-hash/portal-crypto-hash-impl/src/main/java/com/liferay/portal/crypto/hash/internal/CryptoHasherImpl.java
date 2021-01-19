@@ -16,11 +16,6 @@ package com.liferay.portal.crypto.hash.internal;
 
 import com.liferay.portal.crypto.hash.CryptoHasher;
 import com.liferay.portal.crypto.hash.generation.CryptoHashGenerationResponse;
-import com.liferay.portal.crypto.hash.internal.pepper.storage.DummyCryptoHashPepperStorage;
-import com.liferay.portal.crypto.hash.pepper.storage.spi.CryptoHashPepperStorage;
-import com.liferay.portal.crypto.hash.provider.spi.CryptoHashProvider;
-import com.liferay.portal.crypto.hash.provider.spi.CryptoHashProviderResponse;
-import com.liferay.portal.crypto.hash.provider.spi.factory.CryptoHashProviderFactory;
 import com.liferay.portal.crypto.hash.verification.CryptoHashVerificationContext;
 
 import java.util.Arrays;
@@ -28,19 +23,12 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.ConfigurationPolicy;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
 
 /**
  * @author Arthur Chan
  * @author Carlos Sierra Andrés
  */
-@Component(
-	configurationPid = "com.liferay.portal.crypto.hash.configuration.CryptoHashProcessorConfiguration",
-	configurationPolicy = ConfigurationPolicy.REQUIRE,
-	service = CryptoHasher.class
-)
+@Component(service = CryptoHasher.class)
 public class CryptoHasherImpl implements CryptoHasher {
 
 	@Override
@@ -49,14 +37,6 @@ public class CryptoHasherImpl implements CryptoHasher {
 
 		byte[] pepper = null;
 		String pepperId = null;
-
-		if (!(_cryptoHashPepperStorage instanceof
-				DummyCryptoHashPepperStorage)) {
-
-			pepperId = _cryptoHashPepperStorage.getCurrentPepperId();
-
-			pepper = _cryptoHashPepperStorage.getPepper(pepperId);
-		}
 
 		final CryptoHashProviderResponse cryptoHashProviderResponse =
 			_cryptoHashProvider.generate(
@@ -84,23 +64,6 @@ public class CryptoHasherImpl implements CryptoHasher {
 				cryptoHashVerificationContext.
 					getCryptoHashProviderProperties());
 
-			// process pepper
-
-			byte[] pepper = null;
-
-			if (!(_cryptoHashPepperStorage instanceof
-					DummyCryptoHashPepperStorage)) {
-
-				Optional<String> optionalPepperId =
-					cryptoHashVerificationContext.getPepperIdOptional();
-
-				pepper = optionalPepperId.map(
-					_cryptoHashPepperStorage::getPepper
-				).orElse(
-					null
-				);
-			}
-
 			// process salt
 
 			Optional<byte[]> optionalSalt =
@@ -108,7 +71,7 @@ public class CryptoHasherImpl implements CryptoHasher {
 
 			final CryptoHashProviderResponse hashProviderResponse =
 				cryptoHashProvider.generate(
-					pepper, optionalSalt.orElse(null), input);
+					null, optionalSalt.orElse(null), input);
 
 			input = hashProviderResponse.getHash();
 		}
@@ -116,34 +79,6 @@ public class CryptoHasherImpl implements CryptoHasher {
 		return Arrays.equals(input, hash);
 	}
 
-	private CryptoHashProvider _getCryptoHashProvider(
-			String cryptoHashProviderName,
-			Map<String, ?> cryptoHashProviderProperties)
-		throws Exception {
-
-		CryptoHashProviderFactory cryptoHashProviderFactory =
-			_cryptoHashProviderFactoryRegistry.getCryptoHashProviderFactory(
-				cryptoHashProviderName);
-
-		return cryptoHashProviderFactory.create(
-			cryptoHashProviderName, cryptoHashProviderProperties);
-	}
-
-	@Reference(
-		cardinality = ReferenceCardinality.MANDATORY,
-		name = "CryptoHashPepperStorage",
-		target = "(component.name=com.liferay.portal.crypto.hash.internal.pepper.storage.DummyCryptoHashPepperStorage)"
-	)
-	private CryptoHashPepperStorage _cryptoHashPepperStorage;
-
-	@Reference(
-		cardinality = ReferenceCardinality.MANDATORY,
-		name = "CryptoHashProvider", target = "(component.name=)"
-	)
 	private CryptoHashProvider _cryptoHashProvider;
-
-	@Reference
-	private CryptoHashProviderFactoryRegistry
-		_cryptoHashProviderFactoryRegistry;
 
 }
