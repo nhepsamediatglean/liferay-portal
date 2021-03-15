@@ -82,7 +82,6 @@ public class DataLayoutRendererCTTest {
 		_ctCollection = _ctCollectionLocalService.addCTCollection(
 			_company.getCompanyId(), _user.getUserId(),
 			DataLayoutRendererCTTest.class.getName(), null);
-
 		_group = GroupTestUtil.addGroup(
 			_company.getCompanyId(), _user.getUserId(),
 			GroupConstants.DEFAULT_PARENT_GROUP_ID);
@@ -141,7 +140,6 @@ public class DataLayoutRendererCTTest {
 
 		dataLayoutRendererContext.setHttpServletResponse(
 			mockHttpServletResponse);
-
 		dataLayoutRendererContext.setPortletNamespace(
 			JournalPortletKeys.JOURNAL + StringPool.UNDERLINE);
 
