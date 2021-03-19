@@ -153,16 +153,11 @@ public class RemoteCommerceTaxEngine implements CommerceTaxEngine {
 			long channelGroupId)
 		throws Exception {
 
-		try {
-			return _configurationProvider.getConfiguration(
-				RemoteCommerceTaxConfiguration.class,
-				new GroupServiceSettingsLocator(
-					channelGroupId,
-					RemoteCommerceTaxConfiguration.class.getName()));
-		}
-		catch (ConfigurationException configurationException) {
-			throw new CommerceTaxEngineException(configurationException);
-		}
+		return _configurationProvider.getConfiguration(
+			RemoteCommerceTaxConfiguration.class,
+			new GroupServiceSettingsLocator(
+				channelGroupId,
+				RemoteCommerceTaxConfiguration.class.getName()));
 	}
 
 	private Map<String, String> _getCommerceAddressParameters(
