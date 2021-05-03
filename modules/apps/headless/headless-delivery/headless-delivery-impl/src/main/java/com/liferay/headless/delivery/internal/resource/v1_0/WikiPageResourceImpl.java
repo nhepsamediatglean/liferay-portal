@@ -276,7 +276,7 @@ public class WikiPageResourceImpl
 		}
 
 		if (wikiPage.getNodeId() == null) {
-			throw new BadRequestException("Node id is null");
+			throw new BadRequestException("Node ID is null");
 		}
 
 		return _toWikiPage(
