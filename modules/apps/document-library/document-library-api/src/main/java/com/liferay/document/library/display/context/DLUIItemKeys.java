@@ -40,8 +40,8 @@ public class DLUIItemKeys {
 	public static final String DELETE_VERSION =
 		DLUIItemKeys.class.getName() + "#delete-version";
 
-	public static final String DIGITAL_SIGNATURE =
-		DLUIItemKeys.class.getName() + "#digital-signature";
+	public static final String COLLECT_DIGITAL_SIGNATURE =
+		DLUIItemKeys.class.getName() + "#collect-digital-signature";
 
 	public static final String DOWNLOAD =
 		DLUIItemKeys.class.getName() + "#download";
