@@ -31,6 +31,9 @@ public class DLUIItemKeys {
 	public static final String CHECKOUT =
 		DLUIItemKeys.class.getName() + "#checkout";
 
+	public static final String COLLECT_DIGITAL_SIGNATURE =
+		DLUIItemKeys.class.getName() + "#collect-digital-signature";
+
 	public static final String COMPARE_TO =
 		DLUIItemKeys.class.getName() + "#compare-to";
 
@@ -39,9 +42,6 @@ public class DLUIItemKeys {
 
 	public static final String DELETE_VERSION =
 		DLUIItemKeys.class.getName() + "#delete-version";
-
-	public static final String COLLECT_DIGITAL_SIGNATURE =
-		DLUIItemKeys.class.getName() + "#collect-digital-signature";
 
 	public static final String DOWNLOAD =
 		DLUIItemKeys.class.getName() + "#download";
