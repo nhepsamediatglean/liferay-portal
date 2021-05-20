@@ -100,10 +100,10 @@ public abstract class ProcessorImpl
 		public <V, U, Y> void handleMappedUnsafeObject(
 			String fieldExpression, Class<V> clazz,
 			BiFunction<V, BiFunction<String, Class<Y>, Y>, U> mappingFunction,
-			UnsafeBiConsumer<T, U, ?> consumer) {
+			UnsafeBiConsumer<T, U, ?> unsafeBiConsumer) {
 
 			_bufferedSetters.add(
-				object -> consumer.accept(
+				object -> unsafeBiConsumer.accept(
 					object,
 					mappingFunction.apply(
 						_processorContext.getValue(fieldExpression, clazz),
@@ -112,7 +112,7 @@ public abstract class ProcessorImpl
 
 		public <V> void handleUnsafeObjectArray(
 			String fieldExpression, Class<V> clazz,
-			UnsafeBiConsumer<T, V[], ?> consumer) {
+			UnsafeBiConsumer<T, V[], ?> unsafeBiConsumer) {
 
 			V[] values = _processorContext.getValueArray(
 				fieldExpression, clazz);
@@ -121,32 +121,32 @@ public abstract class ProcessorImpl
 				return;
 			}
 
-			_bufferedSetters.add(object -> consumer.accept(object, values));
+			_bufferedSetters.add(object -> unsafeBiConsumer.accept(object, values));
 		}
 
 		@Override
 		public void handleUnsafeStringArray(
-			String fieldExpression, UnsafeBiConsumer<T, String[], ?> consumer) {
+			String fieldExpression, UnsafeBiConsumer<T, String[], ?> unsafeBiConsumer) {
 
-			handleUnsafeObjectArray(fieldExpression, String.class, consumer);
+			handleUnsafeObjectArray(fieldExpression, String.class, unsafeBiConsumer);
 		}
 
 		@Override
 		public void mapBoolean(
-			String fieldExpression, BiConsumer<T, Boolean> consumer) {
+			String fieldExpression, BiConsumer<T, Boolean> biConsumer) {
 
 			handleUnsafeStringArray(
 				fieldExpression,
 				(object, values) -> {
 					for (String value : values) {
-						consumer.accept(object, GetterUtil.getBoolean(value));
+						biConsumer.accept(object, GetterUtil.getBoolean(value));
 					}
 				});
 		}
 
 		@Override
 		public void mapBooleanArray(
-			String fieldExpression, BiConsumer<T, boolean[]> consumer) {
+			String fieldExpression, BiConsumer<T, boolean[]> biConsumer) {
 
 			handleUnsafeStringArray(
 				fieldExpression,
@@ -157,20 +157,20 @@ public abstract class ProcessorImpl
 						booleanArray[i] = GetterUtil.getBoolean(value[i]);
 					}
 
-					consumer.accept(object, booleanArray);
+					biConsumer.accept(object, booleanArray);
 				});
 		}
 
 		@Override
 		public void mapLong(
-			String fieldExpression, BiConsumer<T, Long> consumer) {
+			String fieldExpression, BiConsumer<T, Long> biConsumer) {
 
 			handleUnsafeStringArray(
 				fieldExpression,
 				(object, values) -> {
 					for (String value : values) {
 						try {
-							consumer.accept(object, Long.parseLong(value));
+							biConsumer.accept(object, Long.parseLong(value));
 						}
 						catch (NumberFormatException numberFormatException) {
 							throw numberFormatException;
@@ -181,14 +181,14 @@ public abstract class ProcessorImpl
 
 		@Override
 		public void mapLongArray(
-			String fieldExpression, BiConsumer<T, long[]> consumer) {
+			String fieldExpression, BiConsumer<T, long[]> biConsumer) {
 
 			handleUnsafeStringArray(
 				fieldExpression,
 				(object, value) -> {
 					Stream<String> stream = Arrays.stream(value);
 
-					consumer.accept(
+					biConsumer.accept(
 						object,
 						stream.mapToLong(
 							Long::parseLong
@@ -198,28 +198,28 @@ public abstract class ProcessorImpl
 
 		@Override
 		public void mapString(
-			String fieldExpression, BiConsumer<T, String> consumer) {
+			String fieldExpression, BiConsumer<T, String> biConsumer) {
 
 			handleUnsafeStringArray(
 				fieldExpression,
-				(object, values) -> consumer.accept(object, values[0]));
+				(object, values) -> biConsumer.accept(object, values[0]));
 		}
 
 		@Override
 		public void mapStringArray(
-			String fieldExpression, BiConsumer<T, String[]> consumer) {
+			String fieldExpression, BiConsumer<T, String[]> biConsumer) {
 
 			handleUnsafeStringArray(
-				fieldExpression, (object, values) -> consumer.accept(object, values));
+				fieldExpression, (object, values) -> biConsumer.accept(object, values));
 		}
 
 		@Override
 		public void mapUnsafeString(
-			String fieldExpression, UnsafeBiConsumer<T, String, ?> consumer) {
+			String fieldExpression, UnsafeBiConsumer<T, String, ?> unsafeBiConsumer) {
 
 			handleUnsafeStringArray(
 				fieldExpression,
-				(object, values) -> consumer.accept(object, values[0]));
+				(object, values) -> unsafeBiConsumer.accept(object, values[0]));
 		}
 
 		private final Queue<UnsafeConsumer<T, ?>> _bufferedSetters;
