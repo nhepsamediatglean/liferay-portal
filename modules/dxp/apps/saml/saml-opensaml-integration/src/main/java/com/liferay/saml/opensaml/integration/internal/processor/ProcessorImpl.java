@@ -137,9 +137,9 @@ public abstract class ProcessorImpl
 
 			handleUnsafeStringArray(
 				fieldExpression,
-				(obj, values) -> {
+				(object, values) -> {
 					for (String value : values) {
-						consumer.accept(obj, GetterUtil.getBoolean(value));
+						consumer.accept(object, GetterUtil.getBoolean(value));
 					}
 				});
 		}
@@ -150,14 +150,14 @@ public abstract class ProcessorImpl
 
 			handleUnsafeStringArray(
 				fieldExpression,
-				(obj, value) -> {
+				(object, value) -> {
 					boolean[] booleanArray = new boolean[value.length];
 
 					for (int i = 0; i < booleanArray.length; i++) {
 						booleanArray[i] = GetterUtil.getBoolean(value[i]);
 					}
 
-					consumer.accept(obj, booleanArray);
+					consumer.accept(object, booleanArray);
 				});
 		}
 
@@ -167,10 +167,10 @@ public abstract class ProcessorImpl
 
 			handleUnsafeStringArray(
 				fieldExpression,
-				(obj, values) -> {
+				(object, values) -> {
 					for (String value : values) {
 						try {
-							consumer.accept(obj, Long.parseLong(value));
+							consumer.accept(object, Long.parseLong(value));
 						}
 						catch (NumberFormatException numberFormatException) {
 							throw numberFormatException;
@@ -185,11 +185,11 @@ public abstract class ProcessorImpl
 
 			handleUnsafeStringArray(
 				fieldExpression,
-				(obj, value) -> {
+				(object, value) -> {
 					Stream<String> stream = Arrays.stream(value);
 
 					consumer.accept(
-						obj,
+						object,
 						stream.mapToLong(
 							Long::parseLong
 						).toArray());
@@ -202,7 +202,7 @@ public abstract class ProcessorImpl
 
 			handleUnsafeStringArray(
 				fieldExpression,
-				(obj, values) -> consumer.accept(obj, values[0]));
+				(object, values) -> consumer.accept(object, values[0]));
 		}
 
 		@Override
@@ -210,7 +210,7 @@ public abstract class ProcessorImpl
 			String fieldExpression, BiConsumer<T, String[]> consumer) {
 
 			handleUnsafeStringArray(
-				fieldExpression, (obj, values) -> consumer.accept(obj, values));
+				fieldExpression, (object, values) -> consumer.accept(object, values));
 		}
 
 		@Override
@@ -219,7 +219,7 @@ public abstract class ProcessorImpl
 
 			handleUnsafeStringArray(
 				fieldExpression,
-				(obj, values) -> consumer.accept(obj, values[0]));
+				(object, values) -> consumer.accept(object, values[0]));
 		}
 
 		private final Queue<UnsafeConsumer<T, ?>> _bufferedSetters;
