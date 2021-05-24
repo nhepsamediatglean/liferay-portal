@@ -91,8 +91,9 @@ public abstract class ProcessorImpl
 		implements ProcessorContext.Bind<T> {
 
 		public BindImpl(
-			Function<M, T> modelGetterFunction, int processingIndex,
-			ProcessorContext processorContext, String publicIdentifier,
+			Function<M, T> modelGetterFunction,
+			ProcessorContext processorContext, int processingIndex,
+			String publicIdentifier,
 			ProcessorContext.UpdateFunction<T> updateFunction) {
 
 			_processorContext = processorContext;
@@ -235,17 +236,17 @@ public abstract class ProcessorImpl
 			int processingIndex, UpdateFunction<M> updateFunction) {
 
 			return new BindImpl<>(
-				Function.identity(), processingIndex, this, null,
+				Function.identity(), this, processingIndex, null,
 				updateFunction);
 		}
 
 		@Override
 		public <T extends BaseModel<T>> Bind<T> bind(
-			String publicIdentifier, Function<M, T> modelGetterFunction,
-			int processingIndex, UpdateFunction<T> updateFunction) {
+			Function<M, T> modelGetterFunction, int processingIndex, String publicIdentifier,
+			UpdateFunction<T> updateFunction) {
 
 			return new BindImpl<>(
-				modelGetterFunction, processingIndex, this, publicIdentifier,
+				modelGetterFunction, this, processingIndex, publicIdentifier,
 				updateFunction);
 		}
 

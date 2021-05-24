@@ -79,12 +79,12 @@ public class SamlSpIdpConnectionProcessorFactoryImpl
 
 			public SamlSpIdpConnectionBindImpl(
 				Function<SamlSpIdpConnection, T> modelGetterFunction,
-				int processingIndex, ProcessorContext processorContext,
+				ProcessorContext processorContext, int processingIndex,
 				String publicIdentifier,
 				ProcessorContext.UpdateFunction<T> updateFunction) {
 
 				super(
-					modelGetterFunction, processingIndex, processorContext,
+					modelGetterFunction, processorContext, processingIndex,
 					publicIdentifier, updateFunction);
 			}
 
@@ -113,18 +113,17 @@ public class SamlSpIdpConnectionProcessorFactoryImpl
 				UpdateFunction<SamlSpIdpConnection> updateFunction) {
 
 				return new SamlSpIdpConnectionBindImpl<>(
-					Function.identity(), processingIndex, this, null,
+					Function.identity(), this, processingIndex, null,
 					updateFunction);
 			}
 
 			@Override
 			public <T extends BaseModel<T>> SamlSpIdpConnectionBind<T> bind(
-				String publicIdentifier,
 				Function<SamlSpIdpConnection, T> modelGetterFunction,
-				int processingIndex, UpdateFunction<T> updateFunction) {
+				int processingIndex, String publicIdentifier, UpdateFunction<T> updateFunction) {
 
 				return new SamlSpIdpConnectionBindImpl<>(
-					modelGetterFunction, processingIndex, this,
+					modelGetterFunction, this, processingIndex,
 					publicIdentifier, updateFunction);
 			}
 
