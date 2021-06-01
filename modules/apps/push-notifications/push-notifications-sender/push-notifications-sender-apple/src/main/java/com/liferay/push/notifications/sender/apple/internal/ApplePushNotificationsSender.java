@@ -86,8 +86,8 @@ public class ApplePushNotificationsSender implements PushNotificationsSender {
 		tokensStream.map(
 			token -> new SimpleApnsPushNotification(token, _topic, payload)
 		).forEach(
-			notification -> _handleNotificationResponse(
-				_apnsClient.sendNotification(notification))
+			simpleApnsPushNotification -> _handleNotificationResponse(
+				_apnsClient.sendNotification(simpleApnsPushNotification))
 		);
 	}
 
@@ -322,10 +322,11 @@ public class ApplePushNotificationsSender implements PushNotificationsSender {
 					_log.isWarnEnabled()) {
 
 					String timestamp = String.valueOf(
-						response.getTokenInvalidationTimestamp(
-						).orElse(
-							Instant.parse("")
-						));
+						simpleApnsPushNotification.
+							getTokenInvalidationTimestamp(
+							).orElse(
+								Instant.parse("")
+							));
 
 					_log.warn(
 						StringBundler.concat(
