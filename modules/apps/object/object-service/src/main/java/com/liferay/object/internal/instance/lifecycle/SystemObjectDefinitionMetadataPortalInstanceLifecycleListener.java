@@ -21,7 +21,8 @@ import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
+import com.liferay.portal.kernel.model.Release;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -40,23 +41,12 @@ import org.osgi.service.component.annotations.ReferencePolicyOption;
 public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 	extends BasePortalInstanceLifecycleListener {
 
-	public SystemObjectDefinitionMetadataPortalInstanceLifecycleListener() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initializing");
-		}
-	}
-
 	@Override
 	public void portalInstanceRegistered(Company company) {
 		for (SystemObjectDefinitionMetadata systemObjectDefinitionMetadata :
 				_systemObjectDefinitionMetadatas) {
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					StringBundler.concat(
-						"Applying ", systemObjectDefinitionMetadata, " to ",
-						company));
-			}
+			_apply(company.getCompanyId(), systemObjectDefinitionMetadata);
 		}
 	}
 
@@ -70,30 +60,49 @@ public class SystemObjectDefinitionMetadataPortalInstanceLifecycleListener
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				StringBundler.concat(
-					"Adding ", systemObjectDefinitionMetadata));
+			_log.debug("Adding " + systemObjectDefinitionMetadata);
 		}
 
 		_systemObjectDefinitionMetadatas.add(systemObjectDefinitionMetadata);
+
+		_companyLocalService.forEachCompanyId(
+			companyId -> _apply(companyId, systemObjectDefinitionMetadata));
 	}
 
 	protected void removeSystemObjectDefinitionMetadata(
 		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				StringBundler.concat(
-					"Removing ", systemObjectDefinitionMetadata));
+			_log.debug("Removing " + systemObjectDefinitionMetadata);
 		}
 
 		_systemObjectDefinitionMetadatas.remove(systemObjectDefinitionMetadata);
 	}
 
-	private boolean _initialized;
+	@Reference(
+		target = "(&(release.bundle.symbolic.name=com.liferay.object.service)(release.schema.version>=1.0.0))",
+		unbind = "-"
+	)
+	protected void setRelease(Release release) {
+	}
+
+	private void _apply(
+		long companyId,
+		SystemObjectDefinitionMetadata systemObjectDefinitionMetadata) {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				StringBundler.concat(
+					"Applying ", systemObjectDefinitionMetadata, " to company ",
+					companyId));
+		}
+	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SystemObjectDefinitionMetadataPortalInstanceLifecycleListener.class);
+
+	@Reference
+	private CompanyLocalService _companyLocalService;
 
 	private final List<SystemObjectDefinitionMetadata>
 		_systemObjectDefinitionMetadatas = new CopyOnWriteArrayList<>();
