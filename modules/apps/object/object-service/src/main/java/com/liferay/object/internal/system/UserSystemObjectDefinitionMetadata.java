@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.commerce.internal.object.system;
+package com.liferay.object.internal.system;
 
-import com.liferay.commerce.model.CommerceOrderTable;
 import com.liferay.object.model.ObjectField;
 import com.liferay.object.service.ObjectFieldLocalService;
 import com.liferay.object.system.SystemObjectDefinitionMetadata;
+import com.liferay.portal.kernel.model.UserTable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,26 +28,24 @@ import org.osgi.service.component.annotations.Component;
  * @author Marco Leo
  * @author Brian Wing Shun Chan
  */
-@Component(
-	enabled = false, immediate = true,
-	service = SystemObjectDefinitionMetadata.class
-)
-public class CommerceOrderSystemObjectDefinitionMetadata
+@Component(immediate = true, service = SystemObjectDefinitionMetadata.class)
+public class UserSystemObjectDefinitionMetadata
 	implements SystemObjectDefinitionMetadata {
 
 	@Override
 	public String getName() {
-		return CommerceOrderTable.INSTANCE.getTableName();
+		return UserTable.INSTANCE.getTableName();
 	}
 
 	@Override
 	public List<ObjectField> getObjectFields() {
 		return Arrays.asList(
 			_createObjectField(
-				CommerceOrderTable.INSTANCE.orderStatus.getName(), "Integer"),
+				UserTable.INSTANCE.emailAddress.getName(), null, "String"),
 			_createObjectField(
-				CommerceOrderTable.INSTANCE.shippingAmount.getName(),
-				"BigDecimal"));
+				UserTable.INSTANCE.firstName.getName(), null, "String"),
+			_createObjectField(
+				UserTable.INSTANCE.uuid.getName(), "uuid", "String"));
 	}
 
 	@Override
@@ -55,9 +53,12 @@ public class CommerceOrderSystemObjectDefinitionMetadata
 		return 1;
 	}
 
-	private ObjectField _createObjectField(String name, String type) {
+	private ObjectField _createObjectField(
+		String dbColumnName, String name, String type) {
+
 		ObjectField objectField = _objectFieldLocalService.createObjectField(0);
 
+		objectField.setDBColumnName(dbColumnName);
 		objectField.setIndexed(false);
 		objectField.setIndexedAsKeyword(false);
 		objectField.setName(name);
