@@ -25,11 +25,9 @@ import java.util.Map;
  */
 public class LocalizedMapUtil {
 
-	public static Map<Locale, String> getLocalizedMap(
-		String labelKey, Locale locale) {
-
+	public static Map<Locale, String> getLocalizedMap(String label) {
 		return Collections.singletonMap(
-			locale, LanguageUtil.get(locale, labelKey));
+			LocaleUtil.getDefault(), label);
 	}
 
 }
