@@ -45,6 +45,8 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+import com.liferay.portal.kernel.util.HashMapDictionaryBuilder;
+
 
 /**
  * @author Iván Zaera Avellón
@@ -69,8 +71,13 @@ public class CustomElementsDynamicPortlet extends MVCPortlet {
 		Dictionary<String, Object> properties = new Hashtable<>();
 
 		properties.put(
+			"com.liferay.portlet.company",
+			_customElementsPortletDescriptor.getCompanyId());
+		properties.put(
 			"com.liferay.portlet.css-class-wrapper",
 			"portlet-custom-element-portlet");
+		properties.put(
+			"com.liferay.portlet.display-category", "category.sample");
 
 		Collection<String> cssURLs = StringUtil.split(
 			_customElementsPortletDescriptor.getCSSURLs(), CharPool.NEW_LINE);
@@ -80,17 +87,12 @@ public class CustomElementsDynamicPortlet extends MVCPortlet {
 			cssURLs.toArray(new String[0]));
 
 		properties.put(
-			"com.liferay.portlet.display-category", "category.sample");
-		properties.put(
 			"com.liferay.portlet.instanceable",
 			_customElementsPortletDescriptor.isInstanceable());
 		properties.put("javax.portlet.name", _getPortletName());
-		properties.put("javax.portlet.security-role-ref", "power-user,user");
 		properties.put(
 			"javax.portlet.resource-bundle", _getResourceBundleName());
-		properties.put(
-			"target.deployment.company",
-			_customElementsPortletDescriptor.getCompanyId());
+		properties.put("javax.portlet.security-role-ref", "power-user,user");
 
 		_serviceRegistration = bundleContext.registerService(
 			Portlet.class, this, properties);

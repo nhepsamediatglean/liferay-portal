@@ -80,15 +80,15 @@ public class RemoteAppPortlet extends MVCPortlet {
 		_serviceRegistration = bundleContext.registerService(
 			Portlet.class, this, properties);
 
-		properties = new Hashtable<>();
-
-		properties.put("resource.bundle.base.name", _getResourceBundleName());
-		properties.put("servlet.context.name", "remote-app-admin-web");
-
 		_resourceBundleLoaderServiceRegistration =
 			bundleContext.registerService(
 				ResourceBundleLoader.class,
-				locale -> _getResourceBundle(locale), properties);
+				locale -> _getResourceBundle(locale),
+				HashMapDictionaryBuilder.<String, Object>put(
+					"resource.bundle.base.name", _getResourceBundleName()
+				).put(
+					"servlet.context.name", "remote-app-admin-web"()
+				).build());
 	}
 
 	@Override
