@@ -215,4 +215,18 @@ public class CustomElementsPortletDescriptorLocalServiceImpl
 		return customElementsPortletDescriptors;
 	}
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		CustomElementsPortletDescriptorLocalServiceImpl.class);
+
+	private BundleContext _bundleContext;
+
+	private final Map<Long, CustomElementsPortlet> _customElementsPortlets =
+		new ConcurrentHashMap<>();
+
+	@Reference
+	private Portal _portal;
+
+	@Reference
+	private PortletLocalService _portletLocalService;
+
 }
