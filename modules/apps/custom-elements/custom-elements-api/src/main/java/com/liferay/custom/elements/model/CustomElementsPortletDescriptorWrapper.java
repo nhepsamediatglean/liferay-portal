@@ -238,6 +238,11 @@ public class CustomElementsPortletDescriptorWrapper
 		return model.getName();
 	}
 
+	@Override
+	public String getPortletName() {
+		return model.getPortletName();
+	}
+
 	/**
 	 * Returns the primary key of this custom elements portlet descriptor.
 	 *
