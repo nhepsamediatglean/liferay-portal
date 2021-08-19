@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.PortletLocalService;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -166,8 +167,8 @@ public class CustomElementsPortletRegistrarImpl
 	private CustomElementsPortletDescriptorLocalService
 		_customElementsPortletDescriptorLocalService;
 
-	private final ConcurrentMap<Long, CustomElementsPortlet>
-		_customElementsPortlets = new ConcurrentHashMap<>();
+	private final Map<Long, CustomElementsPortlet> _customElementsPortlets =
+		new ConcurrentHashMap<>();
 
 	@Reference
 	private Portal _portal;
