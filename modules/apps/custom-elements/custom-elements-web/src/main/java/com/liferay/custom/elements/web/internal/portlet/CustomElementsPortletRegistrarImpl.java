@@ -95,8 +95,7 @@ public class CustomElementsPortletRegistrarImpl
 		CustomElementsPortletDescriptor customElementsPortletDescriptor) {
 
 		String portletId = StringUtil.replace(
-			CustomElementsPortlet.getPortletName(
-				customElementsPortletDescriptor),
+			customElementsPortletDescriptor.getPortletName(),
 			new char[] {'.', '$'}, new char[] {'_', '_'});
 
 		portletId = _portal.getJsSafePortletId(portletId);

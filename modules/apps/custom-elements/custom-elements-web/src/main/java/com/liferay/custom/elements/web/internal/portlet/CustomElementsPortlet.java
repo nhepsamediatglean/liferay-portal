@@ -50,17 +50,6 @@ import org.osgi.framework.ServiceRegistration;
  */
 public class CustomElementsPortlet extends MVCPortlet {
 
-	public static String getPortletName(
-		CustomElementsPortletDescriptor customElementsPortletDescriptor) {
-
-		long customElementsPortletDescriptorId =
-			customElementsPortletDescriptor.
-				getCustomElementsPortletDescriptorId();
-
-		return "com_liferay_custom_elements_web_internal_portlet_" +
-			"CustomElementsPortlet#" + customElementsPortletDescriptorId;
-	}
-
 	public CustomElementsPortlet(
 		CustomElementsPortletDescriptor customElementsPortletDescriptor) {
 
@@ -93,7 +82,7 @@ public class CustomElementsPortlet extends MVCPortlet {
 				_customElementsPortletDescriptor.isInstanceable()
 			).put(
 				"javax.portlet.name",
-				getPortletName(_customElementsPortletDescriptor)
+				_customElementsPortletDescriptor.getPortletName()
 			).put(
 				"javax.portlet.resource-bundle", _getResourceBundleName()
 			).put(
@@ -201,7 +190,7 @@ public class CustomElementsPortlet extends MVCPortlet {
 
 			private final Map<String, String> _labels = HashMapBuilder.put(
 				"javax.portlet.title." +
-					getPortletName(_customElementsPortletDescriptor),
+					_customElementsPortletDescriptor.getPortletName(),
 				_customElementsPortletDescriptor.getName()
 			).build();
 
@@ -209,7 +198,7 @@ public class CustomElementsPortlet extends MVCPortlet {
 	}
 
 	private String _getResourceBundleName() {
-		return getPortletName(_customElementsPortletDescriptor) + ".Language";
+		return _customElementsPortletDescriptor.getPortletName() + ".Language";
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
