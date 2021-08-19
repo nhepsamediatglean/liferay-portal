@@ -19,4 +19,11 @@ package com.liferay.custom.elements.model.impl;
  */
 public class CustomElementsPortletDescriptorImpl
 	extends CustomElementsPortletDescriptorBaseImpl {
+
+	@Override
+	public String getPortletName() {
+		return "com_liferay_custom_elements_web_internal_portlet_" +
+			"CustomElementsPortlet#" + getCustomElementsPortletDescriptorId();
+	}
+
 }
