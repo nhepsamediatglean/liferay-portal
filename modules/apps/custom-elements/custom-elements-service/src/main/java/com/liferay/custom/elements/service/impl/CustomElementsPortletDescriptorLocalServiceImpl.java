@@ -18,6 +18,7 @@ import com.liferay.custom.elements.model.CustomElementsPortletDescriptor;
 import com.liferay.custom.elements.model.CustomElementsSource;
 import com.liferay.custom.elements.service.base.CustomElementsPortletDescriptorLocalServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.cluster.Clusterable;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
@@ -41,6 +42,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 
 /**
@@ -80,8 +83,51 @@ public class CustomElementsPortletDescriptorLocalServiceImpl
 		customElementsPortletDescriptor.setName(name);
 		customElementsPortletDescriptor.setProperties(properties);
 
-		return customElementsPortletDescriptorPersistence.update(
+		customElementsPortletDescriptor =
+			customElementsPortletDescriptorPersistence.update(
+				customElementsPortletDescriptor);
+
+		customElementsPortletDescriptorLocalService.
+			deployCustomElementsPortletDescriptor(
+				customElementsPortletDescriptor);
+
+		return customElementsPortletDescriptor;
+	}
+
+	@Override
+	public CustomElementsPortletDescriptor
+			deleteCustomElementsPortletDescriptor(
+				CustomElementsPortletDescriptor customElementsPortletDescriptor)
+		throws PortalException {
+
+		customElementsPortletDescriptorPersistence.remove(
 			customElementsPortletDescriptor);
+
+		customElementsPortletDescriptorLocalService.
+			undeployCustomElementsPortletDescriptor(
+				customElementsPortletDescriptor);
+
+		return customElementsPortletDescriptor;
+	}
+
+	@Override
+	public CustomElementsPortletDescriptor
+			deleteCustomElementsPortletDescriptor(
+				long customElementsPortletDescriptorId)
+		throws PortalException {
+
+		CustomElementsPortletDescriptor customElementsPortletDescriptor =
+			customElementsPortletDescriptorPersistence.findByPrimaryKey(
+				customElementsPortletDescriptorId);
+
+		return deleteCustomElementsPortletDescriptor(
+			customElementsPortletDescriptor);
+	}
+
+	@Clusterable
+	@Override
+	public void deployCustomElementsPortletDescriptor(
+		CustomElementsPortletDescriptor customElementsPortletDescriptor) {
 	}
 
 	@Override
@@ -125,6 +171,28 @@ public class CustomElementsPortletDescriptorLocalServiceImpl
 		return GetterUtil.getInteger(indexer.searchCount(searchContext));
 	}
 
+	@Override
+	public void setAopProxy(Object aopProxy) {
+		super.setAopProxy(aopProxy);
+
+		List<CustomElementsPortletDescriptor> customElementsPortletDescriptors =
+			customElementsPortletDescriptorLocalService.
+				getCustomElementsPortletDescriptors();
+
+		for (CustomElementsPortletDescriptor customElementsPortletDescriptor :
+				customElementsPortletDescriptors) {
+
+			deployCustomElementsPortletDescriptor(
+				customElementsPortletDescriptor);
+		}
+	}
+
+	@Clusterable
+	@Override
+	public void undeployCustomElementsPortletDescriptor(
+		CustomElementsPortletDescriptor customElementsPortletDescriptor) {
+	}
+
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CustomElementsPortletDescriptor
@@ -146,6 +214,11 @@ public class CustomElementsPortletDescriptorLocalServiceImpl
 
 		return customElementsPortletDescriptorPersistence.update(
 			customElementsPortletDescriptor);
+	}
+
+	@Activate
+	protected void activate(BundleContext bundleContext) {
+		_bundleContext = bundleContext;
 	}
 
 	private SearchContext _buildSearchContext(
@@ -214,5 +287,7 @@ public class CustomElementsPortletDescriptorLocalServiceImpl
 
 		return customElementsPortletDescriptors;
 	}
+
+	private BundleContext _bundleContext;
 
 }
