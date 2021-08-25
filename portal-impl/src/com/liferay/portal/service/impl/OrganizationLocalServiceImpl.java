@@ -551,19 +551,10 @@ public class OrganizationLocalServiceImpl
 		User user = userPersistence.findByC_EA(
 			organization.getCompanyId(), emailAddress);
 
-		List<Long> organizationIdList = ListUtil.fromArray(
-			user.getOrganizationIds());
-
-		organizationIdList.remove(organizationId);
-
-		Stream<Long> stream = organizationIdList.stream();
-
-		LongStream longStream = stream.mapToLong(l -> l);
-
-		long[] organizationIds = longStream.toArray();
-
 		userLocalService.updateOrganizations(
-			user.getUserId(), organizationIds, serviceContext);
+			user.getUserId(),
+			ArrayUtil.remove(user.getOrganizationIds(), organizationId),
+			serviceContext);
 	}
 
 	/**
