@@ -52,8 +52,9 @@ public class WebhookEntryWrapper
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("active", isActive());
+		attributes.put("destinationName", getDestinationName());
 		attributes.put(
-			"messageBusDestinationName", getMessageBusDestinationName());
+			"destinationWebhookEventKeys", getDestinationWebhookEventKeys());
 		attributes.put("name", getName());
 		attributes.put("url", getURL());
 
@@ -116,11 +117,17 @@ public class WebhookEntryWrapper
 			setActive(active);
 		}
 
-		String messageBusDestinationName = (String)attributes.get(
-			"messageBusDestinationName");
+		String destinationName = (String)attributes.get("destinationName");
 
-		if (messageBusDestinationName != null) {
-			setMessageBusDestinationName(messageBusDestinationName);
+		if (destinationName != null) {
+			setDestinationName(destinationName);
+		}
+
+		String destinationWebhookEventKeys = (String)attributes.get(
+			"destinationWebhookEventKeys");
+
+		if (destinationWebhookEventKeys != null) {
+			setDestinationWebhookEventKeys(destinationWebhookEventKeys);
 		}
 
 		String name = (String)attributes.get("name");
@@ -172,13 +179,23 @@ public class WebhookEntryWrapper
 	}
 
 	/**
-	 * Returns the message bus destination name of this webhook entry.
+	 * Returns the destination name of this webhook entry.
 	 *
-	 * @return the message bus destination name of this webhook entry
+	 * @return the destination name of this webhook entry
 	 */
 	@Override
-	public String getMessageBusDestinationName() {
-		return model.getMessageBusDestinationName();
+	public String getDestinationName() {
+		return model.getDestinationName();
+	}
+
+	/**
+	 * Returns the destination webhook event keys of this webhook entry.
+	 *
+	 * @return the destination webhook event keys of this webhook entry
+	 */
+	@Override
+	public String getDestinationWebhookEventKeys() {
+		return model.getDestinationWebhookEventKeys();
 	}
 
 	/**
@@ -327,13 +344,25 @@ public class WebhookEntryWrapper
 	}
 
 	/**
-	 * Sets the message bus destination name of this webhook entry.
+	 * Sets the destination name of this webhook entry.
 	 *
-	 * @param messageBusDestinationName the message bus destination name of this webhook entry
+	 * @param destinationName the destination name of this webhook entry
 	 */
 	@Override
-	public void setMessageBusDestinationName(String messageBusDestinationName) {
-		model.setMessageBusDestinationName(messageBusDestinationName);
+	public void setDestinationName(String destinationName) {
+		model.setDestinationName(destinationName);
+	}
+
+	/**
+	 * Sets the destination webhook event keys of this webhook entry.
+	 *
+	 * @param destinationWebhookEventKeys the destination webhook event keys of this webhook entry
+	 */
+	@Override
+	public void setDestinationWebhookEventKeys(
+		String destinationWebhookEventKeys) {
+
+		model.setDestinationWebhookEventKeys(destinationWebhookEventKeys);
 	}
 
 	/**

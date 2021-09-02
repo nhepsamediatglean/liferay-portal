@@ -77,7 +77,7 @@ public class WebhookEntryCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{mvccVersion=");
 		sb.append(mvccVersion);
@@ -97,8 +97,10 @@ public class WebhookEntryCacheModel
 		sb.append(modifiedDate);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", messageBusDestinationName=");
-		sb.append(messageBusDestinationName);
+		sb.append(", destinationName=");
+		sb.append(destinationName);
+		sb.append(", destinationWebhookEventKeys=");
+		sb.append(destinationWebhookEventKeys);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", url=");
@@ -148,12 +150,19 @@ public class WebhookEntryCacheModel
 
 		webhookEntryImpl.setActive(active);
 
-		if (messageBusDestinationName == null) {
-			webhookEntryImpl.setMessageBusDestinationName("");
+		if (destinationName == null) {
+			webhookEntryImpl.setDestinationName("");
 		}
 		else {
-			webhookEntryImpl.setMessageBusDestinationName(
-				messageBusDestinationName);
+			webhookEntryImpl.setDestinationName(destinationName);
+		}
+
+		if (destinationWebhookEventKeys == null) {
+			webhookEntryImpl.setDestinationWebhookEventKeys("");
+		}
+		else {
+			webhookEntryImpl.setDestinationWebhookEventKeys(
+				destinationWebhookEventKeys);
 		}
 
 		if (name == null) {
@@ -190,7 +199,8 @@ public class WebhookEntryCacheModel
 		modifiedDate = objectInput.readLong();
 
 		active = objectInput.readBoolean();
-		messageBusDestinationName = objectInput.readUTF();
+		destinationName = objectInput.readUTF();
+		destinationWebhookEventKeys = objectInput.readUTF();
 		name = objectInput.readUTF();
 		url = objectInput.readUTF();
 	}
@@ -224,11 +234,18 @@ public class WebhookEntryCacheModel
 
 		objectOutput.writeBoolean(active);
 
-		if (messageBusDestinationName == null) {
+		if (destinationName == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
-			objectOutput.writeUTF(messageBusDestinationName);
+			objectOutput.writeUTF(destinationName);
+		}
+
+		if (destinationWebhookEventKeys == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(destinationWebhookEventKeys);
 		}
 
 		if (name == null) {
@@ -255,7 +272,8 @@ public class WebhookEntryCacheModel
 	public long createDate;
 	public long modifiedDate;
 	public boolean active;
-	public String messageBusDestinationName;
+	public String destinationName;
+	public String destinationWebhookEventKeys;
 	public String name;
 	public String url;
 

@@ -8,7 +8,8 @@ create table WebhookEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	active_ BOOLEAN,
-	messageBusDestinationName VARCHAR(75) null,
+	destinationName VARCHAR(75) null,
+	destinationWebhookEventKeys VARCHAR(75) null,
 	name VARCHAR(75) null,
 	url VARCHAR(75) null
 );
