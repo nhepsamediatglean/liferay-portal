@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Http;
@@ -31,15 +32,35 @@ import com.liferay.webhook.model.WebhookEntry;
  */
 public class WebhookEntryMessageListener extends BaseMessageListener {
 
-	public WebhookEntryMessageListener(WebhookEntry webhookEntry) {
+	public WebhookEntryMessageListener(
+		WebhookEntry webhookEntry) {
+
 		_webhookEntry = webhookEntry;
+	}
+
+
+	private boolean _isRelevant(Message message) {
+		long companyId = message.getLong("companyId");
+
+		if (_webhookEntry.getCompanyId() != companyId) {
+			return false;
+		}
+
+		if (Objects.equals(
+				_webhookEntry.getDestinationWebhookEvents(),
+				WebhookConstants.DESTINATION_WEBHOOK_EVENT_KEYS_ALL)) {
+
+			return true;
+		}
+
+		message.getString("webhookEventKey")
+
+		return true;
 	}
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		long companyId = message.getLong("companyId");
-
-		if (_webhookEntry.getCompanyId() != companyId) {
+		if (_isRelevant(message)) {
 			return;
 		}
 
@@ -64,5 +85,6 @@ public class WebhookEntryMessageListener extends BaseMessageListener {
 		WebhookEntryMessageListener.class);
 
 	private final WebhookEntry _webhookEntry;
+	private final MessageBus _messageBus;
 
 }
