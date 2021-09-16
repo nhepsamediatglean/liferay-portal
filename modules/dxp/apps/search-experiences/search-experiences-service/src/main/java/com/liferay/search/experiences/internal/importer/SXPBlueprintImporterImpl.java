@@ -18,9 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.search.experiences.importer.SXPImporter;
+import com.liferay.search.experiences.importer.SXPBlueprintImporter;
 import com.liferay.search.experiences.service.SXPBlueprintLocalService;
-import com.liferay.search.experiences.service.SXPElementLocalService;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -34,31 +33,12 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Petteri Karttunen
  */
-@Component(immediate = true, service = SXPImporter.class)
-public class SXPImporterImpl implements SXPImporter {
+@Component(immediate = true, service = SXPBlueprintImporter.class)
+public class SXPBlueprintImporterImpl implements SXPBlueprintImporter {
 
 	@Override
-	public void importSXPBlueprint(
+	public void importJSONObject(
 			long companyId, long groupId, long userId, JSONObject jsonObject)
-		throws PortalException {
-
-		_addSXPBlueprint(
-			jsonObject, _createServiceContext(companyId, groupId, userId));
-	}
-
-	@Override
-	public void importSXPElement(
-			long companyId, long groupId, long userId, JSONObject jsonObject,
-			boolean readOnly)
-		throws PortalException {
-
-		_addSXPElement(
-			jsonObject, readOnly,
-			_createServiceContext(companyId, groupId, userId));
-	}
-
-	private void _addSXPBlueprint(
-			JSONObject jsonObject, ServiceContext serviceContext)
 		throws PortalException {
 
 		JSONObject payloadJSONObject = jsonObject.getJSONObject(
@@ -72,26 +52,8 @@ public class SXPImporterImpl implements SXPImporter {
 			_getConfigurationsJSON(payloadJSONObject),
 			_getDescriptionMap(payloadJSONObject),
 			_getElementInstancesJSON(payloadJSONObject),
-			_getTitleMap(payloadJSONObject), serviceContext);
-	}
-
-	private void _addSXPElement(
-			JSONObject jsonObject, boolean readOnly,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		JSONObject payloadJSONObject = jsonObject.getJSONObject(
-			"element-payload");
-
-		if (payloadJSONObject == null) {
-			throw new PortalException("element-payload is required");
-		}
-
-		_saveSXPElement(
-			_getDescriptionMap(payloadJSONObject),
-			_getElementDefinitionJSON(payloadJSONObject), readOnly,
-			_getTitleMap(payloadJSONObject), jsonObject.getInt("type"),
-			serviceContext);
+			_getTitleMap(payloadJSONObject),
+			_createServiceContext(companyId, groupId, userId));
 	}
 
 	private ServiceContext _createServiceContext(
@@ -131,19 +93,6 @@ public class SXPImporterImpl implements SXPImporter {
 		}
 
 		return _getLocalizationMap(descriptionJSONObject);
-	}
-
-	private String _getElementDefinitionJSON(JSONObject jsonObject)
-		throws PortalException {
-
-		JSONObject elementDefinitionJSONObject = jsonObject.getJSONObject(
-			"elementDefinitionJSON");
-
-		if (elementDefinitionJSONObject == null) {
-			throw new PortalException("elementDefinitionJSON is required");
-		}
-
-		return elementDefinitionJSONObject.toJSONString();
 	}
 
 	private String _getElementInstancesJSON(JSONObject jsonObject)
@@ -203,25 +152,10 @@ public class SXPImporterImpl implements SXPImporter {
 			serviceContext);
 	}
 
-	private void _saveSXPElement(
-			Map<Locale, String> descriptionMap, String elementDefinitionJSON,
-			boolean readOnly, Map<Locale, String> titleMap, int type,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		_sxpElementLocalService.addSXPElement(
-			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
-			descriptionMap, elementDefinitionJSON, readOnly, titleMap, type,
-			serviceContext);
-	}
-
 	@Reference
 	private JSONFactory _jsonFactory;
 
 	@Reference
 	private SXPBlueprintLocalService _sxpBlueprintLocalService;
-
-	@Reference
-	private SXPElementLocalService _sxpElementLocalService;
 
 }

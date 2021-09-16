@@ -1,0 +1,147 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * The contents of this file are subject to the terms of the Liferay Enterprise
+ * Subscription License ("License"). You may not use this file except in
+ * compliance with the License. You can obtain a copy of the License by
+ * contacting Liferay, Inc. See the License for the specific language governing
+ * permissions and limitations under the License, including but not limited to
+ * distribution rights of the Software.
+ *
+ *
+ *
+ */
+
+package com.liferay.search.experiences.internal.importer;
+
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONFactory;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.search.experiences.importer.SXPElementImporter;
+import com.liferay.search.experiences.service.SXPElementLocalService;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Stream;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+/**
+ * @author Petteri Karttunen
+ */
+@Component(immediate = true, service = SXPElementImporter.class)
+public class SXPElementImporterImpl implements SXPElementImporter {
+
+	@Override
+	public void importJSONObject(
+			long companyId, long groupId, long userId, JSONObject jsonObject)
+		throws PortalException {
+
+		JSONObject payloadJSONObject = jsonObject.getJSONObject(
+			"element-payload");
+
+		if (payloadJSONObject == null) {
+			throw new PortalException("element-payload is required");
+		}
+
+		_saveSXPElement(
+			_getDescriptionMap(payloadJSONObject),
+			_getElementDefinitionJSON(payloadJSONObject), false,
+			_getTitleMap(payloadJSONObject), jsonObject.getInt("type"),
+			_createServiceContext(companyId, groupId, userId));
+	}
+
+	private ServiceContext _createServiceContext(
+			long companyId, long groupId, long userId)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setCompanyId(companyId);
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setUserId(userId);
+
+		return serviceContext;
+	}
+
+	private Map<Locale, String> _getDescriptionMap(JSONObject jsonObject) {
+		JSONObject descriptionJSONObject = jsonObject.getJSONObject(
+			"description");
+
+		if (descriptionJSONObject == null) {
+			return null;
+		}
+
+		return _getLocalizationMap(descriptionJSONObject);
+	}
+
+	private String _getElementDefinitionJSON(JSONObject jsonObject)
+		throws PortalException {
+
+		JSONObject elementDefinitionJSONObject = jsonObject.getJSONObject(
+			"elementDefinitionJSON");
+
+		if (elementDefinitionJSONObject == null) {
+			throw new PortalException("elementDefinitionJSON is required");
+		}
+
+		return elementDefinitionJSONObject.toJSONString();
+	}
+
+	private Map<Locale, String> _getLocalizationMap(JSONObject jsonObject) {
+		Map<Locale, String> map = new HashMap<>();
+
+		Set<String> languageIds = jsonObject.keySet();
+
+		Stream<String> stream = languageIds.stream();
+
+		stream.forEach(
+			s -> {
+				if ((s != null) && (s.length() == 5) && s.contains("_")) {
+					String[] arr = s.split("_");
+
+					map.put(
+						new Locale(arr[0], arr[1]), jsonObject.getString(s));
+				}
+			});
+
+		return map;
+	}
+
+	private Map<Locale, String> _getTitleMap(JSONObject jsonObject)
+		throws PortalException {
+
+		JSONObject titleJSONObject = jsonObject.getJSONObject("title");
+
+		if (titleJSONObject == null) {
+			throw new PortalException("title is required");
+		}
+
+		return _getLocalizationMap(titleJSONObject);
+	}
+
+	private void _saveSXPElement(
+			Map<Locale, String> descriptionMap, String elementDefinitionJSON,
+			boolean readOnly, Map<Locale, String> titleMap, int type,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		_sxpElementLocalService.addSXPElement(
+			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+			descriptionMap, elementDefinitionJSON, readOnly, titleMap, type,
+			serviceContext);
+	}
+
+	@Reference
+	private JSONFactory _jsonFactory;
+
+	@Reference
+	private SXPElementLocalService _sxpElementLocalService;
+
+}

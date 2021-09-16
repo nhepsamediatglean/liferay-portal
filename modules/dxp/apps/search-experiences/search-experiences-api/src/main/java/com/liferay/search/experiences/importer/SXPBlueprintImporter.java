@@ -20,15 +20,10 @@ import com.liferay.portal.kernel.json.JSONObject;
 /**
  * @author Petteri Karttunen
  */
-public interface SXPImporter {
+public interface SXPBlueprintImporter {
 
-	public void importSXPBlueprint(
+	public void importJSONObject(
 			long companyId, long groupId, long userId, JSONObject jsonObject)
-		throws PortalException;
-
-	public void importSXPElement(
-			long companyId, long groupId, long userId, JSONObject jsonObject,
-			boolean readOnly)
 		throws PortalException;
 
 }
