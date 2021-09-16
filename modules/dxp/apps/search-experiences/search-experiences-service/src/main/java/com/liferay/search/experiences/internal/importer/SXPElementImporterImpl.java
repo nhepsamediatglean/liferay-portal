@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.search.experiences.importer.SXPElementImporter;
-import com.liferay.search.experiences.service.SXPElementLocalService;
+import com.liferay.search.experiences.service.SXPElementService;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -132,8 +132,8 @@ public class SXPElementImporterImpl implements SXPElementImporter {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_sxpElementLocalService.addSXPElement(
-			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+		_sxpElementService.addSXPElement(
+			serviceContext.getScopeGroupId(),
 			descriptionMap, elementDefinitionJSON, readOnly, titleMap, type,
 			serviceContext);
 	}
@@ -142,6 +142,6 @@ public class SXPElementImporterImpl implements SXPElementImporter {
 	private JSONFactory _jsonFactory;
 
 	@Reference
-	private SXPElementLocalService _sxpElementLocalService;
+	private SXPElementService _sxpElementService;
 
 }

@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.search.experiences.importer.SXPBlueprintImporter;
-import com.liferay.search.experiences.service.SXPBlueprintLocalService;
+import com.liferay.search.experiences.service.SXPBlueprintService;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -146,8 +146,8 @@ public class SXPBlueprintImporterImpl implements SXPBlueprintImporter {
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		_sxpBlueprintLocalService.addSXPBlueprint(
-			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+		_sxpBlueprintService.addSXPBlueprint(
+			serviceContext.getScopeGroupId(),
 			configurationsJSON, descriptionMap, elementInstancesJSON, titleMap,
 			serviceContext);
 	}
@@ -156,6 +156,6 @@ public class SXPBlueprintImporterImpl implements SXPBlueprintImporter {
 	private JSONFactory _jsonFactory;
 
 	@Reference
-	private SXPBlueprintLocalService _sxpBlueprintLocalService;
+	private SXPBlueprintService _sxpBlueprintService;
 
 }
