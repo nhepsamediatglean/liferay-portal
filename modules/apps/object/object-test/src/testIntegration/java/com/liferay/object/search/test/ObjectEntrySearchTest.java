@@ -65,11 +65,11 @@ public class ObjectEntrySearchTest {
 			SynchronousDestinationTestRule.INSTANCE);
 
 	@Test
-	public void testInvalidFieldBlobType() throws Exception {
+	public void testAddObjectField() throws Exception {
 		try {
 			_addObjectDefinition(
 				ObjectFieldUtil.createObjectField(
-					_INDEXED, _INDEXED_AS_KEYWORD, "Alpha", "Blob"));
+					true, true, "Alpha", "Blob"));
 
 			Assert.fail();
 		}
@@ -78,14 +78,11 @@ public class ObjectEntrySearchTest {
 
 			Assert.assertTrue(message.equals("Blob type is not indexable"));
 		}
-	}
 
-	@Test
-	public void testInvalidFieldNonstringKeywordWithLocale() throws Exception {
 		try {
 			_addObjectDefinition(
 				ObjectFieldUtil.createObjectField(
-					_INDEXED, _INDEXED_AS_KEYWORD, "en_US", "Alpha", "Date"));
+					true, true, "en_US", "Alpha", "Date"));
 
 			Assert.fail();
 		}
@@ -95,14 +92,11 @@ public class ObjectEntrySearchTest {
 			Assert.assertTrue(
 				message.startsWith("Indexed language ID can only be applied"));
 		}
-	}
 
-	@Test
-	public void testInvalidFieldNonstringWithLocale() throws Exception {
 		try {
 			_addObjectDefinition(
 				ObjectFieldUtil.createObjectField(
-					_INDEXED, _NOT_INDEXED_AS_KEYWORD, "en_US", "Alpha",
+					true, false, "en_US", "Alpha",
 					"Long"));
 
 			Assert.fail();
@@ -113,14 +107,11 @@ public class ObjectEntrySearchTest {
 			Assert.assertTrue(
 				message.startsWith("Indexed language ID can only be applied"));
 		}
-	}
 
-	@Test
-	public void testInvalidFieldStringKeywordWithLocale() throws Exception {
 		try {
 			_addObjectDefinition(
 				ObjectFieldUtil.createObjectField(
-					_INDEXED, _INDEXED_AS_KEYWORD, "en_US", "Alpha", "String"));
+					true, true, "en_US", "Alpha", "String"));
 
 			Assert.fail();
 		}
@@ -136,7 +127,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchBigDecimal() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _NOT_INDEXED_AS_KEYWORD, "Alpha", "BigDecimal"));
+				true, false, "Alpha", "BigDecimal"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -163,7 +154,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchBigDecimalKeyword() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _INDEXED_AS_KEYWORD, "Alpha", "BigDecimal"));
+				true, true, "Alpha", "BigDecimal"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -190,7 +181,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchBoolean() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _NOT_INDEXED_AS_KEYWORD, "Alpha", "Boolean"));
+				true, false, "Alpha", "Boolean"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -218,7 +209,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchBooleanKeyword() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _INDEXED_AS_KEYWORD, "Alpha", "Boolean"));
+				true, true, "Alpha", "Boolean"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -246,7 +237,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchDate() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _NOT_INDEXED_AS_KEYWORD, "Alpha", "Date"));
+				true, false, "Alpha", "Date"));
 
 		long date = 1632335654272L;
 
@@ -279,7 +270,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchDateKeyword() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _INDEXED_AS_KEYWORD, "Alpha", "Date"));
+				true, true, "Alpha", "Date"));
 
 		long date = 1632335654272L;
 
@@ -312,7 +303,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchDouble() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _NOT_INDEXED_AS_KEYWORD, "Alpha", "Double"));
+				true, false, "Alpha", "Double"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -340,7 +331,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchDoubleKeyword() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _INDEXED_AS_KEYWORD, "Alpha", "Double"));
+				true, true, "Alpha", "Double"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -368,7 +359,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchInteger() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _NOT_INDEXED_AS_KEYWORD, "Alpha", "Integer"));
+				true, false, "Alpha", "Integer"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -394,7 +385,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchIntegerKeyword() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _INDEXED_AS_KEYWORD, "Alpha", "Integer"));
+				true, true, "Alpha", "Integer"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -420,7 +411,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchLong() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _NOT_INDEXED_AS_KEYWORD, "Alpha", "Long"));
+				true, false, "Alpha", "Long"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -443,7 +434,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchLongKeyword() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _INDEXED_AS_KEYWORD, "Alpha", "Long"));
+				true, true, "Alpha", "Long"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -466,7 +457,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchString() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _NOT_INDEXED_AS_KEYWORD, "Alpha", "String"));
+				true, false, "Alpha", "String"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -484,7 +475,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchStringAnalyzed() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _NOT_INDEXED_AS_KEYWORD, "en_US", "Alpha", "String"));
+				true, false, "en_US", "Alpha", "String"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -502,7 +493,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchStringKeyword() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_INDEXED, _INDEXED_AS_KEYWORD, "Alpha", "String"));
+				true, true, "Alpha", "String"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -523,7 +514,7 @@ public class ObjectEntrySearchTest {
 	public void testSearchStringNotIndexed() throws Exception {
 		_addObjectDefinition(
 			ObjectFieldUtil.createObjectField(
-				_NOT_INDEXED, _NOT_INDEXED_AS_KEYWORD, "Alpha", "String"));
+				false, false, "Alpha", "String"));
 
 		_addObjectEntry(
 			HashMapBuilder.<String, Serializable>put(
@@ -570,14 +561,6 @@ public class ObjectEntrySearchTest {
 
 		Assert.assertEquals(count, baseModelSearchResult.getLength());
 	}
-
-	private static final boolean _INDEXED = true;
-
-	private static final boolean _INDEXED_AS_KEYWORD = true;
-
-	private static final boolean _NOT_INDEXED = false;
-
-	private static final boolean _NOT_INDEXED_AS_KEYWORD = false;
 
 	@DeleteAfterTestRun
 	private ObjectDefinition _objectDefinition;
