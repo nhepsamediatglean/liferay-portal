@@ -460,9 +460,9 @@ definition {
 			var baseURL = PropsUtil.get("portal.url");
 		}
 
-		var URL = "${baseURL}/web/guest${friendlyURL}";
+		var url = "${baseURL}/web/guest${friendlyURL}";
 
-		return "${URL}";
+		return "${url}";
 	}
 
 	@summary = "Go to the page creation form through the empty-result-message taglib"
