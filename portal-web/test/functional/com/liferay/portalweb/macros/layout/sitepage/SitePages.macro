@@ -458,8 +458,8 @@ definition {
 		}
 
 		key_friendlyURL = "";
-		var friendlyURL = selenium.getElementValue(
-			locator1 = "SitePages#FRIENDLY_URL");
+
+		var friendlyURL = selenium.getElementValue(locator1 = "SitePages#FRIENDLY_URL");
 
 		return "${baseURL}/web/guest${friendlyURL}";
 	}
