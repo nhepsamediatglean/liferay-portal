@@ -454,7 +454,7 @@ definition {
 		var baseURL = "${baseURL}";
 
 		if (contains("${baseURL}", "{baseURL}")) {
-			var baseURL = PropsUtil.get("portal.url");
+			baseURL = PropsUtil.get("portal.url");
 		}
 
 		key_friendlyURL = "";
