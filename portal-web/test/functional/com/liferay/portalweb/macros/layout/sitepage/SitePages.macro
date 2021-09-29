@@ -461,9 +461,7 @@ definition {
 		var friendlyURL = selenium.getElementValue(
 			locator1 = "SitePages#FRIENDLY_URL");
 
-		var url = "${baseURL}/web/guest${friendlyURL}";
-
-		return "${url}";
+		return "${baseURL}/web/guest${friendlyURL}";
 	}
 
 	@summary = "Go to the page creation form through the empty-result-message taglib"
