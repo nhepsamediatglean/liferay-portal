@@ -451,14 +451,15 @@ definition {
 	}
 
 	macro getFriendlyUrl {
-		key_friendlyURL = "";
-		var friendlyURL = selenium.getElementValue(
-			locator1 = "SitePages#FRIENDLY_URL");
 		var baseURL = "${baseURL}";
 
 		if (contains("${baseURL}", "{baseURL}")) {
 			var baseURL = PropsUtil.get("portal.url");
 		}
+
+		key_friendlyURL = "";
+		var friendlyURL = selenium.getElementValue(
+			locator1 = "SitePages#FRIENDLY_URL");
 
 		var url = "${baseURL}/web/guest${friendlyURL}";
 
