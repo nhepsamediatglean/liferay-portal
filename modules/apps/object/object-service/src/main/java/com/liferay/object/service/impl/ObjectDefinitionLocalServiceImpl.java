@@ -15,6 +15,7 @@
 package com.liferay.object.service.impl;
 
 import com.liferay.list.type.service.ListTypeEntryLocalService;
+import com.liferay.object.action.trigger.ObjectActionTriggerRegistry;
 import com.liferay.object.deployer.ObjectDefinitionDeployer;
 import com.liferay.object.exception.DuplicateObjectDefinitionException;
 import com.liferay.object.exception.NoSuchObjectFieldException;
@@ -429,9 +430,10 @@ public class ObjectDefinitionLocalServiceImpl
 		_addingObjectDefinitionDeployer(
 			new ObjectDefinitionDeployerImpl(
 				_bundleContext, _dynamicQueryBatchIndexingActionableFactory,
-				_listTypeEntryLocalService, _modelSearchRegistrarHelper, this,
-				_objectEntryLocalService, _objectFieldLocalService,
-				_objectRelationshipLocalService, _objectScopeProviderRegistry,
+				_listTypeEntryLocalService, _modelSearchRegistrarHelper,
+				_objectActionTriggerRegistry, this, _objectEntryLocalService,
+				_objectFieldLocalService, _objectRelationshipLocalService,
+				_objectScopeProviderRegistry,
 				_persistedModelLocalServiceRegistry, _resourceActions,
 				_workflowStatusModelPreFilterContributor));
 
@@ -1031,6 +1033,9 @@ public class ObjectDefinitionLocalServiceImpl
 
 	@Reference
 	private ModelSearchRegistrarHelper _modelSearchRegistrarHelper;
+
+	@Reference
+	private ObjectActionTriggerRegistry _objectActionTriggerRegistry;
 
 	private ServiceTracker<ObjectDefinitionDeployer, ObjectDefinitionDeployer>
 		_objectDefinitionDeployerServiceTracker;

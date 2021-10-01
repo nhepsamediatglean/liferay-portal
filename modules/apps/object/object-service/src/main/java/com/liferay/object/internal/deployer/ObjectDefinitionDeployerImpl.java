@@ -17,7 +17,7 @@ package com.liferay.object.internal.deployer;
 import com.liferay.info.collection.provider.InfoCollectionProvider;
 import com.liferay.list.type.service.ListTypeEntryLocalService;
 import com.liferay.object.action.trigger.ObjectActionTrigger;
-import com.liferay.object.constants.ObjectActionTriggerConstants;
+import com.liferay.object.action.trigger.ObjectActionTriggerRegistry;
 import com.liferay.object.deployer.ObjectDefinitionDeployer;
 import com.liferay.object.internal.info.collection.provider.ObjectEntrySingleFormVariationInfoCollectionProvider;
 import com.liferay.object.internal.related.models.ObjectEntry1to1ObjectRelatedModelsProviderImpl;
@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.security.permission.resource.PortletResourcePer
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermissionFactory;
 import com.liferay.portal.kernel.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.kernel.util.HashMapDictionaryBuilder;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -57,7 +58,6 @@ import com.liferay.portal.search.spi.model.query.contributor.KeywordQueryContrib
 import com.liferay.portal.search.spi.model.query.contributor.ModelPreFilterContributor;
 import com.liferay.portal.search.spi.model.registrar.ModelSearchRegistrarHelper;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.osgi.framework.BundleContext;
@@ -75,6 +75,7 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 			dynamicQueryBatchIndexingActionableFactory,
 		ListTypeEntryLocalService listTypeEntryLocalService,
 		ModelSearchRegistrarHelper modelSearchRegistrarHelper,
+		ObjectActionTriggerRegistry objectActionTriggerRegistry,
 		ObjectDefinitionLocalService objectDefinitionLocalService,
 		ObjectEntryLocalService objectEntryLocalService,
 		ObjectFieldLocalService objectFieldLocalService,
@@ -89,6 +90,7 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 			dynamicQueryBatchIndexingActionableFactory;
 		_listTypeEntryLocalService = listTypeEntryLocalService;
 		_modelSearchRegistrarHelper = modelSearchRegistrarHelper;
+		_objectActionTriggerRegistry = objectActionTriggerRegistry;
 		_objectDefinitionLocalService = objectDefinitionLocalService;
 		_objectEntryLocalService = objectEntryLocalService;
 		_objectFieldLocalService = objectFieldLocalService;
@@ -127,7 +129,7 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 				objectDefinition.getResourceName(),
 				new ObjectEntryPortletResourcePermissionLogic());
 
-		return Arrays.asList(
+		List<ServiceRegistration<?>> serviceRegistrations = ListUtil.fromArray(
 			_bundleContext.registerService(
 				InfoCollectionProvider.class,
 				new ObjectEntrySingleFormVariationInfoCollectionProvider(
@@ -173,45 +175,6 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 					"com.liferay.object", "true"
 				).put(
 					"model.class.name", objectDefinition.getClassName()
-				).build()),
-			_bundleContext.registerService(
-				ObjectActionTrigger.class,
-				new ObjectActionTrigger(
-					objectDefinition.getClassName(),
-					ObjectActionTriggerConstants.KEY_ON_AFTER_CREATE,
-					ObjectActionTriggerConstants.TYPE_TRANSACTION),
-				HashMapDictionaryBuilder.<String, Object>put(
-					"object.action.trigger.class.name",
-					objectDefinition.getClassName()
-				).put(
-					"object.action.trigger.key",
-					ObjectActionTriggerConstants.KEY_ON_AFTER_CREATE
-				).build()),
-			_bundleContext.registerService(
-				ObjectActionTrigger.class,
-				new ObjectActionTrigger(
-					objectDefinition.getClassName(),
-					ObjectActionTriggerConstants.KEY_ON_AFTER_REMOVE,
-					ObjectActionTriggerConstants.TYPE_TRANSACTION),
-				HashMapDictionaryBuilder.<String, Object>put(
-					"object.action.trigger.class.name",
-					objectDefinition.getClassName()
-				).put(
-					"object.action.trigger.key",
-					ObjectActionTriggerConstants.KEY_ON_AFTER_REMOVE
-				).build()),
-			_bundleContext.registerService(
-				ObjectActionTrigger.class,
-				new ObjectActionTrigger(
-					objectDefinition.getClassName(),
-					ObjectActionTriggerConstants.KEY_ON_AFTER_UPDATE,
-					ObjectActionTriggerConstants.TYPE_TRANSACTION),
-				HashMapDictionaryBuilder.<String, Object>put(
-					"object.action.trigger.class.name",
-					objectDefinition.getClassName()
-				).put(
-					"object.action.trigger.key",
-					ObjectActionTriggerConstants.KEY_ON_AFTER_UPDATE
 				).build()),
 			_bundleContext.registerService(
 				ObjectRelatedModelsProvider.class,
@@ -263,6 +226,24 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 					modelSearchDefinition.setModelSummaryContributor(
 						objectEntryModelSummaryContributor);
 				}));
+
+		for (ObjectActionTrigger objectActionTrigger :
+				_objectActionTriggerRegistry.getObjectActionTriggers(
+					objectDefinition.getClassName())) {
+
+			serviceRegistrations.add(
+				_bundleContext.registerService(
+					ObjectActionTrigger.class, objectActionTrigger,
+					HashMapDictionaryBuilder.<String, Object>put(
+						"object.action.trigger.class.name",
+						objectDefinition.getClassName()
+					).put(
+						"object.action.trigger.key",
+						objectActionTrigger.getKey()
+					).build()));
+		}
+
+		return serviceRegistrations;
 	}
 
 	@Override
@@ -296,6 +277,7 @@ public class ObjectDefinitionDeployerImpl implements ObjectDefinitionDeployer {
 		_dynamicQueryBatchIndexingActionableFactory;
 	private final ListTypeEntryLocalService _listTypeEntryLocalService;
 	private final ModelSearchRegistrarHelper _modelSearchRegistrarHelper;
+	private final ObjectActionTriggerRegistry _objectActionTriggerRegistry;
 	private final ObjectDefinitionLocalService _objectDefinitionLocalService;
 	private final ObjectEntryLocalService _objectEntryLocalService;
 	private final ObjectFieldLocalService _objectFieldLocalService;
