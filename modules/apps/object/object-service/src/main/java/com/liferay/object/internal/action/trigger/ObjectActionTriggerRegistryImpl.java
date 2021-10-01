@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.HashMapDictionaryBuilder;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -55,7 +54,7 @@ public class ObjectActionTriggerRegistryImpl
 			_objectActionTriggerServiceTrackerMap.getService(className);
 
 		if (objectActionTriggers == null) {
-			return _defaultObjectActionTriggers;
+			return Collections.<ObjectActionTrigger>emptyList();
 		}
 
 		return objectActionTriggers;
@@ -121,7 +120,7 @@ public class ObjectActionTriggerRegistryImpl
 		_bundleContext.registerService(
 			ObjectActionTrigger.class,
 			new ObjectActionTrigger(
-				destination.getName(),
+				className, destination.getName(),
 				ObjectActionTriggerConstants.TYPE_MESSAGE_BUS),
 			HashMapDictionaryBuilder.<String, Object>put(
 				"object.action.trigger.class.name", className
@@ -176,18 +175,6 @@ public class ObjectActionTriggerRegistryImpl
 		ObjectActionTriggerRegistryImpl.class);
 
 	private BundleContext _bundleContext;
-	private final List<ObjectActionTrigger> _defaultObjectActionTriggers =
-		Collections.unmodifiableList(
-			Arrays.asList(
-				new ObjectActionTrigger(
-					ObjectActionTriggerConstants.KEY_ON_AFTER_CREATE,
-					ObjectActionTriggerConstants.TYPE_TRANSACTION),
-				new ObjectActionTrigger(
-					ObjectActionTriggerConstants.KEY_ON_AFTER_REMOVE,
-					ObjectActionTriggerConstants.TYPE_TRANSACTION),
-				new ObjectActionTrigger(
-					ObjectActionTriggerConstants.KEY_ON_AFTER_UPDATE,
-					ObjectActionTriggerConstants.TYPE_TRANSACTION)));
 	private ServiceTrackerMap<String, List<Destination>>
 		_destinationServiceTrackerMap;
 
