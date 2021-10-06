@@ -49,14 +49,14 @@ public class CommerceOrderRuleEntryLocalServiceImpl
 			String typeSettings)
 		throws PortalException {
 
-		User user = userLocalService.getUser(userId);
-
-		long commerceOrderRuleEntryId = counterLocalService.increment();
-
 		CommerceOrderRuleEntry commerceOrderRuleEntry =
-			commerceOrderRuleEntryPersistence.create(commerceOrderRuleEntryId);
+			commerceOrderRuleEntryPersistence.create(
+				counterLocalService.increment());
 
 		commerceOrderRuleEntry.setExternalReferenceCode(externalReferenceCode);
+
+		User user = userLocalService.getUser(userId);
+
 		commerceOrderRuleEntry.setCompanyId(user.getCompanyId());
 		commerceOrderRuleEntry.setUserId(user.getUserId());
 		commerceOrderRuleEntry.setUserName(user.getFullName());

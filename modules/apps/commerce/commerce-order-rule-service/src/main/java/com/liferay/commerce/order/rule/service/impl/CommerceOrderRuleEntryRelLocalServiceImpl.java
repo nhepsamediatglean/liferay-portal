@@ -69,28 +69,24 @@ public class CommerceOrderRuleEntryRelLocalServiceImpl
 			long commerceOrderRuleEntryId)
 		throws PortalException {
 
-		// Commerce order rule entry rel
-
-		User user = userLocalService.getUser(userId);
-
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		CommerceOrderRuleEntryRel commerceOrderRuleEntryRel =
 			commerceOrderRuleEntryRelPersistence.create(
 				counterLocalService.increment());
 
+		User user = userLocalService.getUser(userId);
+
 		commerceOrderRuleEntryRel.setCompanyId(user.getCompanyId());
 		commerceOrderRuleEntryRel.setUserId(user.getUserId());
 		commerceOrderRuleEntryRel.setUserName(user.getFullName());
-		commerceOrderRuleEntryRel.setClassNameId(classNameId);
+
+		commerceOrderRuleEntryRel.setClassNameId(
+			classNameLocalService.getClassNameId(className));
 		commerceOrderRuleEntryRel.setClassPK(classPK);
 		commerceOrderRuleEntryRel.setCommerceOrderRuleEntryId(
 			commerceOrderRuleEntryId);
 
 		commerceOrderRuleEntryRel = commerceOrderRuleEntryRelPersistence.update(
 			commerceOrderRuleEntryRel);
-
-		// Commerce order rule entry
 
 		reindexCommerceOrderRuleEntry(commerceOrderRuleEntryId);
 
