@@ -416,8 +416,6 @@ public class CommerceOrderRuleEntryLocalServiceImpl
 		commerceOrderRuleEntry.setActive(active);
 		commerceOrderRuleEntry.setDescription(description);
 
-		Date date = new Date();
-
 		User user = userLocalService.getUser(userId);
 
 		commerceOrderRuleEntry.setDisplayDate(
@@ -447,6 +445,8 @@ public class CommerceOrderRuleEntryLocalServiceImpl
 
 		commerceOrderRuleEntry.setTypeSettingsUnicodeProperties(
 			typeSettingsUnicodeProperties);
+
+		Date date = new Date();
 
 		if ((expirationDate == null) || expirationDate.after(date)) {
 			commerceOrderRuleEntry.setStatus(WorkflowConstants.STATUS_DRAFT);
